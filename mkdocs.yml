@@ -37,15 +37,15 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
@@ -57,6 +57,14 @@ theme:
     - search.highlight
     - search.suggest
     - toc.follow
+
+extra:
+  # Footer link back to the Campforge home page (icon bundled with the theme, no external request).
+  social:
+    - icon: material/home-outline
+      link: https://campforge.github.io/
+      name: Campforge
+  generator: false
 
 extra_css:
   - assets/stylesheets/extra.css
