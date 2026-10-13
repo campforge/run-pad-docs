@@ -5,7 +5,8 @@ The user guide is built with [MkDocs](https://www.mkdocs.org/) and
 <https://campforge.github.io/run-pad-notes/> by `.github/workflows/docs.yml`. The site lives in the private
 notes repository (`Campforge/run-pad-notes`), so publishing it needs a GitHub plan that allows Pages from
 private repositories; the published site itself is public. The code it documents (examples run with
-`RunPad.Cli`, icon sources) is in the code repository, cloned next to this one as `../dot-pad`.
+`RunPad.Cli`, icon sources) is in the code repository (`Campforge/run-pad`), checked out next to this one as `../run-pad`
+(both are submodules of `run-pad-handoffs`).
 
 This file is not part of the published site.
 
@@ -91,8 +92,8 @@ Every `.rpad` example except `analyzer-diagnostics.rpad` should run cleanly with
 command-line runner (no network, files or packages needed):
 
 ```bash
-dotnet build ../dot-pad/src/main/RunPad.Cli -c Release
-for f in docs/site/examples/*.rpad; do dotnet ../dot-pad/src/main/RunPad.Cli/bin/Release/net10.0/runpad.dll "$f"; done
+dotnet build ../run-pad/src/main/RunPad.Cli -c Release
+for f in docs/site/examples/*.rpad; do dotnet ../run-pad/src/main/RunPad.Cli/bin/Release/net10.0/runpad.dll "$f"; done
 ```
 
 `analyzer-diagnostics.rpad` is expected to stop with `error CS0103` (exit code 1). The
