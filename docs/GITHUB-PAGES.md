@@ -2,19 +2,18 @@
 
 The user guide is built with [MkDocs](https://www.mkdocs.org/) and
 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and prepared for publication to
-<https://campforge.github.io/run-pad-notes/> by `.github/workflows/docs.yml`. The site lives in the private
-notes repository (`Campforge/run-pad-notes`), so publishing it needs a GitHub plan that allows Pages from
-private repositories; the published site itself is public. The code it documents (examples run with
-`RunPad.Cli`, icon sources) is in the code repository (`Campforge/run-pad`), checked out next to this one as `../run-pad`
-(both are submodules of `run-pad-handoffs`).
+<https://campforge.github.io/run-pad-docs/> by `.github/workflows/docs.yml`. The site lives in its own
+repository, `Campforge/run-pad-docs`. The code it documents (examples run with `RunPad.Cli`, icon
+sources) is in the code repository, `Campforge/run-pad`; the commands below expect it cloned next to
+this one as `../run-pad`.
 
 This file is not part of the published site.
 
 ## What is published
 
 - Source: `mkdocs.yml` and `docs/site/**` only (`docs_dir: docs/site`). MkDocs reads
-  nothing else, so the private notes that share this repository (`archive/`,
-  `plans/`, `TODO.md`, `ANALYSIS.md`, the root `README.md`) are never copied into the site.
+  nothing else, so this file, the workflow, the scripts and the root `README.md` are never copied into
+  the site.
 - Downloadable examples: `docs/site/examples/*.rpad` and `*.linq` are copied as static
   files.
 - Icons: `docs/site/assets/app-icon.svg` (copy of `docs/img/app-icon.svg`) and
@@ -51,7 +50,7 @@ changes also trigger the full .NET CI. That is unchanged by this task.
    **Settings → Environments → github-pages**, keep the deployment branch rule limited to
    `main` (the default for Pages).
 3. Push a change under `docs/site/` to `main`, or run the **Docs** workflow manually on
-   `main`. The site appears at <https://campforge.github.io/run-pad-notes/>.
+   `main`. The site appears at <https://campforge.github.io/run-pad-docs/>.
 
 `site_url` in `mkdocs.yml` and `SITE_URL` in the workflow must match the Pages URL. If the
 repository is renamed or a custom domain is configured, update both.
@@ -76,9 +75,9 @@ Use an isolated virtual environment, not a global install:
 ```bash
 python3 -m venv /tmp/runpad-docs-venv
 /tmp/runpad-docs-venv/bin/pip install -r requirements-docs.txt
-/tmp/runpad-docs-venv/bin/mkdocs serve              # preview at http://127.0.0.1:8000/run-pad-notes/
+/tmp/runpad-docs-venv/bin/mkdocs serve              # preview at http://127.0.0.1:8000/run-pad-docs/
 /tmp/runpad-docs-venv/bin/mkdocs build --strict     # output in ./site (git-ignored)
-/tmp/runpad-docs-venv/bin/python scripts/docs/check_site_links.py site --site-url https://campforge.github.io/run-pad-notes/
+/tmp/runpad-docs-venv/bin/python scripts/docs/check_site_links.py site --site-url https://campforge.github.io/run-pad-docs/
 ```
 
 `requirements-docs.txt` pins `mkdocs`, `mkdocs-material`, `pymdown-extensions` and
