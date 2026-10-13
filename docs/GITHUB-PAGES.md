@@ -2,15 +2,18 @@
 
 The user guide is built with [MkDocs](https://www.mkdocs.org/) and
 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and prepared for publication to
-<https://coddwrench.github.io/run-pad/> by `.github/workflows/docs.yml`.
+<https://campforge.github.io/run-pad-notes/> by `.github/workflows/docs.yml`. The site lives in the private
+notes repository (`Campforge/run-pad-notes`), so publishing it needs a GitHub plan that allows Pages from
+private repositories; the published site itself is public. The code it documents (examples run with
+`RunPad.Cli`, icon sources) is in the code repository, cloned next to this one as `../dot-pad`.
 
 This file is not part of the published site.
 
 ## What is published
 
 - Source: `mkdocs.yml` and `docs/site/**` only (`docs_dir: docs/site`). MkDocs reads
-  nothing else, so `docs/handoffs`, `docs/reviews`, `docs/archive`, the plans in `docs/`,
-  `TODO.md`, `ANALYSIS.md` and the root `README.md` are never copied into the site.
+  nothing else, so the private notes that share this repository (`handoffs/`, `reviews/`, `archive/`,
+  `plans/`, `TODO.md`, `ANALYSIS.md`, the root `README.md`) are never copied into the site.
 - Downloadable examples: `docs/site/examples/*.rpad` and `*.linq` are copied as static
   files.
 - Icons: `docs/site/assets/app-icon.svg` (copy of `docs/img/app-icon.svg`) and
@@ -47,7 +50,7 @@ changes also trigger the full .NET CI. That is unchanged by this task.
    **Settings → Environments → github-pages**, keep the deployment branch rule limited to
    `main` (the default for Pages).
 3. Push a change under `docs/site/` to `main`, or run the **Docs** workflow manually on
-   `main`. The site appears at <https://coddwrench.github.io/run-pad/>.
+   `main`. The site appears at <https://campforge.github.io/run-pad-notes/>.
 
 `site_url` in `mkdocs.yml` and `SITE_URL` in the workflow must match the Pages URL. If the
 repository is renamed or a custom domain is configured, update both.
@@ -72,9 +75,9 @@ Use an isolated virtual environment, not a global install:
 ```bash
 python3 -m venv /tmp/runpad-docs-venv
 /tmp/runpad-docs-venv/bin/pip install -r requirements-docs.txt
-/tmp/runpad-docs-venv/bin/mkdocs serve              # preview at http://127.0.0.1:8000/run-pad/
+/tmp/runpad-docs-venv/bin/mkdocs serve              # preview at http://127.0.0.1:8000/run-pad-notes/
 /tmp/runpad-docs-venv/bin/mkdocs build --strict     # output in ./site (git-ignored)
-/tmp/runpad-docs-venv/bin/python scripts/docs/check_site_links.py site --site-url https://coddwrench.github.io/run-pad/
+/tmp/runpad-docs-venv/bin/python scripts/docs/check_site_links.py site --site-url https://campforge.github.io/run-pad-notes/
 ```
 
 `requirements-docs.txt` pins `mkdocs`, `mkdocs-material`, `pymdown-extensions` and
@@ -88,8 +91,8 @@ Every `.rpad` example except `analyzer-diagnostics.rpad` should run cleanly with
 command-line runner (no network, files or packages needed):
 
 ```bash
-dotnet build src/main/RunPad.Cli -c Release
-for f in docs/site/examples/*.rpad; do dotnet src/main/RunPad.Cli/bin/Release/net10.0/runpad.dll "$f"; done
+dotnet build ../dot-pad/src/main/RunPad.Cli -c Release
+for f in docs/site/examples/*.rpad; do dotnet ../dot-pad/src/main/RunPad.Cli/bin/Release/net10.0/runpad.dll "$f"; done
 ```
 
 `analyzer-diagnostics.rpad` is expected to stop with `error CS0103` (exit code 1). The
