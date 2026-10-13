@@ -13,7 +13,7 @@ Assets the page loads (stylesheets, scripts, images, icons, fonts) must be serve
 site itself, so the published docs make no third-party requests. Plain links to other sites
 are allowed and not fetched.
 
-Usage: check_site_links.py SITE_DIR --site-url https://coddwrench.github.io/run-pad/
+Usage: check_site_links.py SITE_DIR --site-url https://campforge.github.io/run-pad-notes/
 Exits 1 if any problem is found.
 """
 
@@ -70,7 +70,7 @@ def main() -> int:
     arg_parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     arg_parser.add_argument("site_dir", type=Path)
     arg_parser.add_argument("--site-url", required=True,
-                            help="Public URL of the site root, e.g. https://coddwrench.github.io/run-pad/")
+                            help="Public URL of the site root, e.g. https://campforge.github.io/run-pad-notes/")
     args = arg_parser.parse_args()
 
     site_dir: Path = args.site_dir.resolve()
