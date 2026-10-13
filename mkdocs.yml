@@ -1,9 +1,9 @@
-# User documentation published to GitHub Pages (https://campforge.github.io/run-pad-notes/).
-# Only docs/site is published; the private notes in this repository (handoffs, reviews, TODO, ...) are not.
+# User documentation published to GitHub Pages (https://campforge.github.io/run-pad-docs/).
+# Only docs/site is published.
 # Build locally: see docs/GITHUB-PAGES.md.
 site_name: RunPad
 site_description: User guide for RunPad, a desktop scratchpad for C# and Visual Basic scripts.
-site_url: https://campforge.github.io/run-pad-notes/
+site_url: https://campforge.github.io/run-pad-docs/
 copyright: Copyright &copy; 2026 Vadim (hobobyte). RunPad is licensed under GPL-3.0.
 
 docs_dir: docs/site
