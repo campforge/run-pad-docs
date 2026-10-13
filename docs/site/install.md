@@ -12,7 +12,7 @@ installed on your machine, and to debug them it uses the open-source
 ## Download
 
 Prebuilt packages are published on the
-[releases page](https://github.com/coddwrench/run-pad/releases/latest).
+[releases page](https://github.com/Campforge/run-pad/releases/latest).
 
 === "Windows"
 
