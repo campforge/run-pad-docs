@@ -12,7 +12,7 @@ This file is not part of the published site.
 ## What is published
 
 - Source: `mkdocs.yml` and `docs/site/**` only (`docs_dir: docs/site`). MkDocs reads
-  nothing else, so the private notes that share this repository (`handoffs/`, `reviews/`, `archive/`,
+  nothing else, so the private notes that share this repository (`archive/`,
   `plans/`, `TODO.md`, `ANALYSIS.md`, the root `README.md`) are never copied into the site.
 - Downloadable examples: `docs/site/examples/*.rpad` and `*.linq` are copied as static
   files.
