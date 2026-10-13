@@ -2,10 +2,12 @@
 """Checks the generated documentation site (mkdocs build output) for broken internal links.
 
 Every href/src/srcset in every HTML page is resolved the way a browser would resolve it on
-GitHub Pages, where the site lives under a path prefix (/run-pad/):
+GitHub Pages, where the site lives under a path prefix (/run-pad-docs/):
 
 - relative URLs resolve against the page's own location;
-- root-relative URLs must start with the prefix and are resolved below it;
+- root-relative URLs must start with the prefix and are resolved below it; only an explicit
+  absolute link to another path on the same host (another site of the organization) counts as
+  external;
 - absolute URLs on the site's own origin (canonical links, sitemap) are treated as internal;
 - a #fragment must match an id (or a[name]) in the target page.
 
@@ -110,10 +112,15 @@ def main() -> int:
             else:
                 external_links += 1
             return
-        checked += 1
         if not parts.path.startswith(prefix):
-            problems.append(f"{source}: link leaves the {prefix} prefix: {url}")
+            if not loaded and urlsplit(url).netloc:
+                # An explicit absolute link to another site on the same Pages host (e.g. the
+                # organization's home page): a plain link out of this site, not checked.
+                external_links += 1
+            else:
+                problems.append(f"{source}: link leaves the {prefix} prefix: {url}")
             return
+        checked += 1
         target = resolve(parts.path)
         if target is None:
             problems.append(f"{source}: broken link: {url}")

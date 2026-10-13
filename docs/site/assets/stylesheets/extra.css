@@ -1,9 +1,164 @@
+/* Campforge look: the same colors and font stack as https://campforge.github.io/.
+   mkdocs.yml selects the "custom" primary/accent palette, defined here for both schemes. */
+
+:root {
+  --md-text-font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ── Light (scheme: default) ─────────────────────────────────────────────── */
+[data-md-color-scheme="default"] {
+  --cf-bg:        #EEF1F8;
+  --cf-surface:   #FFFFFF;
+  --cf-surface2:  #F5F7FC;
+  --cf-border:    #D8DCE8;
+  --cf-text:      #1A1E30;
+  --cf-text2:     #52597A;
+  --cf-accent:    #3D6FE5;
+  --cf-accent-soft: #E3EBFC;
+
+  --md-default-bg-color: var(--cf-bg);
+  --md-default-fg-color: var(--cf-text);
+  --md-default-fg-color--light: var(--cf-text2);
+  --md-default-fg-color--lighter: #8A90AA;
+  --md-default-fg-color--lightest: var(--cf-border);
+  --md-typeset-color: var(--cf-text);
+  --md-typeset-a-color: var(--cf-accent);
+  --md-code-bg-color: var(--cf-surface2);
+  --md-code-fg-color: var(--cf-text);
+  --md-footer-bg-color: var(--cf-surface);
+  --md-footer-bg-color--dark: var(--cf-bg);
+  --md-footer-fg-color: var(--cf-text);
+  --md-footer-fg-color--light: var(--cf-text2);
+  --md-footer-fg-color--lighter: var(--cf-text2);
+}
+
+/* ── Dark (scheme: slate) ─────────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] {
+  --cf-bg:        #111420;
+  --cf-surface:   #1A1E2E;
+  --cf-surface2:  #1F2438;
+  --cf-border:    #2C3050;
+  --cf-text:      #D8DCF0;
+  --cf-text2:     #7880A8;
+  --cf-accent:    #5B8CFF;
+  --cf-accent-soft: #1E2847;
+
+  --md-default-bg-color: var(--cf-bg);
+  --md-default-fg-color: var(--cf-text);
+  --md-default-fg-color--light: var(--cf-text2);
+  --md-default-fg-color--lighter: #5A6080;
+  --md-default-fg-color--lightest: var(--cf-border);
+  --md-typeset-color: var(--cf-text);
+  --md-typeset-a-color: var(--cf-accent);
+  --md-code-bg-color: var(--cf-surface2);
+  --md-code-fg-color: var(--cf-text);
+  --md-footer-bg-color: var(--cf-surface);
+  --md-footer-bg-color--dark: var(--cf-bg);
+  --md-footer-fg-color: var(--cf-text);
+  --md-footer-fg-color--light: var(--cf-text2);
+  --md-footer-fg-color--lighter: var(--cf-text2);
+}
+
+/* Primary = the header: a light surface with dark text, like the Campforge home page header. */
+[data-md-color-primary="custom"] {
+  --md-primary-fg-color:        var(--cf-surface);
+  --md-primary-fg-color--light: var(--cf-surface2);
+  --md-primary-fg-color--dark:  var(--cf-bg);
+  --md-primary-bg-color:        var(--cf-text);
+  --md-primary-bg-color--light: var(--cf-text2);
+}
+
+[data-md-color-accent="custom"] {
+  --md-accent-fg-color:              var(--cf-accent);
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--cf-accent) 10%, transparent);
+  --md-accent-bg-color:              #FFFFFF;
+  --md-accent-bg-color--light:       rgba(255, 255, 255, 0.7);
+}
+
+/* Header and footer: thin border instead of a shadow, matching the cards on the home page. */
+.md-header,
+.md-header--shadow {
+  box-shadow: none;
+  border-bottom: 1px solid var(--cf-border);
+}
+
+.md-header__title {
+  font-weight: 700;
+}
+
+.md-search__form {
+  background-color: var(--cf-surface2);
+  border: 1px solid var(--cf-border);
+  border-radius: 8px;
+}
+
+.md-footer {
+  border-top: 1px solid var(--cf-border);
+}
+
+.md-footer-meta {
+  background-color: var(--cf-bg);
+}
+
+/* Content links and the active navigation entry use the Campforge blue. */
+.md-nav__link--active,
+.md-nav__item .md-nav__link--active {
+  color: var(--cf-accent);
+}
+
+.md-typeset a:hover {
+  color: var(--cf-accent);
+  text-decoration: underline;
+}
+
+/* Code blocks and inline code: a quiet surface with the same border as the cards. */
+.md-typeset pre > code,
+.md-typeset :not(pre) > code {
+  border: 1px solid var(--cf-border);
+  border-radius: 6px;
+}
+
+.md-typeset :not(pre) > code {
+  padding: 0 0.3em;
+}
+
+/* Admonitions and tables: rounded, bordered cards like the home page. */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 10px;
+  box-shadow: none;
+  background-color: var(--cf-surface);
+}
+
+.md-typeset__table table:not([class]) {
+  border: 1px solid var(--cf-border);
+  border-radius: 10px;
+  background-color: var(--cf-surface);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--cf-surface2);
+}
+
 /* Screenshots: keep them inside the content column and set them off from the page. */
 .md-typeset figure img {
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 6px;
+  border: 1px solid var(--cf-border);
+  border-radius: 8px;
 }
 
 .md-typeset figcaption {
   max-width: none;
+  color: var(--cf-text2);
+}
+
+/* Headings: dark and bold like the home page, not Material's light, thin H1. */
+.md-typeset h1 {
+  color: var(--cf-text);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.md-typeset h2,
+.md-typeset h3 {
+  font-weight: 600;
 }
