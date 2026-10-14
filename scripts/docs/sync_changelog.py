@@ -32,9 +32,12 @@ def main() -> int:
         print(f"{source} not found; pass the path to a run-pad clone.", file=sys.stderr)
         return 1
     text = source.read_text(encoding="utf-8").replace("\r\n", "\n")
+    # Keep the site's package-manager description neutral when copying older release notes.
+    text = text.replace("**NuGet manager** in the style of LINQPad's,", "**NuGet manager**")
     text = RELATIVE_LINK.sub(lambda m: f"]({REPO_URL}{m.group(1)})", text)
     target = Path(__file__).resolve().parents[2] / "docs" / "site" / "changelog.md"
-    target.write_text(FRONT_MATTER + text, encoding="utf-8", newline="\n")
+    with target.open("w", encoding="utf-8", newline="\n") as output:
+        output.write(FRONT_MATTER + text)
     print(f"Wrote {target}")
     return 0
 
