@@ -3,8 +3,8 @@
 The user guide is built with [MkDocs](https://www.mkdocs.org/) and
 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and prepared for publication to
 <https://campforge.github.io/run-pad-docs/> by `.github/workflows/docs.yml`. The site lives in its own
-repository, `Campforge/run-pad-docs`. The code it documents (examples run with `RunPad.Cli`, icon
-sources) is in the code repository, `Campforge/run-pad`; the commands below expect it cloned next to
+repository, `campforge/run-pad-docs`. The code it documents (examples run with `RunPad.Cli`, icon
+sources) is in the code repository, `campforge/run-pad`; the commands below expect it cloned next to
 this one as `../run-pad`.
 
 This file is not part of the published site.
