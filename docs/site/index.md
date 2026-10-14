@@ -25,7 +25,8 @@ Click a screenshot to open it at full size.
 RunPad runs on Windows, macOS (Apple Silicon and Intel) and Linux. Installers and
 portable builds for every release are on the
 [releases page](https://github.com/campforge/run-pad/releases); the
-[installation guide](install.md#download) explains which file to pick.
+[installation guide](install.md#download) explains which file to pick, and the
+[changelog](changelog.md) lists what changed in each release.
 
 ## Start here
 
