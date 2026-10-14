@@ -13,6 +13,7 @@ nav:
   - Overview: index.md
   - Getting started:
       - Installation: install.md
+      - Installing on macOS: install-macos.md
       - Quick start: quick-start.md
       - Examples: examples.md
   - Using RunPad:

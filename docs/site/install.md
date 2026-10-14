@@ -42,6 +42,9 @@ list:
 
 ## macOS
 
+For architecture selection, first-launch approval, SDK setup and troubleshooting, see
+[Installing RunPad on macOS](install-macos.md).
+
 1. Open the disk image for your Mac.
 2. Drag `RunPad.app` onto the `Applications` folder shown next to it.
 3. Eject the disk image and start RunPad from Applications.

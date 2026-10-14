@@ -184,7 +184,8 @@ Reference the project's built `.dll` instead. See
 
 ### macOS refuses to open RunPad
 
-The build is not signed or notarized yet. See [Installation → macOS](install.md#macos).
+The package is ad-hoc signed but has no Apple Developer ID certificate or notarization.
+See [Installing RunPad on macOS](install-macos.md#3-allow-the-first-launch).
 
 ### No completion or underlines
 
