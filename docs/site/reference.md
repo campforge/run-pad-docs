@@ -12,14 +12,17 @@ bar on macOS. Every toolbar button and shortcut has a menu item too.
 
 | Menu | Commands |
 | --- | --- |
-| **File** | New File, New RPad File, Open Text File..., Import LINQPad Query..., Save, Save As..., Close Tab, Exit (on macOS: **RunPad → Quit**) |
+| **File** | New File, New RPad File, Open Text File..., Import LINQPad Query..., Save, Save As..., Close Tab, Exit |
 | **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Go to Line..., Resolve All Usings |
 | **View** | Toggle File Tree, Toggle Output Panel, Zoom In, Zoom Out, Reset Zoom |
 | **Run** | Run / Continue, Stop, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
 | **Tools** | Dependencies..., Assembly Explorer..., Preferences... |
 | **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
 
-Commands that work on a script, such as Run or Zoom In, act on the active tab.
+Each command shows its current shortcut, also in the macOS menu bar. **File → Exit** asks about
+unsaved tabs before RunPad closes; on macOS it is also ++cmd+q++, and the application menu has no
+commands of its own (About RunPad is under **Help**). Commands that work on a script, such as Run
+or Zoom In, act on the active tab.
 
 ## Preferences
 
@@ -46,7 +49,9 @@ Open **Tools → Preferences...**. Settings are grouped in a tree on the left; t
 Every shortcut can be changed in **Tools → Preferences... → Keyboard**. The page lists each
 command with its key; type a new combination such as `Ctrl+Shift+R`, `Cmd+,` or `F6`, or clear
 the field to remove the key. **Reset** brings back the default, and a warning appears under a
-key that another command already uses. Only the keys you change are stored in `settings.json`.
+key that another command already uses where the same keypress reaches both (a file-tree key may
+repeat an editor key, an Assembly Explorer key a main-window one). A changed key takes effect at
+once, in the menu and in every open window. Only the keys you change are stored in `settings.json`.
 
 The defaults follow LINQPad (and Visual Studio, whose debugging keys LINQPad shares), so
 LINQPad habits carry over. On macOS, the Command key (++cmd++) takes the place of Control
@@ -60,6 +65,7 @@ where that is the Mac convention.
 | Save | ++ctrl+s++ | ++cmd+s++ |
 | Save As | ++ctrl+shift+s++ | ++cmd+shift+s++ |
 | Close Tab | ++ctrl+w++ | ++cmd+w++ |
+| Exit | — (the system's ++alt+f4++) | ++cmd+q++ |
 | Dependencies | ++f4++ | ++f4++ |
 | Preferences | — | ++cmd+comma++ |
 | Toggle Output Panel | ++ctrl+r++ | ++cmd+r++ |

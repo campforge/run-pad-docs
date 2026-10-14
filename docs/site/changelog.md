@@ -10,6 +10,38 @@ description: What changed in each RunPad release.
 Notable changes in each RunPad release. Downloads are on the
 [releases page](https://github.com/campforge/run-pad/releases).
 
+## [0.4.2] — 2026-10-14
+
+A new main menu, the same on every system, and shortcuts you can change for every command.
+
+### Changed
+
+- The main menu has a conventional layout — File, Edit, View, Run, Tools and Help — the same on
+  every system. Every toolbar button and shortcut is now in the menu too: undo and clipboard
+  commands, formatting, zoom, running and debugging. Dependencies, Assembly Explorer and Preferences
+  moved to **Tools**, and **Help** links to the user guide, the release notes and the issue tracker.
+- Every keyboard shortcut can be changed in **Preferences → Keyboard**: the page now lists all
+  commands — including the editor's (completion, Go to Definition…) and the Assembly Explorer's —
+  grouped by area, with **Reset** and a warning when two commands share a key.
+- New default shortcuts follow LINQPad: **Stop** is **Shift+F5** (was Esc), **Run to Cursor** is
+  **Ctrl+F10** and **Ctrl+R** shows or hides the output panel. Shortcuts you changed before are kept.
+- On macOS, shortcuts use the Command key where that is the Mac convention (⌘S, ⌘N, ⌘W, ⌘, for
+  Preferences…), and ⌘ + mouse wheel zooms the editor.
+- On macOS, the menu bar shows each command's shortcut, as the menu does on Windows and Linux, and
+  the application menu no longer adds Hide, Show All, Quit or a second About: About is under
+  **Help**, and **File → Exit** (⌘Q) quits after asking about unsaved tabs, as on other systems.
+- A shortcut changed in Preferences takes effect at once in every open window — the menu, text
+  editor windows and the Assembly Explorer — without reopening them.
+- RunPad's own analyzers (`RPAD…` warnings) are now an experimental feature, off by default. Turn
+  them on in **Preferences → Experimental**.
+
+### Fixed
+
+- In the light theme, the children of a selected item in the Preferences tree and in the file
+  tree no longer turn white.
+- Preferences → Keyboard warns when a file-tree or Assembly Explorer shortcut is also used by a
+  command the same keypress reaches, such as the file tree's Delete rebound to New File's key.
+
 ## [0.4.1] — 2026-10-14
 
 The first public release.
@@ -159,6 +191,7 @@ Even this groundwork showed how large the rest of the changes would be — the d
 features had not been started yet — so writing a new application from scratch turned out to be the
 better choice. RunPad began as DotPad two days after the last commit to the fork.
 
+[0.4.2]: https://github.com/campforge/run-pad/releases/tag/v0.4.2
 [0.4.1]: https://github.com/campforge/run-pad/releases/tag/v0.4.1
 [0.4.0]: https://github.com/campforge/run-pad/releases/tag/v0.4.0
 [0.3.0]: https://github.com/campforge/run-pad/releases/tag/v0.3.0
