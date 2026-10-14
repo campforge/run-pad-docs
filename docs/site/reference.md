@@ -8,18 +8,21 @@ description: RunPad Preferences, keyboard shortcuts, data locations and solution
 ## Menu
 
 The menu is the same on every system: at the top of the window on Windows and Linux, in the menu
-bar on macOS. Every toolbar button and shortcut has a menu item too.
+bar on macOS. Every toolbar button and shortcut has a menu item too, and each item shows its
+shortcut.
 
 | Menu | Commands |
 | --- | --- |
-| **File** | New File, New RPad File, Open Text File..., Import LINQPad Query..., Save, Save As..., Close Tab, Exit (on macOS: **RunPad → Quit**) |
+| **File** | New File, New RPad File, Open Text File..., Import LINQPad Query..., Save, Save As..., Close Tab, Exit (++cmd+q++ on macOS) |
 | **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Go to Line..., Resolve All Usings |
 | **View** | Toggle File Tree, Toggle Output Panel, Zoom In, Zoom Out, Reset Zoom |
 | **Run** | Run / Continue, Stop, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
 | **Tools** | Dependencies..., Assembly Explorer..., Preferences... |
 | **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
 
-Commands that work on a script, such as Run or Zoom In, act on the active tab.
+Commands that work on a script, such as Run or Zoom In, act on the active tab. On macOS the
+menu bar holds only RunPad's own commands: About RunPad is under **Help**, and **File → Exit**
+quits, from any RunPad window.
 
 ## Preferences
 
@@ -60,6 +63,7 @@ where that is the Mac convention.
 | Save | ++ctrl+s++ | ++cmd+s++ |
 | Save As | ++ctrl+shift+s++ | ++cmd+shift+s++ |
 | Close Tab | ++ctrl+w++ | ++cmd+w++ |
+| Exit | — (++alt+f4++ closes the window) | ++cmd+q++ |
 | Dependencies | ++f4++ | ++f4++ |
 | Preferences | — | ++cmd+comma++ |
 | Toggle Output Panel | ++ctrl+r++ | ++cmd+r++ |
