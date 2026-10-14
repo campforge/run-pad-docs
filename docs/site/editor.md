@@ -102,7 +102,8 @@ panel has focus.
   **Preferences → Editor → Show code folding**.
 - **Display options** in **Preferences → Editor**: line numbers, visible tabs, spaces
   and line ends, a column ruler at column 80, word wrap, font size and font family.
-- **Zoom**: hold ++ctrl++ and turn the mouse wheel, or use the percentage button at the
+- **Zoom**: hold ++ctrl++ (++cmd++ on macOS) and turn the mouse wheel, use **View → Zoom In**
+  and **Zoom Out**, or use the percentage button at the
   right of the status strip. It offers *Zoom In*, *Zoom Out*, *Reset (100%)* and presets
   from 50% to 200% of the font size set in Preferences.
 

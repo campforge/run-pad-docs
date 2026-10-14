@@ -3,23 +3,39 @@ title: Overview
 description: RunPad is a native, fast, cross-platform C# scratchpad for .NET with IntelliSense, live diagnostics, a debugger and rich .Dump() output.
 ---
 
-# RunPad
+# The native C# scratchpad for .NET
 
-RunPad is a native, fast, cross-platform C# scratchpad for .NET — an open-source
-alternative to LINQPad, RoslynPad and NetPad. Write a few lines of C#, press ++f5++ and
-see the output and any `.Dump()` results right under the editor.
+RunPad is a free, open-source alternative to LINQPad, RoslynPad and NetPad.
 
-Each script is a `.rpad` file: a Markdown document with a short YAML header and one
-runnable code block. RunPad compiles the block in-process with the .NET SDK installed on
-your machine, so there is no project to set up and nothing to build by hand.
+- Instantly run any C# snippet, statement block or program — press ++f5++
+- Full IntelliSense: [completion with automatic imports, signature help, rename and Go to Definition](editor.md)
+- [See problems as you type](analyzers.md): compiler errors, Roslyn analyzers, 500+ RunPad checks and lightbulb fixes
+- [Debug](debugging.md) with breakpoints, conditions, stepping, watches and exception breaks
+- [Explore results with `.Dump()`](results.md): tables, live updates, progress bars and interactive input
+- [Add NuGet packages](dependencies.md) in a LINQPad-style manager, or reference any `.dll`
+- [Read decompiled code](assembly-explorer.md) in an ILSpy-style Assembly Explorer
+- Feel at home coming from LINQPad: [import `.linq` queries](cli.md#importing-linqpad-queries), the same `Dump` and `Util` APIs, the [same keyboard shortcuts](reference.md#keyboard-shortcuts)
+- [Scripts are Markdown](scripts.md): notes and code in one `.rpad` file that reads well and diffs cleanly
+- Native and fast: no embedded browser, scripts compile in-process with Roslyn
+- Visual Basic scripts run and debug too
+- Free and open source, on Windows, macOS and Linux
+
+[Download RunPad](https://github.com/campforge/run-pad/releases){ .md-button .md-button--primary }
+[Quick start](quick-start.md){ .md-button }
 
 <figure markdown="span">
   [![RunPad main window with a C# script in the editor and a table of results in the Results tab below it](assets/screenshots/overview_light.png#only-light)](assets/screenshots/overview_light.png "Open full-size screenshot")
   [![RunPad main window with a C# script in the editor and a table of results in the Results tab below it](assets/screenshots/overview.png#only-dark)](assets/screenshots/overview.png "Open full-size screenshot")
-  <figcaption>The main window: file tree, editor, toolbar and Results tab.</figcaption>
+  <figcaption>The main window: file tree, editor, toolbar and Results tab. Click to open it at full size.</figcaption>
 </figure>
 
-Click a screenshot to open it at full size.
+## A scratchpad for C#
+
+Each script is a `.rpad` file: a Markdown document with a short YAML header and one
+runnable code block. Write top-level statements, a `Main` program or a single expression;
+RunPad compiles it with the .NET SDK installed on your machine and shows the output and any
+`.Dump()` results right under the editor. There is no project to set up and nothing to build
+by hand.
 
 ## Download
 
@@ -36,26 +52,6 @@ portable builds for every release are on the
 2. Follow the [quick start](quick-start.md) to run your first script and read its
    output.
 3. Download the [examples](examples.md) to try the features described in this guide.
-
-## What you can do
-
-- **Run scripts** in three styles (*kinds*): top-level statements, a `Main` program, or a
-  single expression. See [Scripts and .rpad files](scripts.md).
-- **Write C# with IntelliSense**: completion with automatic imports, signature help,
-  quick info, semantic highlighting, rename, Go to Definition and formatting. See
-  [Editor](editor.md).
-- **See problems while you type**: compiler errors, Roslyn IDE analyzers, RunPad's own
-  analyzers and lightbulb quick fixes. See [Diagnostics and analyzers](analyzers.md).
-- **Debug** with breakpoints (including conditions and hit counts), stepping, locals,
-  watches, call stack, threads and exception breaks. See [Debugging](debugging.md).
-- **Inspect results** with `.Dump()` tables, live-updating `DumpContainer` blocks,
-  progress bars and interactive input. See [Results and runtime helpers](results.md).
-- **Add NuGet packages, assembly references and namespaces** in the Dependencies
-  window. See [Packages and references](dependencies.md).
-- **Browse compiled code** in the Assembly Explorer: decompiled C#, IL, resources and
-  usage analysis. See [Assembly Explorer](assembly-explorer.md).
-- **Run scripts from a terminal** and convert LINQPad queries. See
-  [Command line and LINQPad import](cli.md).
 
 ## C# and Visual Basic
 

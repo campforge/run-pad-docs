@@ -35,56 +35,88 @@ Open **Tools → Preferences...**. Settings are grouped in a tree on the left; t
 | --- | --- |
 | **Interface** | *Appearance*: System, Dark or Light. *Interface theme* and *Editor theme* for the current appearance (defaults: *VS Code Dark* / *VS Code Light* and *Dark+* / *Light+*). |
 | **Editor** | Show line numbers, code folding, tabs, spaces, end of line, column ruler (column 80); word wrap; *Accept completion when typing punctuation*; font size and font family; *New file defaults (Ctrl+N)*: language and kind. |
-| **Keyboard** | Key bindings; see [Keyboard shortcuts](#keyboard-shortcuts). |
+| **Keyboard** | Every key binding, grouped by area, with Reset and conflict warnings; see [Keyboard shortcuts](#keyboard-shortcuts). |
 | **Languages → .NET** | *Dotnet path* (default `dotnet`, found on `PATH`) and *Debugger path* (the `netcoredbg` executable). Shared by C# and Visual Basic. |
 | **Languages → .NET → C#** | *Inlay hints*; *Code fixes and refactorings (lightbulb)*; *Excluded diagnostic IDs*. See [Diagnostics and analyzers](analyzers.md#settings). |
 | **Languages → .NET → Visual Basic** | No settings yet. |
 
 ## Keyboard shortcuts
 
-!!! warning "macOS uses the Control key"
-    RunPad's shortcuts currently use the Control key (⌃) on every platform. On macOS,
-    ++ctrl+s++ means Control-S, not Command-S. Some built-in text-editing commands in the
-    editor follow the platform's own conventions.
+Every shortcut can be changed in **Tools → Preferences... → Keyboard**. The page lists each
+command with its key; type a new combination such as `Ctrl+Shift+R`, `Cmd+,` or `F6`, or clear
+the field to remove the key. **Reset** brings back the default, and a warning appears under a
+key that another command already uses. Only the keys you change are stored in `settings.json`.
 
-### Customizable shortcuts
+The defaults follow LINQPad (and Visual Studio, whose debugging keys LINQPad shares), so
+LINQPad habits carry over. On macOS, the Command key (++cmd++) takes the place of Control
+where that is the Mac convention.
 
-Change these in **Preferences → Keyboard**. Type a gesture such as `Ctrl+Shift+R` or
-`F6`; it is applied when the field loses focus.
+### General
 
-| Action | Default |
-| --- | --- |
-| Run / Continue | ++f5++ |
-| Cancel (stop the run) | ++escape++ |
-| Step Over | ++f10++ |
-| Step In | ++f11++ |
-| Step Out | ++shift+f11++ |
-| Format Document | ++shift+alt+f++ |
-| Go to Line | ++ctrl+g++ |
-| Open Dependencies | ++f4++ |
-| Close Tab | ++ctrl+w++ |
-| Rename File (file tree) | ++f2++ |
-| Delete File (file tree) | ++delete++ |
-| New File | ++ctrl+n++ |
-| Save As | ++ctrl+shift+s++ |
-| Resolve All Usings | ++ctrl+alt+u++ |
-| Save | ++ctrl+s++ (not shown in the Preferences window; stored as `Keyboard.Save` in `settings.json`) |
+| Command | Windows and Linux | macOS |
+| --- | --- | --- |
+| New File | ++ctrl+n++ | ++cmd+n++ |
+| Save | ++ctrl+s++ | ++cmd+s++ |
+| Save As | ++ctrl+shift+s++ | ++cmd+shift+s++ |
+| Close Tab | ++ctrl+w++ | ++cmd+w++ |
+| Dependencies | ++f4++ | ++f4++ |
+| Preferences | — | ++cmd+comma++ |
+| Toggle Output Panel | ++ctrl+r++ | ++cmd+r++ |
+| Assembly Explorer, Toggle File Tree, Zoom In, Zoom Out, Reset Zoom | — | — |
 
-### Fixed editor shortcuts
+### Run and debug
 
-| Action | Key |
-| --- | --- |
-| Open completion | ++ctrl+space++ |
-| Signature help | ++ctrl+shift+space++ |
-| Expand snippet | ++tab++ after a snippet keyword |
-| Jump to matching brace | ++ctrl+bracket-right++ |
-| Rename symbol | ++f2++ (in the editor) |
-| Go to Definition / Implementation | ++f12++ |
-| Find References | ++shift+f12++ |
-| Zoom | ++ctrl++ + mouse wheel |
+| Command | Windows and Linux | macOS |
+| --- | --- | --- |
+| Run / Continue | ++f5++ | ++f5++ |
+| Stop | ++shift+f5++ | ++shift+f5++ |
+| Step Over | ++f10++ | ++f10++ |
+| Step Into | ++f11++ | ++f11++ |
+| Step Out | ++shift+f11++ | ++shift+f11++ |
+| Run to Cursor | ++ctrl+f10++ | ++cmd+f10++ |
+| Debug Mode, Pause | — | — |
 
-The Assembly Explorer has its own fixed keys; see
-[Assembly Explorer](assembly-explorer.md#keyboard-reference).
+On macOS, function keys may need the ++fn++ key, depending on your keyboard settings.
+
+### Editor
+
+| Command | Windows and Linux | macOS |
+| --- | --- | --- |
+| Show Completion | ++ctrl+space++ | ++ctrl+space++ |
+| Signature Help | ++ctrl+shift+space++ | ++cmd+shift+space++ |
+| Go to Definition / Implementation | ++f12++ | ++f12++ |
+| Find References | ++shift+f12++ | ++shift+f12++ |
+| Rename Symbol | ++f2++ | ++f2++ |
+| Jump to Matching Bracket | ++ctrl+bracket-right++ | ++ctrl+bracket-right++ |
+| Format Document | ++shift+alt+f++ | ++shift+alt+f++ |
+| Go to Line | ++ctrl+g++ | ++ctrl+g++ |
+| Resolve All Usings | ++ctrl+alt+u++ | ++cmd+alt+u++ |
+
+### File tree
+
+| Command | Windows and Linux | macOS |
+| --- | --- | --- |
+| Rename | ++f2++ | ++enter++ |
+| Delete | ++del++ | ++cmd+backspace++ |
+
+### Assembly Explorer
+
+| Command | Windows and Linux | macOS |
+| --- | --- | --- |
+| Back / Forward | ++alt+left++ / ++alt+right++ | ++cmd+bracket-left++ / ++cmd+bracket-right++ |
+| Search Types and Members | ++ctrl+shift+f++ | ++cmd+shift+f++ |
+| Analyze | ++ctrl+r++ | ++cmd+r++ |
+| Remove Assembly | ++del++ | ++cmd+backspace++ |
+| Next / Previous Tab | ++ctrl+tab++ / ++ctrl+shift+tab++ | ++ctrl+tab++ / ++ctrl+shift+tab++ |
+
+Save and Close Tab use the General keys above.
+
+### Keys that follow the system
+
+These are not listed in Preferences: text editing uses the platform's own keys (Undo, Redo,
+Cut, Copy, Paste, Select All — with ++cmd++ on macOS), ++tab++ expands a snippet, and holding
+++ctrl++ (++cmd++ on macOS) while turning the mouse wheel zooms the editor or while clicking a
+name in the Assembly Explorer goes to its definition.
 
 ## Where RunPad stores data
 

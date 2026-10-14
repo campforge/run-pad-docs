@@ -18,9 +18,9 @@ To pick the language and kind yourself, use **File → New RPad File → C#** or
 **Visual Basic** instead and choose a kind in the dialog.
 
 !!! tip "Shortcuts on macOS"
-    RunPad's own shortcuts currently use the Control key on every platform, including
-    macOS. ++ctrl+n++ means Control-N, not Command-N. See
-    [Keyboard shortcuts](reference.md#keyboard-shortcuts).
+    This guide gives the Windows and Linux keys. On macOS, use ++cmd++ where they say
+    ++ctrl++ for file commands: ++cmd+n++, ++cmd+s++, ++cmd+w++. See
+    [Keyboard shortcuts](reference.md#keyboard-shortcuts) for every key on both systems.
 
 ## 2. Type the code
 
@@ -56,7 +56,7 @@ The **Results** tab shows:
 | 2 | "Visual Basic" | 12 |
 
 Strings are shown in quotes so you can tell `"1"` from `1`. To stop a script that runs
-too long, press ++escape++ or click the **Stop** button next to Run.
+too long, press ++shift+f5++ or click the **Stop** button next to Run.
 
 ## 4. Save it
 

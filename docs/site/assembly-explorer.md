@@ -51,7 +51,7 @@ The toolbar above the code has:
   language features the decompiler may use.
 
 The code pane is read-only. In the C# view, put the caret on a name and press ++f12++,
-or hold ++ctrl++ and click it, to go to that type or member. Holding ++ctrl++ underlines
+or hold ++ctrl++ (++cmd++ on macOS) and click it, to go to that type or member. Holding it underlines
 names you can navigate to. If the target is in another assembly, that assembly is added
 to the tree. Navigation is available only in the C# view, not in IL.
 
@@ -109,7 +109,7 @@ at run time.
 
 | Key | Action |
 | --- | --- |
-| ++f12++ / ++ctrl++ + click | Go to the definition under the caret or pointer (C# view) |
+| ++f12++ / ++ctrl++ + click | Go to the definition under the caret or pointer (C# view; ++cmd++ + click on macOS) |
 | ++alt+left++ / ++alt+right++ | Back / Forward |
 | ++ctrl+shift+f++ | Focus the search box |
 | ++ctrl+r++ | Run the first analysis for the selected row |
@@ -119,4 +119,5 @@ at run time.
 | ++enter++ on a reference | Load the referenced assembly |
 | ++delete++ on an assembly | Remove it from the tree |
 
-These keys are fixed and use the Control key on every platform, including macOS.
+These are the Windows and Linux defaults. The macOS keys, and how to change any of them, are in
+[Keyboard shortcuts](reference.md#assembly-explorer).
