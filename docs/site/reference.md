@@ -20,9 +20,11 @@ bar on macOS. Every toolbar button and shortcut has a menu item too.
 | **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
 
 Each command shows its current shortcut, also in the macOS menu bar. **File → Exit** asks about
-unsaved tabs before RunPad closes; on macOS it is also ++cmd+q++, and the application menu has no
-commands of its own (About RunPad is under **Help**). Commands that work on a script, such as Run
-or Zoom In, act on the active tab.
+unsaved tabs and text editor windows before RunPad closes; on macOS it is also ++cmd+q++, which
+works from every RunPad window. On macOS the menus hold only RunPad's commands: the application
+menu has none of its own (About RunPad is under **Help**), and **Edit** has no AutoFill, Start
+Dictation or Emoji & Symbols items — dictation and the character viewer are still available from
+the system. Commands that work on a script, such as Run or Zoom In, act on the active tab.
 
 ## Preferences
 
