@@ -20,7 +20,7 @@ analysis does not promise.
 | --- | --- | --- | --- |
 | C# compiler | `CS…` (for example `CS0103`) | Editor underlines; also printed in the Results tab when you run | While you type and on every run |
 | Roslyn IDE analyzers | `IDE…` | Mostly as lightbulb suggestions; many have no underline | While you type |
-| RunPad analyzers | `RPAD…` | Editor warning underlines | While you type |
+| RunPad analyzers (experimental, off by default) | `RPAD…` | Editor warning underlines | While you type |
 | Assembly Explorer analysis | none | The Assembly Explorer's analysis pane | When you ask for it |
 
 **Compiler diagnostics** are the same errors and warnings the build reports. In the
@@ -38,6 +38,11 @@ lightbulb fix available on the caret's line instead.
 them flag calls with constant arguments that always throw, such as parsing a string that
 is out of range for the target type. They report warnings with IDs that start with
 `RPAD` and have no quick fixes of their own.
+
+!!! note "Experimental"
+    RunPad analyzers are still being refined and are **off by default**. Turn them on in
+    **Tools → Preferences... → Experimental → RunPad analyzers**; the open scripts are
+    analyzed again right away. Compiler errors and Roslyn's IDE analyzers are not affected.
 
 **Assembly Explorer analysis** is a different tool: it searches compiled assemblies for
 code that uses, reads, assigns or implements a member. See
@@ -70,7 +75,8 @@ What you see in the editor:
   `System.Text.Json` is not imported. If you run now, the Results tab shows
   `(1,16): error CS0103: The name 'JsonSerializer' does not exist in the current context`
   and nothing runs.
-- **Lines 4 and 5** have warning underlines from RunPad analyzer **RPAD0258**. Hovering
+- **Lines 4 and 5** have warning underlines from RunPad analyzer **RPAD0258**, once RunPad
+  analyzers are turned on (see the note above). Hovering
   shows, for example: *'byte.Parse(...)' always throws OverflowException at runtime —
   '300' is out of range for byte*.
 

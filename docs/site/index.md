@@ -9,7 +9,7 @@ RunPad is a free, open-source alternative to LINQPad, RoslynPad and NetPad.
 
 - Instantly run any C# snippet, statement block or program — press ++f5++
 - Full IntelliSense: [completion with automatic imports, signature help, rename and Go to Definition](editor.md)
-- [See problems as you type](analyzers.md): compiler errors, Roslyn analyzers, 500+ RunPad checks and lightbulb fixes
+- [See problems as you type](analyzers.md): compiler errors, Roslyn analyzers and lightbulb fixes
 - [Debug](debugging.md) with breakpoints, conditions, stepping, watches and exception breaks
 - [Explore results with `.Dump()`](results.md): tables, live updates, progress bars and interactive input
 - [Add NuGet packages](dependencies.md) in a LINQPad-style manager, or reference any `.dll`
