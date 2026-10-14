@@ -90,7 +90,8 @@ Sum of squares 1..5
 used in [Diagnostics and analyzers](analyzers.md#example-an-always-failing-constant)
 
 **Not meant to run.** Open it to see a compiler error with a `using` quick fix and two
-RunPad analyzer warnings (RPAD0258). As downloaded, Run stops with error `CS0103`. After
+RunPad analyzer warnings (RPAD0258, shown once RunPad analyzers are turned on in
+**Preferences → Experimental**). As downloaded, Run stops with error `CS0103`. After
 the quick fix is applied, Run prints `{"Name":"RunPad","Version":1}` and then fails with
 `System.OverflowException`, which is what the warnings predict.
 
