@@ -14,7 +14,8 @@ runnable code block. RunPad compiles the block in-process with the .NET SDK inst
 your machine, so there is no project to set up and nothing to build by hand.
 
 <figure markdown="span">
-  [![RunPad main window with a C# script in the editor and a table of results in the Results tab below it](assets/screenshots/overview.png)](assets/screenshots/overview.png "Open full-size screenshot")
+  [![RunPad main window with a C# script in the editor and a table of results in the Results tab below it](assets/screenshots/overview_light.png#only-light)](assets/screenshots/overview_light.png "Open full-size screenshot")
+  [![RunPad main window with a C# script in the editor and a table of results in the Results tab below it](assets/screenshots/overview.png#only-dark)](assets/screenshots/overview.png "Open full-size screenshot")
   <figcaption>The main window: file tree, editor, toolbar and Results tab.</figcaption>
 </figure>
 
