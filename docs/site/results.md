@@ -16,8 +16,9 @@ Under the editor are three tabs:
 
 - **Results** — console output and `.Dump()` blocks, in the order the script produces
   them. Text the script writes to `Console.Error`, compiler errors and unhandled
-  exceptions are shown as errors. The status strip below reads *Success*, *Cancelled* or
-  an error state when the run ends, with the elapsed time.
+  exceptions are shown as errors. When the run ends, the status strip below shows the
+  elapsed time and *Success*, *Cancelled*, *Compilation failed* or *Exit code N* when the
+  script ends with a non-zero exit code.
 - **Debugger** — the debugger panels; see [Debugging](debugging.md).
 - **IL** — the IL disassembly of the last successful compile, as read-only text.
 
