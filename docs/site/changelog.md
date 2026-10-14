@@ -112,7 +112,7 @@ The first public release.
   `Util.CurrentQueryPath` and wider LINQPad compatibility.
 - **LINQPad import:** File → Import LINQPad Query... and `runpad convert` turn `.linq` files into
   `.rpad` scripts.
-- **NuGet manager** in the style of LINQPad's, with package source configuration and authentication.
+- **NuGet manager** with package source configuration and authentication.
 - **First-run setup** that finds or installs the .NET SDK and the netcoredbg debugger.
 - **Installers:** MSI for Windows, `.deb` and AppImage for Linux, unsigned DMG images for Apple
   Silicon and Intel Macs, and portable archives.

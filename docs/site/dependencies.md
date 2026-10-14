@@ -22,7 +22,7 @@ it already has a name, and refreshes IntelliSense so new types are recognized.
 
 ## NuGet packages
 
-The **Packages** tab has three columns, in the style of LINQPad's NuGet manager:
+The **Packages** tab has three columns:
 
 - **Left** — the packages already in this script, followed by the packages in your local
   NuGet cache. Type in *Search local package cache* to filter them.

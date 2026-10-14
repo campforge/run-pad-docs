@@ -12,7 +12,7 @@ RunPad is a free, open-source alternative to LINQPad, RoslynPad and NetPad.
 - [See problems as you type](analyzers.md): compiler errors, Roslyn analyzers and lightbulb fixes
 - [Debug](debugging.md) with breakpoints, conditions, stepping, watches and exception breaks
 - [Explore results with `.Dump()`](results.md): tables, live updates, progress bars and interactive input
-- [Add NuGet packages](dependencies.md) in a LINQPad-style manager, or reference any `.dll`
+- [Add NuGet packages](dependencies.md) with the built-in package manager, or reference any `.dll`
 - [Read decompiled code](assembly-explorer.md) in an ILSpy-style Assembly Explorer
 - Feel at home coming from LINQPad: [import `.linq` queries](cli.md#importing-linqpad-queries), the same `Dump` and `Util` APIs, the [same keyboard shortcuts](reference.md#keyboard-shortcuts)
 - [Scripts are Markdown](scripts.md): notes and code in one `.rpad` file that reads well and diffs cleanly
