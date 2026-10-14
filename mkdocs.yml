@@ -4,7 +4,7 @@
 site_name: RunPad
 site_description: User guide for RunPad, a desktop scratchpad for C# and Visual Basic scripts.
 site_url: https://campforge.github.io/run-pad-docs/
-copyright: Copyright &copy; 2026 Vadim (hobobyte). RunPad is licensed under GPL-3.0.
+copyright: Copyright &copy; 2026 Vadim S (hobobyte). RunPad is licensed under GPL-3.0.
 
 docs_dir: docs/site
 site_dir: site
