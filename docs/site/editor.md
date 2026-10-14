@@ -20,7 +20,7 @@ Visual Basic gets the lexical features described in [Visual Basic](#visual-basic
   theme in **Preferences → Interface → Editor theme**; the defaults are *Dark+* and
   *Light+*.
 - **Semantic highlighting** (C#) colors identifiers by what they are after Roslyn has
-  analyzed the code: types, interfaces, methods, and properties, fields, events and
+  analyzed the code: types, interfaces, methods, properties, fields, events and
   namespaces each get their own color.
 - **Occurrences** (C#): when the caret is on a symbol, the other uses of that symbol in
   the script are highlighted.
@@ -36,9 +36,14 @@ Completion (C#) opens automatically while you type:
 - after `<` for generic type arguments;
 - while you type an identifier or keyword.
 
-Press ++ctrl+space++ to open it yourself. On macOS, the system may reserve this shortcut for switching input sources; automatic completion or a different system shortcut avoids that conflict. The list is filtered by context (no member
+Press ++ctrl+space++ to open it yourself. The list is filtered by context (no member
 suggestions inside strings or comments, for example), members declared in your own
 script are shown in bold, and overloads are collapsed into one entry.
+
+!!! tip "Control-Space on macOS"
+    macOS may use Control-Space to switch input sources. If the list does not open,
+    rely on automatic completion or assign the input-source switch to a different key in
+    **System Settings → Keyboard → Keyboard Shortcuts**.
 
 **Automatic imports**: the list also offers types from namespaces that are not imported
 yet, including types from the script's NuGet packages. Accepting one adds its namespace

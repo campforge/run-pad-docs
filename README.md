@@ -2,8 +2,9 @@
 
 Source of the RunPad user guide, published at <https://campforge.github.io/run-pad-docs/>.
 
-RunPad itself — a desktop scratchpad for C# and Visual Basic scripts — lives in
-[`Campforge/run-pad`](https://github.com/Campforge/run-pad).
+RunPad itself — a native, fast, cross-platform C# scratchpad for .NET — lives in
+[`campforge/run-pad`](https://github.com/campforge/run-pad); downloads are on its
+[releases page](https://github.com/campforge/run-pad/releases).
 
 - `docs/site/` — the pages (Markdown), screenshots and downloadable examples; navigation is in
   `mkdocs.yml`.

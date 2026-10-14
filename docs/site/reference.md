@@ -7,8 +7,9 @@ description: RunPad Preferences, keyboard shortcuts, data locations and solution
 
 ## Preferences
 
-Open **Edit → Preferences** (shown as **Settings…** in the native macOS menu). Settings are grouped in a tree on the left; type in
-*Search settings...* to filter it. Changes apply immediately.
+Open **Edit → Preferences** (shown as **Settings…** in the native macOS menu). Settings are
+grouped in a tree on the left; type in *Search settings...* to filter it. Changes apply
+immediately.
 
 <figure markdown="span">
   [![The Preferences window with its settings tree and Interface appearance and theme controls](assets/screenshots/preferences.png)](assets/screenshots/preferences.png "Open full-size screenshot")

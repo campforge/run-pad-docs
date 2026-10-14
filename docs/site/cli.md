@@ -16,8 +16,9 @@ macros) and `namespaces` the same way the RunPad window does.
     The runner is not included in the release packages. On Linux, the `runpad` command
     that the `.deb` package puts on `PATH` starts the RunPad window, not this runner.
 
-    The runner is the `RunPad.Cli` project in the RunPad source repository. Build it from
-    a clone with the .NET 10 SDK:
+    The runner is the `RunPad.Cli` project in the
+    [RunPad source code](https://github.com/campforge/run-pad). Build it from a clone with
+    the .NET 10 SDK:
 
     ```bash
     dotnet build src/main/RunPad.Cli -c Release
@@ -68,7 +69,9 @@ Running with no arguments prints this usage and exits with code 1.
 | `1` | Bad arguments, file not found, the file is not a valid `.rpad` document, no .NET SDK found, a compile error, or the script wrote to standard error (an unhandled exception does). |
 | `130` | Interrupted with ++ctrl+c++. |
 
-The runner currently does **not** forward the script process's numeric exit code. A script that calls `Environment.Exit(42)` without writing to standard error can therefore leave the runner with exit code `0`. Use the reported diagnostics and output when assessing a run.
+The runner does **not** pass on the script's own exit code yet: a script that calls
+`Environment.Exit(42)` without writing to standard error leaves the runner with exit
+code `0`.
 
 ### Example
 

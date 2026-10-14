@@ -76,7 +76,9 @@ What you see in the editor:
 
 RPAD0258 checks `Parse` on the integer types and `decimal`, and the matching
 `Convert.ToXxx` methods, when the argument is a constant string of plain digits.
-RPAD0258 does **not** flag `int.Parse("abc")`; a separate analyzer, **RPAD0356**, detects non-numeric constant strings that always throw `FormatException`, such as the call in the screenshot. Values read at run time are outside these constant checks.
+RPAD0258 does **not** flag `int.Parse("abc")`. A separate analyzer, **RPAD0356**, catches
+non-numeric constant strings that always throw `FormatException`, such as the call in the
+screenshot. Values read at run time are outside these constant checks.
 
 ### Applying the quick fix
 

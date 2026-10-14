@@ -20,7 +20,8 @@ ILSpy inside RunPad. There is one Assembly Explorer window per RunPad instance.
   or drop `.dll`, `.exe` or `.winmd` files onto the window.
 - **Go to Definition** (++f12++) on a symbol that is not declared in your C# script opens
   the explorer with that member decompiled, its assembly loaded and its row selected.
-  Later ++f12++ jumps from the script open in a new tab of the same window.
+  While the explorer is open, each further ++f12++ from the script opens a new tab in
+  the same window.
 
 ## The tree
 

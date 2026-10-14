@@ -1,15 +1,17 @@
 ---
 title: Overview
-description: RunPad is a desktop scratchpad for C# and Visual Basic scripts with live diagnostics, a debugger and rich .Dump() output.
+description: RunPad is a native, fast, cross-platform C# scratchpad for .NET with IntelliSense, live diagnostics, a debugger and rich .Dump() output.
 ---
 
 # RunPad
 
-RunPad is a desktop scratchpad for small C# and Visual Basic programs, in the same
-space as LINQPad, RoslynPad and NetPad. Each script is a `.rpad` file: a Markdown
-document with a short YAML header and one runnable code block. RunPad compiles the
-block with the .NET SDK installed on your machine, runs it, and shows the output and
-any `.Dump()` results under the editor.
+RunPad is a native, fast, cross-platform C# scratchpad for .NET — an open-source
+alternative to LINQPad, RoslynPad and NetPad. Write a few lines of C#, press ++f5++ and
+see the output and any `.Dump()` results right under the editor.
+
+Each script is a `.rpad` file: a Markdown document with a short YAML header and one
+runnable code block. RunPad compiles the block in-process with the .NET SDK installed on
+your machine, so there is no project to set up and nothing to build by hand.
 
 <figure markdown="span">
   [![RunPad main window with a C# script in the editor and a table of results in the Results tab below it](assets/screenshots/overview.png)](assets/screenshots/overview.png "Open full-size screenshot")
@@ -17,6 +19,13 @@ any `.Dump()` results under the editor.
 </figure>
 
 Click a screenshot to open it at full size.
+
+## Download
+
+RunPad runs on Windows, macOS (Apple Silicon and Intel) and Linux. Installers and
+portable builds for every release are on the
+[releases page](https://github.com/campforge/run-pad/releases); the
+[installation guide](install.md#download) explains which file to pick.
 
 ## Start here
 
@@ -48,8 +57,8 @@ Click a screenshot to open it at full size.
 
 ## C# and Visual Basic
 
-Both languages compile, run and debug the same way. Editor intelligence currently
-exists only for C#.
+RunPad is built for C#. Visual Basic scripts compile, run and debug the same way, but
+editor intelligence currently exists only for C#.
 
 | Capability | C# | Visual Basic |
 | --- | --- | --- |
@@ -68,7 +77,13 @@ exists only for C#.
 
 - Scripts cannot reference `.csproj` or `.vbproj` projects; reference a built `.dll`
   instead. See [Packages and references](dependencies.md#project-references-are-not-supported).
-- There is no *Set Next Statement* in the debugger.
 - There is no File → Open command. RunPad shows the `.rpad` files in its scripts folder;
   see [Where your scripts live](scripts.md#where-your-scripts-live).
-- The macOS build is not signed or notarized with an Apple Developer certificate yet. See [Installation](install.md#macos).
+- The macOS build is not signed or notarized with an Apple Developer certificate yet;
+  see [Installation](install.md#macos).
+
+## Feedback and source code
+
+RunPad is free and open source under the GPL-3.0. The code is on
+[GitHub](https://github.com/campforge/run-pad); report bugs and suggest ideas in its
+[issues](https://github.com/campforge/run-pad/issues).

@@ -16,8 +16,9 @@ This file is not part of the published site.
   the site.
 - Downloadable examples: `docs/site/examples/*.rpad` and `*.linq` are copied as static
   files.
-- Icons: `docs/site/assets/app-icon.svg` (copy of `docs/img/app-icon.svg`) and
-  `docs/site/assets/favicon.png` (copy of `src/main/RunPad/Assets/runpad.png`).
+- Icons: `docs/site/assets/app-icon.svg` (also used on the Campforge home page) and
+  `docs/site/assets/favicon.png` (copy of `src/main/RunPad/Assets/runpad.png` in the code
+  repository).
 - The theme uses no web fonts (`theme.font: false`) and no repository widget, so the
   pages make no third-party requests. `scripts/docs/check_site_links.py` fails the build if
   a page loads a stylesheet, script, image or font from another origin.
@@ -38,9 +39,6 @@ manually.
 The deploy job alone gets `pages: write` and `id-token: write`, runs in the
 `github-pages` environment, and uses `actions/configure-pages@v5` and
 `actions/deploy-pages@v4`; the build job uploads with `actions/upload-pages-artifact@v4`.
-
-The existing `CI` workflow (`dotnet-desktop.yml`) has no path filters, so documentation
-changes also trigger the full .NET CI. That is unchanged by this task.
 
 ## One-time setup (repository admin)
 
@@ -65,8 +63,8 @@ repository is renamed or a custom domain is configured, update both.
   the repository belongs to an organization on GitHub Enterprise Cloud that restricts
   Pages access. Only the built `docs/site` content is published; internal documents in
   the repository stay private.
-- The guide links to the releases page and source paths on GitHub. While the repository
-  is private, anonymous readers cannot open those links.
+- The guide links to the releases page and the source code in `campforge/run-pad`. While
+  that repository is private, anonymous readers cannot open those links.
 
 ## Building locally
 
@@ -116,11 +114,11 @@ Screenshots live in `docs/site/assets/screenshots/`. They are real native-window
 | Field | Value |
 | --- | --- |
 | Status | Complete: seven original PNG captures |
-| Captured application | Installed /Applications/RunPad.app, CFBundleShortVersionString 0.4.0; source documentation checked against main 11a9f33 |
+| Captured application | RunPad 0.4.0, installed in /Applications |
 | Operating system | macOS 26.5.1, Apple Silicon |
 | Theme and size | Dark: RunPad Midnight / Dark+; original window captures (2268×1384 main, 2200×1496 explorer, 2000×1336 Dependencies) |
 | Samples | Self-contained product list, integer summation loop, non-numeric Parse literal, LINQ over names; public System.Linq.dll copied into a temporary directory |
-| Captured by / date | Codex, 2026-10-13 |
+| Captured | 2026-10-13 |
 
 The screenshots illustrate the controls and workflows, and are not all exact executions of the downloadable samples. Captions describe the captured state. Completion is documented from source; the Editor image shows highlighting, not an open completion popup.
 
