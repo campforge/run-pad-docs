@@ -63,15 +63,14 @@ Running with no arguments prints this usage and exits with code 1.
 
 ### Exit codes
 
+Once the script has run, the runner exits with the script's own exit code: `0` when it
+finishes normally, `42` after `Environment.Exit(42)`, and a non-zero code after an
+unhandled exception. Text on standard error alone does not fail the run. Otherwise:
+
 | Code | Meaning |
 | --- | --- |
-| `0` | The runner finished without reporting a compiler error or standard-error output. |
-| `1` | Bad arguments, file not found, the file is not a valid `.rpad` document, no .NET SDK found, a compile error, or the script wrote to standard error (an unhandled exception does). |
+| `1` | Bad arguments, file not found, the file is not a valid `.rpad` document, no .NET SDK found, a compile error, or the compiled script could not be started. |
 | `130` | Interrupted with ++ctrl+c++. |
-
-The runner does **not** pass on the script's own exit code yet: a script that calls
-`Environment.Exit(42)` without writing to standard error leaves the runner with exit
-code `0`.
 
 ### Example
 
