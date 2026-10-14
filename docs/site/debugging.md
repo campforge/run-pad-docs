@@ -80,11 +80,11 @@ The line about to run is highlighted and marked with an arrow in the gutter. The
 | Step Into | ++f11++ | Step Into |
 | Step Out | ++shift+f11++ | Step Out |
 | Pause | — | Pause |
-| Run to Cursor | — | Run to Cursor (runs until the line that holds the caret) |
-| Stop | ++escape++ | Stop |
+| Run to Cursor | ++ctrl+f10++ | Run to Cursor (runs until the line that holds the caret) |
+| Stop | ++shift+f5++ | Stop |
 
-The keys can be changed in **Preferences → Keyboard**; see
-[Keyboard shortcuts](reference.md#keyboard-shortcuts). On macOS, function keys may need
+The same commands are in the **Run** menu. The keys can be changed in
+**Tools → Preferences... → Keyboard**; see [Keyboard shortcuts](reference.md#keyboard-shortcuts). On macOS, function keys may need
 the ++fn++ key depending on your keyboard settings.
 
 ### Breaking on exceptions
@@ -128,7 +128,7 @@ Try this:
 3. Add the watch expression `total * 2` in **Watch**, then press ++f5++ a few times and
    watch it change.
 4. Right-click the breakpoint, enter the condition `i == 3` and click **OK**. Stop with
-   ++escape++ and run again: the first stop is now at `i` = 3.
+   ++shift+f5++ and run again: the first stop is now at `i` = 3.
 
 Without a debugger the script prints five lines, from `i = 1, square = 1, running total = 1`
 to `i = 5, square = 25, running total = 55`, and then a block **Sum of squares 1..5**
