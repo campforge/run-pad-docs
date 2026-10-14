@@ -26,8 +26,9 @@ The **Packages** tab has three columns, in the style of LINQPad's NuGet manager:
 
 - **Left** — the packages already in this script, followed by the packages in your local
   NuGet cache. Type in *Search local package cache* to filter them.
-- **Middle** — online search. Type in *Search online*; search runs after a short pause, or press Enter to search immediately. Use the arrows to page through
-  results, and pick a source in the drop-down: *All sources*, one enabled source, or
+- **Middle** — online search. Type in *Search online*; the search runs after a short
+  pause, or press ++enter++ to search at once. Use the arrows to page through results,
+  and pick a source in the drop-down: *All sources*, one enabled source, or
   *(configure sources...)*.
 - **Right** — *Include Prerelease*, and details of the selected package with a
   **Version** list.

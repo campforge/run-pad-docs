@@ -5,14 +5,16 @@ description: Install RunPad on Windows, macOS or Linux and set up the .NET SDK a
 
 # Installation and first run
 
-RunPad itself is a desktop application. To compile and run scripts it uses a .NET SDK
-installed on your machine, and to debug them it uses the open-source
-[netcoredbg](https://github.com/Samsung/netcoredbg) debugger.
+RunPad is a desktop application. To compile and run scripts it uses a .NET SDK installed
+on your machine, and to debug them it uses the open-source
+[netcoredbg](https://github.com/Samsung/netcoredbg) debugger. The first-run setup can
+install both for you.
 
 ## Download
 
-Prebuilt packages are published on the
-[releases page](https://github.com/Campforge/run-pad/releases/latest).
+Download RunPad from the [releases page](https://github.com/campforge/run-pad/releases).
+The newest release is at the top; pick the file for your system from its **Assets**
+list:
 
 === "Windows"
 
@@ -45,8 +47,8 @@ Prebuilt packages are published on the
 3. Eject the disk image and start RunPad from Applications.
 
 The build is not yet signed or notarized with an Apple Developer certificate, so on the
-first launch macOS may refuse to open it because it cannot verify the developer. If you
-downloaded RunPad from the releases page:
+first launch macOS may refuse to open it because it cannot verify the developer. To open
+it anyway:
 
 1. Open **System Settings → Privacy & Security**.
 2. Click **Open Anyway** next to the message about RunPad, then confirm.
@@ -92,6 +94,9 @@ recorded in the file and shown in the status bar, but it does not choose the SDK
 [Front matter](scripts.md#front-matter).
 
 ## Updating and uninstalling
+
+RunPad does not update itself. To update, download the new version from the
+[releases page](https://github.com/campforge/run-pad/releases):
 
 - **Windows installer**: install the new `.msi` over the old one. Uninstall from
   *Add or remove programs*.

@@ -2,7 +2,7 @@
 # Only docs/site is published.
 # Build locally: see docs/GITHUB-PAGES.md.
 site_name: RunPad
-site_description: User guide for RunPad, a desktop scratchpad for C# and Visual Basic scripts.
+site_description: User guide for RunPad, a native, fast, cross-platform C# scratchpad for .NET.
 site_url: https://campforge.github.io/run-pad-docs/
 copyright: Copyright &copy; 2026 Vadim S (hobobyte). RunPad is licensed under GPL-3.0.
 
@@ -25,6 +25,7 @@ nav:
       - Assembly Explorer: assembly-explorer.md
       - Command line and LINQPad import: cli.md
   - Reference: reference.md
+  - Download: https://github.com/campforge/run-pad/releases
 
 theme:
   name: material
@@ -59,11 +60,15 @@ theme:
     - toc.follow
 
 extra:
-  # Footer link back to the Campforge home page (icon bundled with the theme, no external request).
+  # Footer links to the Campforge home page and the source code (icons bundled with the theme,
+  # no external request).
   social:
     - icon: material/home-outline
       link: https://campforge.github.io/
       name: Campforge
+    - icon: fontawesome/brands/github
+      link: https://github.com/campforge/run-pad
+      name: RunPad on GitHub
   generator: false
 
 extra_css:
