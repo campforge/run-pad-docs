@@ -5,11 +5,26 @@ description: RunPad Preferences, keyboard shortcuts, data locations and solution
 
 # Settings, shortcuts and troubleshooting
 
+## Menu
+
+The menu is the same on every system: at the top of the window on Windows and Linux, in the menu
+bar on macOS. Every toolbar button and shortcut has a menu item too.
+
+| Menu | Commands |
+| --- | --- |
+| **File** | New File, New RPad File, Open Text File..., Import LINQPad Query..., Save, Save As..., Close Tab, Exit (on macOS: **RunPad → Quit**) |
+| **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Go to Line..., Resolve All Usings |
+| **View** | Toggle File Tree, Toggle Output Panel, Zoom In, Zoom Out, Reset Zoom |
+| **Run** | Run / Continue, Stop, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
+| **Tools** | Dependencies..., Assembly Explorer..., Preferences... |
+| **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
+
+Commands that work on a script, such as Run or Zoom In, act on the active tab.
+
 ## Preferences
 
-Open **Edit → Preferences** (shown as **Settings…** in the native macOS menu). Settings are
-grouped in a tree on the left; type in *Search settings...* to filter it. Changes apply
-immediately.
+Open **Tools → Preferences...**. Settings are grouped in a tree on the left; type in
+*Search settings...* to filter it. Changes apply immediately.
 
 <figure markdown="span">
   [![The Preferences window with its settings tree and Interface appearance and theme controls](assets/screenshots/preferences.png)](assets/screenshots/preferences.png "Open full-size screenshot")
