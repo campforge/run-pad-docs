@@ -16,7 +16,7 @@ ILSpy inside RunPad. There is one Assembly Explorer window per RunPad instance.
 
 ## Opening it
 
-- **Edit → Assembly Explorer...** opens it empty. Click **Browse...** to add an assembly,
+- **Tools → Assembly Explorer...** opens it empty. Click **Browse...** to add an assembly,
   or drop `.dll`, `.exe` or `.winmd` files onto the window.
 - **Go to Definition** (++f12++) on a symbol that is not declared in your C# script opens
   the explorer with that member decompiled, its assembly loaded and its row selected.

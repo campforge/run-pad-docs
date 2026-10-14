@@ -15,7 +15,7 @@ A script's dependencies live in its front matter: `packages`, `references` and
 
 ## Open the Dependencies window
 
-Choose **Edit → Dependencies** or press ++f4++. The window edits the script in the active
+Choose **Tools → Dependencies...** or press ++f4++. The window edits the script in the active
 tab. It has three tabs, described below. Click **Save** to apply your changes to the
 script, or **Cancel** to discard them. Saving updates the front matter, writes the file if
 it already has a name, and refreshes IntelliSense so new types are recognized.
