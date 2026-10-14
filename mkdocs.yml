@@ -25,6 +25,7 @@ nav:
       - Assembly Explorer: assembly-explorer.md
       - Command line and LINQPad import: cli.md
   - Reference: reference.md
+  - Changelog: changelog.md
   - Download: https://github.com/campforge/run-pad/releases
 
 theme:

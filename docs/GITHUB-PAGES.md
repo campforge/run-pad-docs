@@ -14,6 +14,9 @@ This file is not part of the published site.
 - Source: `mkdocs.yml` and `docs/site/**` only (`docs_dir: docs/site`). MkDocs reads
   nothing else, so this file, the workflow, the scripts and the root `README.md` are never copied into
   the site.
+- Changelog: `docs/site/changelog.md` is generated from `CHANGELOG.md` in the code repository by
+  `scripts/docs/sync_changelog.py`. Never edit it by hand; after a release, run the script and
+  commit the result.
 - Downloadable examples: `docs/site/examples/*.rpad` and `*.linq` are copied as static
   files.
 - Icons: `docs/site/assets/app-icon.svg` (also used on the Campforge home page) and
