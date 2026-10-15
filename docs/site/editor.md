@@ -105,7 +105,14 @@ panel has focus.
 - **Zoom**: hold ++ctrl++ (++cmd++ on macOS) and turn the mouse wheel, use **View → Zoom In**
   and **Zoom Out**, or use the percentage button at the
   right of the status strip. It offers *Zoom In*, *Zoom Out*, *Reset (100%)* and presets
-  from 50% to 200% of the font size set in Preferences.
+  from 50% to 200%. The zoom is one setting for all editors — every open tab and every tab you
+  open later follows it — and RunPad keeps it after a restart. **Preferences → Editor → Code zoom**
+  shows it and resets it.
+- **Code zoom and interface scale**: **Preferences → Interface → Interface scale** (90% to 200%)
+  sizes the whole RunPad window, code included. The code zoom works on top of it: 100% is the
+  font size from Preferences at the current interface scale. With font size 12, interface scale
+  125% and code zoom 110%, code is shown at 12 × 1.25 × 1.10 = 16.5. Resetting one leaves the
+  other as it is.
 
 ## Visual Basic
 
