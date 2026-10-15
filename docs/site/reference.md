@@ -51,8 +51,8 @@ command with its key; type a new combination such as `Ctrl+Shift+R`, `Cmd+,` or 
 the field to remove the key. **Reset** brings back the default, and a warning appears under a
 key that another command already uses. Only the keys you change are stored in `settings.json`.
 
-The defaults follow LINQPad (and Visual Studio, whose debugging keys LINQPad shares), so
-LINQPad habits carry over. On macOS, the Command key (++cmd++) takes the place of Control
+The defaults follow common IDE conventions: ++f5++ runs, ++shift+f5++ stops, ++f10++ and ++f11++
+step. On macOS, the Command key (++cmd++) takes the place of Control
 where that is the Mac convention.
 
 ### General

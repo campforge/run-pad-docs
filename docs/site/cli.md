@@ -1,9 +1,9 @@
 ---
-title: Command line and LINQPad import
-description: Run .rpad scripts from a terminal with the runpad CLI and convert LINQPad .linq queries.
+title: Command line and .linq import
+description: Run .rpad scripts from a terminal with the runpad CLI and convert .linq queries.
 ---
 
-# Command line and LINQPad import
+# Command line and .linq import
 
 ## The `runpad` command-line runner
 
@@ -85,9 +85,9 @@ Sum of squares 1..5
 55
 ```
 
-## Importing LINQPad queries
+## Importing .linq queries
 
-RunPad converts LINQPad `.linq` files to `.rpad` scripts.
+RunPad converts `.linq` query files to `.rpad` scripts.
 
 - **In RunPad:** choose **File → Import LINQPad Query...** and pick the `.linq` file.
   RunPad writes a `.rpad` file with the same name **next to the `.linq` file** and opens
@@ -99,7 +99,7 @@ RunPad converts LINQPad `.linq` files to `.rpad` scripts.
 
 ### What is converted
 
-| LINQPad | RunPad |
+| `.linq` | `.rpad` |
 | --- | --- |
 | `Kind="Statements"`, `"Program"`, `"Expression"` | `language: csharp` with the same kind |
 | `Kind="VBStatements"`, `"VBProgram"`, `"VBExpression"` | `language: vb` with the same kind |
@@ -109,17 +109,16 @@ RunPad converts LINQPad `.linq` files to `.rpad` scripts.
 | The code after `</Query>` | The run block, under a heading with the file name |
 
 Other kinds, such as SQL or F# queries, are rejected with an error that lists the
-supported kinds. LINQPad database connections are not converted. The converted file
+supported kinds. Database connections are not converted. The converted file
 gets `targetSdk: latest`.
 
-Most `.Dump()` calls work unchanged because RunPad's `.Dump()` overloads mirror
-LINQPad's; see [Results and runtime helpers](results.md). LINQPad's long positional
-`Dump(description, depth, collapseTo, toDataGrid, …)` overloads are not provided; use
+Most `.Dump()` calls work unchanged; see [Results and runtime helpers](results.md). The long
+positional `Dump(description, depth, collapseTo, toDataGrid, …)` overloads are not provided; use
 `Dump(new DumpOptions { … })` instead.
 
 ### Try it
 
-Download [`linqpad-sample.linq`](examples/linqpad-sample.linq):
+Download [`sample-query.linq`](examples/sample-query.linq):
 
 ```xml
 <Query Kind="Statements">
@@ -134,7 +133,7 @@ prices
     .Dump("Formatted prices");
 ```
 
-`runpad convert linqpad-sample.linq` produces:
+`runpad convert sample-query.linq` produces:
 
 ````markdown
 ---
@@ -146,7 +145,7 @@ namespaces:
   - System.Globalization
 ---
 
-# linqpad-sample
+# sample-query
 
 ```csharp run
 var culture = CultureInfo.InvariantCulture;
