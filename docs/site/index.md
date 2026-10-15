@@ -30,7 +30,7 @@ RunPad is a free, open-source C# scratchpad for Windows, macOS and Linux.
   <figcaption>The main window: file tree, editor, toolbar and Results tab. Click to open it at full size.</figcaption>
 </figure>
 
-## A scratchpad for C#
+## A scratchpad for C\#
 
 Each script is a `.rpad` file: a Markdown document with a short YAML header and one
 runnable code block. Write top-level statements, a `Main` program or a single expression;
