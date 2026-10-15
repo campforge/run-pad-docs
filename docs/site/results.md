@@ -158,8 +158,33 @@ script waits there until you press ++ctrl+c++.
 | `Util.SaveString`, `Util.LoadString`, `Util.SaveBytes`, `Util.LoadBytes` | Save and load files by name in RunPad's per-user data folder. |
 | `Util.Try(action)`, `Util.Try(func)` | Run code and get the exception back instead of having it thrown. |
 | `Util.KeepRunning()` | Keeps the script's process alive until the returned object is disposed, for timers or background work. |
+| `Util.CancellationToken` | Cancelled when you press **Stop**; see [Stopping a script](#stopping-a-script). |
 | `Util.Cmd(…)` | Runs an external program, streams its output into the Results tab and returns its exit code. An overload captures the output into a string instead. |
 
 `Util.Cache` and the `Save…` methods write files under the `UserData` folder inside
 RunPad's data folder (see [Where RunPad stores data](reference.md#where-runpad-stores-data)).
 Cached entries stay there until they expire or you delete the files.
+
+## Stopping a script
+
+**Stop** (++shift+f5++) ends a running script at once — unless the script listens for it. A script
+that uses `Util.CancellationToken`, or a Program script whose `Main` takes a `CancellationToken`,
+sees the token cancelled and gets up to 3 seconds to close files, connections and child processes
+before RunPad ends it:
+
+```csharp
+async Task Main(string[] args, CancellationToken ct)
+{
+    using var connection = await OpenConnectionAsync();
+    try
+    {
+        await ProcessAsync(connection, ct);
+    }
+    finally
+    {
+        Console.WriteLine("Closing the connection");
+    }
+}
+```
+
+The run still counts as cancelled. Under the debugger, Stop always ends the script at once.

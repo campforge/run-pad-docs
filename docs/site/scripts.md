@@ -136,8 +136,18 @@ names.Select(Function(n) New With {.Name = n, .Letters = n.Length}).Dump("Names"
 
 You write a `Main` method and whatever else it needs: fields, helper methods, nested
 types. In C#, RunPad places your code inside a generated class and calls `Main` for you.
-`Main` may be `void` or return `Task` (`async Task Main()`), and it may be static or
-not.
+`Main` may be static or not, and may take the command-line arguments, a cancellation token, or
+both:
+
+| `Main` | Notes |
+| --- | --- |
+| `void Main()`, `async Task Main()` | The usual form. |
+| `Main(string[] args)` | `args` is empty when you run from RunPad. |
+| `Main(CancellationToken ct)`, `Main(string[] args, CancellationToken ct)` | `ct` is cancelled when you press **Stop**; see [Stopping a script](results.md#stopping-a-script). |
+| `int Main(…)`, `async Task<int> Main(…)` | The returned number is the exit code; anything but 0 shows as *Exit code N*. |
+
+If the script declares several `Main` overloads, RunPad calls the one that takes the most:
+arguments and a token, then a token, then arguments, then none.
 
 ```csharp
 void Main()
