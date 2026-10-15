@@ -16,6 +16,7 @@ RunPad is a free, open-source C# scratchpad for Windows, macOS and Linux.
 - [Read decompiled code](assembly-explorer.md) in an ILSpy-style Assembly Explorer
 - [Import `.linq` queries](cli.md#importing-linq-queries) and run them with few or no changes
 - [Scripts are Markdown](scripts.md): notes and code in one `.rpad` file that reads well and diffs cleanly
+- [View your scripts in Obsidian](obsidian.md): read and edit the notes and code of `.rpad` files with the RunPad Markdown plugin
 - Native and fast: no embedded browser, scripts compile in-process with Roslyn
 - Visual Basic scripts run and debug too
 - Free and open source, on Windows, macOS and Linux
