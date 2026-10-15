@@ -5,7 +5,7 @@ description: RunPad is a native, fast, cross-platform C# scratchpad for .NET wit
 
 # The native C# scratchpad for .NET
 
-RunPad is a free, open-source alternative to LINQPad, RoslynPad and NetPad.
+RunPad is a free, open-source C# scratchpad for Windows, macOS and Linux.
 
 - Instantly run any C# snippet, statement block or program — press ++f5++
 - Full IntelliSense: [completion with automatic imports, signature help, rename and Go to Definition](editor.md)
@@ -14,7 +14,7 @@ RunPad is a free, open-source alternative to LINQPad, RoslynPad and NetPad.
 - [Explore results with `.Dump()`](results.md): tables, live updates, progress bars and interactive input
 - [Add NuGet packages](dependencies.md) with the built-in package manager, or reference any `.dll`
 - [Read decompiled code](assembly-explorer.md) in an ILSpy-style Assembly Explorer
-- Feel at home coming from LINQPad: [import `.linq` queries](cli.md#importing-linqpad-queries), the same `Dump` and `Util` APIs, the [same keyboard shortcuts](reference.md#keyboard-shortcuts)
+- [Import `.linq` queries](cli.md#importing-linq-queries) and run them with few or no changes
 - [Scripts are Markdown](scripts.md): notes and code in one `.rpad` file that reads well and diffs cleanly
 - Native and fast: no embedded browser, scripts compile in-process with Roslyn
 - Visual Basic scripts run and debug too

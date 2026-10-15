@@ -182,5 +182,5 @@ files change on disk. Right-click it to create C# or Visual Basic files and fold
 rename, delete, or *Show in File Manager*; drag items to move them.
 
 There is no File → Open command yet. To use a script from elsewhere, copy it into the
-RunPad Queries folder. LINQPad `.linq` files can be imported with
-**File → Import LINQPad Query...**; see [Command line and LINQPad import](cli.md#importing-linqpad-queries).
+RunPad Queries folder. `.linq` query files can be imported with
+**File → Import LINQPad Query...**; see [Command line and .linq import](cli.md#importing-linq-queries).

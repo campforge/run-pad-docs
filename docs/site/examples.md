@@ -104,12 +104,12 @@ A `Util.ProgressBar` and a `DumpContainer` that update in place for about one se
 then a **Processed values** list: 10, 20, 30, 40, 50. The progress bar ends at 100% with
 the caption *Done*, and the status block reads `"Processed 5 of 5 items"`.
 
-## linqpad-sample.linq
+## sample-query.linq
 
-[Download `linqpad-sample.linq`](examples/linqpad-sample.linq) · LINQPad query
+[Download `sample-query.linq`](examples/sample-query.linq) · `.linq` query
 
-A LINQPad *Statements* query for trying **File → Import LINQPad Query...** or
-`runpad convert`. See [Importing LINQPad queries](cli.md#importing-linqpad-queries).
+A *Statements* query in the `.linq` format for trying **File → Import LINQPad Query...** or
+`runpad convert`. See [Importing .linq queries](cli.md#importing-linq-queries).
 
 ## Visual Basic
 

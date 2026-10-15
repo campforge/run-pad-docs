@@ -7,8 +7,8 @@ description: Console output, .Dump() tables, DumpOptions, DumpContainer, progres
 
 Every script is compiled against a small runtime library, `RunPad.Runtime`. It provides
 `.Dump()`, `DumpContainer`, `DumpOptions` and the `Util` class. Its namespace is imported
-automatically, so none of these need a `using`. The API follows LINQPad's names, so many
-LINQPad scripts work without changes.
+automatically, so none of these need a `using`. Scripts imported from `.linq` files
+usually work without changes.
 
 ## The output tabs
 
@@ -61,7 +61,7 @@ Without a label, the heading is the source text of the dumped expression. For
 | `x.Dump(5)` | Expands nested values 5 levels deep. No heading. |
 | `x.Dump(5, 1)` | 5 levels deep; levels after the first start collapsed (click to expand). |
 | `x.Dump("label", 5)` | Heading and depth. |
-| `x.Dump(true)`, `x.Dump("label", true)` | Accepted for LINQPad compatibility; the result looks the same as without `true`. |
+| `x.Dump(true)`, `x.Dump("label", true)` | Accepted for compatibility with imported scripts; the result looks the same as without `true`. |
 | `x.Dump(new DumpOptions { … })` | Full control, see below. |
 
 ### `DumpOptions` and `Util.DumpDefaults`
@@ -90,7 +90,7 @@ people.Dump(new DumpOptions
 | `ForceExpansion` | Render expanded even for types that start collapsed by default. |
 | `UseInvariantCultureForNumbers` | Format numbers with the invariant culture. |
 | `FormatStrings` | Format strings for integers, real numbers, dates and times. |
-| `ToDataGrid` | Accepted for LINQPad compatibility; currently has no visible effect. |
+| `ToDataGrid` | Accepted for compatibility with imported scripts; currently has no visible effect. |
 
 To change the defaults for the rest of a run, set properties on `Util.DumpDefaults`, for
 example `Util.DumpDefaults.MaxDepth = 5;`.

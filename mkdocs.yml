@@ -24,7 +24,7 @@ nav:
       - Results and runtime helpers: results.md
       - Packages and references: dependencies.md
       - Assembly Explorer: assembly-explorer.md
-      - Command line and LINQPad import: cli.md
+      - Command line and .linq import: cli.md
   - Reference: reference.md
   - Changelog: changelog.md
   - Download: https://github.com/campforge/run-pad/releases
