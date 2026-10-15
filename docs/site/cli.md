@@ -89,7 +89,7 @@ Sum of squares 1..5
 
 RunPad converts `.linq` query files to `.rpad` scripts.
 
-- **In RunPad:** choose **File → Import LINQPad Query...** and pick the `.linq` file.
+- **In RunPad:** choose **File → Import .linq Query...** and pick the `.linq` file.
   RunPad writes a `.rpad` file with the same name **next to the `.linq` file** and opens
   it. If that name is taken, it adds a number (`Query 2.rpad`). The file appears in the
   file tree only if it is inside your RunPad Queries folder.

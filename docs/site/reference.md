@@ -13,7 +13,7 @@ shortcut.
 
 | Menu | Commands |
 | --- | --- |
-| **File** | New File, New RPad File, Open Text File..., Import LINQPad Query..., Save, Save As..., Close Tab, Exit (++cmd+q++ on macOS) |
+| **File** | New File, New RPad File, Open Text File..., Import .linq Query..., Save, Save As..., Close Tab, Exit (++cmd+q++ on macOS) |
 | **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Go to Line..., Resolve All Usings |
 | **View** | Toggle File Tree, Toggle Output Panel, Zoom In, Zoom Out, Reset Zoom |
 | **Run** | Run / Continue, Stop, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
