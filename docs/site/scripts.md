@@ -148,8 +148,13 @@ void Main()
 string Greet(string name) => $"Hello, {name}!";
 ```
 
+A new Program script starts with an empty `Main`, and switching a script to **Program** in the
+toolbar wraps its code in `Main` — `async Task Main()` when the code uses `await` — and keeps
+methods and types after it. One **Undo** brings the old code back; a script that already has a
+`Main` is left as it is.
+
 In Visual Basic the code is compiled as written, so a Program script contains the whole
-module:
+module (switching to Program wraps the code in one):
 
 ```vb
 Module Program

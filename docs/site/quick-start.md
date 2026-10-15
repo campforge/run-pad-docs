@@ -10,7 +10,8 @@ window, or that you have finished it (see [Installation and first run](install.m
 
 ## 1. Create a script
 
-Choose **File → New File** or press ++ctrl+n++. RunPad opens an empty, untitled tab.
+Choose **File → New File** or press ++ctrl+n++. RunPad opens an empty, untitled tab (a Program
+script starts with an empty `Main` method).
 New files use the language and kind set in **Preferences → Editor → New file defaults**,
 which are C# and *Statements* unless you changed them.
 
