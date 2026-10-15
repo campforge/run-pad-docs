@@ -20,7 +20,8 @@ shortcut.
 | **Tools** | Dependencies..., Assembly Explorer..., Preferences... |
 | **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
 
-Commands that work on a script, such as Run or Zoom In, act on the active tab. On macOS the
+Commands that work on a script, such as Run, act on the active tab; Zoom In, Zoom Out and Reset
+Zoom change the code zoom of all editors. On macOS the
 menu bar holds only RunPad's own commands: About RunPad is under **Help**, and **File → Exit**
 quits, from any RunPad window.
 
@@ -36,8 +37,8 @@ Open **Tools → Preferences...**. Settings are grouped in a tree on the left; t
 
 | Page | Settings |
 | --- | --- |
-| **Interface** | *Appearance*: System, Dark or Light. *Interface theme* and *Editor theme* for the current appearance (defaults: *VS Code Dark* / *VS Code Light* and *Dark+* / *Light+*). |
-| **Editor** | Show line numbers, code folding, tabs, spaces, end of line, column ruler (column 80); word wrap; *Accept completion when typing punctuation*; font size and font family; *New file defaults (File → New File)*: language and kind. |
+| **Interface** | *Interface scale*: the size of everything in RunPad's windows, code included, 90% to 200% (default 100%), with *Reset to 100%*. *Appearance*: System, Dark or Light. *Interface theme* and *Editor theme* for the current appearance (defaults: *VS Code Dark* / *VS Code Light* and *Dark+* / *Light+*). |
+| **Editor** | Show line numbers, code folding, tabs, spaces, end of line, column ruler (column 80); word wrap; *Accept completion when typing punctuation*; font size; *Code zoom* on top of the interface scale, with *Reset to 100%*; font family; *New file defaults (File → New File)*: language and kind. |
 | **Keyboard** | Every key binding, grouped by area, with Reset and conflict warnings; see [Keyboard shortcuts](#keyboard-shortcuts). |
 | **Languages → .NET** | *Dotnet path* (default `dotnet`, found on `PATH`) and *Debugger path* (the `netcoredbg` executable). Shared by C# and Visual Basic. |
 | **Languages → .NET → C#** | *Inlay hints*; *Code fixes and refactorings (lightbulb)*; *Excluded diagnostic IDs*. See [Diagnostics and analyzers](analyzers.md#settings). |
@@ -120,7 +121,7 @@ Save and Close Tab use the General keys above.
 
 These are not listed in Preferences: text editing uses the platform's own keys (Undo, Redo,
 Cut, Copy, Paste, Select All — with ++cmd++ on macOS), ++tab++ expands a snippet, and holding
-++ctrl++ (++cmd++ on macOS) while turning the mouse wheel zooms the editor or while clicking a
+++ctrl++ (++cmd++ on macOS) while turning the mouse wheel zooms code in all editors or while clicking a
 name in the Assembly Explorer goes to its definition.
 
 ## Where RunPad stores data
