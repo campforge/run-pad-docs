@@ -16,7 +16,7 @@ A RunPad script is a plain-text `.rpad` file. It is a Markdown document with:
 ---
 version: "1.0"
 language: csharp
-targetSdk: net10.0
+targetSdk: latest
 kind: Statements
 ---
 
@@ -54,7 +54,7 @@ All fields are optional. A missing or empty value falls back to the default.
 | --- | --- | --- |
 | `version` | `"1.0"` | Version of the file format. |
 | `language` | `csharp` | `csharp` or `vb`. Must match the run block's info string. |
-| `targetSdk` | `latest` | A framework moniker such as `net10.0`. Recorded in the file and shown in the status bar as *Kind · targetSdk*. It does **not** select the SDK: the GUI uses the SDK chosen in the toolbar drop-down, and the [command-line runner](cli.md) uses the newest stable installed SDK. |
+| `targetSdk` | `latest` | The .NET version the script runs on: `latest` for the newest installed stable SDK, or a framework moniker such as `net8.0`. The toolbar's SDK drop-down shows and changes it, and the [command-line runner](cli.md) follows it too. If that version isn't installed, the script runs on the newest SDK with a warning. See [Choosing the SDK](install.md#choosing-the-sdk-a-script-runs-with). |
 | `kind` | `Statements` | `Statements`, `Program` or `Expression`. See [Kinds](#kinds). |
 | `packages` | none | NuGet packages as `PackageId: version` pairs. |
 | `references` | none | Paths to `.dll` files. See [Packages and references](dependencies.md). |
