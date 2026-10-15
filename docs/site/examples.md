@@ -108,7 +108,7 @@ the caption *Done*, and the status block reads `"Processed 5 of 5 items"`.
 
 [Download `sample-query.linq`](examples/sample-query.linq) · `.linq` query
 
-A *Statements* query in the `.linq` format for trying **File → Import LINQPad Query...** or
+A *Statements* query in the `.linq` format for trying **File → Import .linq Query...** or
 `runpad convert`. See [Importing .linq queries](cli.md#importing-linq-queries).
 
 ## Visual Basic
