@@ -1,7 +1,7 @@
 ---
 version: "1.0"
 language: csharp
-targetSdk: net10.0
+targetSdk: latest
 kind: Expression
 ---
 

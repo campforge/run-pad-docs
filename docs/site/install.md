@@ -90,11 +90,17 @@ later in **Preferences → Languages → .NET** (fields *Dotnet path* and *Debug
 
 ## Choosing the SDK a script runs with
 
-The toolbar above the editor has an SDK drop-down. It lists the newest installed SDK for
-each .NET version from .NET 6 upwards, with the newest stable SDK first, and that SDK is
-the one used when you press Run. The `targetSdk` value in a script's front matter is
-recorded in the file and shown in the status bar, but it does not choose the SDK. See
-[Front matter](scripts.md#front-matter).
+A script runs on the .NET version its `targetSdk` names, and the SDK drop-down in the
+toolbar above the editor shows and changes it:
+
+- **latest (.NET 10.0.100)** — the newest installed stable SDK; the file keeps
+  `targetSdk: latest`, so the script moves to a newer SDK when you install one.
+- **.NET 8.0.400** and the other entries — the newest installed SDK of each .NET version
+  from .NET 6 upwards; picking one writes its version (`targetSdk: net8.0`) to the file.
+
+If the version a script names isn't installed, it runs on the newest SDK: the Results tab
+starts with a warning, and the status bar shows *net6.0 (not installed)*. The
+[command-line runner](cli.md) follows the same rule. See [Front matter](scripts.md#front-matter).
 
 ## Updating and uninstalling
 

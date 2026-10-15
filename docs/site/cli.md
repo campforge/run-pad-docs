@@ -52,8 +52,9 @@ Running with no arguments prints this usage and exits with code 1.
   not when it is redirected to a file or pipe.
 - `DumpContainer` and `Util.ProgressBar` updates are printed one after another instead of
   updating in place.
-- The script runs with the newest stable .NET SDK found by `dotnet --list-sdks` on
-  `PATH`; the `targetSdk` field does not change this.
+- The script runs on the SDK its `targetSdk` names, found by `dotnet --list-sdks` on `PATH`
+  (`latest`: the newest stable one). If that version isn't installed, the newest SDK runs it
+  and a warning goes to standard error.
 - Each run compiles into a new temporary folder that is deleted afterwards. The runner
   does not use the RunPad window's build cache.
 - NuGet sources come from RunPad's own `NuGet.Config` if the RunPad window has created
