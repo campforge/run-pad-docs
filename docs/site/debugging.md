@@ -28,8 +28,9 @@ Step Into, Step Out, Pause and Run to Cursor) appear only while a session is run
 
 ## Breakpoints
 
-Click in the gutter, where the line numbers are, to add a breakpoint on that line. Click
-it again to remove it. Breakpoints can be added and removed during a session; the
+Click the breakpoint column in the gutter beside the line numbers to add a breakpoint
+on that line. Click the breakpoint again to remove it. Breakpoints can be added and
+removed during a session; the
 debugger receives the change the next time execution stops.
 
 The gutter icon shows each breakpoint's state:
@@ -97,6 +98,16 @@ In **Debugger → Exceptions**:
 
 The settings apply to the next debug session.
 
+When the debugger stops on an exception, the top of the **Debugger** panel shows its
+type and message. Additional details, such as a stack trace and inner exception, appear
+when the debugger supplies them; limited debugger support may leave only a short message.
+
+An unhandled exception can prevent execution from reaching later breakpoints. For
+example, `int.Parse("not-a-number")` throws before the next statement runs. Read the
+exception notice first: **Continue** lets an unhandled exception end the script, while
+**Stop** ends the debug session. A step rejected by the debugger leaves execution paused
+and shows a notice; it does not mean the step succeeded.
+
 ## Practice script
 
 Download [`debugging-loop.rpad`](examples/debugging-loop.rpad). Its code block is:
@@ -150,6 +161,11 @@ path shows the setup window again, where **Install** downloads a matching build.
 
 **The script runs, but breakpoints are ignored.** Make sure the bug button is
 highlighted before you press Run. Without debug mode, breakpoints are not used.
+
+**Later breakpoints are skipped, or stepping does not move.** Check the exception and
+notice above the Debugger panels. A statement before the breakpoint may have thrown an
+unhandled exception. If the debugger rejects stepping from that stop, use **Continue**
+or **Stop**, correct the failing statement and start a new session.
 
 **A breakpoint shows a hollow ring.** Hover over it to read the debugger's reason. Most
 often the line has no executable code; move the breakpoint to a statement. Also check

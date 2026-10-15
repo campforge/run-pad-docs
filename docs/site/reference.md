@@ -44,6 +44,10 @@ Open **Tools → Preferences...**. Settings are grouped in a tree on the left; t
 | **Experimental** | Features that are not finished yet, all off by default: *RunPad analyzers* (`RPAD…` warnings). See [Diagnostics and analyzers](analyzers.md#four-kinds-of-analysis). |
 | **Languages → .NET → Visual Basic** | No settings yet. |
 
+The next release also adds a saved interface scale and shared code zoom. See
+[Interface scale and shared code zoom](editor.md#interface-scale-and-shared-code-zoom)
+for the two settings and how they interact.
+
 ## Keyboard shortcuts
 
 Every shortcut can be changed in **Tools → Preferences... → Keyboard**. The page lists each
