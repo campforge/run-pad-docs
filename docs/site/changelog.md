@@ -10,7 +10,7 @@ description: What changed in each RunPad release.
 Notable changes in each RunPad release. Downloads are on the
 [releases page](https://github.com/campforge/run-pad/releases).
 
-## [0.6.0] — 2026-10-16
+## [0.6.0] — 2026-10-17
 
 ### Added
 
