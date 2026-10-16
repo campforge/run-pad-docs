@@ -113,9 +113,7 @@ panel has focus.
 
 ### Interface scale and shared code zoom
 
-!!! info "Next release"
-    The following controls are being prepared for the next release. They are not part
-    of RunPad 0.5.0.
+Available from **RunPad 0.6.0**.
 
 **Preferences → Interface → Interface scale** changes the size of the interface,
 including code, results, panels, dialogs, icons and click targets. The default is 100%;
