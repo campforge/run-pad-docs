@@ -65,9 +65,10 @@ To **update** the plugin, unpack the archive from the new release over the old
 
 ## Things to know
 
-- Obsidian keeps its settings in a `.obsidian` folder inside the vault. If the vault is your
-  RunPad Queries folder, that folder also appears on the **Queries** tab in RunPad. It holds no
-  scripts; leave it in place.
+- Obsidian keeps its settings in a `.obsidian` folder inside the vault. Leave it in place.
+  In RunPad 0.5.0 it also appears on the **Queries** tab if the vault is your RunPad Queries
+  folder. The next release hides folders whose names start with a dot, including `.obsidian`,
+  and their contents from that tree; it does not delete or change them on disk.
 - Avoid editing the same script in RunPad and Obsidian at the same time. RunPad rewrites the
   front matter when it saves (see [How RunPad edits the file](scripts.md#how-runpad-edits-the-file)),
   so make changes in one app and save before switching to the other.
