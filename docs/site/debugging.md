@@ -67,10 +67,12 @@ The line about to run is highlighted and marked with an arrow in the gutter. The
 | Panel | Contents |
 | --- | --- |
 | **Locals** | Variables in the current scope with name, value and type. Objects and collections expand on demand. |
-| **Watch** | Expressions you add with **+ Add** and edit in the *Expression* column. They are re-evaluated every time execution stops. **− Remove** deletes the selected row. |
+| **Watch** | Expressions you add with the **+** button and edit in the *Expression* column. They are re-evaluated every time execution stops. The **−** button deletes the selected row. |
 | **Call Stack** | The method, file and line of each frame. |
 | **Threads** | ID and name of every thread in the script's process. |
-| **Exceptions** | The exception break settings below. |
+
+Threads and Call Stack are permanent tables on the left, separated by a draggable divider.
+Locals and Watch share the right-hand pane.
 
 ### Stepping
 
@@ -90,7 +92,7 @@ the ++fn++ key depending on your keyboard settings.
 
 ### Breaking on exceptions
 
-In **Debugger → Exceptions**:
+Open the **settings gear** at the right of the Results/Debugger/IL header:
 
 - **Break on unhandled exceptions** pauses when an exception is about to end the script.
 - **Break on all exceptions (including caught)** pauses whenever an exception is thrown,
