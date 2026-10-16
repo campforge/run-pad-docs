@@ -15,6 +15,8 @@
   --cf-text2:     #52597A;
   --cf-accent:    #3D6FE5;
   --cf-accent-soft: #E3EBFC;
+  --cf-button-accent: #315CC5;
+  --cf-button-on-accent: #FFFFFF;
 
   --md-default-bg-color: var(--cf-bg);
   --md-default-fg-color: var(--cf-text);
@@ -42,6 +44,8 @@
   --cf-text2:     #7880A8;
   --cf-accent:    #5B8CFF;
   --cf-accent-soft: #1E2847;
+  --cf-button-accent: #5B8CFF;
+  --cf-button-on-accent: #111420;
 
   --md-default-bg-color: var(--cf-bg);
   --md-default-fg-color: var(--cf-text);
@@ -161,4 +165,26 @@
 .md-typeset h2,
 .md-typeset h3 {
   font-weight: 600;
+}
+
+/* Content actions use the accent, not the header's surface-colored primary palette.
+   Otherwise outlined buttons are almost invisible against the dark page background. */
+.md-typeset .md-button {
+  color: var(--cf-button-accent);
+  border-color: var(--cf-button-accent);
+  background-color: transparent;
+}
+
+.md-typeset .md-button--primary,
+.md-typeset .md-button:hover,
+.md-typeset .md-button:focus {
+  color: var(--cf-button-on-accent);
+  border-color: var(--cf-button-accent);
+  background-color: var(--cf-button-accent);
+  text-decoration: none;
+}
+
+.md-typeset .md-button:focus-visible {
+  outline: 2px solid var(--cf-button-accent);
+  outline-offset: 4px;
 }

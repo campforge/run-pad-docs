@@ -41,7 +41,8 @@ The editor shows only the code inside the run block. RunPad keeps the Markdown b
 and after the block exactly as it was and writes it back unchanged when it saves. The
 front matter is changed through the UI: the **kind** drop-down in the toolbar, the
 [Dependencies window](dependencies.md) and code fixes that add a namespace. To edit the
-Markdown text around the code, use another text editor.
+Markdown text around the code, use another text editor — for example Obsidian with the
+RunPad Markdown plugin; see [View your scripts in Obsidian](obsidian.md).
 
 When RunPad saves a script, it writes the front matter again from the fields it knows,
 in a fixed order. YAML comments and unknown fields in the header are not kept.

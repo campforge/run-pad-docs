@@ -81,7 +81,9 @@ continue typing.
 
 ## Navigation and refactoring
 
-These commands work on the symbol under the caret in C# scripts.
+These commands work on the symbol under the caret in C# scripts. The table shows the
+Windows and Linux defaults; see [Keyboard shortcuts](reference.md#keyboard-shortcuts)
+for the macOS equivalents and custom bindings.
 
 | Command | Key | What it does |
 | --- | --- | --- |
@@ -97,15 +99,34 @@ panel has focus.
 
 ## Folding, display and zoom
 
-- **Folding**: C# blocks fold at braces; Visual Basic blocks fold at keyword pairs such as
-  `Sub` … `End Sub`. Use the arrows in the gutter. Turn folding off in
-  **Preferences → Editor → Show code folding**.
+- **Folding**: multi-line C# blocks fold at braces; a one-line `{ … }` block does not get
+  a folding arrow. Visual Basic blocks fold at keyword pairs such as `Sub` … `End Sub`.
+  Move the pointer over the folding column in the gutter to reveal the arrows for open
+  blocks. A folded block keeps its arrow visible so you can expand it. Turn folding off
+  in **Preferences → Editor → Show code folding**.
 - **Display options** in **Preferences → Editor**: line numbers, visible tabs, spaces
   and line ends, a column ruler at column 80, word wrap, font size and font family.
 - **Zoom**: hold ++ctrl++ (++cmd++ on macOS) and turn the mouse wheel, use **View → Zoom In**
   and **Zoom Out**, or use the percentage button at the
   right of the status strip. It offers *Zoom In*, *Zoom Out*, *Reset (100%)* and presets
   from 50% to 200% of the font size set in Preferences.
+
+### Interface scale and shared code zoom
+
+Available from **RunPad 0.6.0**.
+
+**Preferences → Interface → Interface scale** changes the size of the interface,
+including code, results, panels, dialogs, icons and click targets. The default is 100%;
+choose a preset from 90% to 200%. The native macOS menu bar keeps its system size.
+
+Code zoom is an extra adjustment on top of the interface scale. It is shared by existing
+and new editor tabs and separate code editor windows, and both settings are kept after
+a restart. Use the wheel, **View → Zoom In / Zoom Out**, or the percentage button in the
+status strip to change it. **Preferences → Editor → Code zoom** shows the current value.
+
+For example, font size 12 with interface scale 125% and code zoom 110% gives an effective
+code size of 16.5. Resetting interface scale leaves code zoom alone, and resetting code
+zoom leaves interface scale alone. To return to the original sizes, reset both to 100%.
 
 ## Visual Basic
 
