@@ -71,6 +71,9 @@ To **update** the plugin, unpack the archive from the new release over the old
 - Avoid editing the same script in RunPad and Obsidian at the same time. RunPad rewrites the
   front matter when it saves (see [How RunPad edits the file](scripts.md#how-runpad-edits-the-file)),
   so make changes in one app and save before switching to the other.
+  If another program changed the disk file, RunPad now asks before replacing it; choose
+  Save As to keep both versions, Overwrite to replace the disk version, or Cancel to
+  keep editing. It does not automatically merge or reload external edits.
 - A file whose structure the plugin does not recognise — no front matter, a missing or
   unclosed run block, or several run blocks — opens read-only, so the problem stays visible
   instead of being "fixed" automatically.
