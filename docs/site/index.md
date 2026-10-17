@@ -28,7 +28,6 @@ RunPad is a free, open-source C# scratchpad for Windows, macOS and Linux.
 <figure markdown="span">
   [![RunPad main window with a C# script in the editor and a table of results in the Results tab below it](assets/screenshots/overview_light.png#only-light)](assets/screenshots/overview_light.png "Open full-size screenshot")
   [![RunPad main window with a C# script in the editor and a table of results in the Results tab below it](assets/screenshots/overview.png#only-dark)](assets/screenshots/overview.png "Open full-size screenshot")
-  <figcaption>The main window: file tree, editor, toolbar and Results tab. Click to open it at full size.</figcaption>
 </figure>
 
 ## A scratchpad for C\#

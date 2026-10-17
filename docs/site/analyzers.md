@@ -11,7 +11,6 @@ analysis does not promise.
 
 <figure markdown="span">
   [![A warning underline on int.Parse with the non-numeric constant not-a-number in a C# script](assets/screenshots/diagnostics.png)](assets/screenshots/diagnostics.png "Open full-size screenshot")
-  <figcaption>A warning on a constant that cannot be parsed as an integer (RPAD0356). The downloadable example below demonstrates overflow warnings and a missing namespace.</figcaption>
 </figure>
 
 ## Four kinds of analysis

@@ -11,7 +11,6 @@ Visual Basic gets the lexical features described in [Visual Basic](#visual-basic
 
 <figure markdown="span">
   [![A C# script with comments, strings and LINQ calls highlighted in the editor](assets/screenshots/editor-highlighting.png)](assets/screenshots/editor-highlighting.png "Open full-size screenshot")
-  <figcaption>Syntax highlighting in a C# statement script.</figcaption>
 </figure>
 
 ## Highlighting

@@ -31,7 +31,6 @@ Open **Tools → Preferences...**. Settings are grouped in a tree on the left; t
 
 <figure markdown="span">
   [![The Preferences window with its settings tree and Interface appearance and theme controls](assets/screenshots/preferences.png)](assets/screenshots/preferences.png "Open full-size screenshot")
-  <figcaption>Preferences, with the Interface settings page selected.</figcaption>
 </figure>
 
 | Page | Settings |

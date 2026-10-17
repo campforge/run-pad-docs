@@ -18,7 +18,6 @@ them next to the rest of your knowledge base.
 <figure markdown="span">
   [![The debugging-loop.rpad example open in Obsidian: a collapsed Properties section, the title and notes as formatted Markdown, and the C# code block](assets/screenshots/obsidian_light.png#only-light)](assets/screenshots/obsidian_light.png "Open full-size screenshot")
   [![The debugging-loop.rpad example open in Obsidian: a collapsed Properties section, the title and notes as formatted Markdown, and the C# code block](assets/screenshots/obsidian.png#only-dark)](assets/screenshots/obsidian.png "Open full-size screenshot")
-  <figcaption markdown="span">The [debugging-loop.rpad](examples.md#debugging-looprpad) example in Obsidian, with the RunPad Queries folder open as the vault. Click to open it at full size.</figcaption>
 </figure>
 
 ## What you get
