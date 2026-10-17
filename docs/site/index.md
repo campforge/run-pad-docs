@@ -100,13 +100,6 @@ editor intelligence currently exists only for C#.
 | Rename, Find References, Go to Definition, Format Document | Yes | No |
 | Snippets | Yes | No |
 
-## What RunPad does not do (yet)
-
-- There is no File → Open command. RunPad shows the `.rpad` files in its scripts folder;
-  see [Where your scripts live](scripts.md#where-your-scripts-live).
-- The macOS build is not signed or notarized with an Apple Developer certificate yet;
-  see [Installation](install.md#macos).
-
 ## Feedback and source code
 
 RunPad is free and open source under the GPL-3.0. The code is on
