@@ -32,8 +32,10 @@ total.Dump("Total");
 More notes after the code.
 ````
 
-Because the file is Markdown, it reads well on GitHub and in any Markdown editor, and it
-diffs cleanly in version control.
+The file is Markdown-compatible and diffs cleanly in version control. You can read it in
+[Obsidian](obsidian.md) or use [GitHub Markdown preview](index.md#markdown-compatible-files)
+without creating a separate `.md` copy. The overview explains the file-type hint needed
+for GitHub rendering.
 
 ## How RunPad edits the file
 

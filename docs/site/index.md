@@ -15,13 +15,14 @@ RunPad is a free, open-source C# scratchpad for Windows, macOS and Linux.
 - [Add NuGet packages](dependencies.md) with the built-in package manager, or reference any `.dll`
 - [Read decompiled code](assembly-explorer.md) in an ILSpy-style Assembly Explorer
 - [Import `.linq` queries](cli.md#importing-linq-queries) and run them with few or no changes
-- [Scripts are Markdown](scripts.md): notes and code in one `.rpad` file that reads well and diffs cleanly
+- [Markdown-compatible scripts](scripts.md): keep notes and runnable code together in `.rpad` files,
+  and view them as Markdown in Obsidian or repository previews
 - [View your scripts in Obsidian](obsidian.md): read and edit the notes and code of `.rpad` files with the RunPad Markdown plugin
 - Native and fast: no embedded browser, scripts compile in-process with Roslyn
 - Visual Basic scripts run and debug too
 - Free and open source, on Windows, macOS and Linux
 
-[Download RunPad](https://github.com/campforge/run-pad/releases){ .md-button .md-button--primary }
+[Download RunPad](https://github.com/campforge/run-pad/releases){ .md-button }
 [Quick start](quick-start.md){ .md-button }
 
 <figure markdown="span">
@@ -37,6 +38,33 @@ runnable code block. Write top-level statements, a `Main` program or a single ex
 RunPad compiles it with the .NET SDK installed on your machine and shows the output and any
 `.Dump()` results right under the editor. There is no project to set up and nothing to build
 by hand.
+
+## Markdown-compatible files
+
+`.rpad` is a **Markdown-compatible format**: a document containing a YAML metadata header,
+Markdown notes and a fenced, runnable code block. Your code and its documentation stay
+in one readable file that you can version, share and review.
+
+You can view and edit these files in [Obsidian with the RunPad Markdown plugin](obsidian.md),
+or read them as Markdown on repository pages that support rendering the file type.
+For a working GitHub example, open [CompareTo.rpad in the examples repository](https://github.com/campforge/runpad-examples/blob/main/CompareTo.rpad)
+and select **Preview**. The file keeps its `.rpad` extension; no separate `.md` copy is needed.
+
+GitHub preview uses a Markdown file-type hint. Add this HTML comment at the end of the
+file, outside the code block:
+
+```html
+<!-- vim: set filetype=markdown: -->
+```
+
+For repository highlighting and Markdown diffs, add `*.rpad linguist-language=Markdown diff=markdown`
+to `.gitattributes`.
+
+![A .rpad file rendered as Markdown on GitHub, with metadata, a title and highlighted C# code](assets/screenshots/github-rpad-preview.png)
+
+The comment stays invisible in the rendered document. Repository rendering support varies
+by host; GitLab's Markdown syntax-highlighting setting alone does not enable a rendered
+`.rpad` preview.
 
 ## Download
 
