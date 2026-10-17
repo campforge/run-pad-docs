@@ -102,8 +102,6 @@ editor intelligence currently exists only for C#.
 
 ## What RunPad does not do (yet)
 
-- Scripts cannot reference `.csproj` or `.vbproj` projects; reference a built `.dll`
-  instead. See [Packages and references](dependencies.md#project-references-are-not-supported).
 - There is no File → Open command. RunPad shows the `.rpad` files in its scripts folder;
   see [Where your scripts live](scripts.md#where-your-scripts-live).
 - The macOS build is not signed or notarized with an Apple Developer certificate yet;
