@@ -62,6 +62,7 @@ All fields are optional. A missing or empty value falls back to the default.
 | `packages` | none | NuGet packages as `PackageId: version` pairs. |
 | `references` | none | Paths to `.dll` files. See [Packages and references](dependencies.md). |
 | `namespaces` | none | Namespaces imported for the whole script, like global `using` (C#) or project-level `Imports` (VB). |
+| `args` | empty list | String arguments passed to the script when running or debugging. CLI arguments can override this list for one invocation. |
 
 Field names are case-sensitive camelCase (`targetSdk`, not `TargetSdk`). The values of
 `language` and `kind` are case-insensitive. Unknown fields are ignored when the file is
@@ -82,6 +83,9 @@ references:
 namespaces:
   - System.Text.Json
   - System.Globalization
+args:
+  - "April totals"
+  - "2026"
 ---
 ```
 
@@ -108,6 +112,34 @@ Visual Basic scripts import the same list. Add anything else to `namespaces`, or
 
 C# scripts compile with nullable reference types enabled and the default C# language
 version of the selected SDK (for example C# 14 for .NET 10).
+
+## Script arguments
+
+Set `args:` in the YAML header with another text editor. There is no dedicated arguments
+field in Preferences or the toolbar. Run and Debug pass the strings to the script:
+
+```yaml
+args:
+  - "April totals"
+  - "2026"
+  - ""
+```
+
+C# top-level Statements and a Program's `Main(string[] args)` receive these values;
+Visual Basic Statements and `Sub Main(args As String())` receive them too. Each list
+item is one argument: spaces do not split it, and an empty string stays an argument.
+The [command-line runner](cli.md#script-arguments-and-options) can replace the list
+without changing the file. Close or save your RunPad edits before changing the header
+in another program; external edits are protected as described below.
+
+## External file changes
+
+If another program changes a script after RunPad opened or saved it, the next save asks
+whether to **Save As…**, **Overwrite** or **Cancel**. This also applies to the automatic
+save before Run/Debug and saves required before closing or file operations. Cancel or
+an unsuccessful Save As stops that operation and keeps your unsaved changes.
+Overwrite explicitly replaces the disk version; Save As keeps it and saves your tab
+under another name. This protection does not automatically reload or merge external edits.
 
 ## Kinds
 
@@ -145,7 +177,7 @@ both:
 | `Main` | Notes |
 | --- | --- |
 | `void Main()`, `async Task Main()` | The usual form. |
-| `Main(string[] args)` | `args` is empty when you run from RunPad. |
+| `Main(string[] args)` | Receives the file's `args:` values, or the [CLI override](cli.md#script-arguments-and-options). |
 | `Main(CancellationToken ct)`, `Main(string[] args, CancellationToken ct)` | `ct` is cancelled when you press **Stop**; see [Stopping a script](results.md#stopping-a-script). |
 | `int Main(…)`, `async Task<int> Main(…)` | The returned number is the exit code; anything but 0 shows as *Exit code N*. |
 
