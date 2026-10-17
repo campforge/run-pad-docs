@@ -39,11 +39,45 @@ macros) and `namespaces` the same way the RunPad window does.
 ### Usage
 
 ```text
-runpad <path-to.rpad>
+runpad [run] [options] <script.rpad> [options] [--] [script arguments...]
 runpad convert <input.linq> [output.rpad]
 ```
 
-Running with no arguments prints this usage and exits with code 1.
+Running with no arguments prints this usage and exits with code 2; `runpad --help` prints it
+and exits with code 0.
+
+The command line follows LINQPad's `lprun` and NetPad's `npad`, so existing calls keep
+working: `run` is optional, and options may be written either way (`-lang=e`,
+`--kind expression`, `-k e`).
+
+| Option | Meaning |
+| --- | --- |
+| `-lang=<kind>`, `-k <kind>`, `--kind <kind>` | Run the script as `Statements`, `Program` or `Expression` (`s`, `p`, `e`), whatever its `kind` says. `VBStatements`, `VBProgram` and `VBExpression` also check that the script is Visual Basic. |
+| `-s <version>`, `--sdk <version>` | Run on this .NET SDK instead of the script's `targetSdk`: `9`, `9.0`, `net9.0` or `latest`. |
+| `-compileonly`, `--compile-only` | Compile the script and report errors and warnings without running it. |
+| `-nunuget`, `--no-cache`, `-b`, `--rebuild` | Accepted and ignored: every run already compiles afresh. |
+| `-h`, `--help` | Show the usage. |
+| `--version` | Show the runner's version. |
+
+Output formats (`-format`, `--format`), inline code (`-e`), code from standard input,
+database connections and `-optimize` are not available yet: these options are reported as
+unsupported and the script does not run.
+
+### Script arguments
+
+Everything after the script path that is not one of the options above is passed to the
+script as `args`, as with `lprun`:
+
+```console
+$ runpad greet.rpad Hello World
+```
+
+Write `--` to pass the rest as it is, even what looks like an option:
+`runpad greet.rpad -- -s --kind`. Arguments on the command line replace the script's own
+`args` field; `runpad greet.rpad --` runs it with none. In C#, `Statements` and `Expression`
+scripts read them from `args`, and a `Program` script from `Main(string[] args)`; in Visual
+Basic, `Statements` scripts read `args` and a `Program` script declares
+`Sub Main(args As String())`.
 
 - Script output goes to standard output. Text written to `Console.Error` and compiler
   errors go to standard error.
@@ -70,7 +104,7 @@ unhandled exception. Text on standard error alone does not fail the run. Otherwi
 
 | Code | Meaning |
 | --- | --- |
-| `1` | Bad arguments, file not found, the file is not a valid `.rpad` document, no .NET SDK found, a compile error, or the compiled script could not be started. |
+| `2` | The script did not run: bad arguments, file not found, the file is not a valid `.rpad` document, no .NET SDK found, a compile error, or the compiled script could not be started. NetPad's `npad` uses the same code. |
 | `130` | Interrupted with ++ctrl+c++. |
 
 ### Example

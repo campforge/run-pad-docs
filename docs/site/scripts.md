@@ -62,6 +62,7 @@ All fields are optional. A missing or empty value falls back to the default.
 | `packages` | none | NuGet packages as `PackageId: version` pairs. |
 | `references` | none | Paths to `.dll` files. See [Packages and references](dependencies.md). |
 | `namespaces` | none | Namespaces imported for the whole script, like global `using` (C#) or project-level `Imports` (VB). |
+| `args` | none | The script's command-line arguments: what `args` holds when it runs, from RunPad, under the debugger and from the [command-line runner](cli.md), which can replace them. RunPad has no field for them yet; edit the header in another text editor. |
 
 Field names are case-sensitive camelCase (`targetSdk`, not `TargetSdk`). The values of
 `language` and `kind` are case-insensitive. Unknown fields are ignored when the file is
@@ -82,6 +83,9 @@ references:
 namespaces:
   - System.Text.Json
   - System.Globalization
+args:
+  - input.csv
+  - --verbose
 ---
 ```
 
@@ -124,8 +128,10 @@ var words = new[] { "alpha", "beta", "gamma" };
 words.Select(w => w.ToUpperInvariant()).Dump();
 ```
 
-In Visual Basic, RunPad wraps the code in a module with a `Sub Main`, so you write only
-the statements:
+The script's command-line arguments are in `args` (see the `args` field above).
+
+In Visual Basic, RunPad wraps the code in a module with a `Sub Main(args As String())`, so you
+write only the statements, and `args` is available there too:
 
 ```vb
 Dim names = {"Ada", "Grace", "Linus"}
@@ -145,7 +151,7 @@ both:
 | `Main` | Notes |
 | --- | --- |
 | `void Main()`, `async Task Main()` | The usual form. |
-| `Main(string[] args)` | `args` is empty when you run from RunPad. |
+| `Main(string[] args)` | `args` holds the front matter's `args`, or what the [command-line runner](cli.md) passes. |
 | `Main(CancellationToken ct)`, `Main(string[] args, CancellationToken ct)` | `ct` is cancelled when you press **Stop**; see [Stopping a script](results.md#stopping-a-script). |
 | `int Main(…)`, `async Task<int> Main(…)` | The returned number is the exit code; anything but 0 shows as *Exit code N*. |
 
