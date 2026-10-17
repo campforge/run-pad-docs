@@ -12,7 +12,6 @@ existing `netcoredbg` executable. See [Installation](install.md#first-run-net-sd
 
 <figure markdown="span">
   [![A script paused on a breakpoint: the current line is highlighted, the step buttons are visible in the toolbar, and the Debugger tab shows local variables](assets/screenshots/debugging.png)](assets/screenshots/debugging.png "Open full-size screenshot")
-  <figcaption>Execution paused inside a loop, with the current line and the variables total and i visible.</figcaption>
 </figure>
 
 ## Start a debug session

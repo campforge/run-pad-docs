@@ -11,7 +11,6 @@ ILSpy inside RunPad. There is one Assembly Explorer window per RunPad instance.
 
 <figure markdown="span">
   [![The Assembly Explorer searching Enumerable.Where, with matching methods, a selected tree row and decompiled C#](assets/screenshots/assembly-explorer.png)](assets/screenshots/assembly-explorer.png "Open full-size screenshot")
-  <figcaption>Searching and reading a decompiled System.Linq method.</figcaption>
 </figure>
 
 ## Opening it

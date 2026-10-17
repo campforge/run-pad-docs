@@ -10,7 +10,6 @@ A script's dependencies live in its front matter: `packages`, `references` and
 
 <figure markdown="span">
   [![The Dependencies window on the Packages tab: the script's packages and local cache on the left, online search results in the middle and version details on the right](assets/screenshots/dependencies.png)](assets/screenshots/dependencies.png "Open full-size screenshot")
-  <figcaption>The Dependencies window, Packages tab.</figcaption>
 </figure>
 
 ## Open the Dependencies window
