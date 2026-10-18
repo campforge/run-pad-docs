@@ -5,12 +5,26 @@ description: The .rpad file format, front matter fields and the Statements, Prog
 
 # Scripts and .rpad files
 
+## Opening scripts
+
+Use **File → Open…** (**Ctrl+O**, or **Cmd+O** on macOS) to open a `.rpad` file from
+any local folder. It stays in that folder; opening it does not copy it into Queries or run it.
+Opening an already-open path activates its existing tab and preserves unsaved changes.
+
+**File → Recent Files** remembers the last 50 script paths, newest first, across restarts.
+The full path distinguishes scripts with the same name. **Clear Recent Files** clears this history
+without deleting files or closing tabs. If a file was moved or deleted, opening its old recent
+entry reports an error; use Open to choose its new location.
+
+## File format
+
 A RunPad script is a plain-text `.rpad` file. It is a Markdown document with:
 
 1. a YAML **front matter** block between two `---` lines at the very top;
 2. exactly one **run block**: a fenced code block whose info string is `csharp run` or
    `vb run`, matching the script's language;
 3. any other Markdown you like, before or after the run block.
+
 
 ````markdown
 ---
