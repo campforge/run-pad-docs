@@ -77,22 +77,34 @@ out.
 
 ```yaml
 references:
-  - C:\Tools\MyCompany.Utilities.dll
+  - "C:/Tools/MyCompany.Utilities.dll"
   - $(CurrentQueryPath)/lib/Helpers.dll
 ```
 
 - Only paths ending in `.dll` are used as assembly references.
 - Other `.dll` files in the same folder that the referenced assembly depends on are
   picked up automatically.
-- A path whose file does not exist is skipped, so the script then fails to compile with
-  errors about the missing types. Prefer absolute paths or the macros below; a plain
-  relative path is not resolved against the script's folder.
+- Relative paths such as `lib/Helpers.dll` are resolved next to the `.rpad` file,
+  consistently in RunPad, the CLI and IntelliSense. An unsaved tab has no containing
+  folder yet: save it first or use an absolute path.
+- A missing DLL produces a warning and is not loaded; compilation also fails if the
+  script needs types from that assembly.
+- Paths are written with `/`. Existing Windows drive paths (`C:\Tools\Helpers.dll`)
+  and UNC paths (`\\server\share\Helpers.dll`) are still recognized. On macOS/Linux,
+  an unavailable Windows path produces an error; RunPad does not guess a mount point.
+  Ambiguous drive-relative paths such as `C:lib/Helpers.dll` are rejected.
+- On macOS/Linux a backslash in a relative or Unix path can be a literal filename
+  character, so it is preserved. Use `/` for directory separators.
+- **Save As** into another folder rebases relative references to keep pointing at the
+  same DLLs. Moving a script through the Queries tree does not currently rewrite them;
+  check its references after moving it. No referenced files are copied.
 
-These macros are expanded in reference paths, in RunPad and in the command-line runner:
+Macros remain unchanged in the saved header and are expanded only when resolving
+references, in RunPad, the command-line runner and IntelliSense:
 
 | Macro | Expands to |
 | --- | --- |
-| `$(CurrentQueryPath)` | The folder that contains the running `.rpad` file. Not expanded for an unsaved tab. |
+| `$(CurrentQueryPath)` | The folder that contains the running `.rpad` file. Requires a saved script; reported as an error for an unsaved tab. |
 | `$(MyDocuments)` | Your Documents folder. |
 | `$(RuntimeDirectory)` | The folder of the .NET runtime that RunPad itself runs on. |
 
