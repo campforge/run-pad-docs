@@ -155,12 +155,25 @@ in another program; external edits are protected as described below.
 
 ## External file changes
 
-If another program changes a script after RunPad opened or saved it, the next save asks
-whether to **Save As…**, **Overwrite** or **Cancel**. This also applies to the automatic
-save before Run/Debug and saves required before closing or file operations. Cancel or
-an unsuccessful Save As stops that operation and keeps your unsaved changes.
-Overwrite explicitly replaces the disk version; Save As keeps it and saves your tab
-under another name. This protection does not automatically reload or merge external edits.
+When another program changes an open script, its tab follows the file. RunPad checks
+when you switch back to it from another program, and as soon as a script in the scripts
+folder changes:
+
+- A tab without unsaved changes reloads quietly: the code, the header (kind, target,
+  packages) and the preview. **Undo** brings back the text the reload replaced.
+- A tab with unsaved changes asks whether to **Reload** the file and lose your changes, or
+  **Keep My Changes**. Keeping them is the default, and RunPad doesn't ask again about the
+  same version of the file.
+- A running script, or a file that was deleted, is left as it is.
+
+**File → Revert to Saved** goes back to the script as it is on disk at any time, asking
+first if that drops unsaved changes.
+
+If you keep your changes, the next save asks whether to **Save As…**, **Overwrite** or
+**Cancel**. This also applies to the automatic save before Run/Debug and saves required
+before closing or file operations. Cancel or an unsuccessful Save As stops that operation
+and keeps your unsaved changes. Overwrite explicitly replaces the disk version; Save As
+keeps it and saves your tab under another name. RunPad never merges the two versions.
 
 ## Kinds
 
