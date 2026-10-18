@@ -57,6 +57,9 @@ To see the whole script as a document, as VS Code shows a Markdown file, open th
   place of the editor; the same key brings the editor back.
 - **View → Markdown Preview to the Side** (++ctrl+alt+v++, on macOS ++cmd+alt+v++) shows it beside
   the editor; drag the line between them to resize. The same key closes it.
+- The **preview button** on the tab's toolbar, next to the debug-mode button, does the same as
+  Markdown Preview to the Side, and is lit while any preview is shown; clicking it then hides the
+  preview.
 
 The preview shows the front matter as a table of settings, then the Markdown around the
 code, with the code highlighted in the editor's colors and font. It follows what you type
