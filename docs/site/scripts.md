@@ -61,8 +61,11 @@ To see the whole script as a document, as VS Code shows a Markdown file, open th
 The preview shows the front matter as a table of settings, then the Markdown around the
 code, with the code highlighted in the editor's colors and font. It follows what you type
 after a short pause, and the kind, SDK and dependencies as soon as they change. Each tab
-has its own preview. The preview is read-only and does not yet scroll together with the
-editor.
+has its own preview. The preview is read-only.
+
+Side by side, the editor and the preview scroll together: scroll either one and the other
+follows to the same line. When you leave the preview shown in place of the editor, the editor
+opens where you stopped reading.
 
 ## Front matter
 
