@@ -39,11 +39,12 @@ macros) and `namespaces` the same way the RunPad window does.
 ### Usage
 
 ```text
-runpad <path-to.rpad>
+runpad [run] [options] <script.rpad> [--] [script arguments...]
 runpad convert <input.linq> [output.rpad]
 ```
 
-Running with no arguments prints this usage and exits with code 1.
+Running with no arguments prints this usage and exits with code 2. `--help` and
+`--version` print information and exit with code 0.
 
 - Script output goes to standard output. Text written to `Console.Error` and compiler
   errors go to standard error.
@@ -62,6 +63,39 @@ Running with no arguments prints this usage and exits with code 1.
 - [Interactive input](results.md#interactive-input) is not supported. A script that calls
   `Util.ReadLine` waits until you press ++ctrl+c++.
 
+### Script arguments and options
+
+```bash
+runpad report.rpad "April totals" 2026
+runpad run report.rpad -- --kind --help
+runpad --kind program --sdk 10 report.rpad -- "April totals"
+runpad --compile-only report.rpad
+```
+
+Arguments following the script replace its front-matter `args:` list. With no script
+arguments, the list in the file is used; a bare `--` after the script explicitly selects
+an empty list. Use your shell's normal quoting for spaces or quotes inside one argument.
+
+Recognized runner options are accepted before **or after** the script path. Put `--`
+after the path to pass everything that follows literally to the script, including
+`--help`, `--kind` or `-s`. Without it, those names are interpreted by the runner.
+Unknown options after the script are passed through, except recognized unsupported
+runner options, which produce an error. Always use `--` when passing option-like values.
+
+| Option | Meaning |
+| --- | --- |
+| `--kind`, `-k`, `-lang=<kind>` | Override `Statements`, `Program` or `Expression`; `s`, `p`, `e` also work. `VBStatements`, `VBProgram` and `VBExpression` require a Visual Basic file; they do not translate C# code. |
+| `--sdk`, `-s` | Override `targetSdk`, for example `10`, `10.0`, `net10.0` or `latest`. The normal installed-SDK selection and warning rules apply. |
+| `--compile-only`, `-compileonly` | Check compilation and report diagnostics without executing the script. The temporary compilation output is removed afterwards. |
+| `--help`, `-h`, `-?` | Show usage. |
+| `--version` | Show the runner version. |
+
+Overrides affect this invocation only; the script file is not rewritten. These spellings
+support common `lprun`/`npad` command lines, not every option of those tools. `-nunuget`,
+`--no-cache`, `--rebuild` and `-b` are accepted with no effect; package restoration is
+not disabled. Options such as output format, evaluation, database connections and
+optimization are not implemented and are reported as unsupported.
+
 ### Exit codes
 
 Once the script has run, the runner exits with the script's own exit code: `0` when it
@@ -70,7 +104,8 @@ unhandled exception. Text on standard error alone does not fail the run. Otherwi
 
 | Code | Meaning |
 | --- | --- |
-| `1` | Bad arguments, file not found, the file is not a valid `.rpad` document, no .NET SDK found, a compile error, or the compiled script could not be started. |
+| `2` | Bad run arguments, file not found, an invalid `.rpad` document, no .NET SDK found, a compile error, or the compiled script could not be started. |
+| `1` | The `convert` command failed; conversion retains its existing error code. |
 | `130` | Interrupted with ++ctrl+c++. |
 
 ### Example
