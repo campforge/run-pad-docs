@@ -90,6 +90,10 @@ On macOS, function keys may need the ++fn++ key, depending on your keyboard sett
 
 | Command | Windows and Linux | macOS |
 | --- | --- | --- |
+| Find | ++ctrl+f++ | ++cmd+f++ |
+| Replace | ++ctrl+h++ | ++cmd+alt+f++ |
+| Find Next / Previous | ++f3++ / ++shift+f3++ | ++f3++ / ++shift+f3++ |
+| Replace Next / All | ++alt+r++ / ++alt+a++ | ++alt+r++ / ++alt+a++ |
 | Show Completion | ++ctrl+space++ | ++ctrl+space++ |
 | Signature Help | ++ctrl+shift+space++ | ++cmd+shift+space++ |
 | Go to Definition / Implementation | ++f12++ | ++f12++ |
