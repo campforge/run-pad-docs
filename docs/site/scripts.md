@@ -70,6 +70,10 @@ Side by side, the editor and the preview scroll together: scroll either one and 
 follows to the same line. When you leave the preview shown in place of the editor, the editor
 opens where you stopped reading.
 
+<figure markdown="span">
+  [![A Fibonacci script in the editor with its Markdown preview beside it: the settings table, the title and the notes, and the lit preview button in the toolbar](assets/screenshots/markdown-preview.png)](assets/screenshots/markdown-preview.png "Open full-size screenshot")
+</figure>
+
 ## Front matter
 
 All fields are optional. A missing or empty value falls back to the default.
@@ -165,9 +169,12 @@ folder changes:
   **Keep My Changes**. Keeping them is the default, and RunPad doesn't ask again about the
   same version of the file.
 - A running script, or a file that was deleted, is left as it is.
+- If the file now holds a script in the other language (C# instead of Visual Basic or the
+  other way round), it reopens in a new tab in the same place.
 
 **File → Revert to Saved** goes back to the script as it is on disk at any time, asking
-first if that drops unsaved changes.
+first if that drops unsaved changes. It has no default key; you can assign one in
+[Preferences](reference.md#keyboard-shortcuts).
 
 If you keep your changes, the next save asks whether to **Save As…**, **Overwrite** or
 **Cancel**. This also applies to the automatic save before Run/Debug and saves required
