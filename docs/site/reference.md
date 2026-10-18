@@ -13,7 +13,7 @@ shortcut.
 
 | Menu | Commands |
 | --- | --- |
-| **File** | New File, New RPad File, Open Text File..., Import .linq Query..., Save, Save As..., Close Tab, Exit (++cmd+q++ on macOS) |
+| **File** | New File, New RPad File, Open Text File..., Import .linq Query..., Save, Save As..., Revert to Saved, Close Tab, Exit (++cmd+q++ on macOS) |
 | **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Go to Line..., Resolve All Usings |
 | **View** | Toggle File Tree, Toggle Output Panel, Zoom In, Zoom Out, Reset Zoom |
 | **Run** | Run / Continue, Stop, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
@@ -70,7 +70,7 @@ where that is the Mac convention.
 | Dependencies | ++f4++ | ++f4++ |
 | Preferences | — | ++cmd+comma++ |
 | Toggle Output Panel | ++ctrl+r++ | ++cmd+r++ |
-| Assembly Explorer, Toggle File Tree, Zoom In, Zoom Out, Reset Zoom | — | — |
+| Revert to Saved, Assembly Explorer, Toggle File Tree, Zoom In, Zoom Out, Reset Zoom | — | — |
 
 ### Run and debug
 
