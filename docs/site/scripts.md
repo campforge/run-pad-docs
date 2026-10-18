@@ -49,6 +49,21 @@ RunPad Markdown plugin; see [View your scripts in Obsidian](obsidian.md).
 When RunPad saves a script, it writes the front matter again from the fields it knows,
 in a fixed order. YAML comments and unknown fields in the header are not kept.
 
+## Markdown preview
+
+To see the whole script as a document, as VS Code shows a Markdown file, open the preview:
+
+- **View → Markdown Preview** (++ctrl+shift+v++, on macOS ++cmd+shift+v++) shows the preview in
+  place of the editor; the same key brings the editor back.
+- **View → Markdown Preview to the Side** (++ctrl+alt+v++, on macOS ++cmd+alt+v++) shows it beside
+  the editor; drag the line between them to resize. The same key closes it.
+
+The preview shows the front matter as a table of settings, then the Markdown around the
+code, with the code highlighted in the editor's colors and font. It follows what you type
+after a short pause, and the kind, SDK and dependencies as soon as they change. Each tab
+has its own preview. The preview is read-only and does not yet scroll together with the
+editor.
+
 ## Front matter
 
 All fields are optional. A missing or empty value falls back to the default.
