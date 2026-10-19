@@ -22,7 +22,7 @@ Select complete statements and include any declarations they need: variables fro
 are not retained. Empty selections do nothing. Program and Expression selections are not supported
 in this first version; selection execution runs without the debugger.
 
-**Run → Stop and Run Again** (Alt+Shift+X) cancels the current execution, waits for its host to
+**Run → Stop and Run Again** (Alt+Shift+X, or Cmd+Shift+F5 on macOS) cancels the current execution, waits for its host to
 finish and starts the whole script again using the current debug-mode setting. Pressing it
 repeatedly while cancellation is pending queues only one restart. Stop cancels a queued restart.
 The new full run uses the usual save/conflict checks; cancelling that save prevents execution.
@@ -43,7 +43,9 @@ RunPad waits for pending Save As and file moves before writing the checkpoint. I
 the window stays open so you can retry or save your work. Recovery data is stored under
 `RunPad/recovery/v1` in the application's local data directory. A damaged checkpoint can fall back
 to the previous one. Other running instances retain their own recovery data; startup restores the
-most recent available session rather than combining every instance.
+most recent available session rather than combining every instance. If other session data exists,
+a warning lists its recovery folders; those sessions are kept unchanged. Damaged session data
+is skipped when an older readable session is available.
 
 This is recovery on normal exit, not continuous autosave: the latest edits are not guaranteed
 after a crash or forced termination. Results, running processes, undo history and separate text
