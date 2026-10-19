@@ -77,15 +77,17 @@ To see the whole script as a document, as VS Code shows a Markdown file, open th
 
 The preview shows the front matter as a table of settings, then the Markdown around the
 code, with the code highlighted in the editor's colors and font. It follows what you type
-after a short pause, and the kind, SDK and dependencies as soon as they change. Each tab
-has its own preview. The preview is read-only.
+after a short pause, and the kind, SDK and dependencies as soon as they change. The preview is
+read-only. Whether it is shown, and where the dividers between the editor, the preview and the
+output are, is the same for every tab, including tabs opened later.
 
 Side by side, the editor and the preview scroll together: scroll either one and the other
 follows to the same line. When you leave the preview shown in place of the editor, the editor
 opens where you stopped reading.
 
 <figure markdown="span">
-  [![A Fibonacci script in the editor with its Markdown preview beside it: the settings table, the title and the notes, and the lit preview button in the toolbar](assets/screenshots/markdown-preview.png)](assets/screenshots/markdown-preview.png "Open full-size screenshot")
+  [![The products-overview example with the editor on the left and its Markdown preview on the right: the header as a table of settings, the title, the notes and the highlighted code](assets/screenshots/markdown-preview_light.png#only-light)](assets/screenshots/markdown-preview_light.png "Open full-size screenshot")
+  [![The products-overview example with the editor on the left and its Markdown preview on the right: the header as a table of settings, the title, the notes and the highlighted code](assets/screenshots/markdown-preview.png#only-dark)](assets/screenshots/markdown-preview.png "Open full-size screenshot")
 </figure>
 
 ## Front matter
@@ -287,6 +289,5 @@ left. The tree refreshes when files change on disk. The panel's **Examples** tab
 sample scripts that come with RunPad; see [Examples](examples.md). Right-click it to create C# or Visual Basic files and folders,
 rename, delete, or *Show in File Manager*; drag items to move them.
 
-There is no File → Open command yet. To use a script from elsewhere, copy it into the
-RunPad Queries folder. `.linq` query files can be imported with
-**File → Import .linq Query...**; see [Command line and .linq import](cli.md#importing-linq-queries).
+To open a script from another folder, use [File → Open...](#opening-scripts). `.linq` query files can be imported with **File → Import .linq Query...**; see
+[Command line and .linq import](cli.md#importing-linq-queries).

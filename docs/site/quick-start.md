@@ -69,7 +69,8 @@ the left. Once a file has a name, every Run saves it first.
 
 The same script, with explanatory Markdown around it, is available as
 [`quick-start.rpad`](examples/quick-start.rpad). Save it in your
-`Documents/RunPad Queries` folder and click it in RunPad's file tree.
+`Documents/RunPad Queries` folder and click it in RunPad's file tree, or open it from
+anywhere with **File → Open...** (++ctrl+o++).
 
 ## Next steps
 

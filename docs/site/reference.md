@@ -30,22 +30,19 @@ Open **Tools → Preferences...**. Settings are grouped in a tree on the left; t
 *Search settings...* to filter it. Changes apply immediately.
 
 <figure markdown="span">
-  [![The Preferences window with its settings tree and Interface appearance and theme controls](assets/screenshots/preferences.png)](assets/screenshots/preferences.png "Open full-size screenshot")
+  [![The Interface page of Preferences: restoring open tabs, interface scale, appearance and the interface and editor themes](assets/screenshots/preferences_light.png#only-light)](assets/screenshots/preferences_light.png "Open full-size screenshot")
+  [![The Interface page of Preferences: restoring open tabs, interface scale, appearance and the interface and editor themes](assets/screenshots/preferences.png#only-dark)](assets/screenshots/preferences.png "Open full-size screenshot")
 </figure>
 
 | Page | Settings |
 | --- | --- |
-| **Interface** | *Restore open tabs and unsaved changes* (applies after restart; local normal-exit recovery). *Appearance*: System, Dark or Light. *Interface theme* and *Editor theme* for the current appearance (defaults: *VS Code Dark* / *VS Code Light* and *Dark+* / *Light+*). |
-| **Editor** | Show line numbers, code folding, tabs, spaces, end of line, column ruler (column 80); word wrap; *Accept completion when typing punctuation*; font size and font family; *New file defaults (File → New File)*: language and kind. |
+| **Interface** | *Restore open tabs and unsaved changes* (on by default; see [Recovering unsaved tabs](editor.md#recovering-unsaved-tabs)). *Interface scale*, 90% to 200%, with *Reset to 100%* (see [Interface scale and shared code zoom](editor.md#interface-scale-and-shared-code-zoom)). *Appearance*: System, Dark or Light. *Interface theme* and *Editor theme* for the current appearance (defaults: *VS Code Dark* / *VS Code Light* and *Dark+* / *Light+*). |
+| **Editor** | Font family, font size and *Code zoom*; show line numbers, code folding, tabs, spaces, end of line, column ruler (column 80); word wrap; *Accept completion when typing punctuation*; *New files* (File → New File): language and kind. |
 | **Keyboard** | Every key binding, grouped by area, with Reset and conflict warnings; see [Keyboard shortcuts](#keyboard-shortcuts). |
 | **Languages → .NET** | *Dotnet path* (default `dotnet`, found on `PATH`) and *Debugger path* (the `netcoredbg` executable). Shared by C# and Visual Basic. |
 | **Languages → .NET → C#** | *Inlay hints*; *Code fixes and refactorings (lightbulb)*; *Excluded diagnostic IDs*. See [Diagnostics and analyzers](analyzers.md#settings). |
 | **Experimental** | Features that are not finished yet, all off by default: *RunPad analyzers* (`RPAD…` warnings). See [Diagnostics and analyzers](analyzers.md#four-kinds-of-analysis). |
 | **Languages → .NET → Visual Basic** | No settings yet. |
-
-RunPad 0.6.0 adds a saved interface scale and shared code zoom. See
-[Interface scale and shared code zoom](editor.md#interface-scale-and-shared-code-zoom)
-for the two settings and how they interact.
 
 ## Keyboard shortcuts
 
@@ -140,7 +137,8 @@ name in the Assembly Explorer goes to its definition.
 | What | Location |
 | --- | --- |
 | Your scripts | `RunPad Queries` in your Documents folder |
-| Settings | `settings.json` in RunPad's data folder |
+| Settings, including Recent Files | `settings.json` in RunPad's data folder |
+| Drafts of open tabs and unsaved changes | `recovery` folder in RunPad's data folder |
 | NuGet sources | `NuGet.Config` in RunPad's data folder |
 | Debugger installed by the setup window | `netcoredbg` folder in RunPad's data folder |
 | Files written by `Util.Cache` and `Util.SaveString`/`SaveBytes` | `UserData` folder in RunPad's data folder |

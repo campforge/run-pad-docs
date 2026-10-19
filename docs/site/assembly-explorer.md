@@ -10,7 +10,8 @@ types and members on the left, and decompiled code on the right. It works like a
 ILSpy inside RunPad. There is one Assembly Explorer window per RunPad instance.
 
 <figure markdown="span">
-  [![The Assembly Explorer searching Enumerable.Where, with matching methods, a selected tree row and decompiled C#](assets/screenshots/assembly-explorer.png)](assets/screenshots/assembly-explorer.png "Open full-size screenshot")
+  [![The Assembly Explorer searching Enumerable.Where, with matching methods, a selected tree row and decompiled C#](assets/screenshots/assembly-explorer_light.png#only-light)](assets/screenshots/assembly-explorer_light.png "Open full-size screenshot")
+  [![The Assembly Explorer searching Enumerable.Where, with matching methods, a selected tree row and decompiled C#](assets/screenshots/assembly-explorer.png#only-dark)](assets/screenshots/assembly-explorer.png "Open full-size screenshot")
 </figure>
 
 ## Opening it

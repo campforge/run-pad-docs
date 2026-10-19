@@ -13,8 +13,8 @@ files, do not use the network and do not need NuGet packages. Each one is a comp
 example. It opens as a new, unsaved script — nothing runs until you press **Run**, and nothing
 is written until you save it, which asks where to put the copy. The examples on this page
 come with RunPad; you can also download one (right-click the link and save it if your
-browser opens the file as text), put it in the `RunPad Queries` folder in your Documents
-folder, and click it on the **Queries** tab.
+browser opens the file as text) and open it with **File → Open...**, or put it in the
+`RunPad Queries` folder in your Documents folder and click it on the **Queries** tab.
 
 Numbers in the output are formatted with your system's culture, so you may see `49,90`
 instead of `49.90`.

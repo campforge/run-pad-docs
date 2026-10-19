@@ -10,7 +10,8 @@ This page explains where those messages come from, how quick fixes work, and wha
 analysis does not promise.
 
 <figure markdown="span">
-  [![A warning underline on int.Parse with the non-numeric constant not-a-number in a C# script](assets/screenshots/diagnostics.png)](assets/screenshots/diagnostics.png "Open full-size screenshot")
+  [![An error underline on the unknown JsonSerializer, with the lightbulb menu offering using System.Text.Json and other fixes](assets/screenshots/diagnostics_light.png#only-light)](assets/screenshots/diagnostics_light.png "Open full-size screenshot")
+  [![An error underline on the unknown JsonSerializer, with the lightbulb menu offering using System.Text.Json and other fixes](assets/screenshots/diagnostics.png#only-dark)](assets/screenshots/diagnostics.png "Open full-size screenshot")
 </figure>
 
 ## Four kinds of analysis
