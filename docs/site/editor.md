@@ -13,6 +13,26 @@ Visual Basic gets the lexical features described in [Visual Basic](#visual-basic
   [![A C# script with comments, strings and LINQ calls highlighted in the editor](assets/screenshots/editor-highlighting.png)](assets/screenshots/editor-highlighting.png "Open full-size screenshot")
 </figure>
 
+## Recovering unsaved tabs
+
+**Preferences → Interface → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
+RunPad normally. It is enabled by default; restart RunPad after changing the setting.
+
+On the next launch, RunPad restores the tab order, active tab, unsaved text, caret and selection,
+and script settings such as arguments, references and packages. Original script files are not
+modified by this checkpoint. Clean files are read again from disk; a missing file can be recovered
+from its cached text. Explicitly closing a tab and choosing **Don't Save** discards that tab.
+
+RunPad waits for pending Save As and file moves before writing the checkpoint. If writing fails,
+the window stays open so you can retry or save your work. Recovery data is stored under
+`RunPad/recovery/v1` in the application's local data directory. A damaged checkpoint can fall back
+to the previous one. Other running instances retain their own recovery data; startup restores the
+most recent available session rather than combining every instance.
+
+This is recovery on normal exit, not continuous autosave: the latest edits are not guaranteed
+after a crash or forced termination. Results, running processes, undo history and separate text
+editor windows are not restored.
+
 ## Highlighting
 
 - **Syntax highlighting** uses TextMate grammars for both languages. Choose the color
