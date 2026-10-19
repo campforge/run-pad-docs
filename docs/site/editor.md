@@ -43,7 +43,7 @@ RunPad waits for pending Save As and file moves before writing the checkpoint. I
 the window stays open so you can retry or save your work. Recovery data is stored under
 `RunPad/recovery/v1` in the application's local data directory. A damaged checkpoint can fall back
 to the previous one. Other running instances retain their own recovery data; startup restores the
-most recent available session rather than combining every instance. If other session data exists,
+most recent available session rather than combining every instance. If other drafts or unreadable session data exist,
 a warning lists its recovery folders; those sessions are kept unchanged. Damaged session data
 is skipped when an older readable session is available.
 
