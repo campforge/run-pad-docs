@@ -141,7 +141,8 @@ or a feature changes, adjust its scenario in `Scenarios.cs` and the image's alt 
 | `dependencies` | `dependencies` | Packages and references | Online search for Humanizer, Humanizer.Core selected; the local cache filtered to Humanizer |
 | `explorer` | `assembly-explorer` | Assembly Explorer | System.Linq.dll searched for `Enumerable.Where`, the first result decompiled |
 
-The window chrome is RunPad's own Windows title bar; dialogs are captured without the
+The interface uses RunPad's own themes, RunPad Midnight and RunPad Warm Light, with the
+editor's default Dark+ and Light+ colors. The window chrome is RunPad's own Windows title bar; dialogs are captured without the
 system's title bar. Numbers are formatted with the invariant culture. The GitHub and
 Obsidian screenshots (`github-rpad-preview.png`, `obsidian*.png`) show other programs and
 are captured by hand.

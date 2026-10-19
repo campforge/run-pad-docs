@@ -32,6 +32,9 @@ public sealed class Ctx : IAsyncDisposable
         Directory.CreateDirectory(root);
         var prefs = new MemoryPrefs();
         prefs.Appearance.Mode = Program.Light ? ThemeMode.Light : ThemeMode.Dark;
+        // RunPad's own interface themes; the editor keeps its default Dark+ / Light+ colors.
+        prefs.Appearance.DarkInterfaceTheme = "RunPad Midnight";
+        prefs.Appearance.LightInterfaceTheme = "RunPad Warm Light";
         prefs.Appearance.RestoreUnsavedTabs = false;
         // The debugger the first-run setup installs on Windows, unless RUNPAD_NETCOREDBG names another.
         prefs.Debugger.DebuggerPath = Environment.GetEnvironmentVariable("RUNPAD_NETCOREDBG") is { Length: > 0 } dbg ? dbg
