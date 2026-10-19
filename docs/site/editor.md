@@ -13,6 +13,44 @@ Visual Basic gets the lexical features described in [Visual Basic](#visual-basic
   [![A C# script with comments, strings and LINQ calls highlighted in the editor](assets/screenshots/editor-highlighting.png)](assets/screenshots/editor-highlighting.png "Open full-size screenshot")
 </figure>
 
+## Running a selection and restarting
+
+In **Statements** mode, select a block and choose **Run → Execute Selection**
+(Ctrl+Shift+E, or Cmd+Shift+E on macOS). Only that block runs, with the script's current
+arguments, packages, namespaces and references. The command does not save the source file.
+Select complete statements and include any declarations they need: variables from earlier runs
+are not retained. Empty selections do nothing. Program and Expression selections are not supported
+in this first version; selection execution runs without the debugger.
+
+**Run → Stop and Run Again** (Alt+Shift+X, or Cmd+Shift+F5 on macOS) cancels the current execution, waits for its host to
+finish and starts the whole script again using the current debug-mode setting. Pressing it
+repeatedly while cancellation is pending queues only one restart. Stop cancels a queued restart.
+The new full run uses the usual save/conflict checks; cancelling that save prevents execution.
+
+Change or disable both shortcuts in **Preferences → Keyboard**.
+
+## Recovering unsaved tabs
+
+**Preferences → Interface → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
+RunPad normally. It is enabled by default; restart RunPad after changing the setting.
+
+On the next launch, RunPad restores the tab order, active tab, unsaved text, caret and selection,
+and script settings such as arguments, references and packages. Original script files are not
+modified by this checkpoint. Clean files are read again from disk; a missing file can be recovered
+from its cached text. Explicitly closing a tab and choosing **Don't Save** discards that tab.
+
+RunPad waits for pending Save As and file moves before writing the checkpoint. If writing fails,
+the window stays open so you can retry or save your work. Recovery data is stored under
+`RunPad/recovery/v1` in the application's local data directory. A damaged checkpoint can fall back
+to the previous one. Other running instances retain their own recovery data; startup restores the
+most recent available session rather than combining every instance. If other drafts or unreadable session data exist,
+a warning lists its recovery folders; those sessions are kept unchanged. Damaged session data
+is skipped when an older readable session is available.
+
+This is recovery on normal exit, not continuous autosave: the latest edits are not guaranteed
+after a crash or forced termination. Results, running processes, undo history and separate text
+editor windows are not restored.
+
 ## Highlighting
 
 - **Syntax highlighting** uses TextMate grammars for both languages. Choose the color

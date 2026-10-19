@@ -5,12 +5,26 @@ description: The .rpad file format, front matter fields and the Statements, Prog
 
 # Scripts and .rpad files
 
+## Opening scripts
+
+Use **File → Open…** (**Ctrl+O**, or **Cmd+O** on macOS) to open a `.rpad` file from
+any local folder. It stays in that folder; opening it does not copy it into Queries or run it.
+Opening an already-open path activates its existing tab and preserves unsaved changes.
+
+**File → Recent Files** remembers the last 50 script paths, newest first, across restarts.
+The full path distinguishes scripts with the same name. **Clear Recent Files** clears this history
+without deleting files or closing tabs. If a file was moved or deleted, opening its old recent
+entry reports an error; use Open to choose its new location.
+
+## File format
+
 A RunPad script is a plain-text `.rpad` file. It is a Markdown document with:
 
 1. a YAML **front matter** block between two `---` lines at the very top;
 2. exactly one **run block**: a fenced code block whose info string is `csharp run` or
    `vb run`, matching the script's language;
 3. any other Markdown you like, before or after the run block.
+
 
 ````markdown
 ---
@@ -48,6 +62,31 @@ RunPad Markdown plugin; see [View your scripts in Obsidian](obsidian.md).
 
 When RunPad saves a script, it writes the front matter again from the fields it knows,
 in a fixed order. YAML comments and unknown fields in the header are not kept.
+
+## Markdown preview
+
+To see the whole script as a document, as VS Code shows a Markdown file, open the preview:
+
+- **View → Markdown Preview** (++ctrl+shift+v++, on macOS ++cmd+shift+v++) shows the preview in
+  place of the editor; the same key brings the editor back.
+- **View → Markdown Preview to the Side** (++ctrl+alt+v++, on macOS ++cmd+alt+v++) shows it beside
+  the editor; drag the line between them to resize. The same key closes it.
+- The **preview button** on the tab's toolbar, next to the debug-mode button, does the same as
+  Markdown Preview to the Side, and is lit while any preview is shown; clicking it then hides the
+  preview.
+
+The preview shows the front matter as a table of settings, then the Markdown around the
+code, with the code highlighted in the editor's colors and font. It follows what you type
+after a short pause, and the kind, SDK and dependencies as soon as they change. Each tab
+has its own preview. The preview is read-only.
+
+Side by side, the editor and the preview scroll together: scroll either one and the other
+follows to the same line. When you leave the preview shown in place of the editor, the editor
+opens where you stopped reading.
+
+<figure markdown="span">
+  [![A Fibonacci script in the editor with its Markdown preview beside it: the settings table, the title and the notes, and the lit preview button in the toolbar](assets/screenshots/markdown-preview.png)](assets/screenshots/markdown-preview.png "Open full-size screenshot")
+</figure>
 
 ## Front matter
 
@@ -144,9 +183,12 @@ folder changes:
   **Keep My Changes**. Keeping them is the default, and RunPad doesn't ask again about the
   same version of the file.
 - A running script, or a file that was deleted, is left as it is.
+- If the file now holds a script in the other language (C# instead of Visual Basic or the
+  other way round), it reopens in a new tab in the same place.
 
 **File → Revert to Saved** goes back to the script as it is on disk at any time, asking
-first if that drops unsaved changes.
+first if that drops unsaved changes. It has no default key; you can assign one in
+[Preferences](reference.md#keyboard-shortcuts).
 
 If you keep your changes, the next save asks whether to **Save As…**, **Overwrite** or
 **Cancel**. This also applies to the automatic save before Run/Debug and saves required
