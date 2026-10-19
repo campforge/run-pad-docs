@@ -13,9 +13,9 @@ shortcut.
 
 | Menu | Commands |
 | --- | --- |
-| **File** | New File, New RPad File, Open Text File..., Import .linq Query..., Save, Save As..., Close Tab, Exit (++cmd+q++ on macOS) |
+| **File** | New File, New RPad File, Open..., Recent Files, Open Text File..., Import .linq Query..., Save, Save As..., Revert to Saved, Close Tab, Exit (++cmd+q++ on macOS) |
 | **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Go to Line..., Resolve All Usings |
-| **View** | Toggle File Tree, Toggle Output Panel, Zoom In, Zoom Out, Reset Zoom |
+| **View** | Toggle File Tree, Toggle Output Panel, Markdown Preview, Markdown Preview to the Side, Zoom In, Zoom Out, Reset Zoom |
 | **Run** | Run / Continue, Stop, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
 | **Tools** | Dependencies..., Assembly Explorer..., Preferences... |
 | **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
@@ -63,6 +63,7 @@ where that is the Mac convention.
 | Command | Windows and Linux | macOS |
 | --- | --- | --- |
 | New File | ++ctrl+n++ | ++cmd+n++ |
+| Open Script | ++ctrl+o++ | ++cmd+o++ |
 | Save | ++ctrl+s++ | ++cmd+s++ |
 | Save As | ++ctrl+shift+s++ | ++cmd+shift+s++ |
 | Close Tab | ++ctrl+w++ | ++cmd+w++ |
@@ -70,7 +71,9 @@ where that is the Mac convention.
 | Dependencies | ++f4++ | ++f4++ |
 | Preferences | — | ++cmd+comma++ |
 | Toggle Output Panel | ++ctrl+r++ | ++cmd+r++ |
-| Assembly Explorer, Toggle File Tree, Zoom In, Zoom Out, Reset Zoom | — | — |
+| Toggle Markdown Preview | ++ctrl+shift+v++ | ++cmd+shift+v++ |
+| Toggle Markdown Preview to the Side | ++ctrl+alt+v++ | ++cmd+alt+v++ |
+| Revert to Saved, Assembly Explorer, Toggle File Tree, Zoom In, Zoom Out, Reset Zoom | — | — |
 
 ### Run and debug
 
