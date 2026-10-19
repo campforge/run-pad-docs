@@ -13,6 +13,22 @@ Visual Basic gets the lexical features described in [Visual Basic](#visual-basic
   [![A C# script with comments, strings and LINQ calls highlighted in the editor](assets/screenshots/editor-highlighting.png)](assets/screenshots/editor-highlighting.png "Open full-size screenshot")
 </figure>
 
+## Running a selection and restarting
+
+In **Statements** mode, select a block and choose **Run → Execute Selection**
+(Ctrl+Shift+E, or Cmd+Shift+E on macOS). Only that block runs, with the script's current
+arguments, packages, namespaces and references. The command does not save the source file.
+Select complete statements and include any declarations they need: variables from earlier runs
+are not retained. Empty selections do nothing. Program and Expression selections are not supported
+in this first version; selection execution runs without the debugger.
+
+**Run → Stop and Run Again** (Alt+Shift+X) cancels the current execution, waits for its host to
+finish and starts the whole script again using the current debug-mode setting. Pressing it
+repeatedly while cancellation is pending queues only one restart. Stop cancels a queued restart.
+The new full run uses the usual save/conflict checks; cancelling that save prevents execution.
+
+Change or disable both shortcuts in **Preferences → Keyboard**.
+
 ## Recovering unsaved tabs
 
 **Preferences → Interface → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
