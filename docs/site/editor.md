@@ -29,6 +29,31 @@ The new full run uses the usual save/conflict checks; cancelling that save preve
 
 Change or disable both shortcuts in **Preferences → Keyboard**.
 
+## Extension methods in C# Program scripts
+
+!!! note "Unreleased"
+    This support is not included in RunPad 0.8.0.
+
+In **Program** mode, put extension methods in a top-level static class alongside `Main`:
+
+```csharp
+void Main()
+{
+    Console.WriteLine(21.Twice());
+}
+
+static class NumberExtensions
+{
+    public static int Twice(this int value) => value * 2;
+}
+```
+
+The same applies to generic extension methods and custom `GetAwaiter` methods used by
+an asynchronous `Main`. With a .NET 10 target, C# 14 extension blocks are supported too.
+Keep extension classes at script level, rather than nesting them inside another class.
+Helper types declared at script level share namespace scope with those extension classes;
+methods and fields of the query remain members of the query.
+
 ## Recovering unsaved tabs
 
 **Preferences → Interface → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
