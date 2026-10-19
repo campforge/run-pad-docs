@@ -13,10 +13,10 @@ shortcut.
 
 | Menu | Commands |
 | --- | --- |
-| **File** | New File, New RPad File, Open Text File..., Import .linq Query..., Save, Save As..., Revert to Saved, Close Tab, Exit (++cmd+q++ on macOS) |
+| **File** | New File, New RPad File, Open..., Recent Files, Open Text File..., Import .linq Query..., Save, Save As..., Revert to Saved, Close Tab, Exit (++cmd+q++ on macOS) |
 | **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Go to Line..., Resolve All Usings |
-| **View** | Toggle File Tree, Toggle Output Panel, Zoom In, Zoom Out, Reset Zoom |
-| **Run** | Run / Continue, Stop, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
+| **View** | Toggle File Tree, Toggle Output Panel, Markdown Preview, Markdown Preview to the Side, Zoom In, Zoom Out, Reset Zoom |
+| **Run** | Run / Continue, Stop, Execute Selection, Stop and Run Again, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
 | **Tools** | Dependencies..., Assembly Explorer..., Preferences... |
 | **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
 
@@ -35,7 +35,7 @@ Open **Tools → Preferences...**. Settings are grouped in a tree on the left; t
 
 | Page | Settings |
 | --- | --- |
-| **Interface** | *Appearance*: System, Dark or Light. *Interface theme* and *Editor theme* for the current appearance (defaults: *VS Code Dark* / *VS Code Light* and *Dark+* / *Light+*). |
+| **Interface** | *Restore open tabs and unsaved changes* (applies after restart; local normal-exit recovery). *Appearance*: System, Dark or Light. *Interface theme* and *Editor theme* for the current appearance (defaults: *VS Code Dark* / *VS Code Light* and *Dark+* / *Light+*). |
 | **Editor** | Show line numbers, code folding, tabs, spaces, end of line, column ruler (column 80); word wrap; *Accept completion when typing punctuation*; font size and font family; *New file defaults (File → New File)*: language and kind. |
 | **Keyboard** | Every key binding, grouped by area, with Reset and conflict warnings; see [Keyboard shortcuts](#keyboard-shortcuts). |
 | **Languages → .NET** | *Dotnet path* (default `dotnet`, found on `PATH`) and *Debugger path* (the `netcoredbg` executable). Shared by C# and Visual Basic. |
@@ -63,6 +63,7 @@ where that is the Mac convention.
 | Command | Windows and Linux | macOS |
 | --- | --- | --- |
 | New File | ++ctrl+n++ | ++cmd+n++ |
+| Open Script | ++ctrl+o++ | ++cmd+o++ |
 | Save | ++ctrl+s++ | ++cmd+s++ |
 | Save As | ++ctrl+shift+s++ | ++cmd+shift+s++ |
 | Close Tab | ++ctrl+w++ | ++cmd+w++ |
@@ -70,6 +71,8 @@ where that is the Mac convention.
 | Dependencies | ++f4++ | ++f4++ |
 | Preferences | — | ++cmd+comma++ |
 | Toggle Output Panel | ++ctrl+r++ | ++cmd+r++ |
+| Toggle Markdown Preview | ++ctrl+shift+v++ | ++cmd+shift+v++ |
+| Toggle Markdown Preview to the Side | ++ctrl+alt+v++ | ++cmd+alt+v++ |
 | Revert to Saved, Assembly Explorer, Toggle File Tree, Zoom In, Zoom Out, Reset Zoom | — | — |
 
 ### Run and debug
@@ -78,6 +81,8 @@ where that is the Mac convention.
 | --- | --- | --- |
 | Run / Continue | ++f5++ | ++f5++ |
 | Stop | ++shift+f5++ | ++shift+f5++ |
+| Execute Selection (Statements) | ++ctrl+shift+e++ | ++cmd+shift+e++ |
+| Stop and Run Again | ++alt+shift+x++ | ++cmd+shift+f5++ |
 | Step Over | ++f10++ | ++f10++ |
 | Step Into | ++f11++ | ++f11++ |
 | Step Out | ++shift+f11++ | ++shift+f11++ |
@@ -90,6 +95,10 @@ On macOS, function keys may need the ++fn++ key, depending on your keyboard sett
 
 | Command | Windows and Linux | macOS |
 | --- | --- | --- |
+| Find | ++ctrl+f++ | ++cmd+f++ |
+| Replace | ++ctrl+h++ | ++cmd+alt+f++ |
+| Find Next / Previous | ++f3++ / ++shift+f3++ | ++f3++ / ++shift+f3++ |
+| Replace Next / All | ++alt+r++ / ++alt+a++ | ++alt+r++ / ++alt+a++ |
 | Show Completion | ++ctrl+space++ | ++ctrl+space++ |
 | Signature Help | ++ctrl+shift+space++ | ++cmd+shift+space++ |
 | Go to Definition / Implementation | ++f12++ | ++f12++ |
