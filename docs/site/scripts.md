@@ -63,6 +63,31 @@ RunPad Markdown plugin; see [View your scripts in Obsidian](obsidian.md).
 When RunPad saves a script, it writes the front matter again from the fields it knows,
 in a fixed order. YAML comments and unknown fields in the header are not kept.
 
+## Markdown preview
+
+To see the whole script as a document, as VS Code shows a Markdown file, open the preview:
+
+- **View → Markdown Preview** (++ctrl+shift+v++, on macOS ++cmd+shift+v++) shows the preview in
+  place of the editor; the same key brings the editor back.
+- **View → Markdown Preview to the Side** (++ctrl+alt+v++, on macOS ++cmd+alt+v++) shows it beside
+  the editor; drag the line between them to resize. The same key closes it.
+- The **preview button** on the tab's toolbar, next to the debug-mode button, does the same as
+  Markdown Preview to the Side, and is lit while any preview is shown; clicking it then hides the
+  preview.
+
+The preview shows the front matter as a table of settings, then the Markdown around the
+code, with the code highlighted in the editor's colors and font. It follows what you type
+after a short pause, and the kind, SDK and dependencies as soon as they change. Each tab
+has its own preview. The preview is read-only.
+
+Side by side, the editor and the preview scroll together: scroll either one and the other
+follows to the same line. When you leave the preview shown in place of the editor, the editor
+opens where you stopped reading.
+
+<figure markdown="span">
+  [![A Fibonacci script in the editor with its Markdown preview beside it: the settings table, the title and the notes, and the lit preview button in the toolbar](assets/screenshots/markdown-preview.png)](assets/screenshots/markdown-preview.png "Open full-size screenshot")
+</figure>
+
 ## Front matter
 
 All fields are optional. A missing or empty value falls back to the default.
@@ -148,12 +173,28 @@ in another program; external edits are protected as described below.
 
 ## External file changes
 
-If another program changes a script after RunPad opened or saved it, the next save asks
-whether to **Save As…**, **Overwrite** or **Cancel**. This also applies to the automatic
-save before Run/Debug and saves required before closing or file operations. Cancel or
-an unsuccessful Save As stops that operation and keeps your unsaved changes.
-Overwrite explicitly replaces the disk version; Save As keeps it and saves your tab
-under another name. This protection does not automatically reload or merge external edits.
+When another program changes an open script, its tab follows the file. RunPad checks
+when you switch back to it from another program, and as soon as a script in the scripts
+folder changes:
+
+- A tab without unsaved changes reloads quietly: the code, the header (kind, target,
+  packages) and the preview. **Undo** brings back the text the reload replaced.
+- A tab with unsaved changes asks whether to **Reload** the file and lose your changes, or
+  **Keep My Changes**. Keeping them is the default, and RunPad doesn't ask again about the
+  same version of the file.
+- A running script, or a file that was deleted, is left as it is.
+- If the file now holds a script in the other language (C# instead of Visual Basic or the
+  other way round), it reopens in a new tab in the same place.
+
+**File → Revert to Saved** goes back to the script as it is on disk at any time, asking
+first if that drops unsaved changes. It has no default key; you can assign one in
+[Preferences](reference.md#keyboard-shortcuts).
+
+If you keep your changes, the next save asks whether to **Save As…**, **Overwrite** or
+**Cancel**. This also applies to the automatic save before Run/Debug and saves required
+before closing or file operations. Cancel or an unsuccessful Save As stops that operation
+and keeps your unsaved changes. Overwrite explicitly replaces the disk version; Save As
+keeps it and saves your tab under another name. RunPad never merges the two versions.
 
 ## Kinds
 
