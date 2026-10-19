@@ -11,7 +11,8 @@ on first run, or you can point **Preferences → Languages → .NET → Debugger
 existing `netcoredbg` executable. See [Installation](install.md#first-run-net-sdk-and-debugger).
 
 <figure markdown="span">
-  [![A script paused on a breakpoint: the current line is highlighted, the step buttons are visible in the toolbar, and the Debugger tab shows local variables](assets/screenshots/debugging.png)](assets/screenshots/debugging.png "Open full-size screenshot")
+  [![The debugging-loop example paused on line 5 in its third iteration: the step buttons are in the toolbar, Threads and Call Stack on the left of the Debugger tab and Locals on the right](assets/screenshots/debugging_light.png#only-light)](assets/screenshots/debugging_light.png "Open full-size screenshot")
+  [![The debugging-loop example paused on line 5 in its third iteration: the step buttons are in the toolbar, Threads and Call Stack on the left of the Debugger tab and Locals on the right](assets/screenshots/debugging.png#only-dark)](assets/screenshots/debugging.png "Open full-size screenshot")
 </figure>
 
 ## Start a debug session
@@ -84,6 +85,7 @@ Locals and Watch share the right-hand pane.
 | Pause | — | Pause |
 | Run to Cursor | ++ctrl+f10++ | Run to Cursor (runs until the line that holds the caret) |
 | Stop | ++shift+f5++ | Stop |
+| Stop and Run Again | ++alt+shift+x++ | — (in the **Run** menu) |
 
 The same commands are in the **Run** menu. The keys can be changed in
 **Tools → Preferences... → Keyboard**; see [Keyboard shortcuts](reference.md#keyboard-shortcuts). On macOS, function keys may need
