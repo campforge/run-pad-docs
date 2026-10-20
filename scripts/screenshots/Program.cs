@@ -158,6 +158,7 @@ public static class Program
             var drivers = new RunPad.Contracts.Connections.ConnectionDriverRegistry();
             drivers.Register(new RunPad.Connectors.Http.HttpConnectionDriver());
             drivers.Register(new RunPad.Connectors.Grpc.GrpcConnectionDriver());
+            drivers.Register(new RunPad.Connectors.Sqlite.SqliteConnectionDriver());
             return drivers;
         });
         services.AddSingleton<Func<DependenciesWindow>>(sp => () => sp.GetRequiredService<DependenciesWindow>());
