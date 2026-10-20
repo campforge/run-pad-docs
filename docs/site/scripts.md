@@ -253,9 +253,12 @@ void Main()
 string Greet(string name) => $"Hello, {name}!";
 ```
 
-A static class with extension methods can sit next to `Main`. RunPad then compiles the types
-declared at the top of the script outside the generated class, so they can be extended; such
-types can't use the script's own methods and fields by their simple names.
+A static class with extension methods can sit next to `Main`, as in LINQPad. RunPad then compiles
+the script's static classes outside the generated class, because C# allows extension methods only
+in a class that isn't nested; other types stay nested in it as usual. The static classes still see
+the script's types, methods and fields by their simple names, but only those marked `internal` or
+`public`: to extend a type of your own, declare it `internal class Point …` rather than
+`class Point …`.
 
 A Program script without any statement or method at the top level, written as an ordinary C#
 program (`class Program { static void Main() … }`, with using directives and namespaces if you
