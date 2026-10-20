@@ -133,3 +133,11 @@ another namespace, a `using …;` [quick fix](analyzers.md#quick-fixes-and-the-l
 and **Resolve All Usings** (++ctrl+alt+u++) all add namespaces here. The default
 namespaces listed in [Scripts and .rpad files](scripts.md#namespaces-imported-by-default)
 are always imported and do not need to be added.
+
+## Compilation
+
+The **Compilation** tab, shown for C# scripts only, has **Allow unsafe code**. It compiles the
+script with C#'s `/unsafe` option, which pointers, `fixed` buffers and `sizeof` of your own
+structs need, and is stored as `allowUnsafe: true` in the front matter. It is off unless a script
+turns it on, also for imported LINQPad queries. It is a compiler setting, not a sandbox: a script
+always runs with your full permissions, with or without it.
