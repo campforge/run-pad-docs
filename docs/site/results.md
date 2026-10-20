@@ -177,20 +177,21 @@ reads the same store. To use another file, for example on a build server, set th
 
 ## Connections
 
-**Tools → Connections** keeps your own connections in one window: for now HTTP APIs and gRPC
-servers, with databases to follow. **Add** creates one of a type; the form shows that type's
-settings. For an HTTP API they are the base address, headers sent with every request and a
-timeout; for a gRPC server, its address and metadata sent with every call.
+**Tools → Connections** keeps your own connections in one window: HTTP APIs, gRPC servers and
+SQLite databases, with other databases to follow. **Add** creates one of a type; the form shows
+that type's settings. For an HTTP API they are the base address, headers sent with every request
+and a timeout; for a gRPC server, its address and metadata sent with every call; for SQLite, the
+database file.
 
 <figure markdown="span">
-  [![The Connections window: billing (HTTP), inventory (gRPC) and github; billing shows its base address and an Authorization header that names a secret](assets/screenshots/connections_light.png#only-light)](assets/screenshots/connections_light.png "Open full-size screenshot")
-  [![The Connections window: billing (HTTP), inventory (gRPC) and github; billing shows its base address and an Authorization header that names a secret](assets/screenshots/connections.png#only-dark)](assets/screenshots/connections.png "Open full-size screenshot")
+  [![The Connections window: billing (HTTP), inventory (gRPC), shop (SQLite) and github; billing shows its base address and an Authorization header that names a secret](assets/screenshots/connections_light.png#only-light)](assets/screenshots/connections_light.png "Open full-size screenshot")
+  [![The Connections window: billing (HTTP), inventory (gRPC), shop (SQLite) and github; billing shows its base address and an Authorization header that names a secret](assets/screenshots/connections.png#only-dark)](assets/screenshots/connections.png "Open full-size screenshot")
 </figure>
 
 Write a password or token as `${secret:name}` (or pick it from **Insert secret**): the value stays
 in the [Secret Store](#secrets) and is filled in only when the connection is used.
 `${env:NAME}` takes an environment variable instead, and `$${` writes a literal `${`.
-**Test Connection** tries the selected connection with those values. **OK** saves the list in
+**Test Connection** tries the selected connection with those values. **Save** saves the list in
 `connections.json` in RunPad's data folder; secrets are never written there.
 
 ### Connections in a script
@@ -251,6 +252,28 @@ else, such as a client RunPad didn't write. The script needs the `Grpc.Net.Clien
 and reads it again when **Test Connection** succeeds, so after the server's services change, test
 the connection once. A server that can't be read, because it is down, refuses the metadata or has
 no reflection, fails the build with the reason, and the **Connections** tab shows it.
+
+### SQLite connections
+
+A SQLite connection names a database file, either a full path or one relative to the script's
+folder (so `data/shop.db` travels with the script). RunPad reads its tables and views when the
+script is opened or run, and the connection becomes an
+[Entity Framework Core](https://learn.microsoft.com/ef/core/) context with a set for each of them,
+named in PascalCase: the table `order_items` is `Connections.Shop.OrderItems`, of `OrderItem`
+rows. Query them with LINQ, and change them with `SaveChanges()`:
+
+```csharp
+Connections.Shop.Customers.Where(c => c.City == "Oslo").OrderBy(c => c.Name).Dump();
+
+Connections.Shop.Customers.Add(new Connections.ShopClient.Customer { Name = "Eve", City = "Bergen" });
+Connections.Shop.SaveChanges();
+```
+
+Views and tables without a primary key can be read but not changed. Turn on **Read only** to open
+the file for reading only. The script needs the `Microsoft.EntityFrameworkCore.Sqlite` package,
+which **Add to Script** adds. RunPad never creates the file: a file that doesn't exist fails the
+build with its full path. A relative path needs the script to be saved; **Test Connection** in
+**Tools → Connections** needs a full path.
 
 Connections work in C# scripts for now.
 

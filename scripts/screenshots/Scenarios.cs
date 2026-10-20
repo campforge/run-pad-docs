@@ -356,6 +356,11 @@ public static class Scenarios
             },
             new RpadConnection
             {
+                Name = "shop", Driver = "sqlite",
+                Params = new(StringComparer.Ordinal) { ["file"] = RpadValue.Of("data/shop.db") },
+            },
+            new RpadConnection
+            {
                 Name = "github", Driver = "http",
                 Params = new(StringComparer.Ordinal) { ["baseAddress"] = RpadValue.Of("https://api.github.com/") },
             },
@@ -363,6 +368,7 @@ public static class Scenarios
         var registry = new ConnectionDriverRegistry();
         registry.Register(new HttpConnectionDriver());
         registry.Register(new RunPad.Connectors.Grpc.GrpcConnectionDriver());
+        registry.Register(new RunPad.Connectors.Sqlite.SqliteConnectionDriver());
         var window = new ConnectionsWindow(new ConnectionsWindowViewModel(store, registry, secrets)) { Width = 820, Height = 560 };
         window.Show(c.Window);
         await Pump(1500);
