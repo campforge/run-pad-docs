@@ -149,11 +149,33 @@ Interactive input works only in a normal run in the RunPad window. It is not ava
 while debugging, and the command-line runner does not answer input requests, so such a
 script waits there until you press ++ctrl+c++.
 
+## Secrets
+
+Keep passwords, tokens and keys out of your scripts: save them once in **Tools → Secret Store**
+and read them by name.
+
+```csharp
+var token = Util.GetSecret("billing-api");
+```
+
+The Secret Store window lists the names of your secrets. Select one to change its name or value;
+the value stays hidden until you tick **Show**. **Add** and **Remove** change the list, and **OK**
+saves it. Names must differ, letter case aside, and `Util.GetSecret` finds them the same way.
+
+The secrets belong to you on this computer and live outside every script, in `secrets.json` in
+RunPad's data folder (see [Where RunPad stores data](reference.md#where-runpad-stores-data)). On
+Windows the values are encrypted for your Windows account; on macOS and Linux the file is
+readable only by you, like `~/.pgpass`. A script asking for a secret that isn't there fails with
+`KeyNotFoundException`, whose message names the secret and the store. The command-line runner
+reads the same store. To use another file, for example on a build server, set the
+`RUNPAD_SECRETS_FILE` environment variable to its path.
+
 ## Other `Util` helpers
 
 | Member | What it does |
 | --- | --- |
 | `Util.CurrentQueryPath` | Full path of the running `.rpad` file, or `null` for an unsaved tab. |
+| `Util.GetSecret(name)` | A secret saved in **Tools → Secret Store**; see [Secrets](#secrets). |
 | `Util.Cache(func, key, duration)`, `Util.CacheAsync(…)` | Returns a cached result for `key`, or runs the function and stores its result. The cache survives across runs; `duration` is an optional time-to-live. |
 | `Util.SaveString`, `Util.LoadString`, `Util.SaveBytes`, `Util.LoadBytes` | Save and load files by name in RunPad's per-user data folder. |
 | `Util.Try(action)`, `Util.Try(func)` | Run code and get the exception back instead of having it thrown. |
