@@ -217,9 +217,13 @@ The script keeps its own copy of the connection under `connections:` in its fron
 [command-line runner](cli.md). Secrets stay `${secret:name}` placeholders in the file and are read
 from the Secret Store of whoever runs the script, when it runs.
 
+A connection that needs libraries, such as a database driver, brings them as ordinary packages of
+the script: **Add to Script** also adds them to the **Packages** tab, where you can see and update
+them like any other package, and they are restored the same way.
+
 The tab shows, for each of the script's connections, its name in code, whether it is the same as
-yours, and what would fail the build: a missing secret, a missing setting, or a connection type this
-RunPad doesn't have. **Remove from Script** takes it out; **Import to Your Connections** keeps a
+yours, and what would fail the build: a missing secret, a missing setting, a missing package, or a
+connection type this RunPad doesn't have. **Remove from Script** takes it out; **Import to Your Connections** keeps a
 script's connection in your own list (replacing one of the same name), for example one that came
 with a script someone shared.
 
