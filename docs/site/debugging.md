@@ -48,7 +48,7 @@ statement.
 
 ### Conditions, hit counts and disabling
 
-Right-click the gutter on a line (or Control-click on macOS) to open the breakpoint dialog. It works for a line with
+Right-click the gutter on a line (or Control-click on macOS) to open the breakpoint popover beside that line. It works for a line with
 or without a breakpoint:
 
 - **Enabled** — clear it to keep the breakpoint in the gutter without stopping there.
@@ -59,7 +59,10 @@ or without a breakpoint:
 
 The condition stays on one line; expand **Hit count** for its optional settings.
 Press Enter to apply or Escape to cancel. Changes also update an active debug session.
-The condition and hit count are evaluated by netcoredbg.
+C# conditions are checked without executing them and must resolve to Boolean at the breakpoint.
+Errors disable Done. Scoped name and member suggestions support Down + Enter or a double-click.
+Escape or clicking outside dismisses edits. Runtime evaluation is still performed by netcoredbg;
+its expression support can differ from the C# compiler.
 
 ## When execution is paused
 
