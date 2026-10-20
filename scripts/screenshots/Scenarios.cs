@@ -6,6 +6,11 @@ using AvaloniaEdit;
 using Avalonia.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using RunPad.Avalonia.Themes;
+using RunPad.Connectors.Http;
+using RunPad.Contracts.Connections;
+using RunPad.Format.RPad;
+using RunPad.Services.Connections;
+using RunPad.Services.Secrets;
 using RunPad.Services;
 using RunPad.Services.Scaling;
 using RunPad.UserControls;
@@ -100,7 +105,7 @@ public sealed class Ctx : IAsyncDisposable
 public static class Scenarios
 {
     public static readonly string[] All =
-        ["overview", "editor", "search", "diagnostics", "debugging", "preview", "preferences", "dependencies", "explorer"];
+        ["overview", "editor", "search", "diagnostics", "debugging", "preview", "preferences", "dependencies", "explorer", "connections", "secrets"];
 
     public static async Task Run(string name)
     {
@@ -117,6 +122,8 @@ public static class Scenarios
             case "preferences": await Preferences(); break;
             case "dependencies": await Dependencies(); break;
             case "explorer": await Explorer(); break;
+            case "connections": await Connections(); break;
+            case "secrets": await Secrets(); break;
             default: throw new ArgumentException("Unknown scenario " + name);
         }
     }
@@ -315,6 +322,56 @@ public static class Scenarios
         vm.SelectedOnlinePackage = vm.OnlinePackages[0];
         await Pump(5000);
         Capture(window, "dependencies.png");
+        window.Close();
+    }
+
+    private static SecretStoreWindowViewModel SampleSecrets(string root, out ISecretStore store)
+    {
+        store = new FileSecretStore(Path.GetFullPath(Path.Combine(root, "..", "secrets.json")));
+        store.Save([new Secret("billing-token", "sk_live_51H8xQ2"), new Secret("github-token", "ghp_example"), new Secret("orders-db", "p@ssw0rd")]);
+        return new SecretStoreWindowViewModel(store);
+    }
+
+    private static async Task Connections()
+    {
+        await using var c = await Ctx.Create(1100, 700);
+        SampleSecrets(c.Root, out var secrets);
+        var store = new FileConnectionStore(Path.GetFullPath(Path.Combine(c.Root, "..", "connections.json")));
+        store.Save(
+        [
+            new RpadConnection
+            {
+                Name = "billing", Driver = "http",
+                Params = new(StringComparer.Ordinal)
+                {
+                    ["baseAddress"] = RpadValue.Of("https://billing.example.com/api/"),
+                    ["headers"] = RpadValue.Map([new("Authorization", RpadValue.Of("Bearer ${secret:billing-token}")), new("Accept", RpadValue.Of("application/json"))]),
+                },
+            },
+            new RpadConnection
+            {
+                Name = "github", Driver = "http",
+                Params = new(StringComparer.Ordinal) { ["baseAddress"] = RpadValue.Of("https://api.github.com/") },
+            },
+        ]);
+        var registry = new ConnectionDriverRegistry();
+        registry.Register(new HttpConnectionDriver());
+        var window = new ConnectionsWindow(new ConnectionsWindowViewModel(store, registry, secrets)) { Width = 820, Height = 560 };
+        window.Show(c.Window);
+        await Pump(1500);
+        Capture(window, "connections.png");
+        window.Close();
+    }
+
+    private static async Task Secrets()
+    {
+        await using var c = await Ctx.Create(1100, 700);
+        var vm = SampleSecrets(c.Root, out _);
+        vm.SelectedSecret = vm.Secrets[0];
+        var window = new SecretStoreWindow(vm) { Width = 600, Height = 440 };
+        window.Show(c.Window);
+        await Pump(1500);
+        Capture(window, "secret-store.png");
         window.Close();
     }
 
