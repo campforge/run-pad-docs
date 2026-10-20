@@ -222,6 +222,28 @@ with your edits for retry. If another window or an import changed your saved lis
 window refuses to overwrite it: reopen the list and reapply your edits to its latest contents.
 The code name `Connections` is reserved; choose another connection name.
 
+### gRPC connections
+
+Choose **gRPC** in **Tools → Connections**, enter the server address and any required metadata,
+then use **Test Connection** to read its services. The server must support gRPC server reflection.
+Add the connection to the C# script through **Dependencies → Connections**. Each service has a
+client, for example:
+
+```csharp
+var response = await Connections.Inventory.Stock.GetItemAsync(
+    new Inventory.V1.ItemRequest { Sku = "A1" });
+response.Dump();
+```
+
+The service and message names depend on the server's contract. After the first successful build,
+ordinary script edits reuse a compiled contract in that script's build cache. Changes to the schema,
+SDK target or dependency assemblies require a new contract build. Completion is also available
+before the first run. If the server's contract changes, read its description again with
+**Test Connection** before rebuilding the script.
+
+Scripts with `partial` extensions of generated types retain source-based compilation so the
+extensions and generated declarations remain in the same assembly.
+
 ### SQLite connections
 
 In a development build, choose **SQLite** under **Tools → Connections → Add** and enter an
