@@ -17,7 +17,7 @@ shortcut.
 | **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Go to Line..., Resolve All Usings |
 | **View** | Toggle File Tree, Toggle Output Panel, Markdown Preview, Markdown Preview to the Side, Zoom In, Zoom Out, Reset Zoom |
 | **Run** | Run / Continue, Stop, Execute Selection, Stop and Run Again, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
-| **Tools** | Dependencies..., Assembly Explorer..., Preferences... |
+| **Tools** | Dependencies..., Assembly Explorer..., Connections..., Secret Store..., Preferences... |
 | **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
 
 Commands that work on a script, such as Run or Zoom In, act on the active tab. On macOS the
@@ -78,7 +78,7 @@ where that is the Mac convention.
 | --- | --- | --- |
 | Run / Continue | ++f5++ | ++f5++ |
 | Stop | ++shift+f5++ | ++shift+f5++ |
-| Execute Selection (Statements) | ++ctrl+shift+e++ | ++cmd+shift+e++ |
+| Execute Selection (Statements, Program) | ++ctrl+shift+e++ | ++cmd+shift+e++ |
 | Stop and Run Again | ++alt+shift+x++ | ++cmd+shift+f5++ |
 | Step Over | ++f10++ | ++f10++ |
 | Step Into | ++f11++ | ++f11++ |
@@ -140,6 +140,8 @@ name in the Assembly Explorer goes to its definition.
 | Settings, including Recent Files | `settings.json` in RunPad's data folder |
 | Drafts of open tabs and unsaved changes | `recovery` folder in RunPad's data folder |
 | NuGet sources | `NuGet.Config` in RunPad's data folder |
+| Your connections from **Tools → Connections** | `connections.json` in RunPad's data folder |
+| Secrets from **Tools → Secret Store** | `secrets.json` in RunPad's data folder (`RUNPAD_SECRETS_FILE` points elsewhere) |
 | Debugger installed by the setup window | `netcoredbg` folder in RunPad's data folder |
 | Files written by `Util.Cache` and `Util.SaveString`/`SaveBytes` | `UserData` folder in RunPad's data folder |
 | Logs | `logs` folder in RunPad's data folder |
