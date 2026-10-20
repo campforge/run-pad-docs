@@ -104,7 +104,6 @@ All fields are optional. A missing or empty value falls back to the default.
 | `references` | none | Paths to `.dll` files. See [Packages and references](dependencies.md). |
 | `namespaces` | none | Namespaces imported for the whole script, like global `using` (C#) or project-level `Imports` (VB). |
 | `args` | empty list | String arguments passed to the script when running or debugging. CLI arguments can override this list for one invocation. |
-| `allowUnsafe` | `false` | C# only: `true` compiles the script with unsafe code allowed. Written only when on. See [Compilation](dependencies.md#compilation). |
 
 Field names are case-sensitive camelCase (`targetSdk`, not `TargetSdk`). The values of
 `language` and `kind` are case-insensitive. Unknown fields are ignored when the file is
@@ -240,9 +239,7 @@ both:
 | `int Main(…)`, `async Task<int> Main(…)` | The returned number is the exit code; anything but 0 shows as *Exit code N*. |
 
 If the script declares several `Main` overloads, RunPad calls the one that takes the most:
-arguments and a token, then a token, then arguments, then none. A `Main` under `#if DEBUG` or
-another conditional symbol counts only when the script's target framework defines that symbol,
-as it does for the compiler (`DEBUG` and `TRACE` are always defined).
+arguments and a token, then a token, then arguments, then none.
 
 ```csharp
 void Main()
@@ -252,15 +249,6 @@ void Main()
 
 string Greet(string name) => $"Hello, {name}!";
 ```
-
-A static class with extension methods can sit next to `Main`. RunPad then compiles the types
-declared at the top of the script outside the generated class, so they can be extended; such
-types can't use the script's own methods and fields by their simple names.
-
-A Program script without any statement or method at the top level, written as an ordinary C#
-program (`class Program { static void Main() … }`, with using directives and namespaces if you
-like), is compiled exactly as written. The compiler picks its entry point and reports a missing
-or ambiguous one.
 
 A new Program script starts with an empty `Main`, and switching a script to **Program** in the
 toolbar wraps its code in `Main` — `async Task Main()` when the code uses `await` — and keeps

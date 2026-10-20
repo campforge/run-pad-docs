@@ -16,17 +16,13 @@ Visual Basic gets the lexical features described in [Visual Basic](#visual-basic
 
 ## Running a selection and restarting
 
-In **Statements** and **Program** mode, select a block and choose **Run → Execute Selection**
-(Ctrl+Shift+E, or Cmd+Shift+E on macOS). Only that block runs, as Statements, with the script's current
+In **Statements** mode, select a block and choose **Run → Execute Selection**
+(Ctrl+Shift+E, or Cmd+Shift+E on macOS). Only that block runs, with the script's current
 arguments, packages, namespaces and references. The command does not save the source file.
 Select complete statements and include any declarations they need: variables from earlier runs
 are not retained. Empty selections do nothing. With a rectangular selection (hold ++alt++ while selecting), only
-the selected columns run.
-
-In a Program script the selection is usually a few lines inside `Main` or another method. They
-run on their own, without the rest of the script: a selection that uses a method, field, type or
-variable declared outside it fails to compile, and the output says why. Expression scripts have no
-statements to select. Selection execution runs without the debugger.
+the selected columns run. Program and Expression selections are not supported
+in this first version; selection execution runs without the debugger.
 
 **Run → Stop and Run Again** (Alt+Shift+X, or Cmd+Shift+F5 on macOS) cancels the current execution, waits for its host to
 finish and starts the whole script again using the current debug-mode setting. Pressing it
@@ -45,28 +41,13 @@ and script settings such as arguments, references and packages. Original script 
 modified by this checkpoint. Clean files are read again from disk; a missing file can be recovered
 from its cached text. Explicitly closing a tab and choosing **Don't Save** discards that tab.
 
-When you close RunPad with unsaved tabs, it asks once what to do with them:
-
-- **Save All** saves every unsaved tab, with the usual Save As for untitled ones and the usual
-  question about files changed on disk. Cancelling or a failed save keeps RunPad open; files
-  saved before that stay saved.
-- **Keep in Stash** closes without writing the files; the changes come back on the next launch.
-- **Cancel** keeps RunPad open.
-
 RunPad waits for pending Save As and file moves before writing the checkpoint. If writing fails,
 the window stays open so you can retry or save your work. Recovery data is stored in the
 `recovery` folder of [RunPad's data folder](reference.md#where-runpad-stores-data). A damaged checkpoint can fall back
-to the previous one. Each running instance keeps its own recovery data. On startup RunPad restores
-the most recent session and also brings in the unsaved drafts of other RunPad windows that have
-been closed since; a running window's drafts are left alone. A draft of a file that is already
-open comes back as an untitled copy named after the file, so neither version is overwritten: it
-still finds the file's relative references, and it can't be saved over that file or over one
-another tab has open.
-
-Startup reports what it restored in a notice above the editor instead of a message box; **Dismiss**
-hides it. Draft data that cannot be read is kept unchanged and its recovery folders are listed in
-the notice (the text can be selected and copied). Damaged session data is skipped when an older
-readable session is available.
+to the previous one. Other running instances retain their own recovery data; startup restores the
+most recent available session rather than combining every instance. If other drafts or unreadable session data exist,
+a warning lists its recovery folders; those sessions are kept unchanged. Damaged session data
+is skipped when an older readable session is available.
 
 This is recovery on normal exit, not continuous autosave: the latest edits are not guaranteed
 after a crash or forced termination. Results, running processes, undo history and separate text
