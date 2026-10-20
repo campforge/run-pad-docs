@@ -63,8 +63,9 @@ open comes back as an untitled copy named after the file, so neither version is 
 still finds the file's relative references, and it can't be saved over that file or over one
 another tab has open.
 
-Startup reports what it restored in a notice above the editor instead of a message box; **Dismiss**
-hides it. Draft data that cannot be read is kept unchanged and its recovery folders are listed in
+The other window's draft data is deleted once RunPad has kept the restored drafts in two of its
+own checkpoints, so a damaged newest checkpoint can't lose them. Startup reports what it restored
+in a notice above the editor instead of a message box; **Dismiss** hides it. Draft data that cannot be read is kept unchanged and its recovery folders are listed in
 the notice (the text can be selected and copied). Damaged session data is skipped when an older
 readable session is available.
 
