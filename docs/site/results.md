@@ -171,7 +171,7 @@ Cached entries stay there until they expire or you delete the files.
     Secret Store is available in development builds.
 
 Open **Tools → Secret Store** to add named passwords, tokens or keys. Values stay hidden
-until you tick **Show**. **OK** writes your edits; **Cancel** leaves the file unchanged.
+until you tick **Show**. **Save** writes your edits; **Cancel** leaves the file unchanged.
 A script reads a saved value without embedding it in its source:
 
 ```csharp
@@ -180,12 +180,12 @@ var token = Util.GetSecret("api-token");
 
 Names are case-insensitive. A missing name raises `KeyNotFoundException` with the store's
 location. On Windows values are encrypted for your Windows account; on macOS and Linux
-they are plain text in an owner-only file. The window shows its location.
+they are plain text in an owner-only file. Expand **Storage and usage** to see its location.
 `RUNPAD_SECRETS_FILE` selects a different store for the application and scripts; use an
 absolute path.
 
 If writing fails, the window stays open with your edits and an error message; fix the
-file access or disk problem and retry **OK**. If another window changed the store since
+file access or disk problem and retry **Save**. If another window changed the store since
 you opened it, saving refuses to overwrite that newer file. Both the newer file and your
 unsaved edits are preserved. Reopen the store with its latest contents and reapply your
 edits before saving.
@@ -193,7 +193,7 @@ edits before saving.
 ## Connections
 
 !!! note "Unreleased"
-    Connections are available in development builds, for C# scripts. HTTP is the first driver.
+    Connections are available in development builds, for C# scripts. The examples below use HTTP.
 
 Open **Tools → Connections** to keep named HTTP connections with a base address, headers
 and an optional timeout. Use `${secret:api-token}` in a header value to read a token from
@@ -203,7 +203,9 @@ an HTTP GET with the resolved settings. Secret values are not copied into script
 In **Dependencies → Connections**, add a saved connection to the script. Its settings are
 copied into the script; later changes to your saved list do not change that copy. Required
 libraries become ordinary script packages. **Import** copies a script connection into your
-saved list, replacing one with the same name.
+saved list immediately. Replacing a different connection with the same name requires
+**Replace Saved Connection**; **Keep Existing** cancels the replacement. These imports are
+already saved, so **Cancel** in Dependencies does not undo them.
 
 The editor and compiler expose a client such as `Connections.BillingApi` for a connection
 named `billing-api`. For HTTP this is an `HttpClient` with the address, headers and timeout
