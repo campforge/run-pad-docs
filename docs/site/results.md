@@ -222,6 +222,25 @@ with your edits for retry. If another window or an import changed your saved lis
 window refuses to overwrite it: reopen the list and reapply your edits to its latest contents.
 The code name `Connections` is reserved; choose another connection name.
 
+### SQLite connections
+
+In a development build, choose **SQLite** under **Tools → Connections → Add** and enter an
+existing database file. A relative path is resolved from the saved script's folder. Add the
+connection on **Dependencies → Connections** to get an EF Core context and the required package
+in a C# script targeting .NET 10 or later:
+
+```csharp
+using var shop = Connections.Shop;
+shop.Customers.Where(c => c.City == "Oslo").ToList().Dump();
+```
+
+Tables with a non-null primary key support changes through `SaveChanges()`. Views, tables without
+a primary key, and tables whose primary key permits `NULL` are available for reading without
+tracking. The connection's **Read only** setting also prevents writes to the file.
+
+SQLite `VIRTUAL` and `STORED` computed columns appear on row objects. The database calculates them;
+EF Core refreshes their values after inserts and updates instead of writing assigned values.
+
 ## Stopping a script
 
 **Stop** (++shift+f5++) ends a running script at once — unless the script listens for it. A script
