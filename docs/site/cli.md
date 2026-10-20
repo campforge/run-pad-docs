@@ -144,6 +144,16 @@ RunPad converts `.linq` query files to `.rpad` scripts.
 | `<Reference>` (or its `Relative` attribute) | `references:` entry |
 | The code after `</Query>` | The run block, under a heading with the file name |
 
+!!! note "Unreleased: C# namespace imports"
+    C# `.linq` imports now write LINQPad's standard namespace profile into the converted
+    file's `namespaces`, together with explicit `<Namespace>` entries, without exact duplicates.
+    This includes `System.Text`, `System.Data` and `System.Xml.Linq`. These imports are editable
+    script metadata used by both compilation and the editor. Existing `.rpad` files, new ordinary
+    scripts, global defaults and Visual Basic imports are unchanged.
+
+    Custom defaults configured only on the original LINQPad machine are not present in the
+    `.linq` header and cannot be inferred; add any missing custom imports to the converted file.
+
 Other kinds, such as SQL or F# queries, are rejected with an error that lists the
 supported kinds. Database connections are not converted. The converted file
 gets `targetSdk: latest`.
@@ -169,7 +179,7 @@ prices
     .Dump("Formatted prices");
 ```
 
-`runpad convert sample-query.linq` produces:
+`runpad convert sample-query.linq` produces (with the unreleased import profile):
 
 ````markdown
 ---
@@ -178,6 +188,22 @@ language: csharp
 targetSdk: latest
 kind: Statements
 namespaces:
+  - System
+  - System.Collections
+  - System.Collections.Generic
+  - System.Data
+  - System.Diagnostics
+  - System.IO
+  - System.Linq
+  - System.Linq.Expressions
+  - System.Reflection
+  - System.Text
+  - System.Text.RegularExpressions
+  - System.Threading
+  - System.Transactions
+  - System.Xml
+  - System.Xml.Linq
+  - System.Xml.XPath
   - System.Globalization
 ---
 
