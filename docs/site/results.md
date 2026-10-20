@@ -158,6 +158,11 @@ and read them by name.
 var token = Util.GetSecret("billing-api");
 ```
 
+<figure markdown="span">
+  [![The Secret Store window: three secrets by name, the selected one's value hidden](assets/screenshots/secret-store_light.png#only-light)](assets/screenshots/secret-store_light.png "Open full-size screenshot")
+  [![The Secret Store window: three secrets by name, the selected one's value hidden](assets/screenshots/secret-store.png#only-dark)](assets/screenshots/secret-store.png "Open full-size screenshot")
+</figure>
+
 The Secret Store window lists the names of your secrets. Select one to change its name or value;
 the value stays hidden until you tick **Show**. **Add** and **Remove** change the list, and **OK**
 saves it. Names must differ, letter case aside, and `Util.GetSecret` finds them the same way.
@@ -169,6 +174,26 @@ readable only by you, like `~/.pgpass`. A script asking for a secret that isn't 
 `KeyNotFoundException`, whose message names the secret and the store. The command-line runner
 reads the same store. To use another file, for example on a build server, set the
 `RUNPAD_SECRETS_FILE` environment variable to its path.
+
+## Connections
+
+**Tools → Connections** keeps your own connections in one window: for now HTTP APIs, with database
+and gRPC connections to follow. **Add** creates one of a type; the form shows that type's settings.
+For an HTTP API they are the base address, headers sent with every request and a timeout.
+
+<figure markdown="span">
+  [![The Connections window: a billing HTTP connection with its base address and an Authorization header that names a secret](assets/screenshots/connections_light.png#only-light)](assets/screenshots/connections_light.png "Open full-size screenshot")
+  [![The Connections window: a billing HTTP connection with its base address and an Authorization header that names a secret](assets/screenshots/connections.png#only-dark)](assets/screenshots/connections.png "Open full-size screenshot")
+</figure>
+
+Write a password or token as `${secret:name}` (or pick it from **Insert secret**): the value stays
+in the [Secret Store](#secrets) and is filled in only when the connection is used.
+`${env:NAME}` takes an environment variable instead, and `$${` writes a literal `${`.
+**Test Connection** tries the selected connection with those values. **OK** saves the list in
+`connections.json` in RunPad's data folder; secrets are never written there.
+
+Using connections from a script, with a `connections:` list in its front matter, comes in a later
+version.
 
 ## Other `Util` helpers
 
