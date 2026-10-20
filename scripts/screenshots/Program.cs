@@ -150,6 +150,15 @@ public static class Program
         services.AddTransient<PreferencesWindow>();
         services.AddTransient<DependenciesWindow>();
         services.AddSingleton<EditorTabsControl>();
+        // Connections and secrets in a temporary folder next to the scripts, with the built-in drivers.
+        services.AddSingleton<RunPad.Services.Secrets.ISecretStore>(_ => new RunPad.Services.Secrets.FileSecretStore(Path.GetFullPath(Path.Combine(root, "..", "secrets.json"))));
+        services.AddSingleton<RunPad.Services.Connections.IConnectionStore>(_ => new RunPad.Services.Connections.FileConnectionStore(Path.GetFullPath(Path.Combine(root, "..", "connections.json"))));
+        services.AddSingleton(_ =>
+        {
+            var drivers = new RunPad.Contracts.Connections.ConnectionDriverRegistry();
+            drivers.Register(new RunPad.Connectors.Http.HttpConnectionDriver());
+            return drivers;
+        });
         services.AddSingleton<Func<DependenciesWindow>>(sp => () => sp.GetRequiredService<DependenciesWindow>());
         services.AddSingleton<Func<PreferencesWindow>>(sp => () => sp.GetRequiredService<PreferencesWindow>());
         return services.BuildServiceProvider();

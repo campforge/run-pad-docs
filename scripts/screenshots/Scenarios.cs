@@ -105,7 +105,7 @@ public sealed class Ctx : IAsyncDisposable
 public static class Scenarios
 {
     public static readonly string[] All =
-        ["overview", "editor", "search", "diagnostics", "debugging", "preview", "preferences", "dependencies", "explorer", "connections", "secrets"];
+        ["overview", "editor", "search", "diagnostics", "debugging", "preview", "preferences", "dependencies", "explorer", "connections", "secrets", "script-connections"];
 
     public static async Task Run(string name)
     {
@@ -124,6 +124,7 @@ public static class Scenarios
             case "explorer": await Explorer(); break;
             case "connections": await Connections(); break;
             case "secrets": await Secrets(); break;
+            case "script-connections": await ScriptConnections(); break;
             default: throw new ArgumentException("Unknown scenario " + name);
         }
     }
@@ -361,6 +362,78 @@ public static class Scenarios
         await Pump(1500);
         Capture(window, "connections.png");
         window.Close();
+    }
+
+    private const string ConnectionScript = """
+        ---
+        version: "1.1"
+        language: csharp
+        targetSdk: latest
+        kind: Statements
+        connections:
+          - name: billing
+            driver: http
+            params:
+              baseAddress: https://billing.example.com/api/
+              headers:
+                Authorization: Bearer ${secret:billing-token}
+        ---
+
+        # Invoices
+
+        ```csharp run
+        var invoices = await Connections.Billing.GetStringAsync("invoices");
+        invoices.Dump();
+        ```
+        """;
+
+    // The Dependencies window's Connections tab, then the editor completing the connection's client.
+    private static async Task ScriptConnections()
+    {
+        await using var c = await Ctx.Create(1100, 640, p => p.CSharp.InlayHintsEnabled = false);
+        c.Services.GetRequiredService<IConnectionStore>().Save(
+        [
+            new RpadConnection
+            {
+                Name = "billing", Driver = "http",
+                Params = new(StringComparer.Ordinal)
+                {
+                    ["baseAddress"] = RpadValue.Of("https://billing.example.com/api/"),
+                    ["headers"] = RpadValue.Map([new("Authorization", RpadValue.Of("Bearer ${secret:billing-token}"))]),
+                },
+            },
+            new RpadConnection { Name = "github", Driver = "http", Params = new(StringComparer.Ordinal) { ["baseAddress"] = RpadValue.Of("https://api.github.com/") } },
+        ]);
+        c.Services.GetRequiredService<ISecretStore>().Save([new Secret("billing-token", "t0k")]);
+        var (tab, ctrl) = await c.Open(c.AddScript("invoices.rpad", ConnectionScript));
+        c.Tabs.ToggleOutputPanelActive();
+
+        var window = c.Services.GetRequiredService<DependenciesWindow>();
+        window.Width = 1000;
+        window.Height = 560;
+        window.SetFrontMatter(ctrl.State.RpadDocument?.FrontMatter);
+        window.Show(c.Window);
+        await Pump(1000);
+        window.FindControl<TabControl>("Tabs")?.SetValue(TabControl.SelectedItemProperty, window.FindControl<TabItem>("ConnectionsTab"));
+        window.FindControl<TabItem>("ConnectionsTab")!.IsSelected = true;
+        await Pump(1500);
+        Capture(window, "dependencies-connections.png");
+        window.Close();
+
+        await Pump(3000);
+        var doc = ctrl.State.Editor.Document;
+        doc.Insert(doc.TextLength, "Connections");
+        await Caret(ctrl, 3, 12);
+        await Pump(500);
+        c.Window.KeyTextInput(".");
+        await Pump(2500);
+        c.Window.KeyTextInput("Bi");
+        await Pump(2500);
+        c.Window.KeyTextInput(".");
+        await Pump(2500);
+        c.Window.KeyTextInput("GetS");
+        await Pump(3000);
+        Capture(c.Window, "connections-completion.png");
     }
 
     private static async Task Secrets()

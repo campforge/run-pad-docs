@@ -192,8 +192,43 @@ in the [Secret Store](#secrets) and is filled in only when the connection is use
 **Test Connection** tries the selected connection with those values. **OK** saves the list in
 `connections.json` in RunPad's data folder; secrets are never written there.
 
-Using connections from a script, with a `connections:` list in its front matter, comes in a later
-version.
+### Connections in a script
+
+In a C# script, open **Tools → Dependencies…** and the **Connections** tab, pick one of your
+connections and choose **Add to Script**. Once you save, the script's code has a client for it,
+named after the connection in PascalCase: `billing` is `Connections.Billing`, `orders-db` is
+`Connections.OrdersDb`. For an HTTP connection the client is an `HttpClient` with the base address,
+headers and timeout already set:
+
+```csharp
+var invoices = await Connections.Billing.GetStringAsync("invoices");
+invoices.Dump();
+```
+
+The editor completes the client and its members right away, before the script runs.
+
+<figure markdown="span">
+  [![The editor completing Connections.Billing.GetS with GetStreamAsync and GetStringAsync](assets/screenshots/connections-completion_light.png#only-light)](assets/screenshots/connections-completion_light.png "Open full-size screenshot")
+  [![The editor completing Connections.Billing.GetS with GetStreamAsync and GetStringAsync](assets/screenshots/connections-completion.png#only-dark)](assets/screenshots/connections-completion.png "Open full-size screenshot")
+</figure>
+
+The script keeps its own copy of the connection under `connections:` in its front matter (see
+[Front matter](scripts.md#front-matter)), so it runs anywhere, also in the
+[command-line runner](cli.md). Secrets stay `${secret:name}` placeholders in the file and are read
+from the Secret Store of whoever runs the script, when it runs.
+
+The tab shows, for each of the script's connections, its name in code, whether it is the same as
+yours, and what would fail the build: a missing secret, a missing setting, or a connection type this
+RunPad doesn't have. **Remove from Script** takes it out; **Import to Your Connections** keeps a
+script's connection in your own list (replacing one of the same name), for example one that came
+with a script someone shared.
+
+<figure markdown="span">
+  [![The Dependencies window's Connections tab: billing in the script as Connections.Billing, github ready to add](assets/screenshots/dependencies-connections_light.png#only-light)](assets/screenshots/dependencies-connections_light.png "Open full-size screenshot")
+  [![The Dependencies window's Connections tab: billing in the script as Connections.Billing, github ready to add](assets/screenshots/dependencies-connections.png#only-dark)](assets/screenshots/dependencies-connections.png "Open full-size screenshot")
+</figure>
+
+Connections work in C# scripts for now.
 
 ## Other `Util` helpers
 
