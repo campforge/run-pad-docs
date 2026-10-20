@@ -10,7 +10,8 @@ Roslyn workspace that follows your text as you type. That workspace exists only 
 Visual Basic gets the lexical features described in [Visual Basic](#visual-basic).
 
 <figure markdown="span">
-  [![A C# script with comments, strings and LINQ calls highlighted in the editor](assets/screenshots/editor-highlighting.png)](assets/screenshots/editor-highlighting.png "Open full-size screenshot")
+  [![A highlighted C# script with the completion list open after a dot, Take selected and its documentation beside the list](assets/screenshots/editor-highlighting_light.png#only-light)](assets/screenshots/editor-highlighting_light.png "Open full-size screenshot")
+  [![A highlighted C# script with the completion list open after a dot, Take selected and its documentation beside the list](assets/screenshots/editor-highlighting.png#only-dark)](assets/screenshots/editor-highlighting.png "Open full-size screenshot")
 </figure>
 
 ## Running a selection and restarting
@@ -19,7 +20,8 @@ In **Statements** mode, select a block and choose **Run → Execute Selection**
 (Ctrl+Shift+E, or Cmd+Shift+E on macOS). Only that block runs, with the script's current
 arguments, packages, namespaces and references. The command does not save the source file.
 Select complete statements and include any declarations they need: variables from earlier runs
-are not retained. Empty selections do nothing. Program and Expression selections are not supported
+are not retained. Empty selections do nothing. With a rectangular selection (hold ++alt++ while selecting), only
+the selected columns run. Program and Expression selections are not supported
 in this first version; selection execution runs without the debugger.
 
 **Run → Stop and Run Again** (Alt+Shift+X, or Cmd+Shift+F5 on macOS) cancels the current execution, waits for its host to
@@ -66,8 +68,8 @@ modified by this checkpoint. Clean files are read again from disk; a missing fil
 from its cached text. Explicitly closing a tab and choosing **Don't Save** discards that tab.
 
 RunPad waits for pending Save As and file moves before writing the checkpoint. If writing fails,
-the window stays open so you can retry or save your work. Recovery data is stored under
-`RunPad/recovery/v1` in the application's local data directory. A damaged checkpoint can fall back
+the window stays open so you can retry or save your work. Recovery data is stored in the
+`recovery` folder of [RunPad's data folder](reference.md#where-runpad-stores-data). A damaged checkpoint can fall back
 to the previous one. Other running instances retain their own recovery data; startup restores the
 most recent available session rather than combining every instance. If other drafts or unreadable session data exist,
 a warning lists its recovery folders; those sessions are kept unchanged. Damaged session data
@@ -159,6 +161,30 @@ for the macOS equivalents and custom bindings.
 
 ++f2++ in the file tree renames the selected file instead; the key acts on whichever
 panel has focus.
+
+## Find and replace
+
+Press ++ctrl+f++ to search the script, or ++ctrl+h++ (++cmd+alt+f++ on macOS) to search
+and replace. A strip opens across the top of the editor with the search field; the
+arrow at its left shows or hides the replacement row. Text selected on one line becomes
+the search text.
+
+<figure markdown="span">
+  [![The search strip over the editor: word in the search field, the replacement row open, 10 of 10 matches, and every match highlighted in the code](assets/screenshots/editor-search_light.png#only-light)](assets/screenshots/editor-search_light.png "Open full-size screenshot")
+  [![The search strip over the editor: word in the search field, the replacement row open, 10 of 10 matches, and every match highlighted in the code](assets/screenshots/editor-search.png#only-dark)](assets/screenshots/editor-search.png "Open full-size screenshot")
+</figure>
+
+- Every match is highlighted as you type, and the strip counts them, for example
+  *3 of 10*.
+- The buttons inside the search field turn on **Match case** (*Cc*), **Match whole words**
+  (*W*) and **regular expressions** (*.\**).
+- ++f3++ and ++shift+f3++, or the arrows, go to the next and previous match.
+- **Replace** (++alt+r++) replaces the current match and moves to the next one;
+  **Replace All** (++alt+a++) replaces every match as one undoable edit.
+- ++escape++ closes the strip.
+
+All of these keys can be changed in **Preferences → Keyboard**, and the buttons' hints show
+the keys you assigned. On a narrow window the strip keeps every button within reach.
 
 ## Folding, display and zoom
 

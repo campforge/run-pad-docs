@@ -9,7 +9,8 @@ A script's dependencies live in its front matter: `packages`, `references` and
 `namespaces`. You can edit them in the **Dependencies** window instead of typing YAML.
 
 <figure markdown="span">
-  [![The Dependencies window on the Packages tab: the script's packages and local cache on the left, online search results in the middle and version details on the right](assets/screenshots/dependencies.png)](assets/screenshots/dependencies.png "Open full-size screenshot")
+  [![The Dependencies window on the Packages tab: the local cache filtered on the left, online search results for Humanizer in the middle and the selected package's details and versions on the right](assets/screenshots/dependencies_light.png#only-light)](assets/screenshots/dependencies_light.png "Open full-size screenshot")
+  [![The Dependencies window on the Packages tab: the local cache filtered on the left, online search results for Humanizer in the middle and the selected package's details and versions on the right](assets/screenshots/dependencies.png#only-dark)](assets/screenshots/dependencies.png "Open full-size screenshot")
 </figure>
 
 ## Open the Dependencies window
