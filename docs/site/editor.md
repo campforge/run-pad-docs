@@ -51,8 +51,9 @@ static class NumberExtensions
 The same applies to generic extension methods and custom `GetAwaiter` methods used by
 an asynchronous `Main`. With a .NET 10 target, C# 14 extension blocks are supported too.
 Keep extension classes at script level, rather than nesting them inside another class.
-Helper types declared at script level share namespace scope with those extension classes;
-methods and fields of the query remain members of the query.
+Other helper types remain nested in the query. If an extension class uses a helper type,
+make that type `internal` or `public` so it is accessible from the extension class.
+Methods and fields of the query remain members of the query.
 
 ## Recovering unsaved tabs
 
