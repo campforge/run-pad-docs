@@ -190,6 +190,36 @@ you opened it, saving refuses to overwrite that newer file. Both the newer file 
 unsaved edits are preserved. Reopen the store with its latest contents and reapply your
 edits before saving.
 
+## Connections
+
+!!! note "Unreleased"
+    Connections are available in development builds, for C# scripts. HTTP is the first driver.
+
+Open **Tools → Connections** to keep named HTTP connections with a base address, headers
+and an optional timeout. Use `${secret:api-token}` in a header value to read a token from
+Secret Store, or `${env:API_HOST}` for an environment variable. **Test Connection** sends
+an HTTP GET with the resolved settings. Secret values are not copied into script metadata.
+
+In **Dependencies → Connections**, add a saved connection to the script. Its settings are
+copied into the script; later changes to your saved list do not change that copy. Required
+libraries become ordinary script packages. **Import** copies a script connection into your
+saved list, replacing one with the same name.
+
+The editor and compiler expose a client such as `Connections.BillingApi` for a connection
+named `billing-api`. For HTTP this is an `HttpClient` with the address, headers and timeout
+already set:
+
+```csharp
+var text = await Connections.BillingApi.GetStringAsync("invoices");
+text.Dump();
+```
+
+Header names must be unique, ignoring letter case and surrounding spaces. Duplicates stay
+editable and block saving and testing until corrected. A failed save keeps the window open
+with your edits for retry. If another window or an import changed your saved list, a stale
+window refuses to overwrite it: reopen the list and reapply your edits to its latest contents.
+The code name `Connections` is reserved; choose another connection name.
+
 ## Stopping a script
 
 **Stop** (++shift+f5++) ends a running script at once — unless the script listens for it. A script
