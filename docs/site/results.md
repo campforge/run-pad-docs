@@ -177,13 +177,14 @@ reads the same store. To use another file, for example on a build server, set th
 
 ## Connections
 
-**Tools → Connections** keeps your own connections in one window: for now HTTP APIs, with database
-and gRPC connections to follow. **Add** creates one of a type; the form shows that type's settings.
-For an HTTP API they are the base address, headers sent with every request and a timeout.
+**Tools → Connections** keeps your own connections in one window: for now HTTP APIs and gRPC
+servers, with databases to follow. **Add** creates one of a type; the form shows that type's
+settings. For an HTTP API they are the base address, headers sent with every request and a
+timeout; for a gRPC server, its address and metadata sent with every call.
 
 <figure markdown="span">
-  [![The Connections window: a billing HTTP connection with its base address and an Authorization header that names a secret](assets/screenshots/connections_light.png#only-light)](assets/screenshots/connections_light.png "Open full-size screenshot")
-  [![The Connections window: a billing HTTP connection with its base address and an Authorization header that names a secret](assets/screenshots/connections.png#only-dark)](assets/screenshots/connections.png "Open full-size screenshot")
+  [![The Connections window: billing (HTTP), inventory (gRPC) and github; billing shows its base address and an Authorization header that names a secret](assets/screenshots/connections_light.png#only-light)](assets/screenshots/connections_light.png "Open full-size screenshot")
+  [![The Connections window: billing (HTTP), inventory (gRPC) and github; billing shows its base address and an Authorization header that names a secret](assets/screenshots/connections.png#only-dark)](assets/screenshots/connections.png "Open full-size screenshot")
 </figure>
 
 Write a password or token as `${secret:name}` (or pick it from **Insert secret**): the value stays
@@ -231,6 +232,25 @@ with a script someone shared.
   [![The Dependencies window's Connections tab: billing in the script as Connections.Billing, github ready to add](assets/screenshots/dependencies-connections_light.png#only-light)](assets/screenshots/dependencies-connections_light.png "Open full-size screenshot")
   [![The Dependencies window's Connections tab: billing in the script as Connections.Billing, github ready to add](assets/screenshots/dependencies-connections.png#only-dark)](assets/screenshots/dependencies-connections.png "Open full-size screenshot")
 </figure>
+
+### gRPC connections
+
+A gRPC server must offer [server reflection](https://grpc.io/docs/guides/reflection/): RunPad asks
+it for its services when the script is opened or run, and writes their message and client classes
+with `protoc` from the Grpc.Tools package (downloaded once from NuGet). The connection's client has
+a property for each service, and its calls send the connection's metadata:
+
+```csharp
+var item = await Connections.Inventory.Stock.GetItemAsync(new Inventory.V1.ItemRequest { Sku = "A1" });
+item.Dump();
+```
+
+`Connections.Inventory.Channel` and `Connections.Inventory.CallInvoker` are there for anything
+else, such as a client RunPad didn't write. The script needs the `Grpc.Net.Client` and
+`Google.Protobuf` packages, which **Add to Script** adds. RunPad keeps what it read from the server
+and reads it again when **Test Connection** succeeds, so after the server's services change, test
+the connection once. A server that can't be read, because it is down, refuses the metadata or has
+no reflection, fails the build with the reason, and the **Connections** tab shows it.
 
 Connections work in C# scripts for now.
 

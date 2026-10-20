@@ -104,7 +104,7 @@ All fields are optional. A missing or empty value falls back to the default.
 | `references` | none | Paths to `.dll` files. See [Packages and references](dependencies.md). |
 | `namespaces` | none | Namespaces imported for the whole script, like global `using` (C#) or project-level `Imports` (VB). |
 | `args` | empty list | String arguments passed to the script when running or debugging. CLI arguments can override this list for one invocation. |
-| `connections` | none | The script's connections: each a `name`, a `driver` (such as `http`) and its `params`. Add them in the Dependencies window; see [Connections in a script](results.md#connections-in-a-script). |
+| `connections` | none | The script's connections: each a `name`, a `driver` (such as `http` or `grpc`) and its `params`. Add them in the Dependencies window; see [Connections in a script](results.md#connections-in-a-script). |
 | `allowUnsafe` | `false` | C# only: `true` compiles the script with unsafe code allowed. Written only when on. See [Compilation](dependencies.md#compilation). |
 
 Field names are case-sensitive camelCase (`targetSdk`, not `TargetSdk`). The values of
