@@ -165,6 +165,31 @@ script waits there until you press ++ctrl+c++.
 RunPad's data folder (see [Where RunPad stores data](reference.md#where-runpad-stores-data)).
 Cached entries stay there until they expire or you delete the files.
 
+## Secret Store
+
+!!! note "Unreleased"
+    Secret Store is available in development builds.
+
+Open **Tools → Secret Store** to add named passwords, tokens or keys. Values stay hidden
+until you tick **Show**. **OK** writes your edits; **Cancel** leaves the file unchanged.
+A script reads a saved value without embedding it in its source:
+
+```csharp
+var token = Util.GetSecret("api-token");
+```
+
+Names are case-insensitive. A missing name raises `KeyNotFoundException` with the store's
+location. On Windows values are encrypted for your Windows account; on macOS and Linux
+they are plain text in an owner-only file. The window shows its location.
+`RUNPAD_SECRETS_FILE` selects a different store for the application and scripts; use an
+absolute path.
+
+If writing fails, the window stays open with your edits and an error message; fix the
+file access or disk problem and retry **OK**. If another window changed the store since
+you opened it, saving refuses to overwrite that newer file. Both the newer file and your
+unsaved edits are preserved. Reopen the store with its latest contents and reapply your
+edits before saving.
+
 ## Stopping a script
 
 **Stop** (++shift+f5++) ends a running script at once — unless the script listens for it. A script
