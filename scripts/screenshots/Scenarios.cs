@@ -329,7 +329,7 @@ public static class Scenarios
     private static SecretStoreWindowViewModel SampleSecrets(string root, out ISecretStore store)
     {
         store = new FileSecretStore(Path.GetFullPath(Path.Combine(root, "..", "secrets.json")));
-        store.Save([new Secret("billing-token", "sk_live_51H8xQ2"), new Secret("github-token", "ghp_example"), new Secret("orders-db", "p@ssw0rd")]);
+        store.Save([new Secret("billing-token", "sk_live_51H8xQ2"), new Secret("github-token", "ghp_example"), new Secret("orders-db", "p@ssw0rd")], null);
         return new SecretStoreWindowViewModel(store);
     }
 
@@ -351,12 +351,18 @@ public static class Scenarios
             },
             new RpadConnection
             {
+                Name = "inventory", Driver = "grpc",
+                Params = new(StringComparer.Ordinal) { ["address"] = RpadValue.Of("https://inventory.example.com:5001") },
+            },
+            new RpadConnection
+            {
                 Name = "github", Driver = "http",
                 Params = new(StringComparer.Ordinal) { ["baseAddress"] = RpadValue.Of("https://api.github.com/") },
             },
-        ]);
+        ], null);
         var registry = new ConnectionDriverRegistry();
         registry.Register(new HttpConnectionDriver());
+        registry.Register(new RunPad.Connectors.Grpc.GrpcConnectionDriver());
         var window = new ConnectionsWindow(new ConnectionsWindowViewModel(store, registry, secrets)) { Width = 820, Height = 560 };
         window.Show(c.Window);
         await Pump(1500);
@@ -403,8 +409,8 @@ public static class Scenarios
                 },
             },
             new RpadConnection { Name = "github", Driver = "http", Params = new(StringComparer.Ordinal) { ["baseAddress"] = RpadValue.Of("https://api.github.com/") } },
-        ]);
-        c.Services.GetRequiredService<ISecretStore>().Save([new Secret("billing-token", "t0k")]);
+        ], null);
+        c.Services.GetRequiredService<ISecretStore>().Save([new Secret("billing-token", "t0k")], null);
         var (tab, ctrl) = await c.Open(c.AddScript("invoices.rpad", ConnectionScript));
         c.Tabs.ToggleOutputPanelActive();
 
