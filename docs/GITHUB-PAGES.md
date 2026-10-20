@@ -100,30 +100,49 @@ for f in docs/site/examples/*.rpad; do dotnet ../run-pad/src/main/RunPad.Cli/bin
 expected output of each example is described in `docs/site/examples.md`; update it when
 an example changes.
 
-## Screenshot manifest
+## Screenshots
 
-Screenshots live in `docs/site/assets/screenshots/`. They are real native-window captures of the installed RunPad application, not mock-ups. All seven files are included; `mkdocs build --strict` fails if an image link is broken.
+Screenshots live in `docs/site/assets/screenshots/`. Each RunPad screenshot comes in two
+files, `name.png` (dark) and `name_light.png` (light), shown with `#only-dark` and
+`#only-light` so a page follows the reader's theme. `mkdocs build --strict` fails if an
+image link is broken.
 
-| File | Page | Captured state |
-| --- | --- | --- |
-| `overview.png` | Overview | Main window, a product-list script, and two Dump tables |
-| `editor-highlighting.png` | Editor | C# comments, strings, LINQ calls and syntax colors |
-| `diagnostics.png` | Diagnostics and analyzers | Warning underline on int.Parse("not-a-number") (RPAD0356); no quick-fix menu pictured |
-| `debugging.png` | Debugging | Paused on total += i, with total=0 and i=1 in Locals |
-| `dependencies.png` | Packages and references | Newtonsoft.Json search, cached packages and version details; nothing added |
-| `assembly-explorer.png` | Assembly Explorer | System.Linq search for Enumerable.Where, tree selection and C# code |
-| `preferences.png` | Reference | Interface settings: appearance and theme selectors |
+They are rendered from RunPad itself, not drawn: `scripts/screenshots` is a small program
+that opens RunPad's real main window and dialogs headless (Avalonia's headless platform
+with Skia), drives them through the same internal hooks as RunPad's UI tests and saves
+each window at 2× scale. Scripts really run, the debugger really stops and the package
+search really queries nuget.org. Every scenario starts a fresh RunPad with default
+settings kept in memory and a temporary RunPad Queries folder filled from
+`docs/site/examples`, so the captures never show your own settings, scripts or file paths.
 
-| Field | Value |
-| --- | --- |
-| Status | Complete: seven original PNG captures |
-| Captured application | RunPad 0.4.0, installed in /Applications |
-| Operating system | macOS 26.5.1, Apple Silicon |
-| Theme and size | Dark: RunPad Midnight / Dark+; original window captures (2268×1384 main, 2200×1496 explorer, 2000×1336 Dependencies) |
-| Samples | Self-contained product list, integer summation loop, non-numeric Parse literal, LINQ over names; public System.Linq.dll copied into a temporary directory |
-| Captured | 2026-10-13 |
+To regenerate them after a release (Windows, with `../run-pad` checked out at that
+release, a .NET 10 SDK, the `netcoredbg` that RunPad's first-run setup installs or
+`RUNPAD_NETCOREDBG` pointing at one, and network access):
 
-The screenshots illustrate the controls and workflows, and are not all exact executions of the downloadable samples. Captions describe the captured state. Completion is documented from source; the Editor image shows highlighting, not an open completion popup.
+```bash
+cd scripts/screenshots
+dotnet run                        # every scenario, dark and light (about 5 minutes)
+dotnet run -- debugging editor-light   # only these
+```
 
-Keep personal data out of captures: use the example scripts in a fresh tab, and avoid
-showing user names in file paths, recent files or other open tabs.
+Look through the results before committing: a scenario fails loudly when something it
+waits for never happens, but a changed layout only shows in the picture. When a window
+or a feature changes, adjust its scenario in `Scenarios.cs` and the image's alt text.
+
+| Scenario | Files | Page | Captured state |
+| --- | --- | --- | --- |
+| `overview` | `overview` | Overview | `products-overview.rpad` after a run: code, Results tables, Queries tab |
+| `editor` | `editor-highlighting` | Editor | A LINQ query with the completion list open after `.Ta` and Take's documentation |
+| `search` | `editor-search` | Editor | The find and replace strip searching `word`, 10 matches highlighted |
+| `diagnostics` | `diagnostics` | Diagnostics and analyzers | `analyzer-diagnostics.rpad`: CS0103 on `JsonSerializer` with the lightbulb menu open; RunPad analyzers on |
+| `debugging` | `debugging` | Debugging | `debugging-loop.rpad` paused on line 5 in the third iteration: Threads, Call Stack, Locals |
+| `preview` | `markdown-preview` | Scripts and .rpad files | `products-overview.rpad` with the Markdown preview to the side |
+| `preferences` | `preferences` | Reference | Preferences → Interface |
+| `dependencies` | `dependencies` | Packages and references | Online search for Humanizer, Humanizer.Core selected; the local cache filtered to Humanizer |
+| `explorer` | `assembly-explorer` | Assembly Explorer | System.Linq.dll searched for `Enumerable.Where`, the first result decompiled |
+
+The interface uses RunPad's own themes, RunPad Midnight and RunPad Warm Light, with the
+editor's default Dark+ and Light+ colors. The window chrome is RunPad's own Windows title bar; dialogs are captured without the
+system's title bar. Numbers are formatted with the invariant culture. The GitHub and
+Obsidian screenshots (`github-rpad-preview.png`, `obsidian*.png`) show other programs and
+are captured by hand.
