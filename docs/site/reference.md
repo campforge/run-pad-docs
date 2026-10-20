@@ -78,7 +78,7 @@ where that is the Mac convention.
 | --- | --- | --- |
 | Run / Continue | ++f5++ | ++f5++ |
 | Stop | ++shift+f5++ | ++shift+f5++ |
-| Execute Selection (Statements) | ++ctrl+shift+e++ | ++cmd+shift+e++ |
+| Execute Selection (Statements, Program) | ++ctrl+shift+e++ | ++cmd+shift+e++ |
 | Stop and Run Again | ++alt+shift+x++ | ++cmd+shift+f5++ |
 | Step Over | ++f10++ | ++f10++ |
 | Step Into | ++f11++ | ++f11++ |
