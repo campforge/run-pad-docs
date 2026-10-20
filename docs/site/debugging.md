@@ -53,10 +53,12 @@ or without a breakpoint:
 
 - **Enabled** — clear it to keep the breakpoint in the gutter without stopping there.
   Disabled breakpoints are not sent to the debugger.
-- **Break when this condition is true** — an expression evaluated in the script's
+- **Condition** — an expression evaluated in the script's
   context, such as `i == 3`.
-- **Break only when the hit count matches** — for example `= 5`, `>= 3` or `% 2`.
+- **Hit count** — for example `= 5`, `>= 3` or `% 2`.
 
+The condition stays on one line; expand **Hit count** for its optional settings.
+Press Enter to apply or Escape to cancel. Changes also update an active debug session.
 The condition and hit count are evaluated by netcoredbg.
 
 ## When execution is paused
