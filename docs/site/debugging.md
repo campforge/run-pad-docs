@@ -48,7 +48,7 @@ statement.
 
 ### Conditions, hit counts and disabling
 
-Right-click the gutter on a line to open the breakpoint dialog. It works for a line with
+Right-click the gutter on a line (or Control-click on macOS) to open the breakpoint dialog. It works for a line with
 or without a breakpoint:
 
 - **Enabled** — clear it to keep the breakpoint in the gutter without stopping there.

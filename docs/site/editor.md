@@ -224,3 +224,11 @@ syntax highlighting, brace matching and keyword-based folding. There is no compl
 signature help, quick info, live diagnostics, quick fixes, semantic highlighting, inlay
 hints, snippets, rename, navigation or formatting for Visual Basic yet. Compiler errors
 appear in the Results tab when you run the script.
+
+## Tabs and spaces
+
+In **Preferences → Editor → Editing**, enable **Use tab characters for indentation**
+to insert tabs, or leave it cleared to insert spaces. **Indent / tab width** controls
+both the indentation size and the displayed width of a tab (1–16 columns, default 4).
+The settings apply immediately to open editors, automatic indentation and C# formatting.
+Changing them does not rewrite existing text; format the document to normalize indentation.
