@@ -164,8 +164,10 @@ var token = Util.GetSecret("billing-api");
 </figure>
 
 The Secret Store window lists the names of your secrets. Select one to change its name or value;
-the value stays hidden until you tick **Show**. **Add** and **Remove** change the list, and **OK**
-saves it. Names must differ, letter case aside, and `Util.GetSecret` finds them the same way.
+the value stays hidden until you tick **Show**. **Add** and **Remove** change the list, **Save**
+saves it and **Cancel** drops your changes. Names must differ, letter case aside, and
+`Util.GetSecret` finds them the same way. If another RunPad window changed the store meanwhile,
+**Save** says so instead of overwriting it.
 
 The secrets belong to you on this computer and live outside every script, in `secrets.json` in
 RunPad's data folder (see [Where RunPad stores data](reference.md#where-runpad-stores-data)). On
@@ -217,7 +219,8 @@ The editor completes the client and its members right away, before the script ru
 The script keeps its own copy of the connection under `connections:` in its front matter (see
 [Front matter](scripts.md#front-matter)), so it runs anywhere, also in the
 [command-line runner](cli.md). Secrets stay `${secret:name}` placeholders in the file and are read
-from the Secret Store of whoever runs the script, when it runs.
+from the Secret Store of whoever runs the script, when it runs. RunPad itself reads them only to
+test a connection or to read a gRPC server's services (see below).
 
 A connection that needs libraries, such as a database driver, brings them as ordinary packages of
 the script: **Add to Script** also adds them to the **Packages** tab, where you can see and update
@@ -225,9 +228,10 @@ them like any other package, and they are restored the same way.
 
 The tab shows, for each of the script's connections, its name in code, whether it is the same as
 yours, and what would fail the build: a missing secret, a missing setting, a missing package, or a
-connection type this RunPad doesn't have. **Remove from Script** takes it out; **Import to Your Connections** keeps a
-script's connection in your own list (replacing one of the same name), for example one that came
-with a script someone shared.
+connection type this RunPad doesn't have. **Remove from Script** takes it out. **Import to Your
+Connections** keeps a script's connection in your own list at once, for example one that came with
+a script someone shared; if you already have a different connection of that name, choose **Replace
+Saved Connection** or **Keep Existing**.
 
 <figure markdown="span">
   [![The Dependencies window's Connections tab: billing in the script as Connections.Billing, github ready to add](assets/screenshots/dependencies-connections_light.png#only-light)](assets/screenshots/dependencies-connections_light.png "Open full-size screenshot")
@@ -269,7 +273,8 @@ Connections.Shop.Customers.Add(new Connections.ShopClient.Customer { Name = "Eve
 Connections.Shop.SaveChanges();
 ```
 
-Views and tables without a primary key can be read but not changed. Turn on **Read only** to open
+Views, tables without a primary key and tables whose key can be empty (`NULL`) can be read but
+not changed; computed (generated) columns are read but never written. Turn on **Read only** to open
 the file for reading only. The script needs the `Microsoft.EntityFrameworkCore.Sqlite` package,
 which **Add to Script** adds. RunPad never creates the file: a file that doesn't exist fails the
 build with its full path. A relative path needs the script to be saved; **Test Connection** in
