@@ -156,6 +156,22 @@ Visual Basic scripts import the same list. Add anything else to `namespaces`, or
 C# scripts compile with nullable reference types enabled and the default C# language
 version of the selected SDK (for example C# 14 for .NET 10).
 
+## Conditional code for RunPad
+
+RunPad defines the `RUNPAD` preprocessor symbol for C# and Visual Basic scripts,
+including scripts run through the CLI. Use it to keep RunPad-specific code in a
+script that is also used by another runner:
+
+```csharp
+#if RUNPAD
+Console.WriteLine("Running in RunPad");
+#else
+Console.WriteLine("Running elsewhere");
+#endif
+```
+
+In Visual Basic, use `#If RUNPAD Then` with `#Else` and `#End If`.
+
 ## Script arguments
 
 Set `args:` in the YAML header with another text editor. There is no dedicated arguments
