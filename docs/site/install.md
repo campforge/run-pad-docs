@@ -62,6 +62,9 @@ contains a `Read Me First.txt` with the same steps.
 
 ## First run: .NET SDK and debugger
 
+On slower launches, a startup screen stays visible while RunPad checks the installed tools.
+If startup fails, it shows the log location and a **Close** button.
+
 When RunPad starts, it checks two prerequisites:
 
 - **.NET SDK** — found when `dotnet --list-sdks` (or the dotnet path you configured)
