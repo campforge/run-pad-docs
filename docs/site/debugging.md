@@ -48,20 +48,21 @@ statement.
 
 ### Conditions and disabling
 
-Right-click the gutter on a line (or Control-click on macOS) to open the breakpoint popover
-beside that line. It works for a line with or without a breakpoint:
+Right-click the gutter on a line (or Control-click on macOS) to open the breakpoint condition dialog
+centered on the window. It works for a line with or without a breakpoint:
 
 - **Enabled** — clear it to keep the breakpoint in the gutter without stopping there.
   Disabled breakpoints are not sent to the debugger.
 - **Condition** — an expression evaluated in the script's
   context, such as `i == 3`.
 
-The condition stays on one line. **Done** applies the edit; the popover has no More section.
+The condition stays on one line. **Done** applies the edit.
 Press Enter to apply or Escape to cancel. Changes also update an active debug session.
 C# conditions are checked without executing them and must resolve to Boolean at the breakpoint.
 Errors disable Done. Scoped name and member suggestions support Down + Enter or a double-click.
-Escape or clicking outside dismisses edits. Runtime evaluation is still performed by netcoredbg;
-its expression support can differ from the C# compiler.
+Escape cancels the edit; clicking outside the modal dialog leaves it open.
+Runtime evaluation is still performed by netcoredbg; its expression support can differ
+from the C# compiler.
 
 ## When execution is paused
 
