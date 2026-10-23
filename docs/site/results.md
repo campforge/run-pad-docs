@@ -223,8 +223,10 @@ from the Secret Store of whoever runs the script, when it runs. RunPad itself re
 test a connection or to read a gRPC server's services (see below).
 
 A connection that needs libraries, such as a database driver, brings them as ordinary packages of
-the script: **Add to Script** also adds them to the **Packages** tab, where you can see and update
-them like any other package, and they are restored the same way.
+the script: **Add to Script** names the packages and versions it would add and asks first, then
+adds them to the **Packages** tab, where you can see and update them like any other package, and
+they are restored the same way. Packages the script already has, in any version, are left as they
+are and not asked about.
 
 The tab shows, for each of the script's connections, its name in code, whether it is the same as
 yours, and what would fail the build: a missing secret, a missing setting, a missing package, or a
@@ -253,9 +255,12 @@ item.Dump();
 `Connections.Inventory.Channel` and `Connections.Inventory.CallInvoker` are there for anything
 else, such as a client RunPad didn't write. The script needs the `Grpc.Net.Client` and
 `Google.Protobuf` packages, which **Add to Script** adds. RunPad keeps what it read from the server
-and reads it again when **Test Connection** succeeds, so after the server's services change, test
-the connection once. A server that can't be read, because it is down, refuses the metadata or has
-no reflection, fails the build with the reason, and the **Connections** tab shows it.
+and doesn't ask again on its own. After the server's services change, select the connection on the
+Dependencies window's **Connections** tab and choose **Refresh**, or use **Test Connection** in
+**Tools → Connections**; open scripts that use the connection pick up the new classes at once. The
+command-line runner reads them again with `--refresh-connections`. A server that can't be read,
+because it is down, refuses the metadata or has no reflection, fails the build with the reason, and
+the **Connections** tab shows it.
 
 ### SQLite connections
 
