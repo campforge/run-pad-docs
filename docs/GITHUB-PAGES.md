@@ -131,7 +131,7 @@ or a feature changes, adjust its scenario in `Scenarios.cs` and the image's alt 
 
 | Scenario | Files | Page | Captured state |
 | --- | --- | --- | --- |
-| `overview` | `overview` | Overview | `products-overview.rpad` after a run: code, Results tables, Queries tab |
+| `overview` | `overview` | Overview | `products-overview.rpad` after a run: code, Results tables, the sidebar's Connections and Scripts sections |
 | `editor` | `editor-highlighting` | Editor | A LINQ query with the completion list open after `.Ta` and Take's documentation |
 | `search` | `editor-search` | Editor | The find and replace strip searching `word`, 10 matches highlighted |
 | `diagnostics` | `diagnostics` | Diagnostics and analyzers | `analyzer-diagnostics.rpad`: CS0103 on `JsonSerializer` with the lightbulb menu open; RunPad analyzers on |
