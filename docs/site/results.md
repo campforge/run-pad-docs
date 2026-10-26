@@ -177,6 +177,24 @@ readable only by you, like `~/.pgpass`. A script asking for a secret that isn't 
 reads the same store. To use another file, for example on a build server, set the
 `RUNPAD_SECRETS_FILE` environment variable to its path.
 
+## Sidebar navigation
+
+The workspace sidebar is organized into three collapsible sections:
+
+- **Connections** — saved connections and their user-defined groups;
+- **Scripts** — the files in the current workspace;
+- **Samples** — bundled examples grouped by folder.
+
+The three sections use the same tree rows, icons, selection behavior and keyboard navigation.
+Connections can be reordered or moved between groups with the context menu, keyboard commands or
+drag and drop. A connection can also be dragged onto the editor, or added with **Add to Script**.
+The sidebar remembers which sections, connection groups and sample folders were expanded between
+launches. Grouping is local navigation state and does not change a script's `connections:` metadata.
+
+Connection rows show whether a connection is used by the active script and explain missing drivers,
+secrets, environment variables or unavailable/stale contracts. Use **Refresh** on a connection, or
+**Refresh All**, to re-check its driver and contract.
+
 ## Connections
 
 **Tools → Connections** keeps your own connections in one window: HTTP APIs, gRPC servers and

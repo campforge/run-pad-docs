@@ -10,6 +10,144 @@ description: What changed in each RunPad release.
 Notable changes in each RunPad release. Downloads are on the
 [releases page](https://github.com/campforge/run-pad/releases).
 
+## [Unreleased]
+
+### Added
+
+- **Toggle Line Comment** (Ctrl+/, Cmd+/ on macOS) comments or uncomments every line the selection
+  touches, or the caret's line, with `//` in C# and `'` in Visual Basic. It is one undo step, and its
+  key can be changed in Preferences → Keyboard.
+- The sidebar's **Connections** section shows the saved connections as a tree, in groups you make:
+  new, renamed, nested (up to three levels), reordered and deleted groups, with connections moved by
+  drag and drop or **Move To** in the context menu; connections outside any group stay at the top.
+  Deleting a group keeps what was in it, moving it up a level. Groups are stored beside the
+  connection list and never change a script; a link badge marks the connections the active script
+  uses. Enter or a double click opens a connection in Tools → Connections.
+- A connection from that tree is added to the active script with **Add to Script** in its context
+  menu or by dragging it onto the editor. When its driver needs NuGet packages the script doesn't
+  have, RunPad asks first and adds them with it.
+- Connections that can't be used as they are — no driver for them, settings the driver rejects, a
+  secret or environment variable that isn't there, or a contract that couldn't be read — are marked
+  in the tree with a warning that says why, and so is a group that contains one. A connection whose
+  contract is being read shows it, and one still using a contract read earlier after a failed refresh
+  is marked as out of date. **Refresh** in a connection's context menu reads its contract again
+  (gRPC) or checks it again; **Refresh All** does it for every connection.
+
+### Changed
+
+- The sidebar's Queries and Examples tabs became three full-width sections that open and close on
+  their own: Connections, Scripts and Samples. Open sections share the sidebar's height and each
+  scrolls on its own; which sections, connection groups and sample folders are open is kept between
+  runs. Samples are a tree of folders. Trees in the sidebar start closer to the edge.
+- Typing `{` in C# no longer inserts `}`. Instead, pressing Enter in a new, still empty class,
+  struct, record or interface body offers a property template: Tab inserts it, any other key leaves
+  the code as it is.
+- The `prop` and `propg` snippets have fields: after inserting one, Tab moves from the type to the
+  name, and Enter or Escape leaves the snippet.
+- **Wrap long lines in results** moved from Preferences to the gear menu beside the output tabs,
+  now called **Output settings**, next to the exception break options.
+- In Tools → Connections, the test status under a connection shows the whole test result as a
+  tooltip, so a status cut short in a narrow list can still be read.
+
+### Fixed
+
+- On macOS, Control-click works as a right click: it opens context menus and selects the row under
+  the pointer, in the sidebar, the editor and every other window.
+- With result wrapping on, ordinary output and errors wrap at the pane width too, long unbroken text
+  included, so no horizontal scroll bar into empty space is left; spaces in output are kept.
+- The classes RunPad generates for a gRPC connection use a nullable-annotations-only context
+  (`#nullable enable annotations`), so they keep their nullable annotations without reporting
+  nullable warnings of their own — CS8669 and the warnings generated code shouldn't raise.
+  Descriptions cached by an earlier RunPad are read again, so scripts that already have one get the
+  new directive too. RunPad's own connection wrapper is unchanged.
+
+## [0.9.5] — 2026-10-24
+
+### Changed
+
+- C# completion now suggests values that fit method and constructor arguments and object initializer
+  properties, including compatible variables, enum members and common literals.
+- Adding a connection that needs NuGet packages now asks for confirmation in a separate dialog.
+- In `--compile-only` mode, warnings and errors go to stderr, leaving stdout free of diagnostics.
+
+### Fixed
+
+- The Help menu and its separator follow the active theme.
+- UTF-32 big-endian files with a BOM retain their encoding when opened and saved.
+- A failed run keeps the IL from the last successful build available until another build succeeds.
+- gRPC connection testing works with reflection servers that ignore an empty service-list request,
+  including the Postman Echo server, and explains common HTTP/2 and TLS mismatches.
+- Generated gRPC clients no longer show nullable-context warnings from their generated code.
+- Closing Dependencies while a connection confirmation is pending cannot add the connection later.
+
+## [0.9.4] — 2026-10-23
+
+### Added
+
+- Assembly Explorer now keeps large assembly trees responsive while loading and highlights IL in
+  the code pane and the script editor's IL tab.
+- Dependencies now shows package dependencies, license information, and the project or homepage
+  link when NuGet supplies them.
+- Dependencies can create and add connections directly, with a confirmation that lists any new
+  NuGet packages and versions before changing the script.
+- Script launch progress now identifies restore, connection contract generation, compilation, and
+  execution stages, and reports which stage failed.
+- Dependencies → Connections has **Refresh** for a gRPC connection: it reads the server's services
+  again after they change, and open scripts that use the connection get the new classes at once.
+  The command-line runner does the same with `--refresh-connections`.
+
+### Changed
+
+- gRPC connection schemas and IntelliSense context updates no longer block the editor while they
+  are being prepared; stale completion and analysis results are discarded when newer code or
+  connection context is available.
+
+### Fixed
+
+- Saving the Secret Store while another RunPad window saves it, or while a running script reads it,
+  now waits a moment and tries again; if the store stays in use, the window says so instead of asking
+  to check access and disk space.
+- A Secret Store file that is a symbolic link stays one when saved: the file it points to is updated.
+- A temporary file left by a Secret Store save that was interrupted is removed by the next save.
+- In Tools → Connections, editing a connection while Test Connection is still waiting no longer
+  shows the answer for the old values afterwards, nor reads a gRPC server's services for values that
+  were never tested.
+- Saving a script keeps front matter settings RunPad doesn't know intact in more cases: a block of
+  text marked to keep its final empty lines (`|+`) keeps them, and a YAML alias (`*name`) of another
+  setting is saved as the value it stood for instead of a dangling reference. A script whose
+  settings use such an alias, including in its connections, now opens instead of being reported as
+  invalid.
+- The startup notice about drafts kept unchanged no longer says their data couldn't be read when it
+  could, and only the session that had taken them over can't be checked now; it says so instead.
+
+## [0.9.3] — 2026-10-23
+
+### Changed
+
+- Long lines in results now wrap at the window width, including long unbroken text, with a new
+  "Wrap long lines in results" setting under Editor preferences; the existing editor setting is
+  renamed "Wrap long lines in code editor" and only affects the code.
+- `.Dump()` no longer cuts a string off after 500 characters: the whole value is shown.
+- Adding a connection in Dependencies that needs new NuGet packages now asks for confirmation,
+  listing the packages and versions, before writing them to the script.
+
+### Fixed
+
+- Closing the Connections or Secret Store window with Cancel, Escape or the close button now asks
+  whether to save unsaved edits instead of silently discarding them.
+- The cached description RunPad reads for a gRPC connection (its services) no longer accumulates
+  forever on disk for connections removed, renamed or changed: unused files older than 30 days are
+  reclaimed at startup.
+- A Program script whose first lines are `using` directives — including the one RunPad writes when
+  switching a script from Statements to Program — now compiles instead of failing to build.
+- A Program script whose entry point is a `static Main` no longer shows a spurious "entry point of
+  the program is global code" warning in build results or the output panel. RunPad's generated
+  type name `__RunPadProgram` is now reserved in C# scripts; the synthetic method name
+  `__RunPadRun` is reserved in Program scripts. Declaring either produces a clear diagnostic.
+- Build errors and warnings now point at the matching line of your code. They used to be off by
+  the lines RunPad adds around it (front-matter namespaces, the generated Program wrapper); a
+  message about RunPad's generated text now has no line number instead of a wrong one.
+
 ## [0.9.2] — 2026-10-21
 
 ### Added
@@ -305,6 +443,9 @@ give a script a typed client for each, and keep passwords and tokens out of scri
   Results panel are now thin lines; they are dragged in the same place as before.
 
 ### Fixed
+
+- Closing a running script no longer faults while cancellation finishes; unexpected run and stop
+  errors are logged and reported without escaping the editor action.
 
 - IntelliSense checks framework APIs against the script's selected .NET target when its reference
   pack is available, including when a script without packages is first opened, before any run.
@@ -613,3 +754,8 @@ better choice. RunPad began as DotPad two days after the last commit to the fork
 [0.9.1]: https://github.com/campforge/run-pad/releases/tag/v0.9.1
 
 [0.9.2]: https://github.com/campforge/run-pad/releases/tag/v0.9.2
+
+[0.9.3]: https://github.com/campforge/run-pad/releases/tag/v0.9.3
+[0.9.4]: https://github.com/campforge/run-pad/releases/tag/v0.9.4
+
+[0.9.5]: https://github.com/campforge/run-pad/releases/tag/v0.9.5

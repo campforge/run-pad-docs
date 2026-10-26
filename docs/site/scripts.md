@@ -315,10 +315,11 @@ The [examples](examples.md) include one script of each C# kind.
 
 ## Where your scripts live
 
-RunPad shows the `.rpad` files and folders inside **RunPad Queries** in your Documents
-folder (created on first start) as the file tree on the **Queries** tab of the panel on the
-left. The tree refreshes when files change on disk. The panel's **Examples** tab lists the
-sample scripts that come with RunPad; see [Examples](examples.md). Right-click it to create C# or Visual Basic files and folders,
+RunPad shows the `.rpad` files and folders inside **RunPad Queries** in your Documents folder
+(created on first start) in the **Scripts** section of the panel on the left. The tree refreshes
+when files change on disk. The **Samples** section lists the sample scripts that come with RunPad,
+grouped by folder; see [Examples](examples.md). Right-click the Scripts tree to create C# or Visual
+Basic files and folders,
 rename, delete, or *Show in File Manager*; drag items to move them.
 
 To open a script from another folder, use [File → Open...](#opening-scripts). `.linq` query files can be imported with **File → Import .linq Query...**; see
