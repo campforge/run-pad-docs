@@ -72,8 +72,9 @@ runpad --kind program --sdk 10 report.rpad -- "April totals"
 runpad --compile-only report.rpad
 ```
 
-Arguments following the script replace its front-matter `args:` list. With no script
-arguments, the list in the file is used; a bare `--` after the script explicitly selects
+Arguments following the script replace the values resolved from its declarations and selected
+preset. With no script arguments, the selected preset and declaration defaults are used as
+`--name value` pairs; a bare `--` after the script explicitly selects
 an empty list. Use your shell's normal quoting for spaces or quotes inside one argument.
 
 Recognized runner options are accepted before **or after** the script path. Put `--`

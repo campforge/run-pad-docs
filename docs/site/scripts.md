@@ -103,7 +103,9 @@ All fields are optional. A missing or empty value falls back to the default.
 | `packages` | none | NuGet packages as `PackageId: version` pairs. |
 | `references` | none | Paths to `.dll` files. See [Packages and references](dependencies.md). |
 | `namespaces` | none | Namespaces imported for the whole script, like global `using` (C#) or project-level `Imports` (VB). |
-| `args` | empty list | String arguments passed to the script when running or debugging. CLI arguments can override this list for one invocation. |
+| `arguments` | none | Named arguments with types and defaults. Available as typed `Arguments` properties. |
+| `argumentSets` | none | Named presets of values for declared arguments. |
+| `selectedArgumentSet` | defaults | Preset used when running or debugging. The toolbar changes this selection. |
 | `connections` | none | The script's connections: each a `name`, a `driver` (such as `http`, `grpc` or `sqlite`) and its `params`. Add them in the Dependencies window; see [Connections in a script](results.md#connections-in-a-script). |
 | `allowUnsafe` | `false` | C# only: `true` compiles the script with unsafe code allowed. Written only when on. See [Compilation](dependencies.md#compilation). |
 
@@ -126,9 +128,13 @@ references:
 namespaces:
   - System.Text.Json
   - System.Globalization
-args:
-  - "April totals"
-  - "2026"
+arguments:
+  - name: title
+    type: string
+    default: "April totals"
+  - name: year
+    type: int
+    default: "2026"
 ---
 ```
 
@@ -174,19 +180,52 @@ In Visual Basic, use `#If RUNPAD Then` with `#Else` and `#End If`.
 
 ## Script arguments
 
-Set `args:` in the YAML header with another text editor. There is no dedicated arguments
-field in Preferences or the toolbar. Run and Debug pass the strings to the script:
+Use the **Arguments** page in the script's Dependencies window to declare named arguments,
+their types, defaults and named sets of values. Select a set from the script toolbar.
+Run and Debug use the same selected values. For example:
 
 ```yaml
-args:
-  - "April totals"
-  - "2026"
-  - ""
+arguments:
+  - name: value
+    type: int
+  - name: env
+    type: string
+    default: dev
+argumentSets:
+  production:
+    value: "3"
+    env: prod
+selectedArgumentSet: production
 ```
 
+Read these as `Arguments.Value` and `Arguments.Env` in C# or Visual Basic. Property names
+start with a capital letter; metadata names keep their original spelling. C# completion shows
+the declared properties and their types. A value-type argument without a default is nullable
+in every set, so `Arguments.Value` is an `int?` in this example. Its value is `3`, or `null`
+when no value is supplied. Invalid values prevent the run and identify the argument.
+
+An `enum` argument generates a real enum named `Arguments` followed by its property name.
+For the `env` declaration above, `Arguments.Env` has type `ArgumentsEnv` and the metadata labels
+`dev` and `prod` become `ArgumentsEnv.Dev` and `ArgumentsEnv.Prod`:
+
+```csharp
+ArgumentsEnv environment = Arguments.Env;
+(environment == ArgumentsEnv.Prod).Dump();
+```
+
+Visual Basic uses the same names and types (`Dim environment As ArgumentsEnv = Arguments.Env`).
+Without a default, an enum argument is nullable (`ArgumentsEnv?`). C# completion offers the enum
+type and its members. Metadata keeps the original labels; names with separators such as `prod-us`
+become enum members such as `ProdUs`. Labels that generate conflicting identifiers are reported
+as metadata errors.
+
+The `args` array remains available and contains the generated `--name value` pairs.
+With the production preset above it contains `--value`, `3`, `--env`, `prod`.
+The YAML header has no raw `args:` field; use declarations, defaults and presets.
+
 C# top-level Statements and a Program's `Main(string[] args)` receive these values;
-Visual Basic Statements and `Sub Main(args As String())` receive them too. Each list
-item is one argument: spaces do not split it, and an empty string stays an argument.
+Visual Basic Statements and `Sub Main(args As String())` receive them too. Each name and value
+is a separate array item: spaces do not split a value, and an empty string stays an argument.
 The [command-line runner](cli.md#script-arguments-and-options) can replace the list
 without changing the file. Close or save your RunPad edits before changing the header
 in another program; external edits are protected as described below.
@@ -252,7 +291,7 @@ both:
 | `Main` | Notes |
 | --- | --- |
 | `void Main()`, `async Task Main()` | The usual form. |
-| `Main(string[] args)` | Receives the file's `args:` values, or the [CLI override](cli.md#script-arguments-and-options). |
+| `Main(string[] args)` | Receives the selected arguments as `--name value` pairs, or the [CLI override](cli.md#script-arguments-and-options). |
 | `Main(CancellationToken ct)`, `Main(string[] args, CancellationToken ct)` | `ct` is cancelled when you press **Stop**; see [Stopping a script](results.md#stopping-a-script). |
 | `int Main(…)`, `async Task<int> Main(…)` | The returned number is the exit code; anything but 0 shows as *Exit code N*. |
 
