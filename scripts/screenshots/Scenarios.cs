@@ -69,8 +69,10 @@ public sealed class Ctx : IAsyncDisposable
         return path;
     }
 
+    // The bundled samples sit in folders (Examples/getting-started/quick-start.rpad, …); file names are unique.
     public string AddExample(string file, string? as_ = null)
-        => AddScript(as_ ?? file, File.ReadAllText(Path.Combine(Program.ExamplesDir, file)));
+        => AddScript(as_ ?? file, File.ReadAllText(
+            Directory.EnumerateFiles(Program.ExamplesDir, file, SearchOption.AllDirectories).First()));
 
     public async Task<(EditorTabItemViewModel Tab, EditorsTabItemControl Ctrl)> Open(string path)
     {
