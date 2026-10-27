@@ -46,18 +46,23 @@ A breakpoint on a blank line, a comment or a line with only a brace usually ends
 unverified, because the compiler generated no code there. Move it to a line with a
 statement.
 
-### Conditions, hit counts and disabling
+### Conditions and disabling
 
-Right-click the gutter on a line to open the breakpoint dialog. It works for a line with
-or without a breakpoint:
+Right-click the gutter on a line (or Control-click on macOS) to open the breakpoint condition dialog
+centered on the window. It works for a line with or without a breakpoint:
 
 - **Enabled** — clear it to keep the breakpoint in the gutter without stopping there.
   Disabled breakpoints are not sent to the debugger.
-- **Break when this condition is true** — an expression evaluated in the script's
+- **Condition** — an expression evaluated in the script's
   context, such as `i == 3`.
-- **Break only when the hit count matches** — for example `= 5`, `>= 3` or `% 2`.
 
-The condition and hit count are evaluated by netcoredbg.
+The condition stays on one line. **Done** applies the edit.
+Press Enter to apply or Escape to cancel. Changes also update an active debug session.
+C# conditions are checked without executing them and must resolve to Boolean at the breakpoint.
+Errors disable Done. Scoped name and member suggestions support Down + Enter or a double-click.
+Escape cancels the edit; clicking outside the modal dialog leaves it open.
+Runtime evaluation is still performed by netcoredbg; its expression support can differ
+from the C# compiler.
 
 ## When execution is paused
 

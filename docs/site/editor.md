@@ -35,6 +35,32 @@ The new full run uses the usual save/conflict checks; cancelling that save preve
 
 Change or disable both shortcuts in **Preferences → Keyboard**.
 
+## Extension methods in C# Program scripts
+
+!!! note "Unreleased"
+    This support is not included in RunPad 0.8.0.
+
+In **Program** mode, put extension methods in a top-level static class alongside `Main`:
+
+```csharp
+void Main()
+{
+    Console.WriteLine(21.Twice());
+}
+
+static class NumberExtensions
+{
+    public static int Twice(this int value) => value * 2;
+}
+```
+
+The same applies to generic extension methods and custom `GetAwaiter` methods used by
+an asynchronous `Main`. With a .NET 10 target, C# 14 extension blocks are supported too.
+Keep extension classes at script level, rather than nesting them inside another class.
+Other helper types remain nested in the query. If an extension class uses a helper type,
+make that type `internal` or `public` so it is accessible from the extension class.
+Methods and fields of the query remain members of the query.
+
 ## Recovering unsaved tabs
 
 **Preferences → Interface → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
@@ -218,3 +244,11 @@ syntax highlighting, brace matching and keyword-based folding. There is no compl
 signature help, quick info, live diagnostics, quick fixes, semantic highlighting, inlay
 hints, snippets, rename, navigation or formatting for Visual Basic yet. Compiler errors
 appear in the Results tab when you run the script.
+
+## Tabs and spaces
+
+In **Preferences → Editor → Editing**, enable **Use tab characters for indentation**
+to insert tabs, or leave it cleared to insert spaces. **Indent / tab width** controls
+both the indentation size and the displayed width of a tab (1–16 columns, default 4).
+The settings apply immediately to open editors, automatic indentation and C# formatting.
+Changing them does not rewrite existing text; format the document to normalize indentation.

@@ -9,12 +9,12 @@ These scripts are small and safe: they use only in-memory data, do not read or w
 files, do not use the network and do not need NuGet packages. Each one is a complete
 `.rpad` file with a short explanation in its Markdown.
 
-**To use one:** open the **Examples** tab at the top of the panel on the left and click the
-example. It opens as a new, unsaved script — nothing runs until you press **Run**, and nothing
-is written until you save it, which asks where to put the copy. The examples on this page
-come with RunPad; you can also download one (right-click the link and save it if your
-browser opens the file as text) and open it with **File → Open...**, or put it in the
-`RunPad Queries` folder in your Documents folder and click it on the **Queries** tab.
+**To use one:** open the **Samples** section in the panel on the left and click a sample in its
+folder. It opens as a new, unsaved script — nothing runs until you press **Run**, and nothing is
+written until you save it, which asks where to put the copy. The examples on this page come with
+RunPad; you can also download one (right-click the link and save it if your browser opens the file
+as text) and open it with **File → Open...**, or put it in the `RunPad Queries` folder in your
+Documents folder and open it from the **Scripts** section.
 
 Numbers in the output are formatted with your system's culture, so you may see `49,90`
 instead of `49.90`.

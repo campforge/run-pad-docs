@@ -177,6 +177,24 @@ readable only by you, like `~/.pgpass`. A script asking for a secret that isn't 
 reads the same store. To use another file, for example on a build server, set the
 `RUNPAD_SECRETS_FILE` environment variable to its path.
 
+## Sidebar navigation
+
+The workspace sidebar is organized into three collapsible sections:
+
+- **Connections** — saved connections and their user-defined groups;
+- **Scripts** — the files in the current workspace;
+- **Samples** — bundled examples grouped by folder.
+
+The three sections use the same tree rows, icons, selection behavior and keyboard navigation.
+Connections can be reordered or moved between groups with the context menu, keyboard commands or
+drag and drop. A connection can also be dragged onto the editor, or added with **Add to Script**.
+The sidebar remembers which sections, connection groups and sample folders were expanded between
+launches. Grouping is local navigation state and does not change a script's `connections:` metadata.
+
+Connection rows show whether a connection is used by the active script and explain missing drivers,
+secrets, environment variables or unavailable/stale contracts. Use **Refresh** on a connection, or
+**Refresh All**, to re-check its driver and contract.
+
 ## Connections
 
 **Tools → Connections** keeps your own connections in one window: HTTP APIs, gRPC servers and
@@ -303,6 +321,104 @@ Connections work in C# scripts for now.
 `Util.Cache` and the `Save…` methods write files under the `UserData` folder inside
 RunPad's data folder (see [Where RunPad stores data](reference.md#where-runpad-stores-data)).
 Cached entries stay there until they expire or you delete the files.
+
+## Secret Store
+
+!!! note "Unreleased"
+    Secret Store is available in development builds.
+
+Open **Tools → Secret Store** to add named passwords, tokens or keys. Values stay hidden
+until you tick **Show**. **Save** writes your edits; **Cancel** leaves the file unchanged.
+A script reads a saved value without embedding it in its source:
+
+```csharp
+var token = Util.GetSecret("api-token");
+```
+
+Names are case-insensitive. A missing name raises `KeyNotFoundException` with the store's
+location. On Windows values are encrypted for your Windows account; on macOS and Linux
+they are plain text in an owner-only file. Expand **Storage and usage** to see its location.
+`RUNPAD_SECRETS_FILE` selects a different store for the application and scripts; use an
+absolute path.
+
+If writing fails, the window stays open with your edits and an error message; fix the
+file access or disk problem and retry **Save**. If another window changed the store since
+you opened it, saving refuses to overwrite that newer file. Both the newer file and your
+unsaved edits are preserved. Reopen the store with its latest contents and reapply your
+edits before saving.
+
+## Connections
+
+!!! note "Unreleased"
+    Connections are available in development builds, for C# scripts. The examples below use HTTP.
+
+Open **Tools → Connections** to keep named HTTP connections with a base address, headers
+and an optional timeout. Use `${secret:api-token}` in a header value to read a token from
+Secret Store, or `${env:API_HOST}` for an environment variable. **Test Connection** sends
+an HTTP GET with the resolved settings. Secret values are not copied into script metadata.
+
+In **Dependencies → Connections**, add a saved connection to the script. Its settings are
+copied into the script; later changes to your saved list do not change that copy. Required
+libraries become ordinary script packages. **Import** copies a script connection into your
+saved list immediately. Replacing a different connection with the same name requires
+**Replace Saved Connection**; **Keep Existing** cancels the replacement. These imports are
+already saved, so **Cancel** in Dependencies does not undo them.
+
+The editor and compiler expose a client such as `Connections.BillingApi` for a connection
+named `billing-api`. For HTTP this is an `HttpClient` with the address, headers and timeout
+already set:
+
+```csharp
+var text = await Connections.BillingApi.GetStringAsync("invoices");
+text.Dump();
+```
+
+Header names must be unique, ignoring letter case and surrounding spaces. Duplicates stay
+editable and block saving and testing until corrected. A failed save keeps the window open
+with your edits for retry. If another window or an import changed your saved list, a stale
+window refuses to overwrite it: reopen the list and reapply your edits to its latest contents.
+The code name `Connections` is reserved; choose another connection name.
+
+### gRPC connections
+
+Choose **gRPC** in **Tools → Connections**, enter the server address and any required metadata,
+then use **Test Connection** to read its services. The server must support gRPC server reflection.
+Add the connection to the C# script through **Dependencies → Connections**. Each service has a
+client, for example:
+
+```csharp
+var response = await Connections.Inventory.Stock.GetItemAsync(
+    new Inventory.V1.ItemRequest { Sku = "A1" });
+response.Dump();
+```
+
+The service and message names depend on the server's contract. After the first successful build,
+ordinary script edits reuse a compiled contract in that script's build cache. Changes to the schema,
+SDK target or dependency assemblies require a new contract build. Completion is also available
+before the first run. If the server's contract changes, read its description again with
+**Test Connection** before rebuilding the script.
+
+Scripts with `partial` extensions of generated types retain source-based compilation so the
+extensions and generated declarations remain in the same assembly.
+
+### SQLite connections
+
+In a development build, choose **SQLite** under **Tools → Connections → Add** and enter an
+existing database file. A relative path is resolved from the saved script's folder. Add the
+connection on **Dependencies → Connections** to get an EF Core context and the required package
+in a C# script targeting .NET 10 or later:
+
+```csharp
+using var shop = Connections.Shop;
+shop.Customers.Where(c => c.City == "Oslo").ToList().Dump();
+```
+
+Tables with a non-null primary key support changes through `SaveChanges()`. Views, tables without
+a primary key, and tables whose primary key permits `NULL` are available for reading without
+tracking. The connection's **Read only** setting also prevents writes to the file.
+
+SQLite `VIRTUAL` and `STORED` computed columns appear on row objects. The database calculates them;
+EF Core refreshes their values after inserts and updates instead of writing assigned values.
 
 ## Stopping a script
 

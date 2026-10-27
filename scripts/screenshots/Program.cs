@@ -161,6 +161,11 @@ public static class Program
             drivers.Register(new RunPad.Connectors.Sqlite.SqliteConnectionDriver());
             return drivers;
         });
+        // The sidebar's Connections section, over the same list.
+        services.AddSingleton(sp => new RunPad.UserControls.Models.ConnectionNavigationViewModel(
+            sp.GetRequiredService<RunPad.Services.Connections.IConnectionStore>(),
+            sp.GetRequiredService<RunPad.Contracts.Connections.ConnectionDriverRegistry>(),
+            secrets: sp.GetRequiredService<RunPad.Services.Secrets.ISecretStore>()));
         services.AddSingleton<Func<DependenciesWindow>>(sp => () => sp.GetRequiredService<DependenciesWindow>());
         services.AddSingleton<Func<PreferencesWindow>>(sp => () => sp.GetRequiredService<PreferencesWindow>());
         return services.BuildServiceProvider();

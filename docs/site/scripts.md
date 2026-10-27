@@ -156,6 +156,22 @@ Visual Basic scripts import the same list. Add anything else to `namespaces`, or
 C# scripts compile with nullable reference types enabled and the default C# language
 version of the selected SDK (for example C# 14 for .NET 10).
 
+## Conditional code for RunPad
+
+RunPad defines the `RUNPAD` preprocessor symbol for C# and Visual Basic scripts,
+including scripts run through the CLI. Use it to keep RunPad-specific code in a
+script that is also used by another runner:
+
+```csharp
+#if RUNPAD
+Console.WriteLine("Running in RunPad");
+#else
+Console.WriteLine("Running elsewhere");
+#endif
+```
+
+In Visual Basic, use `#If RUNPAD Then` with `#Else` and `#End If`.
+
 ## Script arguments
 
 Set `args:` in the YAML header with another text editor. There is no dedicated arguments
@@ -299,10 +315,11 @@ The [examples](examples.md) include one script of each C# kind.
 
 ## Where your scripts live
 
-RunPad shows the `.rpad` files and folders inside **RunPad Queries** in your Documents
-folder (created on first start) as the file tree on the **Queries** tab of the panel on the
-left. The tree refreshes when files change on disk. The panel's **Examples** tab lists the
-sample scripts that come with RunPad; see [Examples](examples.md). Right-click it to create C# or Visual Basic files and folders,
+RunPad shows the `.rpad` files and folders inside **RunPad Queries** in your Documents folder
+(created on first start) in the **Scripts** section of the panel on the left. The tree refreshes
+when files change on disk. The **Samples** section lists the sample scripts that come with RunPad,
+grouped by folder; see [Examples](examples.md). Right-click the Scripts tree to create C# or Visual
+Basic files and folders,
 rename, delete, or *Show in File Manager*; drag items to move them.
 
 To open a script from another folder, use [File → Open...](#opening-scripts). `.linq` query files can be imported with **File → Import .linq Query...**; see

@@ -30,7 +30,9 @@ public sealed class Ctx : IAsyncDisposable
     public required EditorTabsControl Tabs;
     public required string Root;
 
-    public static async Task<Ctx> Create(double width = 1100, double height = 700, Action<MemoryPrefs>? configure = null)
+    // sampleConnections: false for a scenario that writes its own connection list.
+    public static async Task<Ctx> Create(double width = 1100, double height = 700, Action<MemoryPrefs>? configure = null,
+        bool sampleConnections = true)
     {
         var temp = Directory.CreateTempSubdirectory("runpad-shots").FullName;
         var root = Path.Combine(temp, "RunPad Queries");
@@ -46,6 +48,7 @@ public sealed class Ctx : IAsyncDisposable
             : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RunPad", "netcoredbg", "netcoredbg", "netcoredbg.exe");
         prefs.Layout.SidebarWidth = 220;
         configure?.Invoke(prefs);
+        if (sampleConnections) SeedConnections(temp);
         var sp = CreateServices(prefs, root);
         sp.GetRequiredService<IThemeService>();
         InterfaceScaling.Attach(ViewScale.For(prefs));
@@ -59,6 +62,26 @@ public sealed class Ctx : IAsyncDisposable
             Prefs = prefs, Services = sp, Window = window, Vm = (MainWindowViewModel)window.DataContext!,
             Tabs = sp.GetRequiredService<EditorTabsControl>(), Root = root,
         };
+    }
+
+    // A small list for the sidebar's Connections section: one group and one connection outside it.
+    // The addresses are placeholders; no scenario connects to them.
+    private static void SeedConnections(string temp)
+    {
+        static RpadConnection Http(string name, string address) => new()
+        {
+            Name = name,
+            Driver = "http",
+            Params = new(StringComparer.Ordinal) { ["baseAddress"] = RpadValue.Of(address) },
+        };
+        var path = Path.Combine(temp, "connections.json");
+        new FileConnectionStore(path).Save([Http("catalog", "https://catalog.example.com/"),
+            Http("orders", "https://orders.example.com/"), Http("weather", "https://api.weather.example.com/")], null);
+        var groups = new ConnectionGroupingModel();
+        var shop = groups.Create("Shop");
+        groups.MoveConnection("catalog", shop.Id);
+        groups.MoveConnection("orders", shop.Id);
+        new FileConnectionGroupingStore(path).Save(groups.Snapshot());
     }
 
     public string AddScript(string name, string content)
@@ -335,7 +358,7 @@ public static class Scenarios
 
     private static async Task Connections()
     {
-        await using var c = await Ctx.Create(1100, 700);
+        await using var c = await Ctx.Create(1100, 700, sampleConnections: false);
         SampleSecrets(c.Root, out var secrets);
         var store = new FileConnectionStore(Path.GetFullPath(Path.Combine(c.Root, "..", "connections.json")));
         store.Save(
@@ -402,7 +425,7 @@ public static class Scenarios
     // The Dependencies window's Connections tab, then the editor completing the connection's client.
     private static async Task ScriptConnections()
     {
-        await using var c = await Ctx.Create(1100, 640, p => p.CSharp.InlayHintsEnabled = false);
+        await using var c = await Ctx.Create(1100, 640, p => p.CSharp.InlayHintsEnabled = false, sampleConnections: false);
         c.Services.GetRequiredService<IConnectionStore>().Save(
         [
             new RpadConnection
