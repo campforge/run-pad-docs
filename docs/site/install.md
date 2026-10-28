@@ -62,7 +62,9 @@ contains a `Read Me First.txt` with the same steps.
 
 ## First run: .NET SDK and debugger
 
-On slower launches, a startup screen stays visible while RunPad checks the installed tools.
+On slower launches, a startup screen stays visible while RunPad checks the installed tools,
+and then while it reopens the scripts from your last session (*Opening scripts…*), so the
+window appears with all its tabs.
 If startup fails, it shows the log location and a **Close** button.
 
 When RunPad starts, it checks two prerequisites:

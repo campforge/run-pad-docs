@@ -28,7 +28,7 @@ The **Packages** tab has three columns:
 - **Left** — the packages already in this script, followed by the packages in your local
   NuGet cache. Type in *Search local package cache* to filter them.
 - **Middle** — online search. Type in *Search online*; the search runs after a short
-  pause, or press ++enter++ to search at once. Use the arrows to page through results,
+  pause, or press ++enter++ to search at once. Use the arrow buttons to page through results,
   and pick a source in the drop-down: *All sources*, one enabled source, or
   *(configure sources...)*.
 - **Right** — *Include Prerelease*, and details of the selected package with a
@@ -40,8 +40,9 @@ Select a package and a version, then:
 - **Update** changes the version of a package the script already uses;
 - **Remove** takes it out of the script.
 
-The rows in the lists also have **Add**, **Update** and **Remove** buttons for the
-common cases. A mark next to a package shows that it is already in this script.
+The rows in the lists also have small buttons for the common cases: **+** adds the
+package, the circular arrows update it and the bin removes it; each one names its action in
+its tooltip. A mark next to a package shows that it is already in this script.
 
 In the file, packages are stored as `PackageId: version` pairs:
 
@@ -74,8 +75,8 @@ NuGet settings. Your global NuGet settings are not changed. See
 ## Assembly references
 
 The **References** tab lists `.dll` files the script references. Type a path in
-*Path to a .dll* or use **Browse…**, then click **Add**. **Remove** takes a reference
-out.
+*Path to a .dll* or use **Browse…**, then click the **+** button. The bin button beside a
+reference takes it out.
 
 ```yaml
 references:

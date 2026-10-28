@@ -79,6 +79,12 @@ The line about to run is highlighted and marked with an arrow in the gutter. The
 Threads and Call Stack are permanent tables on the left, separated by a draggable divider.
 Locals and Watch share the right-hand pane.
 
+While execution is paused, rest the pointer on a variable in the editor to see its value. Over
+`c` in `c.Dump()` the tip shows `c`; over `Name` in `order.Customer.Name` it shows the whole
+`order.Customer.Name`. The tip is a tree like **Locals**: each member shows its name, type and
+value, and the arrow beside a member opens it under its parent. The tip stays open while you move
+the pointer into it, and closes when the pointer leaves both the variable and the tip.
+
 ### Stepping
 
 | Action | Default key | Toolbar |
