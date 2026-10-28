@@ -45,6 +45,7 @@ public sealed class MemoryPrefs : IPreferencesService
     public LayoutSettings Layout { get; } = new();
     public SessionSettings Session { get; } = new();
     public ExperimentalSettings Experimental { get; } = new();
+    public Dictionary<string, bool> System { get; } = [];
     public void Save() => Changed?.Invoke();
     public event Action? Changed;
 }
