@@ -119,11 +119,17 @@ Completion (C#) opens automatically while you type:
 - after `new ` for types you can construct, and after `override ` for members you can
   override (accepting one inserts a stub with a generated body);
 - after `<` for generic type arguments;
+- where an argument starts in a call, with `name:` for each parameter you can still pass by
+  name;
 - while you type an identifier or keyword.
 
 Press ++ctrl+space++ to open it yourself. The list is filtered by context (no member
 suggestions inside strings or comments, for example), members declared in your own
 script are shown in bold, and overloads are collapsed into one entry.
+
+**Matching**: the list matches the start of a name, then any part of it, then the starts of
+its words: `ArgEnv` or `ae` finds `ArgumentsEnvironment`, `SBu` finds `StringBuilder`. When
+two items match equally well, `Dump` wins over other members.
 
 !!! tip "Control-Space on macOS"
     macOS may use Control-Space to switch input sources. If the list does not open,
@@ -131,8 +137,10 @@ script are shown in bold, and overloads are collapsed into one entry.
     **System Settings → Keyboard → Keyboard Shortcuts**.
 
 **Automatic imports**: the list also offers types from namespaces that are not imported
-yet, including types from the script's NuGet packages. Accepting one adds its namespace
-to the `namespaces:` list in the front matter instead of inserting a `using` line.
+yet: from the script's NuGet packages and its own assemblies as soon as you type, and from
+.NET itself after three letters. Each shows its namespace, so when two libraries have a
+type of the same name you pick the one you mean. Accepting one adds its namespace to the
+`namespaces:` list in the front matter instead of inserting a `using` line.
 
 **Commit characters**: with **Preferences → Editor → Accept completion when typing
 punctuation** turned on (the default), typing punctuation such as `.`, `(` or `;` accepts
@@ -158,7 +166,10 @@ continue typing.
 
 - **Signature help** (C#) opens when you type `(` or `,` in a call, or with
   ++ctrl+shift+space++. It picks the overload that matches the arguments typed so far,
-  highlights the current parameter and shows the XML documentation summary.
+  highlights the current parameter and shows the XML documentation summary. Inside a
+  nested call such as `Send(new Message(` it shows the inner call, and the outer one again
+  once the inner `)` is typed; a named argument such as `timeout:` highlights that parameter.
+  A long signature lists one parameter per line instead of running off the editor.
 - **Quick info** (C#): rest the mouse pointer over a symbol for a moment to see its
   signature and documentation.
 - **Inlay hints** (C#) show the inferred type next to `var` declarations and `foreach`
