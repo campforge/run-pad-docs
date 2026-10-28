@@ -319,9 +319,6 @@ Cached entries stay there until they expire or you delete the files.
 
 ## Secret Store
 
-!!! note "Unreleased"
-    Secret Store is available in development builds.
-
 Open **Tools → Secret Store** to add named passwords, tokens or keys. Values stay hidden
 until you tick **Show**. **Save** writes your edits; **Cancel** leaves the file unchanged.
 A script reads a saved value without embedding it in its source:
@@ -343,9 +340,6 @@ unsaved edits are preserved. Reopen the store with its latest contents and reapp
 edits before saving.
 
 ## Connections
-
-!!! note "Unreleased"
-    Connections are available in development builds, for C# scripts. The examples below use HTTP.
 
 Open **Tools → Connections** to keep named HTTP connections with a base address, headers
 and an optional timeout. Use `${secret:api-token}` in a header value to read a token from

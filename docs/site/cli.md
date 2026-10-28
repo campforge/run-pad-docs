@@ -145,12 +145,11 @@ RunPad converts `.linq` query files to `.rpad` scripts.
 | `<Reference>` (or its `Relative` attribute) | `references:` entry |
 | The code after `</Query>` | The run block, under a heading with the file name |
 
-!!! note "Unreleased: C# namespace imports"
-    C# `.linq` imports now write LINQPad's standard namespace profile into the converted
-    file's `namespaces`, together with explicit `<Namespace>` entries, without exact duplicates.
-    This includes `System.Text`, `System.Data` and `System.Xml.Linq`. These imports are editable
-    script metadata used by both compilation and the editor. Existing `.rpad` files, new ordinary
-    scripts, global defaults and Visual Basic imports are unchanged.
+C# `.linq` imports write LINQPad's standard namespace profile into the converted file's
+`namespaces`, together with explicit `<Namespace>` entries, without exact duplicates. This includes
+`System.Text`, `System.Data` and `System.Xml.Linq`. These imports are editable script metadata used
+by both compilation and the editor. Existing `.rpad` files, new ordinary scripts, global defaults
+and Visual Basic imports are unchanged.
 
     Custom defaults configured only on the original LINQPad machine are not present in the
     `.linq` header and cannot be inferred; add any missing custom imports to the converted file.
@@ -180,7 +179,7 @@ prices
     .Dump("Formatted prices");
 ```
 
-`runpad convert sample-query.linq` produces (with the unreleased import profile):
+`runpad convert sample-query.linq` produces (with the LINQPad-compatible import profile):
 
 ````markdown
 ---
