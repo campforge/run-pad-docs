@@ -104,7 +104,7 @@ the ++fn++ key depending on your keyboard settings.
 
 ### Breaking on exceptions
 
-Open the **settings gear** at the right of the Results/Debugger/IL header:
+Open the **Output settings** gear at the right of the Results/Debugger/IL header:
 
 - **Break on unhandled exceptions** pauses when an exception is about to end the script.
 - **Break on all exceptions (including caught)** pauses whenever an exception is thrown,

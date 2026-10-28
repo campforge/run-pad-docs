@@ -63,7 +63,7 @@ Methods and fields of the query remain members of the query.
 
 ## Recovering unsaved tabs
 
-**Preferences → Interface → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
+**Preferences → Editor → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
 RunPad normally. It is enabled by default; restart RunPad after changing the setting.
 
 On the next launch, RunPad restores the tab order, active tab, unsaved text, caret and selection,
@@ -110,6 +110,8 @@ editor windows are not restored.
 - **Occurrences** (C#): when the caret is on a symbol, the other uses of that symbol in
   the script are highlighted.
 - **Brace matching** highlights the matching bracket. ++ctrl+bracket-right++ jumps to it.
+- **Toggle Line Comment** (++ctrl+slash++, ++cmd+slash++ on macOS) comments or uncomments every
+  line the selection touches, or the caret's line, with `//` in C# and `'` in Visual Basic.
 
 ## Completion
 
@@ -161,6 +163,11 @@ continue typing.
 | `prop`, `propg` | Auto-property with `set` or `private set` |
 | `class`, `interface`, `ctor` | Type and constructor skeletons |
 | `using`, `lock` | `using (var resource = …)` and `lock (…)` blocks |
+
+After `prop` or `propg` expands, ++tab++ moves from the type to the name; ++enter++ or
+++esc++ leaves the snippet. Typing `{` does not insert `}`: instead, pressing ++enter++ in a new,
+still empty class, struct, record or interface body offers a property template, which ++tab++
+inserts; any other key leaves the code as it is.
 
 ## Signature help and quick info
 

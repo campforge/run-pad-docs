@@ -70,11 +70,13 @@ runpad report.rpad "April totals" 2026
 runpad run report.rpad -- --kind --help
 runpad --kind program --sdk 10 report.rpad -- "April totals"
 runpad --compile-only report.rpad
+runpad --args-set smoke report.rpad
 ```
 
-Arguments following the script replace its front-matter `args:` list. With no script
-arguments, the list in the file is used; a bare `--` after the script explicitly selects
-an empty list. Use your shell's normal quoting for spaces or quotes inside one argument.
+With no arguments after the script, it gets its [declared arguments](dependencies.md#script-arguments)
+from the set the file selects, or their defaults; `--args-set NAME` picks another set.
+Arguments following the script replace them all, and a bare `--` after the script passes
+none. Use your shell's normal quoting for spaces or quotes inside one argument.
 
 Recognized runner options are accepted before **or after** the script path. Put `--`
 after the path to pass everything that follows literally to the script, including

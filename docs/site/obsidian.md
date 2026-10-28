@@ -66,7 +66,7 @@ To **update** the plugin, unpack the archive from the new release over the old
 
 - Obsidian keeps its settings in a `.obsidian` folder inside the vault. Leave it in place.
   RunPad 0.6.0 hides folders whose names start with a dot, including `.obsidian`, and their
-  contents from the **Queries** tree; it does not delete or change them on disk.
+  contents from the sidebar's **Scripts** section; it does not delete or change them on disk.
   In RunPad 0.5.0 those folders are still visible.
 - Avoid editing the same script in RunPad and Obsidian at the same time. RunPad rewrites the
   front matter when it saves (see [How RunPad edits the file](scripts.md#how-runpad-edits-the-file)),

@@ -136,6 +136,53 @@ and **Resolve All Usings** (++ctrl+alt+u++) all add namespaces here. The default
 namespaces listed in [Scripts and .rpad files](scripts.md#namespaces-imported-by-default)
 are always imported and do not need to be added.
 
+## Script arguments
+
+The **Arguments** tab declares the values a script takes and names sets of them.
+
+**Declared arguments** lists each argument with its *Name*, *Type* and default *Value*. Types are
+`string`, `int`, `bool`, `double`, `decimal`, `datetime`, `timespan`, `string[]` (one item per
+line) and `enum`. For an `enum`, type its values separated by commas, such as `dev, test, prod`,
+and pick the default from them. An empty value means the argument has no default. The **+**
+button adds an argument and the bin button beside a row removes it.
+
+The script reads them as typed properties of `Arguments`, named in PascalCase. An `enum`
+argument gets an enum type of its own: `environment` is `Arguments.Environment` of type
+`ArgumentsEnvironment`, with values such as `ArgumentsEnvironment.Prod`.
+
+```csharp
+if (Arguments.Verbose)
+    Console.WriteLine($"Deploying to {Arguments.Environment}, {Arguments.Count} times");
+```
+
+**Argument sets** are named groups of values, such as `smoke`, added with **+** and removed with
+**−**. A set gives a value for some arguments and leaves the others at their defaults.
+**Next run uses** picks the set for the next run, or **Defaults** for none. A run passes each
+argument as `--name value`, a list as `--name` once per item; an argument without a value in
+the set or a default is left out. On the command line, `--args-set NAME` picks a set, and
+arguments after the script replace them all (see [Command line](cli.md)).
+
+```yaml
+arguments:
+  - name: environment
+    type: enum
+    default: dev
+    values:
+      - dev
+      - test
+      - prod
+  - name: count
+    type: int
+    default: "1"
+  - name: verbose
+    type: bool
+argumentSets:
+  smoke:
+    environment: test
+    verbose: "true"
+selectedArgumentSet: smoke
+```
+
 ## Compilation
 
 The **Compilation** tab, shown for C# scripts only, has **Allow unsafe code**. It compiles the

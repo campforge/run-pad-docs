@@ -60,6 +60,21 @@ macOS offers that button only for a while after a blocked launch. Depending on y
 macOS version and security settings, it may not offer it at all. The disk image also
 contains a `Read Me First.txt` with the same steps.
 
+## Linux on Wayland
+
+In a Wayland session, RunPad runs natively on Wayland and draws its own window frames: rounded
+corners, a shadow, a border in the theme's colors and the same title bar in every window. The
+mouse pointer follows the desktop's cursor theme, and the interface uses the desktop's font.
+
+If a window misbehaves, turn off **Preferences → Interface → System → Native Wayland window** and
+restart RunPad: it then runs through XWayland with the system's frame. When RunPad can't start at
+all, start it with `RUNPAD_WAYLAND=0` instead.
+
+On Wayland only the desktop places windows. On KDE, **Remember window position and center
+dialogs** in the same place adds two window rules to KDE's settings (System Settings → Window
+Rules), so KDE puts the main window back where it was and opens dialogs in the middle of the
+screen. Turning it off removes them.
+
 ## First run: .NET SDK and debugger
 
 On slower launches, a startup screen stays visible while RunPad checks the installed tools,

@@ -24,6 +24,10 @@ Under the editor are three tabs:
 
 The button with the panel icon in the toolbar shows or hides the output area.
 
+The **Output settings** gear at the right of the tabs has *Wrap long lines in results*: output,
+errors and `.Dump()` text then wrap at the pane's width instead of scrolling sideways. The same
+menu has the debugger's [exception break options](debugging.md#breaking-on-exceptions).
+
 ## `.Dump()`
 
 `.Dump()` renders any value in the Results tab and returns the same value, so you can put

@@ -126,9 +126,6 @@ references:
 namespaces:
   - System.Text.Json
   - System.Globalization
-args:
-  - "April totals"
-  - "2026"
 ---
 ```
 
@@ -174,22 +171,17 @@ In Visual Basic, use `#If RUNPAD Then` with `#Else` and `#End If`.
 
 ## Script arguments
 
-Set `args:` in the YAML header with another text editor. There is no dedicated arguments
-field in Preferences or the toolbar. Run and Debug pass the strings to the script:
+Declare a script's arguments, their types and defaults, and named sets of values in the
+**Arguments** tab of the Dependencies window; see
+[Script arguments](dependencies.md#script-arguments). The script reads them as typed
+properties of `Arguments`, such as `Arguments.Count`.
 
-```yaml
-args:
-  - "April totals"
-  - "2026"
-  - ""
-```
-
-C# top-level Statements and a Program's `Main(string[] args)` receive these values;
-Visual Basic Statements and `Sub Main(args As String())` receive them too. Each list
-item is one argument: spaces do not split it, and an empty string stays an argument.
-The [command-line runner](cli.md#script-arguments-and-options) can replace the list
-without changing the file. Close or save your RunPad edits before changing the header
-in another program; external edits are protected as described below.
+Run and Debug also pass them on the command line of the script's process, as `--name value`
+for each argument that has a value (a list as `--name` once per item). C# top-level
+Statements and a Program's `Main(string[] args)` receive these strings in `args`;
+Visual Basic Statements and `Sub Main(args As String())` receive them too. The
+[command-line runner](cli.md#script-arguments-and-options) can pick another set or replace
+the arguments without changing the file.
 
 ## External file changes
 
@@ -252,7 +244,7 @@ both:
 | `Main` | Notes |
 | --- | --- |
 | `void Main()`, `async Task Main()` | The usual form. |
-| `Main(string[] args)` | Receives the file's `args:` values, or the [CLI override](cli.md#script-arguments-and-options). |
+| `Main(string[] args)` | Receives the run's [script arguments](#script-arguments) as `--name value`, or the [CLI override](cli.md#script-arguments-and-options). |
 | `Main(CancellationToken ct)`, `Main(string[] args, CancellationToken ct)` | `ct` is cancelled when you press **Stop**; see [Stopping a script](results.md#stopping-a-script). |
 | `int Main(…)`, `async Task<int> Main(…)` | The returned number is the exit code; anything but 0 shows as *Exit code N*. |
 
