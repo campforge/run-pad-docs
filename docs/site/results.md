@@ -136,7 +136,6 @@ A script can ask for input in the Results area while it runs:
 ```csharp
 var name = Util.ReadLine("Your name?");
 var age = Util.ReadLine<int>("Your age?");
-var secret = Util.GetPassword("Password?");   // typed text is masked on screen
 $"{name} is {age}".Dump();
 ```
 
