@@ -58,6 +58,15 @@ Other helper types remain nested in the query. If an extension class uses a help
 make that type `internal` or `public` so it is accessible from the extension class.
 Methods and fields of the query remain members of the query.
 
+## Many open tabs
+
+Invoklet keeps the editor of the three tabs you used last ready and unloads the others from memory, so
+a long list of tabs stays light. An unloaded tab still shows its name; selecting it opens its file again
+where you left it: the caret, the scroll position and the breakpoints are kept. A tab is never unloaded
+while you are on it, while its script runs or is being debugged, after a run that ended while you were on
+another tab (until you look at it), or while it has unsaved changes. The output of an unloaded tab's last
+run is not kept.
+
 ## Recovering unsaved tabs
 
 **Preferences → Interface → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
