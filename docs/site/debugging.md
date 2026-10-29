@@ -118,7 +118,7 @@ and shows a notice; it does not mean the step succeeded.
 
 ## Practice script
 
-Download [`debugging-loop.rpad`](examples/debugging-loop.rpad). Its code block is:
+Download [`debugging-loop.inv`](examples/debugging-loop.inv). Its code block is:
 
 ```csharp linenums="1"
 var total = 0;

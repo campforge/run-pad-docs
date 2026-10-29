@@ -154,11 +154,11 @@ public static class Scenarios
 
     private static void AddTree(Ctx c)
     {
-        c.AddExample("quick-start.rpad");
-        c.AddExample("live-output.rpad");
-        c.AddExample("debugging-loop.rpad");
-        c.AddExample("program-kind.rpad", Path.Combine("Samples", "program-kind.rpad"));
-        c.AddExample("expression-kind.rpad", Path.Combine("Samples", "expression-kind.rpad"));
+        c.AddExample("quick-start.inv");
+        c.AddExample("live-output.inv");
+        c.AddExample("debugging-loop.inv");
+        c.AddExample("program-kind.inv", Path.Combine("Samples", "program-kind.inv"));
+        c.AddExample("expression-kind.inv", Path.Combine("Samples", "expression-kind.inv"));
     }
 
     public static void ScrollResultsHome(Ctx c)
@@ -186,7 +186,7 @@ public static class Scenarios
     {
         await using var c = await Ctx.Create(1100, 720, p => p.Layout.DebugPanelHeight = 330);
         AddTree(c);
-        var path = c.AddExample("products-overview.rpad");
+        var path = c.AddExample("products-overview.inv");
         var (tab, ctrl) = await c.Open(path);
         await c.RunAndWait(tab);
         await Caret(ctrl, 10, 1);
@@ -230,7 +230,7 @@ public static class Scenarios
         // Inlay hints off: while ".Ta" is unfinished, the hint for counts would read "?".
         await using var c = await Ctx.Create(1100, 640, p => p.CSharp.InlayHintsEnabled = false);
         AddTree(c);
-        var (tab, ctrl) = await c.Open(c.AddScript("word-counts.rpad", EditorCode));
+        var (tab, ctrl) = await c.Open(c.AddScript("word-counts.inv", EditorCode));
         // Hide the output panel: this one is about the code.
         c.Tabs.ToggleOutputPanelActive();
         await Pump(3000);
@@ -251,7 +251,7 @@ public static class Scenarios
     {
         await using var c = await Ctx.Create(1100, 560);
         AddTree(c);
-        var (tab, ctrl) = await c.Open(c.AddScript("word-counts.rpad", EditorCode));
+        var (tab, ctrl) = await c.Open(c.AddScript("word-counts.inv", EditorCode));
         c.Tabs.ToggleOutputPanelActive();
         await Caret(ctrl, 4, 1);
         c.Window.KeyPress(Key.H, RawInputModifiers.Control, PhysicalKey.H, "h");
@@ -265,7 +265,7 @@ public static class Scenarios
     {
         await using var c = await Ctx.Create(1100, 640, p => p.CSharp.InlayHintsEnabled = false);
         AddTree(c);
-        var (tab, ctrl) = await c.Open(c.AddExample("analyzer-diagnostics.rpad"));
+        var (tab, ctrl) = await c.Open(c.AddExample("analyzer-diagnostics.inv"));
         c.Tabs.ToggleOutputPanelActive();
         await Pump(4000);
         // The caret on the unknown JsonSerializer, and its lightbulb menu open.
@@ -281,7 +281,7 @@ public static class Scenarios
     {
         await using var c = await Ctx.Create(1100, 720);
         AddTree(c);
-        var (tab, ctrl) = await c.Open(Path.Combine(c.Root, "debugging-loop.rpad"));
+        var (tab, ctrl) = await c.Open(Path.Combine(c.Root, "debugging-loop.inv"));
         tab.DebugModeEnabled = true;
         ctrl.State.Editor.AddBreakpoint(5);
         await Pump(300);
@@ -307,7 +307,7 @@ public static class Scenarios
     {
         await using var c = await Ctx.Create(1280, 720);
         AddTree(c);
-        var (tab, ctrl) = await c.Open(c.AddExample("products-overview.rpad"));
+        var (tab, ctrl) = await c.Open(c.AddExample("products-overview.inv"));
         c.Tabs.ToggleOutputPanelActive();
         tab.TogglePreviewToSide();
         await Pump(2500);
@@ -331,7 +331,7 @@ public static class Scenarios
     private static async Task Dependencies()
     {
         await using var c = await Ctx.Create(1100, 700);
-        var (tab, ctrl) = await c.Open(c.AddExample("quick-start.rpad"));
+        var (tab, ctrl) = await c.Open(c.AddExample("quick-start.inv"));
         var window = c.Services.GetRequiredService<DependenciesWindow>();
         window.Width = 1100;
         window.Height = 680;
@@ -440,7 +440,7 @@ public static class Scenarios
             new MdRunConnection { Name = "github", Driver = "http", Params = new(StringComparer.Ordinal) { ["baseAddress"] = MdRunValue.Of("https://api.github.com/") } },
         ], null);
         c.Services.GetRequiredService<ISecretStore>().Save([new Secret("billing-token", "t0k")], null);
-        var (tab, ctrl) = await c.Open(c.AddScript("invoices.rpad", ConnectionScript));
+        var (tab, ctrl) = await c.Open(c.AddScript("invoices.inv", ConnectionScript));
         c.Tabs.ToggleOutputPanelActive();
 
         var window = c.Services.GetRequiredService<DependenciesWindow>();

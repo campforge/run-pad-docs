@@ -17,7 +17,7 @@ This file is not part of the published site.
 - Changelog: `docs/site/changelog.md` is generated from `CHANGELOG.md` in the code repository by
   `scripts/docs/sync_changelog.py`. Never edit it by hand; after a release, run the script and
   commit the result.
-- Downloadable examples: `docs/site/examples/*.rpad` and `*.linq` are copied as static
+- Downloadable examples: `docs/site/examples/*.inv` and `*.linq` are copied as static
   files.
 - Icons: `docs/site/assets/app-icon.svg` (also used on the Tervforge home page) and
   `docs/site/assets/favicon.png` (copy of `src/main/Invoklet/Assets/invoklet.png` in the code
@@ -88,15 +88,15 @@ during builds; the pinned MkDocs 1.6 line is what this site uses.
 
 ## Checking the examples
 
-Every `.rpad` example except `analyzer-diagnostics.rpad` should run cleanly with the
+Every `.inv` example except `analyzer-diagnostics.inv` should run cleanly with the
 command-line runner (no network, files or packages needed):
 
 ```bash
 dotnet build ../invoklet/src/main/Invoklet.Cli -c Release
-for f in docs/site/examples/*.rpad; do dotnet ../invoklet/src/main/Invoklet.Cli/bin/Release/net10.0/invoklet.dll "$f"; done
+for f in docs/site/examples/*.inv; do dotnet ../invoklet/src/main/Invoklet.Cli/bin/Release/net10.0/invoklet.dll "$f"; done
 ```
 
-`analyzer-diagnostics.rpad` is expected to stop with `error CS0103` (exit code 1). The
+`analyzer-diagnostics.inv` is expected to stop with `error CS0103` (exit code 1). The
 expected output of each example is described in `docs/site/examples.md`; update it when
 an example changes.
 
@@ -131,12 +131,12 @@ or a feature changes, adjust its scenario in `Scenarios.cs` and the image's alt 
 
 | Scenario | Files | Page | Captured state |
 | --- | --- | --- | --- |
-| `overview` | `overview` | Overview | `products-overview.rpad` after a run: code, Results tables, the sidebar's Connections and Scripts sections |
+| `overview` | `overview` | Overview | `products-overview.inv` after a run: code, Results tables, the sidebar's Connections and Scripts sections |
 | `editor` | `editor-highlighting` | Editor | A LINQ query with the completion list open after `.Ta` and Take's documentation |
 | `search` | `editor-search` | Editor | The find and replace strip searching `word`, 10 matches highlighted |
-| `diagnostics` | `diagnostics` | Diagnostics and analyzers | `analyzer-diagnostics.rpad`: CS0103 on `JsonSerializer` with the lightbulb menu open |
-| `debugging` | `debugging` | Debugging | `debugging-loop.rpad` paused on line 5 in the third iteration: Threads, Call Stack, Locals |
-| `preview` | `markdown-preview` | Scripts and .rpad files | `products-overview.rpad` with the Markdown preview to the side |
+| `diagnostics` | `diagnostics` | Diagnostics and analyzers | `analyzer-diagnostics.inv`: CS0103 on `JsonSerializer` with the lightbulb menu open |
+| `debugging` | `debugging` | Debugging | `debugging-loop.inv` paused on line 5 in the third iteration: Threads, Call Stack, Locals |
+| `preview` | `markdown-preview` | Scripts and .inv files | `products-overview.inv` with the Markdown preview to the side |
 | `preferences` | `preferences` | Reference | Preferences → Interface |
 | `dependencies` | `dependencies` | Packages and references | Online search for Humanizer, Humanizer.Core selected; the local cache filtered to Humanizer |
 | `explorer` | `assembly-explorer` | Assembly Explorer | System.Linq.dll searched for `Enumerable.Where`, the first result decompiled |

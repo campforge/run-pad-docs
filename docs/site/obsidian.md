@@ -1,12 +1,17 @@
 ---
 title: View your scripts in Obsidian
-description: Read and edit the notes and code of your .rpad scripts in Obsidian with the Invoklet Markdown plugin.
+description: Read and edit the notes and code of your .inv scripts in Obsidian with the Invoklet Markdown plugin.
 ---
 
 # View your scripts in Obsidian
 
-A `.rpad` script is a Markdown document, so it reads well outside Invoklet too. The
-**Invoklet Markdown** plugin for [Obsidian](https://obsidian.md) opens `.rpad` files in
+!!! warning "New file extension in 0.10.1"
+    Invoklet scripts now use `.inv`. The plugin must explicitly support this extension;
+    an older plugin that registers only `.rpad` will not recognize renamed files.
+    Plugin compatibility with `.inv` has not yet been verified for this release.
+
+A `.inv` script is a Markdown document, so it reads well outside Invoklet too. The
+**Invoklet Markdown** plugin for [Obsidian](https://obsidian.md) opens `.inv` files in
 Obsidian's own Markdown editor: the title and notes look like any other note, the code shows
 as a highlighted C# or Visual Basic block, and the parts Invoklet needs are protected from
 accidental edits. Use it to browse your scripts, write the notes around the code, or keep
@@ -16,8 +21,8 @@ them next to the rest of your knowledge base.
 [Installation](#install-the-plugin){ .md-button }
 
 <figure markdown="span">
-  [![The debugging-loop.rpad example open in Obsidian: a collapsed Properties section, the title and notes as formatted Markdown, and the C# code block](assets/screenshots/obsidian_light.png#only-light)](assets/screenshots/obsidian_light.png "Open full-size screenshot")
-  [![The debugging-loop.rpad example open in Obsidian: a collapsed Properties section, the title and notes as formatted Markdown, and the C# code block](assets/screenshots/obsidian.png#only-dark)](assets/screenshots/obsidian.png "Open full-size screenshot")
+  [![The debugging-loop.inv example open in Obsidian: a collapsed Properties section, the title and notes as formatted Markdown, and the C# code block](assets/screenshots/obsidian_light.png#only-light)](assets/screenshots/obsidian_light.png "Open full-size screenshot")
+  [![The debugging-loop.inv example open in Obsidian: a collapsed Properties section, the title and notes as formatted Markdown, and the C# code block](assets/screenshots/obsidian.png#only-dark)](assets/screenshots/obsidian.png "Open full-size screenshot")
 </figure>
 
 ## What you get
@@ -48,7 +53,7 @@ You need Obsidian 1.8.7 or later.
 2. In Obsidian, choose **Open folder as vault** and select the **Invoklet Queries** folder in
    your Documents folder — the folder Invoklet keeps your scripts in (see
    [Where your scripts live](scripts.md#where-your-scripts-live)). Any other vault works too;
-   the plugin opens every `.rpad` file in it.
+   the plugin opens every `.inv` file in it.
 3. Open **Settings → Community plugins**, turn off *Restricted mode* if it is on, and click
    the folder icon next to *Installed plugins* to open the vault's plugins folder.
 4. Unpack the archive into that folder. It contains a `invoklet-markdown` folder with the
@@ -56,7 +61,7 @@ You need Obsidian 1.8.7 or later.
    `.obsidian/plugins/invoklet-markdown/`.
 5. Back in **Community plugins**, click the reload icon and turn on **Invoklet Markdown**.
 
-Your `.rpad` files now appear in Obsidian's file list and open in the Markdown editor. If
+Your `.inv` files now appear in Obsidian's file list and open in the Markdown editor. If
 they do not appear, turn on **Settings → Files and links → Detect all file extensions**.
 
 To **update** the plugin, unpack the archive from the new release over the old

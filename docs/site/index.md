@@ -15,12 +15,12 @@ Invoklet is a free, open-source C# scratchpad for Windows, macOS and Linux.
 - [Add NuGet packages](dependencies.md) with the built-in package manager, or reference any `.dll`
 - [Read decompiled code](assembly-explorer.md) in an ILSpy-style Assembly Explorer
 - [Import `.linq` queries](cli.md#importing-linq-queries) and run them with few or no changes
-- [Markdown-compatible scripts](scripts.md): keep notes and runnable code together in `.rpad` files,
+- [Markdown-compatible scripts](scripts.md): keep notes and runnable code together in `.inv` files,
   and read them as Markdown in [Invoklet's own preview](scripts.md#markdown-preview), in Obsidian or
   in repository previews
 - [Find and replace](editor.md#find-and-replace), [run just the selected code](editor.md#running-a-selection-and-restarting),
   and pick up where you left off: open tabs and unsaved changes [come back after a restart](editor.md#recovering-unsaved-tabs)
-- [View your scripts in Obsidian](obsidian.md): read and edit the notes and code of `.rpad` files with the Invoklet Markdown plugin
+- [View your scripts in Obsidian](obsidian.md): read and edit the notes and code of `.inv` files with the Invoklet Markdown plugin
 - Native and fast: no embedded browser, scripts compile in-process with Roslyn
 - Visual Basic scripts run and debug too
 - Free and open source, on Windows, macOS and Linux
@@ -35,7 +35,7 @@ Invoklet is a free, open-source C# scratchpad for Windows, macOS and Linux.
 
 ## A scratchpad for C\#
 
-Each script is a `.rpad` file: a Markdown document with a short YAML header and one
+Each script is a `.inv` file: a Markdown document with a short YAML header and one
 runnable code block. Write top-level statements, a `Main` program or a single expression;
 Invoklet compiles it with the .NET SDK installed on your machine and shows the output and any
 `.Dump()` results right under the editor. There is no project to set up and nothing to build
@@ -43,14 +43,14 @@ by hand.
 
 ## Markdown-compatible files
 
-`.rpad` is a **Markdown-compatible format**: a document containing a YAML metadata header,
+`.inv` is a **Markdown-compatible format**: a document containing a YAML metadata header,
 Markdown notes and a fenced, runnable code block. Your code and its documentation stay
 in one readable file that you can version, share and review.
 
 You can view and edit these files in [Obsidian with the Invoklet Markdown plugin](obsidian.md),
 or read them as Markdown on repository pages that support rendering the file type.
-For a working GitHub example, open [CompareTo.rpad in the examples repository](https://github.com/tervforge/invoklet-examples/blob/main/CompareTo.rpad)
-and select **Preview**. The file keeps its `.rpad` extension; no separate `.md` copy is needed.
+For a working GitHub example, open [CompareTo.inv in the examples repository](https://github.com/tervforge/invoklet-examples/blob/main/CompareTo.inv)
+and select **Preview**. The file keeps its `.inv` extension; no separate `.md` copy is needed.
 
 GitHub preview uses a Markdown file-type hint. Add this HTML comment at the end of the
 file, outside the code block:
@@ -59,14 +59,14 @@ file, outside the code block:
 <!-- vim: set filetype=markdown: -->
 ```
 
-For repository highlighting and Markdown diffs, add `*.rpad linguist-language=Markdown diff=markdown`
+For repository highlighting and Markdown diffs, add `*.inv linguist-language=Markdown diff=markdown`
 to `.gitattributes`.
 
-![A .rpad file rendered as Markdown on GitHub, with metadata, a title and highlighted C# code](assets/screenshots/github-rpad-preview.png)
+![A .inv file rendered as Markdown on GitHub, with metadata, a title and highlighted C# code](assets/screenshots/github-rpad-preview.png)
 
 The comment stays invisible in the rendered document. Repository rendering support varies
 by host; GitLab's Markdown syntax-highlighting setting alone does not enable a rendered
-`.rpad` preview.
+`.inv` preview.
 
 ## Download
 

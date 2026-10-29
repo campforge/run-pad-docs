@@ -125,7 +125,7 @@ for (var i = 1; i <= 5; i++)
 progress.Caption = "Done";
 ```
 
-[`live-output.rpad`](examples/live-output.rpad) combines both. In the
+[`live-output.inv`](examples/live-output.inv) combines both. In the
 [command-line runner](cli.md), each update is printed again below the previous output
 instead of replacing it.
 
@@ -304,7 +304,7 @@ Connections work in C# scripts for now.
 
 | Member | What it does |
 | --- | --- |
-| `Util.CurrentQueryPath` | Full path of the running `.rpad` file, or `null` for an unsaved tab. |
+| `Util.CurrentQueryPath` | Full path of the running `.inv` file, or `null` for an unsaved tab. |
 | `Util.GetSecret(name)` | A secret saved in **Tools → Secret Store**; see [Secrets](#secrets). |
 | `Util.Cache(func, key, duration)`, `Util.CacheAsync(…)` | Returns a cached result for `key`, or runs the function and stores its result. The cache survives across runs; `duration` is an optional time-to-live. |
 | `Util.SaveString`, `Util.LoadString`, `Util.SaveBytes`, `Util.LoadBytes` | Save and load files by name in Invoklet's per-user data folder. |

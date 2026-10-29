@@ -46,7 +46,7 @@ the diagnostic ID is not shown in the editor.
 
 ## Example: a missing namespace
 
-Download [`analyzer-diagnostics.rpad`](examples/analyzer-diagnostics.rpad) and open it.
+Download [`analyzer-diagnostics.inv`](examples/analyzer-diagnostics.inv) and open it.
 **It is meant to be read in the editor, not run.** The code block is:
 
 ```csharp

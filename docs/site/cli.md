@@ -1,13 +1,13 @@
 ---
 title: Command line and .linq import
-description: Run .rpad scripts from a terminal with the invoklet CLI and convert .linq queries.
+description: Run .inv scripts from a terminal with the invoklet CLI and convert .linq queries.
 ---
 
 # Command line and .linq import
 
 ## The `invoklet` command-line runner
 
-`invoklet` compiles and runs the code block of a `.rpad` file in a terminal, without the
+`invoklet` compiles and runs the code block of a `.inv` file in a terminal, without the
 Invoklet window and without the debugger. It is useful for automation and CI. It runs C#
 and Visual Basic scripts and honors `kind`, `packages`, `references` (including the path
 macros) and `namespaces` the same way the Invoklet window does.
@@ -22,13 +22,13 @@ macros) and `namespaces` the same way the Invoklet window does.
 
     ```bash
     dotnet build src/main/Invoklet.Cli -c Release
-    dotnet src/main/Invoklet.Cli/bin/Release/net10.0/invoklet.dll path/to/script.rpad
+    dotnet src/main/Invoklet.Cli/bin/Release/net10.0/invoklet.dll path/to/script.inv
     ```
 
     Or run it straight from source:
 
     ```bash
-    dotnet run --project src/main/Invoklet.Cli -- path/to/script.rpad
+    dotnet run --project src/main/Invoklet.Cli -- path/to/script.inv
     ```
 
     The build also produces a native launcher, `invoklet` (`invoklet.exe` on Windows), that
@@ -39,8 +39,8 @@ macros) and `namespaces` the same way the Invoklet window does.
 ### Usage
 
 ```text
-invoklet [run] [options] <script.rpad> [--] [script arguments...]
-invoklet convert <input.linq> [output.rpad]
+invoklet [run] [options] <script.inv> [--] [script arguments...]
+invoklet convert <input.linq> [output.inv]
 ```
 
 Running with no arguments prints this usage and exits with code 2. `--help` and
@@ -66,10 +66,10 @@ Running with no arguments prints this usage and exits with code 2. `--help` and
 ### Script arguments and options
 
 ```bash
-invoklet report.rpad "April totals" 2026
-invoklet run report.rpad -- --kind --help
-invoklet --kind program --sdk 10 report.rpad -- "April totals"
-invoklet --compile-only report.rpad
+invoklet report.inv "April totals" 2026
+invoklet run report.inv -- --kind --help
+invoklet --kind program --sdk 10 report.inv -- "April totals"
+invoklet --compile-only report.inv
 ```
 
 Arguments following the script replace the values resolved from its declarations and selected
@@ -105,14 +105,14 @@ unhandled exception. Text on standard error alone does not fail the run. Otherwi
 
 | Code | Meaning |
 | --- | --- |
-| `2` | Bad run arguments, file not found, an invalid `.rpad` document, no .NET SDK found, a compile error, or the compiled script could not be started. |
+| `2` | Bad run arguments, file not found, an invalid `.inv` document, no .NET SDK found, a compile error, or the compiled script could not be started. |
 | `1` | The `convert` command failed; conversion retains its existing error code. |
 | `130` | Interrupted with ++ctrl+c++. |
 
 ### Example
 
 ```console
-$ dotnet invoklet.dll debugging-loop.rpad
+$ dotnet invoklet.dll debugging-loop.inv
 i = 1, square = 1, running total = 1
 i = 2, square = 4, running total = 5
 i = 3, square = 9, running total = 14
@@ -124,19 +124,19 @@ Sum of squares 1..5
 
 ## Importing .linq queries
 
-Invoklet converts `.linq` query files to `.rpad` scripts.
+Invoklet converts `.linq` query files to `.inv` scripts.
 
 - **In Invoklet:** choose **File → Import .linq Query...** and pick the `.linq` file.
-  Invoklet writes a `.rpad` file with the same name **next to the `.linq` file** and opens
-  it. If that name is taken, it adds a number (`Query 2.rpad`). The file appears in the
+  Invoklet writes a `.inv` file with the same name **next to the `.linq` file** and opens
+  it. If that name is taken, it adds a number (`Query 2.inv`). The file appears in the
   file tree only if it is inside your Invoklet Queries folder.
-- **From a terminal:** `invoklet convert query.linq` writes `query.rpad` next to the input.
+- **From a terminal:** `invoklet convert query.linq` writes `query.inv` next to the input.
   Give a second argument to choose the output path. The command **overwrites** an
   existing output file.
 
 ### What is converted
 
-| `.linq` | `.rpad` |
+| `.linq` | `.inv` |
 | --- | --- |
 | `Kind="Statements"`, `"Program"`, `"Expression"` | `language: csharp` with the same kind |
 | `Kind="VBStatements"`, `"VBProgram"`, `"VBExpression"` | `language: vb` with the same kind |
@@ -148,7 +148,7 @@ Invoklet converts `.linq` query files to `.rpad` scripts.
 C# `.linq` imports write LINQPad's standard namespace profile into the converted file's
 `namespaces`, together with explicit `<Namespace>` entries, without exact duplicates. This includes
 `System.Text`, `System.Data` and `System.Xml.Linq`. These imports are editable script metadata used
-by both compilation and the editor. Existing `.rpad` files, new ordinary scripts, global defaults
+by both compilation and the editor. Existing `.inv` files, new ordinary scripts, global defaults
 and Visual Basic imports are unchanged.
 
     Custom defaults configured only on the original LINQPad machine are not present in the

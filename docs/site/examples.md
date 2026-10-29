@@ -1,13 +1,13 @@
 ---
 title: Examples
-description: Downloadable .rpad example scripts with explanations and expected output.
+description: Downloadable .inv example scripts with explanations and expected output.
 ---
 
 # Examples
 
 These scripts are small and safe: they use only in-memory data, do not read or write
 files, do not use the network and do not need NuGet packages. Each one is a complete
-`.rpad` file with a short explanation in its Markdown.
+`.inv` file with a short explanation in its Markdown.
 
 **To use one:** open the **Samples** section in the panel on the left and click a sample in its
 folder. It opens as a new, unsaved script — nothing runs until you press **Run**, and nothing is
@@ -19,9 +19,9 @@ Documents folder and open it from the **Scripts** section.
 Numbers in the output are formatted with your system's culture, so you may see `49,90`
 instead of `49.90`.
 
-## quick-start.rpad
+## quick-start.inv
 
-[Download `quick-start.rpad`](examples/quick-start.rpad) · Statements · used in the
+[Download `quick-start.inv`](examples/quick-start.inv) · Statements · used in the
 [quick start](quick-start.md)
 
 Prints one line and dumps a two-row table.
@@ -34,9 +34,9 @@ Supported languages
   2        | "Visual Basic" | 12
 ```
 
-## products-overview.rpad
+## products-overview.inv
 
-[Download `products-overview.rpad`](examples/products-overview.rpad) · Statements
+[Download `products-overview.inv`](examples/products-overview.inv) · Statements
 
 LINQ over an in-memory product list, with a `record` declared after the statements.
 Produces four Results blocks:
@@ -47,9 +47,9 @@ Produces four Results blocks:
   StockValue and a nested **Items** table per category;
 - **Total stock value** — `2823.30`.
 
-## program-kind.rpad
+## program-kind.inv
 
-[Download `program-kind.rpad`](examples/program-kind.rpad) · Program
+[Download `program-kind.inv`](examples/program-kind.inv) · Program
 
 A `void Main()` with a static helper method, a class and a record. Output:
 
@@ -61,17 +61,17 @@ Inventory
 Total items: 10
 ```
 
-## expression-kind.rpad
+## expression-kind.inv
 
-[Download `expression-kind.rpad`](examples/expression-kind.rpad) · Expression
+[Download `expression-kind.inv`](examples/expression-kind.inv) · Expression
 
 A single LINQ expression with no `.Dump()` call and no semicolon. Invoklet renders the
 result as a table with Number, Square and IsLarge for the even numbers 2 to 10; the
 heading is the expression's own source text.
 
-## debugging-loop.rpad
+## debugging-loop.inv
 
-[Download `debugging-loop.rpad`](examples/debugging-loop.rpad) · Statements · used in
+[Download `debugging-loop.inv`](examples/debugging-loop.inv) · Statements · used in
 [Debugging](debugging.md#practice-script)
 
 A five-iteration loop that calls a local function, for practising breakpoints,
@@ -87,18 +87,18 @@ Sum of squares 1..5
 55
 ```
 
-## analyzer-diagnostics.rpad
+## analyzer-diagnostics.inv
 
-[Download `analyzer-diagnostics.rpad`](examples/analyzer-diagnostics.rpad) · Statements ·
+[Download `analyzer-diagnostics.inv`](examples/analyzer-diagnostics.inv) · Statements ·
 used in [Diagnostics and analyzers](analyzers.md#example-a-missing-namespace)
 
 **Not meant to run.** Open it to see a compiler error with a `using` quick fix. As
 downloaded, Run stops with error `CS0103`; after the quick fix is applied, it prints
 `{"Name":"Invoklet","Version":1}` and then reaches the parsing statements.
 
-## live-output.rpad
+## live-output.inv
 
-[Download `live-output.rpad`](examples/live-output.rpad) · Statements · used in
+[Download `live-output.inv`](examples/live-output.inv) · Statements · used in
 [Results and runtime helpers](results.md#live-updating-output)
 
 A `Util.ProgressBar` and a `DumpContainer` that update in place for about one second,

@@ -177,10 +177,10 @@ See [Debugging → Troubleshooting](debugging.md#troubleshooting).
 
 ### "Invalid document"
 
-The file is not a valid `.rpad` document: the front matter is missing or not closed, the
+The file is not a valid `.inv` document: the front matter is missing or not closed, the
 YAML is invalid, a `kind` or `language` value is not supported, or there is no run block
 for the declared language. The Results tab explains which. See
-[Scripts and .rpad files](scripts.md#front-matter).
+[Scripts and .inv files](scripts.md#front-matter).
 
 ### A package cannot be restored
 

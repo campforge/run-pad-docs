@@ -86,7 +86,7 @@ references:
 - Only paths ending in `.dll` are used as assembly references.
 - Other `.dll` files in the same folder that the referenced assembly depends on are
   picked up automatically.
-- Relative paths such as `lib/Helpers.dll` are resolved next to the `.rpad` file,
+- Relative paths such as `lib/Helpers.dll` are resolved next to the `.inv` file,
   consistently in Invoklet, the CLI and IntelliSense. An unsaved tab has no containing
   folder yet: save it first or use an absolute path.
 - A missing DLL produces a warning and is not loaded; compilation also fails if the
@@ -106,7 +106,7 @@ references, in Invoklet, the command-line runner and IntelliSense:
 
 | Macro | Expands to |
 | --- | --- |
-| `$(CurrentQueryPath)` | The folder that contains the running `.rpad` file. Requires a saved script; reported as an error for an unsaved tab. |
+| `$(CurrentQueryPath)` | The folder that contains the running `.inv` file. Requires a saved script; reported as an error for an unsaved tab. |
 | `$(MyDocuments)` | Your Documents folder. |
 | `$(RuntimeDirectory)` | The folder of the .NET runtime that Invoklet itself runs on. |
 
@@ -132,7 +132,7 @@ The **Namespace Imports** tab is a text box with one namespace per line, for exa
 You rarely need to type them yourself: accepting a completion item for a type from
 another namespace, a `using …;` [quick fix](analyzers.md#quick-fixes-and-the-lightbulb)
 and **Resolve All Usings** (++ctrl+alt+u++) all add namespaces here. The default
-namespaces listed in [Scripts and .rpad files](scripts.md#namespaces-imported-by-default)
+namespaces listed in [Scripts and .inv files](scripts.md#namespaces-imported-by-default)
 are always imported and do not need to be added.
 
 ## Compilation

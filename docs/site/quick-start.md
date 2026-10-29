@@ -38,7 +38,7 @@ languages
 
 While you type, completion lists appear after `.`. Press ++ctrl+space++ to open them
 yourself. The editor shows only the code. The file's header and surrounding Markdown are
-managed for you; see [Scripts and .rpad files](scripts.md).
+managed for you; see [Scripts and .inv files](scripts.md).
 
 ## 3. Run it
 
@@ -68,12 +68,12 @@ the left. Once a file has a name, every Run saves it first.
 ## Try the downloadable version
 
 The same script, with explanatory Markdown around it, is available as
-[`quick-start.rpad`](examples/quick-start.rpad). Save it in your
+[`quick-start.inv`](examples/quick-start.inv). Save it in your
 `Documents/Invoklet Queries` folder and click it in Invoklet's file tree, or open it from
 anywhere with **File → Open...** (++ctrl+o++).
 
 ## Next steps
 
-- [Scripts and .rpad files](scripts.md): kinds, front matter and the file format.
+- [Scripts and .inv files](scripts.md): kinds, front matter and the file format.
 - [Results and runtime helpers](results.md): more ways to use `.Dump()`.
 - [Debugging](debugging.md): set a breakpoint and step through this script.

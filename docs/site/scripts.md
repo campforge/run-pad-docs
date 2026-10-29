@@ -1,13 +1,13 @@
 ---
-title: Scripts and .rpad files
-description: The .rpad file format, front matter fields and the Statements, Program and Expression kinds.
+title: Scripts and .inv files
+description: The .inv file format, front matter fields and the Statements, Program and Expression kinds.
 ---
 
-# Scripts and .rpad files
+# Scripts and .inv files
 
 ## Opening scripts
 
-Use **File → Open…** (**Ctrl+O**, or **Cmd+O** on macOS) to open a `.rpad` file from
+Use **File → Open…** (**Ctrl+O**, or **Cmd+O** on macOS) to open a `.inv` file from
 any local folder. It stays in that folder; opening it does not copy it into Queries or run it.
 Opening an already-open path activates its existing tab and preserves unsaved changes.
 
@@ -18,7 +18,7 @@ entry reports an error; use Open to choose its new location.
 
 ## File format
 
-A Invoklet script is a plain-text `.rpad` file. It is a Markdown document with:
+A Invoklet script is a plain-text `.inv` file. It is a Markdown document with:
 
 1. a YAML **front matter** block between two `---` lines at the very top;
 2. exactly one **run block**: a fenced code block whose info string is `csharp run` or
@@ -354,7 +354,7 @@ The [examples](examples.md) include one script of each C# kind.
 
 ## Where your scripts live
 
-Invoklet shows the `.rpad` files and folders inside **Invoklet Queries** in your Documents folder
+Invoklet shows the `.inv` files and folders inside **Invoklet Queries** in your Documents folder
 (created on first start) in the **Scripts** section of the panel on the left. The tree refreshes
 when files change on disk. The **Samples** section lists the sample scripts that come with Invoklet,
 grouped by folder; see [Examples](examples.md). Right-click the Scripts tree to create C# or Visual
