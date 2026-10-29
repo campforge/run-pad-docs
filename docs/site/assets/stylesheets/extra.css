@@ -1,4 +1,4 @@
-/* Campforge look: the same colors and font stack as https://campforge.github.io/.
+/* Tervforge look: the same colors and font stack as https://tervforge.github.io/.
    mkdocs.yml selects the "custom" primary/accent palette, defined here for both schemes. */
 
 :root {
@@ -63,7 +63,7 @@
   --md-footer-fg-color--lighter: var(--cf-text2);
 }
 
-/* Primary = the header: a light surface with dark text, like the Campforge home page header. */
+/* Primary = the header: a light surface with dark text, like the Tervforge home page header. */
 [data-md-color-primary="custom"] {
   --md-primary-fg-color:        var(--cf-surface);
   --md-primary-fg-color--light: var(--cf-surface2);
@@ -104,7 +104,7 @@
   background-color: var(--cf-bg);
 }
 
-/* Content links and the active navigation entry use the Campforge blue. */
+/* Content links and the active navigation entry use the Tervforge blue. */
 .md-nav__link--active,
 .md-nav__item .md-nav__link--active {
   color: var(--cf-accent);

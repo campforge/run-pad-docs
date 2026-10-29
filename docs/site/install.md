@@ -12,7 +12,7 @@ install both for you.
 
 ## Download
 
-Download RunPad from the [releases page](https://github.com/campforge/run-pad/releases).
+Download RunPad from the [releases page](https://github.com/tervforge/invoklet/releases).
 The newest release is at the top; pick the file for your system from its **Assets**
 list:
 
@@ -108,7 +108,7 @@ starts with a warning, and the status bar shows *net6.0 (not installed)*. The
 ## Updating and uninstalling
 
 RunPad does not update itself. To update, download the new version from the
-[releases page](https://github.com/campforge/run-pad/releases):
+[releases page](https://github.com/tervforge/invoklet/releases):
 
 - **Windows installer**: install the new `.msi` over the old one. Uninstall from
   *Add or remove programs*.

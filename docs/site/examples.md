@@ -90,13 +90,11 @@ Sum of squares 1..5
 ## analyzer-diagnostics.rpad
 
 [Download `analyzer-diagnostics.rpad`](examples/analyzer-diagnostics.rpad) · Statements ·
-used in [Diagnostics and analyzers](analyzers.md#example-an-always-failing-constant)
+used in [Diagnostics and analyzers](analyzers.md#example-a-missing-namespace)
 
-**Not meant to run.** Open it to see a compiler error with a `using` quick fix and two
-RunPad analyzer warnings (RPAD0258, shown once RunPad analyzers are turned on in
-**Preferences → Experimental**). As downloaded, Run stops with error `CS0103`. After
-the quick fix is applied, Run prints `{"Name":"RunPad","Version":1}` and then fails with
-`System.OverflowException`, which is what the warnings predict.
+**Not meant to run.** Open it to see a compiler error with a `using` quick fix. As
+downloaded, Run stops with error `CS0103`; after the quick fix is applied, it prints
+`{"Name":"RunPad","Version":1}` and then reaches the parsing statements.
 
 ## live-output.rpad
 

@@ -13,7 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- RunPad cloned next to this repository, as for the other scripts here. -->
-    <ProjectReference Include="..\..\..\run-pad\src\main\RunPad\RunPad.csproj" />
+    <ProjectReference Include="..\..\..\invoklet\src\main\RunPad\RunPad.csproj" />
     <!-- The same versions as RunPad's Directory.Packages.props. -->
     <PackageReference Include="Avalonia.Headless" Version="12.1.4" />
     <PackageReference Include="Avalonia.Skia" Version="12.1.4" />

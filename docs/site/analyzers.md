@@ -1,6 +1,6 @@
 ---
 title: Diagnostics and analyzers
-description: Compiler diagnostics, Roslyn IDE analyzers, RunPad analyzers and quick fixes in C# scripts.
+description: Compiler diagnostics, Roslyn IDE analyzers and quick fixes in C# scripts.
 ---
 
 # Diagnostics and analyzers
@@ -14,13 +14,12 @@ analysis does not promise.
   [![An error underline on the unknown JsonSerializer, with the lightbulb menu offering using System.Text.Json and other fixes](assets/screenshots/diagnostics.png#only-dark)](assets/screenshots/diagnostics.png "Open full-size screenshot")
 </figure>
 
-## Four kinds of analysis
+## Three kinds of analysis
 
 | Source | IDs | Where you see it | When |
 | --- | --- | --- | --- |
 | C# compiler | `CS…` (for example `CS0103`) | Editor underlines; also printed in the Results tab when you run | While you type and on every run |
 | Roslyn IDE analyzers | `IDE…` | Mostly as lightbulb suggestions; many have no underline | While you type |
-| RunPad analyzers (experimental, off by default) | `RPAD…` | Editor warning underlines | While you type |
 | Assembly Explorer analysis | none | The Assembly Explorer's analysis pane | When you ask for it |
 
 **Compiler diagnostics** are the same errors and warnings the build reports. In the
@@ -34,16 +33,6 @@ as the `IDE` suggestions in Visual Studio ("use `var`", "remove unnecessary usin
 Most of them report at *hidden* severity, so there is no underline; they make a
 lightbulb fix available on the caret's line instead.
 
-**RunPad analyzers** are RunPad's own checks for common mistakes in scratch code. Many of
-them flag calls with constant arguments that always throw, such as parsing a string that
-is out of range for the target type. They report warnings with IDs that start with
-`RPAD` and have no quick fixes of their own.
-
-!!! note "Experimental"
-    RunPad analyzers are still being refined and are **off by default**. Turn them on in
-    **Tools → Preferences... → Experimental → RunPad analyzers**; the open scripts are
-    analyzed again right away. Compiler errors and Roslyn's IDE analyzers are not affected.
-
 **Assembly Explorer analysis** is a different tool: it searches compiled assemblies for
 code that uses, reads, assigns or implements a member. See
 [Assembly Explorer](assembly-explorer.md#analyze).
@@ -55,7 +44,7 @@ code that uses, reads, assigns or implements a member. See
 Hover over an underline to read its message. The tooltip shows the message text only;
 the diagnostic ID is not shown in the editor.
 
-## Example: an always-failing constant
+## Example: a missing namespace
 
 Download [`analyzer-diagnostics.rpad`](examples/analyzer-diagnostics.rpad) and open it.
 **It is meant to be read in the editor, not run.** The code block is:
@@ -75,17 +64,6 @@ What you see in the editor:
   `System.Text.Json` is not imported. If you run now, the Results tab shows
   `(1,16): error CS0103: The name 'JsonSerializer' does not exist in the current context`
   and nothing runs.
-- **Lines 4 and 5** have warning underlines from RunPad analyzer **RPAD0258**, once RunPad
-  analyzers are turned on (see the note above). Hovering
-  shows, for example: *'byte.Parse(...)' always throws OverflowException at runtime —
-  '300' is out of range for byte*.
-
-RPAD0258 checks `Parse` on the integer types and `decimal`, and the matching
-`Convert.ToXxx` methods, when the argument is a constant string of plain digits.
-RPAD0258 does **not** flag `int.Parse("abc")`. A separate analyzer, **RPAD0356**, catches
-non-numeric constant strings that always throw `FormatException`, such as the call in the
-screenshot. Values read at run time are outside these constant checks.
-
 ### Applying the quick fix
 
 1. Put the caret on line 1. A lightbulb appears in the gutter on that line.
@@ -94,9 +72,7 @@ screenshot. Values read at run time are outside these constant checks.
 3. Choose `using System.Text.Json;`.
 
 RunPad adds `System.Text.Json` to the `namespaces:` list in the script's front matter
-rather than inserting a `using` line into the code, and the error disappears. If you now
-run the script, it prints `{"Name":"RunPad","Version":1}` and then stops with
-`System.OverflowException` thrown by `byte.Parse("300")`, exactly as RPAD0258 warned.
+rather than inserting a `using` line into the code, and the error disappears.
 
 ## Quick fixes and the lightbulb
 
@@ -129,11 +105,9 @@ Open **Preferences → Languages → .NET → C#**:
 
 ## What analysis does not promise
 
-- The analyzers find **specific** patterns. A clean editor does not mean the script is
-  correct, and RunPad analyzers report only what they can prove from constants in the
-  code.
-- RunPad analyzer and IDE analyzer results are editor-only. They do not run during
-  compilation, so they never stop a run and do not appear in the Results tab or in the
-  [command-line runner](cli.md).
+- IDE analyzers find **specific** patterns. A clean editor does not mean the script is
+  correct.
+- IDE analyzer results are editor-only. They do not run during compilation, so they never
+  stop a run and do not appear in the Results tab or in the [command-line runner](cli.md).
 - Analysis runs after a short pause in typing, so underlines can lag behind very fast
   edits by a moment.

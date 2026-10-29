@@ -1,10 +1,10 @@
-# RunPad documentation
+# Invoklet documentation
 
-Source of the RunPad user guide, published at <https://campforge.github.io/run-pad-docs/>.
+Source of the Invoklet user guide, published at <https://tervforge.github.io/invoklet-docs/>.
 
-RunPad itself — a native, fast, cross-platform C# scratchpad for .NET — lives in
-[`campforge/run-pad`](https://github.com/campforge/run-pad); downloads are on its
-[releases page](https://github.com/campforge/run-pad/releases).
+Invoklet itself — a native, fast, cross-platform C# scratchpad for .NET — lives in
+[`tervforge/invoklet`](https://github.com/tervforge/invoklet); downloads are on its
+[releases page](https://github.com/tervforge/invoklet/releases).
 
 - `docs/site/` — the pages (Markdown), screenshots and downloadable examples; navigation is in
   `mkdocs.yml`.

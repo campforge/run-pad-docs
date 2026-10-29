@@ -19,7 +19,7 @@ Open **Apple menu → About This Mac** and look for **Chip** or **Processor**.
 | Apple Silicon, such as an M1, M2, M3 or later chip | `RunPad-osx-arm64.dmg` | Arm64 |
 | Intel processor | `RunPad-osx-x64.dmg` | x64 |
 
-Open the official [RunPad releases page](https://github.com/campforge/run-pad/releases),
+Open the official [RunPad releases page](https://github.com/tervforge/invoklet/releases),
 choose the latest stable release, expand **Assets**, and download the matching `.dmg`.
 Read that release's notes for known installation issues and compatibility information.
 Keep RunPad, your SDK and debugger on the same architecture.
@@ -206,7 +206,7 @@ or **Browse…** for components you already have, then retry the affected operat
 
 ### What to include in a bug report
 
-Use [RunPad's issue tracker](https://github.com/campforge/run-pad/issues) and include the
+Use [RunPad's issue tracker](https://github.com/tervforge/invoklet/issues) and include the
 RunPad release, macOS version, Apple Silicon or Intel, the exact error and whether it
 happens before the main window opens or only when running/debugging a script. Logs are
 under `~/Library/Application Support/RunPad/logs` when available. Review logs and terminal

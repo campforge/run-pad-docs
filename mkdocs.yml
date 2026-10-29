@@ -1,9 +1,9 @@
-# User documentation published to GitHub Pages (https://campforge.github.io/run-pad-docs/).
+# User documentation published to GitHub Pages (https://tervforge.github.io/invoklet-docs/).
 # Only docs/site is published.
 # Build locally: see docs/GITHUB-PAGES.md.
 site_name: RunPad
 site_description: User guide for RunPad, a native, fast, cross-platform C# scratchpad for .NET.
-site_url: https://campforge.github.io/run-pad-docs/
+site_url: https://tervforge.github.io/invoklet-docs/
 copyright: Copyright &copy; 2026 Vadim S (hobobyte). RunPad is licensed under GPL-3.0.
 
 docs_dir: docs/site
@@ -28,7 +28,7 @@ nav:
       - View your scripts in Obsidian: obsidian.md
   - Reference: reference.md
   - Changelog: changelog.md
-  - Download: https://github.com/campforge/run-pad/releases
+  - Download: https://github.com/tervforge/invoklet/releases
 
 theme:
   name: material
@@ -63,14 +63,14 @@ theme:
     - toc.follow
 
 extra:
-  # Footer links to the Campforge home page and the source code (icons bundled with the theme,
+  # Footer links to the Tervforge home page and the source code (icons bundled with the theme,
   # no external request).
   social:
     - icon: material/home-outline
-      link: https://campforge.github.io/
-      name: Campforge
+      link: https://tervforge.github.io/
+      name: Tervforge
     - icon: fontawesome/brands/github
-      link: https://github.com/campforge/run-pad
+      link: https://github.com/tervforge/invoklet
       name: RunPad on GitHub
   generator: false
 

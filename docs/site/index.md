@@ -25,7 +25,7 @@ RunPad is a free, open-source C# scratchpad for Windows, macOS and Linux.
 - Visual Basic scripts run and debug too
 - Free and open source, on Windows, macOS and Linux
 
-[Download RunPad](https://github.com/campforge/run-pad/releases){ .md-button }
+[Download RunPad](https://github.com/tervforge/invoklet/releases){ .md-button }
 [Quick start](quick-start.md){ .md-button }
 
 <figure markdown="span">
@@ -49,7 +49,7 @@ in one readable file that you can version, share and review.
 
 You can view and edit these files in [Obsidian with the RunPad Markdown plugin](obsidian.md),
 or read them as Markdown on repository pages that support rendering the file type.
-For a working GitHub example, open [CompareTo.rpad in the examples repository](https://github.com/campforge/runpad-examples/blob/main/CompareTo.rpad)
+For a working GitHub example, open [CompareTo.rpad in the examples repository](https://github.com/tervforge/runpad-examples/blob/main/CompareTo.rpad)
 and select **Preview**. The file keeps its `.rpad` extension; no separate `.md` copy is needed.
 
 GitHub preview uses a Markdown file-type hint. Add this HTML comment at the end of the
@@ -72,7 +72,7 @@ by host; GitLab's Markdown syntax-highlighting setting alone does not enable a r
 
 RunPad runs on Windows, macOS (Apple Silicon and Intel) and Linux. Installers and
 portable builds for every release are on the
-[releases page](https://github.com/campforge/run-pad/releases); the
+[releases page](https://github.com/tervforge/invoklet/releases); the
 [installation guide](install.md#download) explains which file to pick, and the
 [changelog](changelog.md) lists what changed in each release.
 
@@ -105,5 +105,5 @@ editor intelligence currently exists only for C#.
 ## Feedback and source code
 
 RunPad is free and open source under the GPL-3.0. The code is on
-[GitHub](https://github.com/campforge/run-pad); report bugs and suggest ideas in its
-[issues](https://github.com/campforge/run-pad/issues).
+[GitHub](https://github.com/tervforge/invoklet); report bugs and suggest ideas in its
+[issues](https://github.com/tervforge/invoklet/issues).

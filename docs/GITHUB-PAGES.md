@@ -2,10 +2,10 @@
 
 The user guide is built with [MkDocs](https://www.mkdocs.org/) and
 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and prepared for publication to
-<https://campforge.github.io/run-pad-docs/> by `.github/workflows/docs.yml`. The site lives in its own
-repository, `campforge/run-pad-docs`. The code it documents (examples run with `RunPad.Cli`, icon
-sources) is in the code repository, `campforge/run-pad`; the commands below expect it cloned next to
-this one as `../run-pad`.
+<https://tervforge.github.io/invoklet-docs/> by `.github/workflows/docs.yml`. The site lives in its own
+repository, `tervforge/invoklet-docs`. The code it documents (examples run with `RunPad.Cli`, icon
+sources) is in the code repository, `tervforge/run-pad`; the commands below expect it cloned next to
+this one as `../invoklet`.
 
 This file is not part of the published site.
 
@@ -19,7 +19,7 @@ This file is not part of the published site.
   commit the result.
 - Downloadable examples: `docs/site/examples/*.rpad` and `*.linq` are copied as static
   files.
-- Icons: `docs/site/assets/app-icon.svg` (also used on the Campforge home page) and
+- Icons: `docs/site/assets/app-icon.svg` (also used on the Tervforge home page) and
   `docs/site/assets/favicon.png` (copy of `src/main/RunPad/Assets/runpad.png` in the code
   repository).
 - The theme uses no web fonts (`theme.font: false`) and no repository widget, so the
@@ -51,7 +51,7 @@ The deploy job alone gets `pages: write` and `id-token: write`, runs in the
    **Settings → Environments → github-pages**, keep the deployment branch rule limited to
    `main` (the default for Pages).
 3. Push a change under `docs/site/` to `main`, or run the **Docs** workflow manually on
-   `main`. The site appears at <https://campforge.github.io/run-pad-docs/>.
+   `main`. The site appears at <https://tervforge.github.io/invoklet-docs/>.
 
 `site_url` in `mkdocs.yml` and `SITE_URL` in the workflow must match the Pages URL. If the
 repository is renamed or a custom domain is configured, update both.
@@ -66,7 +66,7 @@ repository is renamed or a custom domain is configured, update both.
   the repository belongs to an organization on GitHub Enterprise Cloud that restricts
   Pages access. Only the built `docs/site` content is published; internal documents in
   the repository stay private.
-- The guide links to the releases page and the source code in `campforge/run-pad`. While
+- The guide links to the releases page and the source code in `tervforge/run-pad`. While
   that repository is private, anonymous readers cannot open those links.
 
 ## Building locally
@@ -76,9 +76,9 @@ Use an isolated virtual environment, not a global install:
 ```bash
 python3 -m venv /tmp/runpad-docs-venv
 /tmp/runpad-docs-venv/bin/pip install -r requirements-docs.txt
-/tmp/runpad-docs-venv/bin/mkdocs serve              # preview at http://127.0.0.1:8000/run-pad-docs/
+/tmp/runpad-docs-venv/bin/mkdocs serve              # preview at http://127.0.0.1:8000/invoklet-docs/
 /tmp/runpad-docs-venv/bin/mkdocs build --strict     # output in ./site (git-ignored)
-/tmp/runpad-docs-venv/bin/python scripts/docs/check_site_links.py site --site-url https://campforge.github.io/run-pad-docs/
+/tmp/runpad-docs-venv/bin/python scripts/docs/check_site_links.py site --site-url https://tervforge.github.io/invoklet-docs/
 ```
 
 `requirements-docs.txt` pins `mkdocs`, `mkdocs-material`, `pymdown-extensions` and
@@ -92,8 +92,8 @@ Every `.rpad` example except `analyzer-diagnostics.rpad` should run cleanly with
 command-line runner (no network, files or packages needed):
 
 ```bash
-dotnet build ../run-pad/src/main/RunPad.Cli -c Release
-for f in docs/site/examples/*.rpad; do dotnet ../run-pad/src/main/RunPad.Cli/bin/Release/net10.0/runpad.dll "$f"; done
+dotnet build ../invoklet/src/main/RunPad.Cli -c Release
+for f in docs/site/examples/*.rpad; do dotnet ../invoklet/src/main/RunPad.Cli/bin/Release/net10.0/runpad.dll "$f"; done
 ```
 
 `analyzer-diagnostics.rpad` is expected to stop with `error CS0103` (exit code 1). The
@@ -115,7 +115,7 @@ search really queries nuget.org. Every scenario starts a fresh RunPad with defau
 settings kept in memory and a temporary RunPad Queries folder filled from
 `docs/site/examples`, so the captures never show your own settings, scripts or file paths.
 
-To regenerate them after a release (Windows, with `../run-pad` checked out at that
+To regenerate them after a release (Windows, with `../invoklet` checked out at that
 release, a .NET 10 SDK, the `netcoredbg` that RunPad's first-run setup installs or
 `RUNPAD_NETCOREDBG` pointing at one, and network access):
 
@@ -134,7 +134,7 @@ or a feature changes, adjust its scenario in `Scenarios.cs` and the image's alt 
 | `overview` | `overview` | Overview | `products-overview.rpad` after a run: code, Results tables, the sidebar's Connections and Scripts sections |
 | `editor` | `editor-highlighting` | Editor | A LINQ query with the completion list open after `.Ta` and Take's documentation |
 | `search` | `editor-search` | Editor | The find and replace strip searching `word`, 10 matches highlighted |
-| `diagnostics` | `diagnostics` | Diagnostics and analyzers | `analyzer-diagnostics.rpad`: CS0103 on `JsonSerializer` with the lightbulb menu open; RunPad analyzers on |
+| `diagnostics` | `diagnostics` | Diagnostics and analyzers | `analyzer-diagnostics.rpad`: CS0103 on `JsonSerializer` with the lightbulb menu open |
 | `debugging` | `debugging` | Debugging | `debugging-loop.rpad` paused on line 5 in the third iteration: Threads, Call Stack, Locals |
 | `preview` | `markdown-preview` | Scripts and .rpad files | `products-overview.rpad` with the Markdown preview to the side |
 | `preferences` | `preferences` | Reference | Preferences → Interface |

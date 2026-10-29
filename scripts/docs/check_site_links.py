@@ -2,7 +2,7 @@
 """Checks the generated documentation site (mkdocs build output) for broken internal links.
 
 Every href/src/srcset in every HTML page is resolved the way a browser would resolve it on
-GitHub Pages, where the site lives under a path prefix (/run-pad-docs/):
+GitHub Pages, where the site lives under a path prefix (/invoklet-docs/):
 
 - relative URLs resolve against the page's own location;
 - root-relative URLs must start with the prefix and are resolved below it; only an explicit
@@ -15,7 +15,7 @@ Assets the page loads (stylesheets, scripts, images, icons, fonts) must be serve
 site itself, so the published docs make no third-party requests. Plain links to other sites
 are allowed and not fetched.
 
-Usage: check_site_links.py SITE_DIR --site-url https://campforge.github.io/run-pad-docs/
+Usage: check_site_links.py SITE_DIR --site-url https://tervforge.github.io/invoklet-docs/
 Exits 1 if any problem is found.
 """
 
@@ -72,14 +72,14 @@ def main() -> int:
     arg_parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     arg_parser.add_argument("site_dir", type=Path)
     arg_parser.add_argument("--site-url", required=True,
-                            help="Public URL of the site root, e.g. https://campforge.github.io/run-pad-docs/")
+                            help="Public URL of the site root, e.g. https://tervforge.github.io/invoklet-docs/")
     args = arg_parser.parse_args()
 
     site_dir: Path = args.site_dir.resolve()
     site_url = args.site_url if args.site_url.endswith("/") else args.site_url + "/"
     site = urlsplit(site_url)
     origin = f"{site.scheme}://{site.netloc}"
-    prefix = site.path  # "/run-pad/"
+    prefix = site.path  # "/invoklet-docs/"
 
     if not (site_dir / "index.html").is_file():
         print(f"error: {site_dir} has no index.html; build the site first", file=sys.stderr)
@@ -91,7 +91,7 @@ def main() -> int:
     checked = external_links = 0
 
     def resolve(target_path: str) -> Path | None:
-        """Maps a site path below the prefix (e.g. /run-pad/editor/) to a file, or None."""
+        """Maps a site path below the prefix (e.g. /invoklet-docs/editor/) to a file, or None."""
         relative = unquote(target_path[len(prefix):])
         candidate = (site_dir / relative).resolve()
         if site_dir not in candidate.parents and candidate != site_dir:

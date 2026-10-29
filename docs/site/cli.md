@@ -17,7 +17,7 @@ macros) and `namespaces` the same way the RunPad window does.
     that the `.deb` package puts on `PATH` starts the RunPad window, not this runner.
 
     The runner is the `RunPad.Cli` project in the
-    [RunPad source code](https://github.com/campforge/run-pad). Build it from a clone with
+    [RunPad source code](https://github.com/tervforge/invoklet). Build it from a clone with
     the .NET 10 SDK:
 
     ```bash

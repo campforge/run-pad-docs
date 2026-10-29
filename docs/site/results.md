@@ -392,7 +392,7 @@ extensions and generated declarations remain in the same assembly.
 
 ### SQLite connections
 
-In a development build, choose **SQLite** under **Tools → Connections → Add** and enter an
+Choose **SQLite** under **Tools → Connections → Add** and enter an
 existing database file. A relative path is resolved from the saved script's folder. Add the
 connection on **Dependencies → Connections** to get an EF Core context and the required package
 in a C# script targeting .NET 10 or later:

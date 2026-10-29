@@ -12,7 +12,7 @@ as a highlighted C# or Visual Basic block, and the parts RunPad needs are protec
 accidental edits. Use it to browse your scripts, write the notes around the code, or keep
 them next to the rest of your knowledge base.
 
-[Download the plugin](https://github.com/campforge/obsidian-rpad/releases/latest/download/runpad-markdown.zip){ .md-button .md-button--primary }
+[Download the plugin](https://github.com/tervforge/obsidian-rpad/releases/latest/download/runpad-markdown.zip){ .md-button .md-button--primary }
 [Installation](#install-the-plugin){ .md-button }
 
 <figure markdown="span">
@@ -43,8 +43,8 @@ The plugin does not run or debug scripts — open them in RunPad for that.
 
 You need Obsidian 1.8.7 or later.
 
-1. Download [**runpad-markdown.zip**](https://github.com/campforge/obsidian-rpad/releases/latest/download/runpad-markdown.zip)
-   from the [latest release](https://github.com/campforge/obsidian-rpad/releases/latest).
+1. Download [**runpad-markdown.zip**](https://github.com/tervforge/obsidian-rpad/releases/latest/download/runpad-markdown.zip)
+   from the [latest release](https://github.com/tervforge/obsidian-rpad/releases/latest).
 2. In Obsidian, choose **Open folder as vault** and select the **RunPad Queries** folder in
    your Documents folder — the folder RunPad keeps your scripts in (see
    [Where your scripts live](scripts.md#where-your-scripts-live)). Any other vault works too;
@@ -81,4 +81,4 @@ To **update** the plugin, unpack the archive from the new release over the old
   and other programs can still change the file.
 
 The plugin is free and open source under the MIT license; the code and issue tracker are in
-[`campforge/obsidian-rpad`](https://github.com/campforge/obsidian-rpad).
+[`tervforge/obsidian-rpad`](https://github.com/tervforge/obsidian-rpad).

@@ -263,7 +263,7 @@ public static class Scenarios
 
     private static async Task Diagnostics()
     {
-        await using var c = await Ctx.Create(1100, 640, p => { p.Experimental.RunPadAnalyzers = true; p.CSharp.InlayHintsEnabled = false; });
+        await using var c = await Ctx.Create(1100, 640, p => p.CSharp.InlayHintsEnabled = false);
         AddTree(c);
         var (tab, ctrl) = await c.Open(c.AddExample("analyzer-diagnostics.rpad"));
         c.Tabs.ToggleOutputPanelActive();

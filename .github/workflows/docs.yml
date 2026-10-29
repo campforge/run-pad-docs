@@ -1,6 +1,6 @@
 name: Docs
 
-# User documentation (mkdocs.yml + docs/site) → GitHub Pages at https://campforge.github.io/run-pad-docs/.
+# User documentation (mkdocs.yml + docs/site) → GitHub Pages at https://tervforge.github.io/invoklet-docs/.
 # Pull requests only build and check the site; pushes to main (and manual runs on main) also
 # deploy it. Maintainer setup: docs/GITHUB-PAGES.md.
 
@@ -32,7 +32,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  SITE_URL: https://campforge.github.io/run-pad-docs/
+  SITE_URL: https://tervforge.github.io/invoklet-docs/
 
 jobs:
   build:
