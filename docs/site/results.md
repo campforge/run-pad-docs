@@ -175,7 +175,7 @@ Windows the values are encrypted for your Windows account; on macOS and Linux th
 readable only by you, like `~/.pgpass`. A script asking for a secret that isn't there fails with
 `KeyNotFoundException`, whose message names the secret and the store. The command-line runner
 reads the same store. To use another file, for example on a build server, set the
-`RUNPAD_SECRETS_FILE` environment variable to its path.
+`INVOKLET_SECRETS_FILE` environment variable to its path.
 
 ## Sidebar navigation
 
@@ -330,7 +330,7 @@ var token = Util.GetSecret("api-token");
 Names are case-insensitive. A missing name raises `KeyNotFoundException` with the store's
 location. On Windows values are encrypted for your Windows account; on macOS and Linux
 they are plain text in an owner-only file. Expand **Storage and usage** to see its location.
-`RUNPAD_SECRETS_FILE` selects a different store for the application and scripts; use an
+`INVOKLET_SECRETS_FILE` selects a different store for the application and scripts; use an
 absolute path.
 
 If writing fails, the window stays open with your edits and an error message; fix the

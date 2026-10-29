@@ -140,7 +140,7 @@ name in the Assembly Explorer goes to its definition.
 | Drafts of open tabs and unsaved changes | `recovery` folder in Invoklet's data folder |
 | NuGet sources | `NuGet.Config` in Invoklet's data folder |
 | Your connections from **Tools → Connections** | `connections.json` in Invoklet's data folder |
-| Secrets from **Tools → Secret Store** | `secrets.json` in Invoklet's data folder (`Invoklet_SECRETS_FILE` points elsewhere) |
+| Secrets from **Tools → Secret Store** | `secrets.json` in Invoklet's data folder (`INVOKLET_SECRETS_FILE` points elsewhere) |
 | Debugger installed by the setup window | `netcoredbg` folder in Invoklet's data folder |
 | Files written by `Util.Cache` and `Util.SaveString`/`SaveBytes` | `UserData` folder in Invoklet's data folder |
 | Logs | `logs` folder in Invoklet's data folder |

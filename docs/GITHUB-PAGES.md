@@ -117,7 +117,7 @@ settings kept in memory and a temporary Invoklet Queries folder filled from
 
 To regenerate them after a release (Windows, with `../invoklet` checked out at that
 release, a .NET 10 SDK, the `netcoredbg` that Invoklet's first-run setup installs or
-`RUNPAD_NETCOREDBG` pointing at one, and network access):
+`INVOKLET_NETCOREDBG` pointing at one, and network access):
 
 ```bash
 cd scripts/screenshots

@@ -43,8 +43,8 @@ public sealed class Ctx : IAsyncDisposable
         prefs.Appearance.DarkInterfaceTheme = "Invoklet Midnight";
         prefs.Appearance.LightInterfaceTheme = "Invoklet Warm Light";
         prefs.Appearance.RestoreUnsavedTabs = false;
-        // The debugger the first-run setup installs on Windows, unless Invoklet_NETCOREDBG names another.
-        prefs.Debugger.DebuggerPath = Environment.GetEnvironmentVariable("Invoklet_NETCOREDBG") is { Length: > 0 } dbg ? dbg
+        // The debugger the first-run setup installs on Windows, unless INVOKLET_NETCOREDBG names another.
+        prefs.Debugger.DebuggerPath = Environment.GetEnvironmentVariable("INVOKLET_NETCOREDBG") is { Length: > 0 } dbg ? dbg
             : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Invoklet", "netcoredbg", "netcoredbg", "netcoredbg.exe");
         prefs.Layout.SidebarWidth = 220;
         configure?.Invoke(prefs);
