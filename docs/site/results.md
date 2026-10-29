@@ -170,11 +170,16 @@ saves it and **Cancel** drops your changes. Names must differ, letter case aside
 **Save** says so instead of overwriting it.
 
 The secrets belong to you on this computer and live outside every script, in `secrets.json` in
-Invoklet's data folder (see [Where Invoklet stores data](reference.md#where-invoklet-stores-data)). On
-Windows the values are encrypted for your Windows account; on macOS and Linux the file is
-readable only by you, like `~/.pgpass`. A script asking for a secret that isn't there fails with
-`KeyNotFoundException`, whose message names the secret and the store. The command-line runner
-reads the same store. To use another file, for example on a build server, set the
+Invoklet's data folder (see [Where Invoklet stores data](reference.md#where-invoklet-stores-data)),
+a file only you can read. The values in it are encrypted: on Windows for your Windows account, on
+macOS and Linux with a key Invoklet keeps in the macOS Keychain or the Linux Secret Service (GNOME
+Keyring, KWallet; Invoklet uses `secret-tool` from libsecret). A store from an older Invoklet is
+encrypted the first time Invoklet starts. On a Linux machine without a Secret Service the values
+stay plain text, and the Secret Store window says so. A script asking for a secret that isn't
+there fails with `KeyNotFoundException`, whose message names the secret and the store. The
+command-line runner reads the same store. On macOS and Linux a script gets the key from Invoklet
+or the command-line runner that started it, so a script run some other way (`dotnet run`) can't
+read an encrypted store and says so. To use another file, for example on a build server, set the
 `INVOKLET_SECRETS_FILE` environment variable to its path.
 
 ## Sidebar navigation
@@ -328,8 +333,8 @@ var token = Util.GetSecret("api-token");
 ```
 
 Names are case-insensitive. A missing name raises `KeyNotFoundException` with the store's
-location. On Windows values are encrypted for your Windows account; on macOS and Linux
-they are plain text in an owner-only file. Expand **Storage and usage** to see its location.
+location. Values are encrypted for your account, with a key in the macOS Keychain or the
+Linux Secret Service on those systems (see above). Expand **Storage and usage** to see its location.
 `INVOKLET_SECRETS_FILE` selects a different store for the application and scripts; use an
 absolute path.
 
