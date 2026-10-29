@@ -8,7 +8,9 @@ description: Read and edit the notes and code of your .inv scripts in Obsidian w
 !!! warning "New file extension in 0.10.1"
     Invoklet scripts now use `.inv`. The plugin must explicitly support this extension;
     an older plugin that registers only `.rpad` will not recognize renamed files.
-    Plugin compatibility with `.inv` has not yet been verified for this release.
+    Invoklet Markdown 0.4.0 adds `.inv` support. Its local build and automated tests pass;
+    the plugin release must be published separately before it is available from the download link.
+    Disable the old RunPad Markdown plugin and install the new `invoklet-markdown` folder.
 
 A `.inv` script is a Markdown document, so it reads well outside Invoklet too. The
 **Invoklet Markdown** plugin for [Obsidian](https://obsidian.md) opens `.inv` files in
