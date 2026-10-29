@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Invoklet.Avalonia.Themes;
 using Invoklet.Connectors.Http;
 using Invoklet.Contracts.Connections;
-using Invoklet.Format.RPad;
+using Invoklet.Format.MdRun;
 using Invoklet.Services.Connections;
 using Invoklet.Services.Secrets;
 using Invoklet.Services;
@@ -68,11 +68,11 @@ public sealed class Ctx : IAsyncDisposable
     // The addresses are placeholders; no scenario connects to them.
     private static void SeedConnections(string temp)
     {
-        static RpadConnection Http(string name, string address) => new()
+        static MdRunConnection Http(string name, string address) => new()
         {
             Name = name,
             Driver = "http",
-            Params = new(StringComparer.Ordinal) { ["baseAddress"] = RpadValue.Of(address) },
+            Params = new(StringComparer.Ordinal) { ["baseAddress"] = MdRunValue.Of(address) },
         };
         var path = Path.Combine(temp, "connections.json");
         new FileConnectionStore(path).Save([Http("catalog", "https://catalog.example.com/"),
@@ -335,7 +335,7 @@ public static class Scenarios
         var window = c.Services.GetRequiredService<DependenciesWindow>();
         window.Width = 1100;
         window.Height = 680;
-        window.SetFrontMatter(ctrl.State.RpadDocument?.FrontMatter);
+        window.SetFrontMatter(ctrl.State.MdRunDocument?.FrontMatter);
         window.Show(c.Window);
         await Pump(1500);
         var vm = (DependenciesWindowViewModel)window.DataContext!;
@@ -363,29 +363,29 @@ public static class Scenarios
         var store = new FileConnectionStore(Path.GetFullPath(Path.Combine(c.Root, "..", "connections.json")));
         store.Save(
         [
-            new RpadConnection
+            new MdRunConnection
             {
                 Name = "billing", Driver = "http",
                 Params = new(StringComparer.Ordinal)
                 {
-                    ["baseAddress"] = RpadValue.Of("https://billing.example.com/api/"),
-                    ["headers"] = RpadValue.Map([new("Authorization", RpadValue.Of("Bearer ${secret:billing-token}")), new("Accept", RpadValue.Of("application/json"))]),
+                    ["baseAddress"] = MdRunValue.Of("https://billing.example.com/api/"),
+                    ["headers"] = MdRunValue.Map([new("Authorization", MdRunValue.Of("Bearer ${secret:billing-token}")), new("Accept", MdRunValue.Of("application/json"))]),
                 },
             },
-            new RpadConnection
+            new MdRunConnection
             {
                 Name = "inventory", Driver = "grpc",
-                Params = new(StringComparer.Ordinal) { ["address"] = RpadValue.Of("https://inventory.example.com:5001") },
+                Params = new(StringComparer.Ordinal) { ["address"] = MdRunValue.Of("https://inventory.example.com:5001") },
             },
-            new RpadConnection
+            new MdRunConnection
             {
                 Name = "shop", Driver = "sqlite",
-                Params = new(StringComparer.Ordinal) { ["file"] = RpadValue.Of("data/shop.db") },
+                Params = new(StringComparer.Ordinal) { ["file"] = MdRunValue.Of("data/shop.db") },
             },
-            new RpadConnection
+            new MdRunConnection
             {
                 Name = "github", Driver = "http",
-                Params = new(StringComparer.Ordinal) { ["baseAddress"] = RpadValue.Of("https://api.github.com/") },
+                Params = new(StringComparer.Ordinal) { ["baseAddress"] = MdRunValue.Of("https://api.github.com/") },
             },
         ], null);
         var registry = new ConnectionDriverRegistry();
@@ -428,16 +428,16 @@ public static class Scenarios
         await using var c = await Ctx.Create(1100, 640, p => p.CSharp.InlayHintsEnabled = false, sampleConnections: false);
         c.Services.GetRequiredService<IConnectionStore>().Save(
         [
-            new RpadConnection
+            new MdRunConnection
             {
                 Name = "billing", Driver = "http",
                 Params = new(StringComparer.Ordinal)
                 {
-                    ["baseAddress"] = RpadValue.Of("https://billing.example.com/api/"),
-                    ["headers"] = RpadValue.Map([new("Authorization", RpadValue.Of("Bearer ${secret:billing-token}"))]),
+                    ["baseAddress"] = MdRunValue.Of("https://billing.example.com/api/"),
+                    ["headers"] = MdRunValue.Map([new("Authorization", MdRunValue.Of("Bearer ${secret:billing-token}"))]),
                 },
             },
-            new RpadConnection { Name = "github", Driver = "http", Params = new(StringComparer.Ordinal) { ["baseAddress"] = RpadValue.Of("https://api.github.com/") } },
+            new MdRunConnection { Name = "github", Driver = "http", Params = new(StringComparer.Ordinal) { ["baseAddress"] = MdRunValue.Of("https://api.github.com/") } },
         ], null);
         c.Services.GetRequiredService<ISecretStore>().Save([new Secret("billing-token", "t0k")], null);
         var (tab, ctrl) = await c.Open(c.AddScript("invoices.rpad", ConnectionScript));
@@ -446,7 +446,7 @@ public static class Scenarios
         var window = c.Services.GetRequiredService<DependenciesWindow>();
         window.Width = 1000;
         window.Height = 560;
-        window.SetFrontMatter(ctrl.State.RpadDocument?.FrontMatter);
+        window.SetFrontMatter(ctrl.State.MdRunDocument?.FrontMatter);
         window.Show(c.Window);
         await Pump(1000);
         window.FindControl<TabControl>("Tabs")?.SetValue(TabControl.SelectedItemProperty, window.FindControl<TabItem>("ConnectionsTab"));
