@@ -1,18 +1,18 @@
 ---
 title: View your scripts in Obsidian
-description: Read and edit the notes and code of your .rpad scripts in Obsidian with the RunPad Markdown plugin.
+description: Read and edit the notes and code of your .rpad scripts in Obsidian with the Invoklet Markdown plugin.
 ---
 
 # View your scripts in Obsidian
 
-A `.rpad` script is a Markdown document, so it reads well outside RunPad too. The
-**RunPad Markdown** plugin for [Obsidian](https://obsidian.md) opens `.rpad` files in
+A `.rpad` script is a Markdown document, so it reads well outside Invoklet too. The
+**Invoklet Markdown** plugin for [Obsidian](https://obsidian.md) opens `.rpad` files in
 Obsidian's own Markdown editor: the title and notes look like any other note, the code shows
-as a highlighted C# or Visual Basic block, and the parts RunPad needs are protected from
+as a highlighted C# or Visual Basic block, and the parts Invoklet needs are protected from
 accidental edits. Use it to browse your scripts, write the notes around the code, or keep
 them next to the rest of your knowledge base.
 
-[Download the plugin](https://github.com/tervforge/obsidian-rpad/releases/latest/download/runpad-markdown.zip){ .md-button .md-button--primary }
+[Download the plugin](https://github.com/tervforge/obsidian-rpad/releases/latest/download/invoklet-markdown.zip){ .md-button .md-button--primary }
 [Installation](#install-the-plugin){ .md-button }
 
 <figure markdown="span">
@@ -37,41 +37,41 @@ them next to the rest of your knowledge base.
 - **Your language.** The plugin follows Obsidian's interface language and is translated into
   16 languages.
 
-The plugin does not run or debug scripts — open them in RunPad for that.
+The plugin does not run or debug scripts — open them in Invoklet for that.
 
 ## Install the plugin
 
 You need Obsidian 1.8.7 or later.
 
-1. Download [**runpad-markdown.zip**](https://github.com/tervforge/obsidian-rpad/releases/latest/download/runpad-markdown.zip)
+1. Download [**invoklet-markdown.zip**](https://github.com/tervforge/obsidian-rpad/releases/latest/download/invoklet-markdown.zip)
    from the [latest release](https://github.com/tervforge/obsidian-rpad/releases/latest).
-2. In Obsidian, choose **Open folder as vault** and select the **RunPad Queries** folder in
-   your Documents folder — the folder RunPad keeps your scripts in (see
+2. In Obsidian, choose **Open folder as vault** and select the **Invoklet Queries** folder in
+   your Documents folder — the folder Invoklet keeps your scripts in (see
    [Where your scripts live](scripts.md#where-your-scripts-live)). Any other vault works too;
    the plugin opens every `.rpad` file in it.
 3. Open **Settings → Community plugins**, turn off *Restricted mode* if it is on, and click
    the folder icon next to *Installed plugins* to open the vault's plugins folder.
-4. Unpack the archive into that folder. It contains a `runpad-markdown` folder with the
+4. Unpack the archive into that folder. It contains a `invoklet-markdown` folder with the
    plugin's three files (`main.js`, `manifest.json` and `styles.css`), so you end up with
-   `.obsidian/plugins/runpad-markdown/`.
-5. Back in **Community plugins**, click the reload icon and turn on **RunPad Markdown**.
+   `.obsidian/plugins/invoklet-markdown/`.
+5. Back in **Community plugins**, click the reload icon and turn on **Invoklet Markdown**.
 
 Your `.rpad` files now appear in Obsidian's file list and open in the Markdown editor. If
 they do not appear, turn on **Settings → Files and links → Detect all file extensions**.
 
 To **update** the plugin, unpack the archive from the new release over the old
-`runpad-markdown` folder, then turn **RunPad Markdown** off and on again (or restart Obsidian).
+`invoklet-markdown` folder, then turn **Invoklet Markdown** off and on again (or restart Obsidian).
 
 ## Things to know
 
 - Obsidian keeps its settings in a `.obsidian` folder inside the vault. Leave it in place.
-  RunPad 0.6.0 hides folders whose names start with a dot, including `.obsidian`, and their
+  Invoklet 0.6.0 hides folders whose names start with a dot, including `.obsidian`, and their
   contents from the **Queries** tree; it does not delete or change them on disk.
-  In RunPad 0.5.0 those folders are still visible.
-- Avoid editing the same script in RunPad and Obsidian at the same time. RunPad rewrites the
-  front matter when it saves (see [How RunPad edits the file](scripts.md#how-runpad-edits-the-file)),
+  In Invoklet 0.5.0 those folders are still visible.
+- Avoid editing the same script in Invoklet and Obsidian at the same time. Invoklet rewrites the
+  front matter when it saves (see [How Invoklet edits the file](scripts.md#how-invoklet-edits-the-file)),
   so make changes in one app and save before switching to the other.
-  If another program changed the disk file, RunPad now asks before replacing it; choose
+  If another program changed the disk file, Invoklet now asks before replacing it; choose
   Save As to keep both versions, Overwrite to replace the disk version, or Cancel to
   keep editing. It does not automatically merge or reload external edits.
 - A file whose structure the plugin does not recognise — no front matter, a missing or

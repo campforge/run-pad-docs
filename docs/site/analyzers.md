@@ -5,7 +5,7 @@ description: Compiler diagnostics, Roslyn IDE analyzers and quick fixes in C# sc
 
 # Diagnostics and analyzers
 
-While you edit a C# script, RunPad analyzes it in the background and underlines problems.
+While you edit a C# script, Invoklet analyzes it in the background and underlines problems.
 This page explains where those messages come from, how quick fixes work, and what the
 analysis does not promise.
 
@@ -23,7 +23,7 @@ analysis does not promise.
 | Assembly Explorer analysis | none | The Assembly Explorer's analysis pane | When you ask for it |
 
 **Compiler diagnostics** are the same errors and warnings the build reports. In the
-editor they appear about half a second after you stop typing. When you run, RunPad
+editor they appear about half a second after you stop typing. When you run, Invoklet
 prints every compiler diagnostic in the Results tab as
 `(line,column): severity ID: message`, with line numbers counted in the code block. Any
 error stops the run; warnings do not.
@@ -50,7 +50,7 @@ Download [`analyzer-diagnostics.rpad`](examples/analyzer-diagnostics.rpad) and o
 **It is meant to be read in the editor, not run.** The code block is:
 
 ```csharp
-var settings = JsonSerializer.Serialize(new { Name = "RunPad", Version = 1 });
+var settings = JsonSerializer.Serialize(new { Name = "Invoklet", Version = 1 });
 Console.WriteLine(settings);
 
 var small = byte.Parse("300");
@@ -71,7 +71,7 @@ What you see in the editor:
    `using System.Text.Json;` first.
 3. Choose `using System.Text.Json;`.
 
-RunPad adds `System.Text.Json` to the `namespaces:` list in the script's front matter
+Invoklet adds `System.Text.Json` to the `namespaces:` list in the script's front matter
 rather than inserting a `using` line into the code, and the error disappears.
 
 ## Quick fixes and the lightbulb

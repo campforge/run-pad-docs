@@ -5,18 +5,18 @@ using Avalonia.VisualTree;
 using AvaloniaEdit;
 using Avalonia.Controls;
 using Microsoft.Extensions.DependencyInjection;
-using RunPad.Avalonia.Themes;
-using RunPad.Connectors.Http;
-using RunPad.Contracts.Connections;
-using RunPad.Format.RPad;
-using RunPad.Services.Connections;
-using RunPad.Services.Secrets;
-using RunPad.Services;
-using RunPad.Services.Scaling;
-using RunPad.UserControls;
-using RunPad.UserControls.Models;
-using RunPad.Windows;
-using RunPad.Windows.Models;
+using Invoklet.Avalonia.Themes;
+using Invoklet.Connectors.Http;
+using Invoklet.Contracts.Connections;
+using Invoklet.Format.RPad;
+using Invoklet.Services.Connections;
+using Invoklet.Services.Secrets;
+using Invoklet.Services;
+using Invoklet.Services.Scaling;
+using Invoklet.UserControls;
+using Invoklet.UserControls.Models;
+using Invoklet.Windows;
+using Invoklet.Windows.Models;
 using static Shots.Program;
 
 namespace Shots;
@@ -34,18 +34,18 @@ public sealed class Ctx : IAsyncDisposable
     public static async Task<Ctx> Create(double width = 1100, double height = 700, Action<MemoryPrefs>? configure = null,
         bool sampleConnections = true)
     {
-        var temp = Directory.CreateTempSubdirectory("runpad-shots").FullName;
-        var root = Path.Combine(temp, "RunPad Queries");
+        var temp = Directory.CreateTempSubdirectory("Invoklet-shots").FullName;
+        var root = Path.Combine(temp, "Invoklet Queries");
         Directory.CreateDirectory(root);
         var prefs = new MemoryPrefs();
         prefs.Appearance.Mode = Program.Light ? ThemeMode.Light : ThemeMode.Dark;
-        // RunPad's own interface themes; the editor keeps its default Dark+ / Light+ colors.
-        prefs.Appearance.DarkInterfaceTheme = "RunPad Midnight";
-        prefs.Appearance.LightInterfaceTheme = "RunPad Warm Light";
+        // Invoklet's own interface themes; the editor keeps its default Dark+ / Light+ colors.
+        prefs.Appearance.DarkInterfaceTheme = "Invoklet Midnight";
+        prefs.Appearance.LightInterfaceTheme = "Invoklet Warm Light";
         prefs.Appearance.RestoreUnsavedTabs = false;
-        // The debugger the first-run setup installs on Windows, unless RUNPAD_NETCOREDBG names another.
-        prefs.Debugger.DebuggerPath = Environment.GetEnvironmentVariable("RUNPAD_NETCOREDBG") is { Length: > 0 } dbg ? dbg
-            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RunPad", "netcoredbg", "netcoredbg", "netcoredbg.exe");
+        // The debugger the first-run setup installs on Windows, unless Invoklet_NETCOREDBG names another.
+        prefs.Debugger.DebuggerPath = Environment.GetEnvironmentVariable("Invoklet_NETCOREDBG") is { Length: > 0 } dbg ? dbg
+            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Invoklet", "netcoredbg", "netcoredbg", "netcoredbg.exe");
         prefs.Layout.SidebarWidth = 220;
         configure?.Invoke(prefs);
         if (sampleConnections) SeedConnections(temp);
@@ -163,13 +163,13 @@ public static class Scenarios
 
     public static void ScrollResultsHome(Ctx c)
     {
-        foreach (var panel in c.Window.GetVisualDescendants().OfType<RunPad.Avalonia.HtmlRenderer.HtmlPanel>())
+        foreach (var panel in c.Window.GetVisualDescendants().OfType<Invoklet.Avalonia.HtmlRenderer.HtmlPanel>())
         {
-            var bar = (Avalonia.Controls.Primitives.ScrollBar?)typeof(RunPad.Avalonia.HtmlRenderer.HtmlPanel)
+            var bar = (Avalonia.Controls.Primitives.ScrollBar?)typeof(Invoklet.Avalonia.HtmlRenderer.HtmlPanel)
                 .GetField("_verticalScrollBar", BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(panel);
             if (bar is null) continue;
             bar.Value = 0;
-            typeof(RunPad.Avalonia.HtmlRenderer.HtmlPanel).GetMethod("UpdateScrollOffsets", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(panel, null);
+            typeof(Invoklet.Avalonia.HtmlRenderer.HtmlPanel).GetMethod("UpdateScrollOffsets", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(panel, null);
         }
     }
 
@@ -271,7 +271,7 @@ public static class Scenarios
         // The caret on the unknown JsonSerializer, and its lightbulb menu open.
         await Caret(ctrl, 1, 20);
         await Pump(3000);
-        var margin = ctrl.State.Editor.TextArea.LeftMargins.OfType<RunPad.Avalonia.CodeTextEditor.CodeFixMargin>().First();
+        var margin = ctrl.State.Editor.TextArea.LeftMargins.OfType<Invoklet.Avalonia.CodeTextEditor.CodeFixMargin>().First();
         margin.ShowFixMenu(margin.Fixes);
         await Pump(1500);
         Capture(c.Window, "diagnostics.png");
@@ -390,8 +390,8 @@ public static class Scenarios
         ], null);
         var registry = new ConnectionDriverRegistry();
         registry.Register(new HttpConnectionDriver());
-        registry.Register(new RunPad.Connectors.Grpc.GrpcConnectionDriver());
-        registry.Register(new RunPad.Connectors.Sqlite.SqliteConnectionDriver());
+        registry.Register(new Invoklet.Connectors.Grpc.GrpcConnectionDriver());
+        registry.Register(new Invoklet.Connectors.Sqlite.SqliteConnectionDriver());
         var window = new ConnectionsWindow(new ConnectionsWindowViewModel(store, registry, secrets)) { Width = 820, Height = 560 };
         window.Show(c.Window);
         await Pump(1500);

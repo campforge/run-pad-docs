@@ -1,46 +1,46 @@
 ---
 title: Command line and .linq import
-description: Run .rpad scripts from a terminal with the runpad CLI and convert .linq queries.
+description: Run .rpad scripts from a terminal with the invoklet CLI and convert .linq queries.
 ---
 
 # Command line and .linq import
 
-## The `runpad` command-line runner
+## The `invoklet` command-line runner
 
-`runpad` compiles and runs the code block of a `.rpad` file in a terminal, without the
-RunPad window and without the debugger. It is useful for automation and CI. It runs C#
+`invoklet` compiles and runs the code block of a `.rpad` file in a terminal, without the
+Invoklet window and without the debugger. It is useful for automation and CI. It runs C#
 and Visual Basic scripts and honors `kind`, `packages`, `references` (including the path
-macros) and `namespaces` the same way the RunPad window does.
+macros) and `namespaces` the same way the Invoklet window does.
 
 !!! info "Getting the runner"
-    The runner is not included in the release packages. On Linux, the `runpad` command
-    that the `.deb` package puts on `PATH` starts the RunPad window, not this runner.
+    The runner is not included in the release packages. On Linux, the `invoklet` command
+    that the `.deb` package puts on `PATH` starts the Invoklet window, not this runner.
 
-    The runner is the `RunPad.Cli` project in the
-    [RunPad source code](https://github.com/tervforge/invoklet). Build it from a clone with
+    The runner is the `Invoklet.Cli` project in the
+    [Invoklet source code](https://github.com/tervforge/invoklet). Build it from a clone with
     the .NET 10 SDK:
 
     ```bash
-    dotnet build src/main/RunPad.Cli -c Release
-    dotnet src/main/RunPad.Cli/bin/Release/net10.0/runpad.dll path/to/script.rpad
+    dotnet build src/main/Invoklet.Cli -c Release
+    dotnet src/main/Invoklet.Cli/bin/Release/net10.0/invoklet.dll path/to/script.rpad
     ```
 
     Or run it straight from source:
 
     ```bash
-    dotnet run --project src/main/RunPad.Cli -- path/to/script.rpad
+    dotnet run --project src/main/Invoklet.Cli -- path/to/script.rpad
     ```
 
-    The build also produces a native launcher, `runpad` (`runpad.exe` on Windows), that
+    The build also produces a native launcher, `invoklet` (`invoklet.exe` on Windows), that
     works without the `dotnet` prefix if it can find the .NET runtime. With a
     non-standard .NET install, for example one from Homebrew or Linuxbrew, it may not, so
-    use the `dotnet …/runpad.dll` form, which always works.
+    use the `dotnet …/invoklet.dll` form, which always works.
 
 ### Usage
 
 ```text
-runpad [run] [options] <script.rpad> [--] [script arguments...]
-runpad convert <input.linq> [output.rpad]
+invoklet [run] [options] <script.rpad> [--] [script arguments...]
+invoklet convert <input.linq> [output.rpad]
 ```
 
 Running with no arguments prints this usage and exits with code 2. `--help` and
@@ -57,8 +57,8 @@ Running with no arguments prints this usage and exits with code 2. `--help` and
   (`latest`: the newest stable one). If that version isn't installed, the newest SDK runs it
   and a warning goes to standard error.
 - Each run compiles into a new temporary folder that is deleted afterwards. The runner
-  does not use the RunPad window's build cache.
-- NuGet sources come from RunPad's own `NuGet.Config` if the RunPad window has created
+  does not use the Invoklet window's build cache.
+- NuGet sources come from Invoklet's own `NuGet.Config` if the Invoklet window has created
   one; otherwise your normal NuGet settings are used.
 - [Interactive input](results.md#interactive-input) is not supported. A script that calls
   `Util.ReadLine` waits until you press ++ctrl+c++.
@@ -66,10 +66,10 @@ Running with no arguments prints this usage and exits with code 2. `--help` and
 ### Script arguments and options
 
 ```bash
-runpad report.rpad "April totals" 2026
-runpad run report.rpad -- --kind --help
-runpad --kind program --sdk 10 report.rpad -- "April totals"
-runpad --compile-only report.rpad
+invoklet report.rpad "April totals" 2026
+invoklet run report.rpad -- --kind --help
+invoklet --kind program --sdk 10 report.rpad -- "April totals"
+invoklet --compile-only report.rpad
 ```
 
 Arguments following the script replace the values resolved from its declarations and selected
@@ -112,7 +112,7 @@ unhandled exception. Text on standard error alone does not fail the run. Otherwi
 ### Example
 
 ```console
-$ dotnet runpad.dll debugging-loop.rpad
+$ dotnet invoklet.dll debugging-loop.rpad
 i = 1, square = 1, running total = 1
 i = 2, square = 4, running total = 5
 i = 3, square = 9, running total = 14
@@ -124,13 +124,13 @@ Sum of squares 1..5
 
 ## Importing .linq queries
 
-RunPad converts `.linq` query files to `.rpad` scripts.
+Invoklet converts `.linq` query files to `.rpad` scripts.
 
-- **In RunPad:** choose **File → Import .linq Query...** and pick the `.linq` file.
-  RunPad writes a `.rpad` file with the same name **next to the `.linq` file** and opens
+- **In Invoklet:** choose **File → Import .linq Query...** and pick the `.linq` file.
+  Invoklet writes a `.rpad` file with the same name **next to the `.linq` file** and opens
   it. If that name is taken, it adds a number (`Query 2.rpad`). The file appears in the
-  file tree only if it is inside your RunPad Queries folder.
-- **From a terminal:** `runpad convert query.linq` writes `query.rpad` next to the input.
+  file tree only if it is inside your Invoklet Queries folder.
+- **From a terminal:** `invoklet convert query.linq` writes `query.rpad` next to the input.
   Give a second argument to choose the output path. The command **overwrites** an
   existing output file.
 
@@ -179,7 +179,7 @@ prices
     .Dump("Formatted prices");
 ```
 
-`runpad convert sample-query.linq` produces (with the LINQPad-compatible import profile):
+`invoklet convert sample-query.linq` produces (with the LINQPad-compatible import profile):
 
 ````markdown
 ---

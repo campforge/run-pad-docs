@@ -8,7 +8,7 @@ kind: Program
 # Program kind
 
 With `kind: Program` you write a `Main` method plus any fields, helper methods and
-types it needs. RunPad supplies the surrounding class and calls `Main` for you.
+types it needs. Invoklet supplies the surrounding class and calls `Main` for you.
 
 ```csharp run
 void Main()

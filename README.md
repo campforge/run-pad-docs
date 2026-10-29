@@ -9,5 +9,5 @@ Invoklet itself — a native, fast, cross-platform C# scratchpad for .NET — li
 - `docs/site/` — the pages (Markdown), screenshots and downloadable examples; navigation is in
   `mkdocs.yml`.
 - `docs/GITHUB-PAGES.md` — how the site is built, checked and deployed, and how to preview it locally.
-- `scripts/screenshots/` — renders the guide's screenshots from RunPad itself, in dark and light.
+- `scripts/screenshots/` — renders the guide's screenshots from Invoklet itself, in dark and light.
 - `.github/workflows/docs.yml` — builds every pull request and deploys `main` to GitHub Pages.

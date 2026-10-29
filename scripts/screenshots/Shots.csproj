@@ -1,20 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <!-- Renders the user guide's screenshots from RunPad itself; see docs/GITHUB-PAGES.md. -->
+  <!-- Renders the user guide's screenshots from Invoklet itself; see docs/GITHUB-PAGES.md. -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <!-- RunPad's assemblies grant their internals to its UI test assembly; taking its name lets the
+    <!-- Invoklet's assemblies grant their internals to its UI test assembly; taking its name lets the
          scenarios open tabs, set breakpoints and open menus the way those tests do. -->
-    <AssemblyName>RunPad.Runtime.UI.Tests</AssemblyName>
+    <AssemblyName>Invoklet.Runtime.UI.Tests</AssemblyName>
     <RootNamespace>Shots</RootNamespace>
     <NoWarn>$(NoWarn);CS1998;AVLN3001</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <!-- RunPad cloned next to this repository, as for the other scripts here. -->
-    <ProjectReference Include="..\..\..\invoklet\src\main\RunPad\RunPad.csproj" />
-    <!-- The same versions as RunPad's Directory.Packages.props. -->
+    <!-- Invoklet cloned next to this repository, as for the other scripts here. -->
+    <ProjectReference Include="..\..\..\invoklet\src\main\Invoklet\Invoklet.csproj" />
+    <!-- The same versions as Invoklet's Directory.Packages.props. -->
     <PackageReference Include="Avalonia.Headless" Version="12.1.4" />
     <PackageReference Include="Avalonia.Skia" Version="12.1.4" />
   </ItemGroup>

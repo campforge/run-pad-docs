@@ -1,10 +1,10 @@
 # User documentation published to GitHub Pages (https://tervforge.github.io/invoklet-docs/).
 # Only docs/site is published.
 # Build locally: see docs/GITHUB-PAGES.md.
-site_name: RunPad
-site_description: User guide for RunPad, a native, fast, cross-platform C# scratchpad for .NET.
+site_name: Invoklet
+site_description: User guide for Invoklet, a native, fast, cross-platform C# scratchpad for .NET.
 site_url: https://tervforge.github.io/invoklet-docs/
-copyright: Copyright &copy; 2026 Vadim S (hobobyte). RunPad is licensed under GPL-3.0.
+copyright: Copyright &copy; 2026 Vadim S (hobobyte). Invoklet is licensed under GPL-3.0.
 
 docs_dir: docs/site
 site_dir: site
@@ -16,7 +16,7 @@ nav:
       - Installing on macOS: install-macos.md
       - Quick start: quick-start.md
       - Examples: examples.md
-  - Using RunPad:
+  - Using Invoklet:
       - Scripts and .rpad files: scripts.md
       - Editor: editor.md
       - Diagnostics and analyzers: analyzers.md
@@ -71,7 +71,7 @@ extra:
       name: Tervforge
     - icon: fontawesome/brands/github
       link: https://github.com/tervforge/invoklet
-      name: RunPad on GitHub
+      name: Invoklet on GitHub
   generator: false
 
 extra_css:

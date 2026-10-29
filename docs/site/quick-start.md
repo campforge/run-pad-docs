@@ -1,16 +1,16 @@
 ---
 title: Quick start
-description: Write, run and save a first C# script in RunPad.
+description: Write, run and save a first C# script in Invoklet.
 ---
 
 # Quick start
 
-This walkthrough takes about five minutes. It assumes RunPad starts without the setup
+This walkthrough takes about five minutes. It assumes Invoklet starts without the setup
 window, or that you have finished it (see [Installation and first run](install.md)).
 
 ## 1. Create a script
 
-Choose **File → New File** or press ++ctrl+n++. RunPad opens an empty, untitled tab (a Program
+Choose **File → New File** or press ++ctrl+n++. Invoklet opens an empty, untitled tab (a Program
 script starts with an empty `Main` method).
 New files use the language and kind set in **Preferences → Editor → New file defaults**,
 which are C# and *Statements* unless you changed them.
@@ -29,7 +29,7 @@ Paste this into the editor:
 
 ```csharp
 var languages = new[] { "C#", "Visual Basic" };
-Console.WriteLine($"Hello from RunPad! {languages.Length} languages are supported.");
+Console.WriteLine($"Hello from Invoklet! {languages.Length} languages are supported.");
 
 languages
     .Select((name, index) => new { Position = index + 1, Name = name, Letters = name.Length })
@@ -48,7 +48,7 @@ strip under the editor shows *Process* while the script compiles and runs, then
 
 The **Results** tab shows:
 
-- the plain text line `Hello from RunPad! 2 languages are supported.`;
+- the plain text line `Hello from Invoklet! 2 languages are supported.`;
 - a block headed **Supported languages** with a two-row table:
 
 | Position | Name | Letters |
@@ -61,15 +61,15 @@ too long, press ++shift+f5++ or click the **Stop** button next to Run.
 
 ## 4. Save it
 
-Press ++ctrl+s++. Because the tab is untitled, RunPad asks where to save it. Save it in
-the **RunPad Queries** folder in your Documents folder so it appears in the file tree on
+Press ++ctrl+s++. Because the tab is untitled, Invoklet asks where to save it. Save it in
+the **Invoklet Queries** folder in your Documents folder so it appears in the file tree on
 the left. Once a file has a name, every Run saves it first.
 
 ## Try the downloadable version
 
 The same script, with explanatory Markdown around it, is available as
 [`quick-start.rpad`](examples/quick-start.rpad). Save it in your
-`Documents/RunPad Queries` folder and click it in RunPad's file tree, or open it from
+`Documents/Invoklet Queries` folder and click it in Invoklet's file tree, or open it from
 anywhere with **File → Open...** (++ctrl+o++).
 
 ## Next steps

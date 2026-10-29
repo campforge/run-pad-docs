@@ -50,7 +50,7 @@ packages:
   Humanizer.Core: 2.14.1
 ```
 
-When you run the script, RunPad restores the packages itself (no `dotnet restore`
+When you run the script, Invoklet restores the packages itself (no `dotnet restore`
 command is involved) and caches the result, so later runs with the same packages and code
 skip the restore and compile steps. Restoring a package that is not in your local cache
 needs access to its package source.
@@ -66,10 +66,10 @@ Sources**. There you can add, remove and reorder sources (**Move to Top**, **Mov
 - **Authentication** — *None*, or *Basic* with a username and a password or personal
   access token.
 
-These sources are used both for search and for restoring every script. RunPad keeps them
+These sources are used both for search and for restoring every script. Invoklet keeps them
 in its own `NuGet.Config` in its data folder, created the first time from your effective
 NuGet settings. Your global NuGet settings are not changed. See
-[Where RunPad stores data](reference.md#where-runpad-stores-data).
+[Where Invoklet stores data](reference.md#where-invoklet-stores-data).
 
 ## Assembly references
 
@@ -87,13 +87,13 @@ references:
 - Other `.dll` files in the same folder that the referenced assembly depends on are
   picked up automatically.
 - Relative paths such as `lib/Helpers.dll` are resolved next to the `.rpad` file,
-  consistently in RunPad, the CLI and IntelliSense. An unsaved tab has no containing
+  consistently in Invoklet, the CLI and IntelliSense. An unsaved tab has no containing
   folder yet: save it first or use an absolute path.
 - A missing DLL produces a warning and is not loaded; compilation also fails if the
   script needs types from that assembly.
 - Paths are written with `/`. Existing Windows drive paths (`C:\Tools\Helpers.dll`)
   and UNC paths (`\\server\share\Helpers.dll`) are still recognized. On macOS/Linux,
-  an unavailable Windows path produces an error; RunPad does not guess a mount point.
+  an unavailable Windows path produces an error; Invoklet does not guess a mount point.
   Ambiguous drive-relative paths such as `C:lib/Helpers.dll` are rejected.
 - On macOS/Linux a backslash in a relative or Unix path can be a literal filename
   character, so it is preserved. Use `/` for directory separators.
@@ -102,17 +102,17 @@ references:
   check its references after moving it. No referenced files are copied.
 
 Macros remain unchanged in the saved header and are expanded only when resolving
-references, in RunPad, the command-line runner and IntelliSense:
+references, in Invoklet, the command-line runner and IntelliSense:
 
 | Macro | Expands to |
 | --- | --- |
 | `$(CurrentQueryPath)` | The folder that contains the running `.rpad` file. Requires a saved script; reported as an error for an unsaved tab. |
 | `$(MyDocuments)` | Your Documents folder. |
-| `$(RuntimeDirectory)` | The folder of the .NET runtime that RunPad itself runs on. |
+| `$(RuntimeDirectory)` | The folder of the .NET runtime that Invoklet itself runs on. |
 
 ### Project references are not supported
 
-RunPad compiles scripts in-process with Roslyn and does not use MSBuild, so a script
+Invoklet compiles scripts in-process with Roslyn and does not use MSBuild, so a script
 cannot reference a `.csproj` or `.vbproj`. If `references` contains one, the run stops
 with:
 

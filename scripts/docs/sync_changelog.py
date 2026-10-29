@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Copies RunPad's CHANGELOG.md into the site as docs/site/changelog.md.
+"""Copies Invoklet's CHANGELOG.md into the site as docs/site/changelog.md.
 
 CHANGELOG.md in the code repository is the only place release notes are written; this page is a
 generated copy. Links relative to the code repository (ROADMAP.md, src/...) are pointed at its
@@ -16,7 +16,7 @@ REPO_URL = "https://github.com/tervforge/invoklet/blob/main/"
 FRONT_MATTER = (
     "---\n"
     "title: Changelog\n"
-    "description: What changed in each RunPad release.\n"
+    "description: What changed in each Invoklet release.\n"
     "---\n\n"
     "<!-- Generated from CHANGELOG.md in tervforge/invoklet by scripts/docs/sync_changelog.py; "
     "edit it there. -->\n\n"

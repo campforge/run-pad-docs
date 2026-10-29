@@ -3,8 +3,8 @@
 The user guide is built with [MkDocs](https://www.mkdocs.org/) and
 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and prepared for publication to
 <https://tervforge.github.io/invoklet-docs/> by `.github/workflows/docs.yml`. The site lives in its own
-repository, `tervforge/invoklet-docs`. The code it documents (examples run with `RunPad.Cli`, icon
-sources) is in the code repository, `tervforge/run-pad`; the commands below expect it cloned next to
+repository, `tervforge/invoklet-docs`. The code it documents (examples run with `Invoklet.Cli`, icon
+sources) is in the code repository, `tervforge/invoklet`; the commands below expect it cloned next to
 this one as `../invoklet`.
 
 This file is not part of the published site.
@@ -20,7 +20,7 @@ This file is not part of the published site.
 - Downloadable examples: `docs/site/examples/*.rpad` and `*.linq` are copied as static
   files.
 - Icons: `docs/site/assets/app-icon.svg` (also used on the Tervforge home page) and
-  `docs/site/assets/favicon.png` (copy of `src/main/RunPad/Assets/runpad.png` in the code
+  `docs/site/assets/favicon.png` (copy of `src/main/Invoklet/Assets/invoklet.png` in the code
   repository).
 - The theme uses no web fonts (`theme.font: false`) and no repository widget, so the
   pages make no third-party requests. `scripts/docs/check_site_links.py` fails the build if
@@ -66,7 +66,7 @@ repository is renamed or a custom domain is configured, update both.
   the repository belongs to an organization on GitHub Enterprise Cloud that restricts
   Pages access. Only the built `docs/site` content is published; internal documents in
   the repository stay private.
-- The guide links to the releases page and the source code in `tervforge/run-pad`. While
+- The guide links to the releases page and the source code in `tervforge/invoklet`. While
   that repository is private, anonymous readers cannot open those links.
 
 ## Building locally
@@ -74,11 +74,11 @@ repository is renamed or a custom domain is configured, update both.
 Use an isolated virtual environment, not a global install:
 
 ```bash
-python3 -m venv /tmp/runpad-docs-venv
-/tmp/runpad-docs-venv/bin/pip install -r requirements-docs.txt
-/tmp/runpad-docs-venv/bin/mkdocs serve              # preview at http://127.0.0.1:8000/invoklet-docs/
-/tmp/runpad-docs-venv/bin/mkdocs build --strict     # output in ./site (git-ignored)
-/tmp/runpad-docs-venv/bin/python scripts/docs/check_site_links.py site --site-url https://tervforge.github.io/invoklet-docs/
+python3 -m venv /tmp/invoklet-docs-venv
+/tmp/invoklet-docs-venv/bin/pip install -r requirements-docs.txt
+/tmp/invoklet-docs-venv/bin/mkdocs serve              # preview at http://127.0.0.1:8000/invoklet-docs/
+/tmp/invoklet-docs-venv/bin/mkdocs build --strict     # output in ./site (git-ignored)
+/tmp/invoklet-docs-venv/bin/python scripts/docs/check_site_links.py site --site-url https://tervforge.github.io/invoklet-docs/
 ```
 
 `requirements-docs.txt` pins `mkdocs`, `mkdocs-material`, `pymdown-extensions` and
@@ -92,8 +92,8 @@ Every `.rpad` example except `analyzer-diagnostics.rpad` should run cleanly with
 command-line runner (no network, files or packages needed):
 
 ```bash
-dotnet build ../invoklet/src/main/RunPad.Cli -c Release
-for f in docs/site/examples/*.rpad; do dotnet ../invoklet/src/main/RunPad.Cli/bin/Release/net10.0/runpad.dll "$f"; done
+dotnet build ../invoklet/src/main/Invoklet.Cli -c Release
+for f in docs/site/examples/*.rpad; do dotnet ../invoklet/src/main/Invoklet.Cli/bin/Release/net10.0/invoklet.dll "$f"; done
 ```
 
 `analyzer-diagnostics.rpad` is expected to stop with `error CS0103` (exit code 1). The
@@ -102,21 +102,21 @@ an example changes.
 
 ## Screenshots
 
-Screenshots live in `docs/site/assets/screenshots/`. Each RunPad screenshot comes in two
+Screenshots live in `docs/site/assets/screenshots/`. Each Invoklet screenshot comes in two
 files, `name.png` (dark) and `name_light.png` (light), shown with `#only-dark` and
 `#only-light` so a page follows the reader's theme. `mkdocs build --strict` fails if an
 image link is broken.
 
-They are rendered from RunPad itself, not drawn: `scripts/screenshots` is a small program
-that opens RunPad's real main window and dialogs headless (Avalonia's headless platform
-with Skia), drives them through the same internal hooks as RunPad's UI tests and saves
+They are rendered from Invoklet itself, not drawn: `scripts/screenshots` is a small program
+that opens Invoklet's real main window and dialogs headless (Avalonia's headless platform
+with Skia), drives them through the same internal hooks as Invoklet's UI tests and saves
 each window at 2× scale. Scripts really run, the debugger really stops and the package
-search really queries nuget.org. Every scenario starts a fresh RunPad with default
-settings kept in memory and a temporary RunPad Queries folder filled from
+search really queries nuget.org. Every scenario starts a fresh Invoklet with default
+settings kept in memory and a temporary Invoklet Queries folder filled from
 `docs/site/examples`, so the captures never show your own settings, scripts or file paths.
 
 To regenerate them after a release (Windows, with `../invoklet` checked out at that
-release, a .NET 10 SDK, the `netcoredbg` that RunPad's first-run setup installs or
+release, a .NET 10 SDK, the `netcoredbg` that Invoklet's first-run setup installs or
 `RUNPAD_NETCOREDBG` pointing at one, and network access):
 
 ```bash
@@ -141,8 +141,8 @@ or a feature changes, adjust its scenario in `Scenarios.cs` and the image's alt 
 | `dependencies` | `dependencies` | Packages and references | Online search for Humanizer, Humanizer.Core selected; the local cache filtered to Humanizer |
 | `explorer` | `assembly-explorer` | Assembly Explorer | System.Linq.dll searched for `Enumerable.Where`, the first result decompiled |
 
-The interface uses RunPad's own themes, RunPad Midnight and RunPad Warm Light, with the
-editor's default Dark+ and Light+ colors. The window chrome is RunPad's own Windows title bar; dialogs are captured without the
+The interface uses Invoklet's own themes, Invoklet Midnight and Invoklet Warm Light, with the
+editor's default Dark+ and Light+ colors. The window chrome is Invoklet's own Windows title bar; dialogs are captured without the
 system's title bar. Numbers are formatted with the invariant culture. The GitHub and
 Obsidian screenshots (`github-rpad-preview.png`, `obsidian*.png`) show other programs and
 are captured by hand.

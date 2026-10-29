@@ -9,26 +9,26 @@ using Avalonia.Threading;
 using Avalonia.VisualTree;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using RunPad;
-using RunPad.Avalonia.Themes;
-using RunPad.Contracts;
-using RunPad.Languages.CSharp;
-using RunPad.Languages.DotnetCommon;
-using RunPad.Languages.DotnetCommon.Sdk;
-using RunPad.Languages.VB;
-using RunPad.Services;
-using RunPad.Services.BuildCache;
-using RunPad.Services.Preferences;
-using RunPad.Services.Recovery;
-using RunPad.Services.Scaling;
-using RunPad.Services.Setup;
-using RunPad.UserControls;
-using RunPad.Windows;
-using RunPad.Windows.Models;
+using Invoklet;
+using Invoklet.Avalonia.Themes;
+using Invoklet.Contracts;
+using Invoklet.Languages.CSharp;
+using Invoklet.Languages.DotnetCommon;
+using Invoklet.Languages.DotnetCommon.Sdk;
+using Invoklet.Languages.VB;
+using Invoklet.Services;
+using Invoklet.Services.BuildCache;
+using Invoklet.Services.Preferences;
+using Invoklet.Services.Recovery;
+using Invoklet.Services.Scaling;
+using Invoklet.Services.Setup;
+using Invoklet.UserControls;
+using Invoklet.Windows;
+using Invoklet.Windows.Models;
 
 namespace Shots;
 
-// RunPad's own App (its App.axaml styles and resources) without its composition root, which
+// Invoklet's own App (its App.axaml styles and resources) without its composition root, which
 // would read the real settings file and Documents folder.
 public sealed class ShotsApp : App
 {
@@ -67,7 +67,7 @@ public static class Program
     // Usage: dotnet run [scenario[-light] ...]; with no arguments, every scenario in both themes.
     public static int Main(string[] args)
     {
-        // English number and date formats in RunPad itself and in the scripts it starts.
+        // English number and date formats in Invoklet itself and in the scripts it starts.
         var english = System.Globalization.CultureInfo.GetCultureInfo("en-US");
         System.Globalization.CultureInfo.DefaultThreadCurrentCulture = english;
         System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = english;
@@ -78,7 +78,7 @@ public static class Program
         if (args is ["--one", var one]) return RunOne(one);
 
         // Each scenario in a process of its own: the interface scale is process-wide state, and
-        // a fresh RunPad per screenshot keeps them independent of each other.
+        // a fresh Invoklet per screenshot keeps them independent of each other.
         var names = args.Length > 0 ? args : Scenarios.All.SelectMany(n => new[] { n, n + "-light" }).ToArray();
         var self = Environment.ProcessPath!;
         var failed = 0;
@@ -123,7 +123,7 @@ public static class Program
         services.AddSingleton<IFileSystemService>(sp => new FileSystemService(sp.GetRequiredService<ILogger<FileSystemService>>(), root));
         services.AddSingleton<ISdkProvider, DotnetSdkProvider>();
         services.AddSingleton<IRuntimeReferenceLocator, DotnetRuntimeReferenceLocator>();
-        services.AddSingleton<INuGetSourceStore, RunPadNuGetConfigStore>();
+        services.AddSingleton<INuGetSourceStore, InvokletNuGetConfigStore>();
         services.AddSingleton<IPackageSearchService, NuGetPackageSearchService>();
         services.AddSingleton<ILocalPackageCacheService, LocalPackageCacheService>();
         services.AddSingleton<IWindowService, WindowService>();
@@ -151,21 +151,21 @@ public static class Program
         services.AddTransient<DependenciesWindow>();
         services.AddSingleton<EditorTabsControl>();
         // Connections and secrets in a temporary folder next to the scripts, with the built-in drivers.
-        services.AddSingleton<RunPad.Services.Secrets.ISecretStore>(_ => new RunPad.Services.Secrets.FileSecretStore(Path.GetFullPath(Path.Combine(root, "..", "secrets.json"))));
-        services.AddSingleton<RunPad.Services.Connections.IConnectionStore>(_ => new RunPad.Services.Connections.FileConnectionStore(Path.GetFullPath(Path.Combine(root, "..", "connections.json"))));
+        services.AddSingleton<Invoklet.Services.Secrets.ISecretStore>(_ => new Invoklet.Services.Secrets.FileSecretStore(Path.GetFullPath(Path.Combine(root, "..", "secrets.json"))));
+        services.AddSingleton<Invoklet.Services.Connections.IConnectionStore>(_ => new Invoklet.Services.Connections.FileConnectionStore(Path.GetFullPath(Path.Combine(root, "..", "connections.json"))));
         services.AddSingleton(_ =>
         {
-            var drivers = new RunPad.Contracts.Connections.ConnectionDriverRegistry();
-            drivers.Register(new RunPad.Connectors.Http.HttpConnectionDriver());
-            drivers.Register(new RunPad.Connectors.Grpc.GrpcConnectionDriver());
-            drivers.Register(new RunPad.Connectors.Sqlite.SqliteConnectionDriver());
+            var drivers = new Invoklet.Contracts.Connections.ConnectionDriverRegistry();
+            drivers.Register(new Invoklet.Connectors.Http.HttpConnectionDriver());
+            drivers.Register(new Invoklet.Connectors.Grpc.GrpcConnectionDriver());
+            drivers.Register(new Invoklet.Connectors.Sqlite.SqliteConnectionDriver());
             return drivers;
         });
         // The sidebar's Connections section, over the same list.
-        services.AddSingleton(sp => new RunPad.UserControls.Models.ConnectionNavigationViewModel(
-            sp.GetRequiredService<RunPad.Services.Connections.IConnectionStore>(),
-            sp.GetRequiredService<RunPad.Contracts.Connections.ConnectionDriverRegistry>(),
-            secrets: sp.GetRequiredService<RunPad.Services.Secrets.ISecretStore>()));
+        services.AddSingleton(sp => new Invoklet.UserControls.Models.ConnectionNavigationViewModel(
+            sp.GetRequiredService<Invoklet.Services.Connections.IConnectionStore>(),
+            sp.GetRequiredService<Invoklet.Contracts.Connections.ConnectionDriverRegistry>(),
+            secrets: sp.GetRequiredService<Invoklet.Services.Secrets.ISecretStore>()));
         services.AddSingleton<Func<DependenciesWindow>>(sp => () => sp.GetRequiredService<DependenciesWindow>());
         services.AddSingleton<Func<PreferencesWindow>>(sp => () => sp.GetRequiredService<PreferencesWindow>());
         return services.BuildServiceProvider();

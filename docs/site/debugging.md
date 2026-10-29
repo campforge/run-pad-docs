@@ -5,7 +5,7 @@ description: Breakpoints, conditions, stepping, locals, watches, call stack, thr
 
 # Debugging
 
-RunPad debugs C# and Visual Basic scripts with [netcoredbg](https://github.com/Samsung/netcoredbg),
+Invoklet debugs C# and Visual Basic scripts with [netcoredbg](https://github.com/Samsung/netcoredbg),
 an open-source .NET debugger, over the Debug Adapter Protocol. The setup window installs it
 on first run, or you can point **Preferences → Languages → .NET → Debugger path** at an
 existing `netcoredbg` executable. See [Installation](install.md#first-run-net-sdk-and-debugger).
@@ -164,7 +164,7 @@ with the value 55.
 
 **Debugging does nothing or fails to start.** Check **Preferences → Languages → .NET →
 Debugger path**. It must point to the `netcoredbg` executable itself
-(`netcoredbg.exe` on Windows), and the file must exist. Restarting RunPad without a valid
+(`netcoredbg.exe` on Windows), and the file must exist. Restarting Invoklet without a valid
 path shows the setup window again, where **Install** downloads a matching build.
 
 **The script runs, but breakpoints are ignored.** Make sure the bug button is

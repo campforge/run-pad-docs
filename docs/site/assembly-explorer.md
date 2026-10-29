@@ -1,13 +1,13 @@
 ---
 title: Assembly Explorer
-description: Browse .NET assemblies, read decompiled C# or IL, view resources and analyze usages in RunPad's Assembly Explorer.
+description: Browse .NET assemblies, read decompiled C# or IL, view resources and analyze usages in Invoklet's Assembly Explorer.
 ---
 
 # Assembly Explorer
 
 The Assembly Explorer shows the contents of compiled .NET assemblies: a tree of namespaces,
 types and members on the left, and decompiled code on the right. It works like a small
-ILSpy inside RunPad. There is one Assembly Explorer window per RunPad instance.
+ILSpy inside Invoklet. There is one Assembly Explorer window per Invoklet instance.
 
 <figure markdown="span">
   [![The Assembly Explorer searching Enumerable.Where, with matching methods, a selected tree row and decompiled C#](assets/screenshots/assembly-explorer_light.png#only-light)](assets/screenshots/assembly-explorer_light.png "Open full-size screenshot")

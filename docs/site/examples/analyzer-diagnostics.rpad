@@ -8,11 +8,11 @@ kind: Statements
 # Analyzer diagnostics
 
 **This script is meant to be read in the editor, not run.** It shows two kinds of
-live feedback that RunPad gives while you type C#:
+live feedback that Invoklet gives while you type C#:
 
 1. A compiler error with a quick fix: `JsonSerializer` is not in scope, so the line is
    underlined as an error. Put the caret on that line and click the lightbulb in the
-   gutter to choose `using System.Text.Json;`. RunPad adds the namespace to the
+   gutter to choose `using System.Text.Json;`. Invoklet adds the namespace to the
    `namespaces:` list in this file's front matter instead of inserting a `using` line.
 2. The two `Parse` calls are included to demonstrate runtime failures after the
    compile-time error is fixed.
@@ -21,7 +21,7 @@ Until the quick fix is applied, Run stops with the compiler error. After it is a
 Run compiles the script and the first `Parse` call throws `OverflowException`.
 
 ```csharp run
-var settings = JsonSerializer.Serialize(new { Name = "RunPad", Version = 1 });
+var settings = JsonSerializer.Serialize(new { Name = "Invoklet", Version = 1 });
 Console.WriteLine(settings);
 
 var small = byte.Parse("300");
