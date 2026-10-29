@@ -176,8 +176,11 @@ macOS and Linux with a key Invoklet keeps in the macOS Keychain or the Linux Sec
 Keyring, KWallet; Invoklet uses `secret-tool` from libsecret). A store from an older Invoklet is
 encrypted the first time Invoklet starts. On a Linux machine without a Secret Service the values
 stay plain text, and the Secret Store window says so. A script asking for a secret that isn't
-there fails with `KeyNotFoundException`, whose message names the secret and the store. The
-command-line runner reads the same store. On macOS and Linux a script gets the key from Invoklet
+there asks you for it, masked, in the input bar under Results, as LINQPad's `Util.GetPassword`
+does, and Invoklet keeps what you enter in the Secret Store for next time. Where nothing can
+answer — under the debugger, or in the command-line runner — the call fails with
+`KeyNotFoundException`, whose message names the secret and the store. The command-line runner
+reads the same store. On macOS and Linux a script gets the key from Invoklet
 or the command-line runner that started it, so a script run some other way (`dotnet run`) can't
 read an encrypted store and says so. To use another file, for example on a build server, set the
 `INVOKLET_SECRETS_FILE` environment variable to its path.
@@ -332,8 +335,9 @@ A script reads a saved value without embedding it in its source:
 var token = Util.GetSecret("api-token");
 ```
 
-Names are case-insensitive. A missing name raises `KeyNotFoundException` with the store's
-location. Values are encrypted for your account, with a key in the macOS Keychain or the
+Names are case-insensitive. A missing name is asked for when the script runs from Invoklet and
+then kept in the store; under the debugger or the command-line runner it raises
+`KeyNotFoundException` with the store's location. Values are encrypted for your account, with a key in the macOS Keychain or the
 Linux Secret Service on those systems (see above). Expand **Storage and usage** to see its location.
 `INVOKLET_SECRETS_FILE` selects a different store for the application and scripts; use an
 absolute path.
