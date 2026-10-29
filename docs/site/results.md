@@ -337,7 +337,9 @@ var token = Util.GetSecret("api-token");
 
 Names are case-insensitive. A missing name is asked for when the script runs from Invoklet and
 then kept in the store; under the debugger or the command-line runner it raises
-`KeyNotFoundException` with the store's location. Values are encrypted for your account, with a key in the macOS Keychain or the
+`KeyNotFoundException` with the store's location. `Util.SetSecret("name", value)` saves a secret,
+or replaces its value, from a script Invoklet runs. Imported `.linq` scripts call these in place of
+LINQPad's `Util.GetPassword(name)` and `Util.SetPassword(name, value)`. Values are encrypted for your account, with a key in the macOS Keychain or the
 Linux Secret Service on those systems (see above). Expand **Storage and usage** to see its location.
 `INVOKLET_SECRETS_FILE` selects a different store for the application and scripts; use an
 absolute path.

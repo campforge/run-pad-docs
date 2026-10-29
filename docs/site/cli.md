@@ -144,6 +144,7 @@ Invoklet converts `.linq` query files to `.inv` scripts.
 | `<Namespace>` | `namespaces:` entry |
 | `<Reference>` (or its `Relative` attribute) | `references:` entry |
 | The code after `</Query>` | The run block, under a heading with the file name |
+| `Util.GetPassword(name)`, `Util.SetPassword(name, value)` | `Util.GetSecret(name)`, `Util.SetSecret(name, value)`: LINQPad's password manager is Invoklet's Secret Store |
 
 C# `.linq` imports write LINQPad's standard namespace profile into the converted file's
 `namespaces`, together with explicit `<Namespace>` entries, without exact duplicates. This includes
