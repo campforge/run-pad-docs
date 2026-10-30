@@ -129,7 +129,7 @@ for (var i = 1; i <= 5; i++)
 progress.Caption = "Done";
 ```
 
-[`live-output.rpad`](examples/live-output.rpad) combines both. In the
+The `live-output.rpad` sample combines both. In the
 [command-line runner](cli.md), each update is printed again below the previous output
 instead of replacing it.
 
