@@ -61,9 +61,11 @@ Methods and fields of the query remain members of the query.
 ## Many open tabs
 
 Invoklet keeps the text and output of the three tabs you used last in memory, so a long list of tabs stays
-light. The other tabs look as they did, but their text, output and syntax colouring wait on a temporary
-file in Invoklet's data folder and come back when you select the tab or save it, with your unsaved
-changes, the caret, the scroll position and the output of the last run. A tab's content is never moved
+light. The other tabs look as they did, but their text, output and syntax colouring wait in a private
+folder of this window's [recovery data](reference.md#where-invoklet-stores-data) (removed when you close
+Invoklet) and come back when you select the tab or save it, with your unsaved changes, the caret and the
+scroll position. The output of a script's last run is kept in the script's build folder, next to its
+library, so it is also shown when you open the script again. A tab's content is never moved
 out while you are on the tab, while its script runs or is being debugged, or after a run that ended while
 you were on another tab (until you look at it). If a tab's text cannot be read back, the tab stays empty
 and read-only and cannot be saved over your file.
