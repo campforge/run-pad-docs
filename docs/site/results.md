@@ -108,7 +108,7 @@ A type can control which members `.Dump()` shows by implementing `ICustomMemberP
 inside what you dump, for instance in a column of a table:
 
 ```csharp
-Util.Highlight(42).Dump();                          // yellow marker; Util.Highlight(x, "lightgreen") picks the colour
+Util.Highlight(42).Dump();                          // the theme's marker; Util.Highlight(x, "lightgreen") picks another colour
 Util.WithStyle("late", "color:red; font-weight:bold").Dump();
 Util.WithHeading(orders, "Open orders").Dump();     // a heading above the value
 
