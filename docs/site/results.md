@@ -121,6 +121,16 @@ Util.WithHeading(orders, "Open orders").Dump();     // a heading above the value
 orders.Select(o => new { o.Id, Qty = Util.HighlightIf(o.Qty, q => q < 5) }).Dump();
 ```
 
+`Util.WithCssClass(value, "my-class")` puts a value in an element with a class of your own, and `Util.HtmlHead.AddStyles(css)` adds the
+rules for it to the output from that point on:
+
+```csharp
+Util.HtmlHead.AddStyles(".late { color: crimson; font-weight: bold; }");
+Util.WithCssClass("overdue", "late").Dump();
+```
+
+The terminal runner shows the value and ignores the styles.
+
 `HighlightIf` highlights only when the condition holds and otherwise returns the value as it is. In the
 [command-line runner](cli.md) a highlight is shown with a yellow background and a heading as an underlined line; a
 style is not applied there.
