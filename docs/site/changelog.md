@@ -10,12 +10,39 @@ description: What changed in each Invoklet release.
 Notable changes in each Invoklet release. Downloads are on the
 [releases page](https://github.com/tervforge/invoklet/releases).
 
-## [Unreleased]
+## [0.10.3] — 2026-10-30
+
+### Changed
+
+- Go to Definition and Find References now use the same navigation behavior for source symbols,
+  generated connection code, implementations and library members.
+- Completion and hover processing cancel obsolete requests when the text or active tab changes,
+  keeping suggestions and diagnostics aligned with the current editor content.
+
+### Fixed
+
+- Hover diagnostics now use the positions captured with the hovered text, so editing the document
+  while a tooltip is being prepared cannot attach an old diagnostic to a new location.
+- Closing a tab or replacing a navigation request no longer leaves the previous request running.
+
+## [0.10.2] — 2026-10-30
 
 ### Changed
 
 - Refine the application icon with a raised hammer, three sparks and shaded surfaces across
   windows, desktop packages and documentation.
+- Keep the text and output of only the three most recently used tabs in memory. The other tabs
+  keep their window, but their text, output and syntax colouring wait on disk and come back, with
+  unsaved changes, caret and scroll position, when you select the tab or save it. A tab that is
+  running, or whose run ended while you were on another tab, keeps its content. A closed Markdown
+  preview is released instead of kept hidden.
+- Keep the output of a script's last run in the script's build folder, next to its library, and
+  show it again when the script is opened. A script that is not saved yet has no such folder, so its
+  output is kept only while Invoklet runs.
+
+### Fixed
+
+- Closing a tab or an editor window no longer leaves a background highlighting thread behind.
 
 ## [0.10.1] — 2026-10-29
 
@@ -881,4 +908,6 @@ better choice. RunPad began as DotPad two days after the last commit to the fork
 
 [0.10.0]: https://github.com/tervforge/invoklet/releases/tag/v0.10.0
 [0.10.1]: https://github.com/tervforge/invoklet/releases/tag/v0.10.1
+[0.10.2]: https://github.com/tervforge/invoklet/releases/tag/v0.10.2
+[0.10.3]: https://github.com/tervforge/invoklet/releases/tag/v0.10.3
 [0.9.5]: https://github.com/tervforge/invoklet/releases/tag/v0.9.5
