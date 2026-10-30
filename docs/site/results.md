@@ -338,6 +338,14 @@ Connections.Shop.Customers.Add(new Connections.ShopClient.Customer { Name = "Eve
 Connections.Shop.SaveChanges();
 ```
 
+A foreign key is a pair of properties: `order.Customer` on the table that holds the key and `customer.Orders` on the table
+it points to (named after the column without its `Id`, and after the table when the key is of several columns; a second key to
+the same table gets the name of its column added). They are loaded as EF Core loads any navigation, so add
+`using Microsoft.EntityFrameworkCore;` and `.Include(o => o.Customer)`. A key whose columns have different types, or that
+points to a table without a primary key, stays an ordinary column.
+
+In the form, **Browse...** next to the database file picks the file, and the path is entered whole (type a relative path by hand).
+
 Views, tables without a primary key and tables whose key can be empty (`NULL`) can be read but
 not changed; computed (generated) columns are read but never written. Turn on **Read only** to open
 the file for reading only. The script needs the `Microsoft.EntityFrameworkCore.Sqlite` package,
