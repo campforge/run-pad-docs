@@ -37,7 +37,7 @@ theme:
   # third-party font requests.
   font: false
   logo: assets/app-icon.svg
-  favicon: assets/favicon.png
+  favicon: assets/app-icon.svg
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default

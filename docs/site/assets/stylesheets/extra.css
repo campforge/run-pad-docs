@@ -90,6 +90,22 @@
   font-weight: 700;
 }
 
+/* Keep the brand mark readable in the header; use the same vector as the favicon. */
+.md-header__button.md-logo {
+  margin: 0 .35rem 0 0;
+  padding: .2rem;
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+[data-md-color-scheme="default"] .md-header__button.md-logo img {
+  content: url("../app-icon-light.svg");
+}
+
 .md-search__form {
   background-color: var(--cf-surface2);
   border: 1px solid var(--cf-border);

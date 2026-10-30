@@ -5,7 +5,7 @@ description: Breakpoints, conditions, stepping, locals, watches, call stack, thr
 
 # Debugging
 
-Invoklet debugs C# and Visual Basic scripts with [netcoredbg](https://github.com/Samsung/netcoredbg),
+RunPad debugs C# and Visual Basic scripts with [netcoredbg](https://github.com/Samsung/netcoredbg),
 an open-source .NET debugger, over the Debug Adapter Protocol. The setup window installs it
 on first run, or you can point **Preferences → Languages → .NET → Debugger path** at an
 existing `netcoredbg` executable. See [Installation](install.md#first-run-net-sdk-and-debugger).
@@ -79,6 +79,12 @@ The line about to run is highlighted and marked with an arrow in the gutter. The
 Threads and Call Stack are permanent tables on the left, separated by a draggable divider.
 Locals and Watch share the right-hand pane.
 
+While execution is paused, rest the pointer on a variable in the editor to see its value. Over
+`c` in `c.Dump()` the tip shows `c`; over `Name` in `order.Customer.Name` it shows the whole
+`order.Customer.Name`. The tip is a tree like **Locals**: each member shows its name, type and
+value, and the arrow beside a member opens it under its parent. The tip stays open while you move
+the pointer into it, and closes when the pointer leaves both the variable and the tip.
+
 ### Stepping
 
 | Action | Default key | Toolbar |
@@ -98,7 +104,7 @@ the ++fn++ key depending on your keyboard settings.
 
 ### Breaking on exceptions
 
-Open the **settings gear** at the right of the Results/Debugger/IL header:
+Open the **Output settings** gear at the right of the Results/Debugger/IL header:
 
 - **Break on unhandled exceptions** pauses when an exception is about to end the script.
 - **Break on all exceptions (including caught)** pauses whenever an exception is thrown,
@@ -118,7 +124,7 @@ and shows a notice; it does not mean the step succeeded.
 
 ## Practice script
 
-Download [`debugging-loop.inv`](examples/debugging-loop.inv). Its code block is:
+Use the `debugging-loop.rpad` example from the Samples section. Its code block is:
 
 ```csharp linenums="1"
 var total = 0;
@@ -156,7 +162,7 @@ with the value 55.
 ## Limitations
 
 - *Set Next Statement* is not available.
-- `Util.ReadLine`, and `Util.GetSecret` asking for a missing secret (see [interactive input](results.md#interactive-input))
+- `Util.ReadLine` and `Util.GetPassword` (see [interactive input](results.md#interactive-input))
   do not work while debugging. Use a normal run for interactive scripts.
 - Debug mode needs a configured netcoredbg; without one, use normal runs.
 
@@ -164,7 +170,7 @@ with the value 55.
 
 **Debugging does nothing or fails to start.** Check **Preferences → Languages → .NET →
 Debugger path**. It must point to the `netcoredbg` executable itself
-(`netcoredbg.exe` on Windows), and the file must exist. Restarting Invoklet without a valid
+(`netcoredbg.exe` on Windows), and the file must exist. Restarting RunPad without a valid
 path shows the setup window again, where **Install** downloads a matching build.
 
 **The script runs, but breakpoints are ignored.** Make sure the bug button is
