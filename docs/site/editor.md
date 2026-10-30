@@ -60,12 +60,13 @@ Methods and fields of the query remain members of the query.
 
 ## Many open tabs
 
-Invoklet keeps the editor of the three tabs you used last ready and unloads the others from memory, so
-a long list of tabs stays light. An unloaded tab still shows its name; selecting it opens its file again
-where you left it: the caret, the scroll position and the breakpoints are kept. A tab is never unloaded
-while you are on it, while its script runs or is being debugged, after a run that ended while you were on
-another tab (until you look at it), or while it has unsaved changes. The output of an unloaded tab's last
-run is not kept.
+Invoklet keeps the text and output of the three tabs you used last in memory, so a long list of tabs stays
+light. The other tabs look as they did, but their text, output and syntax colouring wait on a temporary
+file in Invoklet's data folder and come back when you select the tab or save it, with your unsaved
+changes, the caret, the scroll position and the output of the last run. A tab's content is never moved
+out while you are on the tab, while its script runs or is being debugged, or after a run that ended while
+you were on another tab (until you look at it). If a tab's text cannot be read back, the tab stays empty
+and read-only and cannot be saved over your file.
 
 ## Recovering unsaved tabs
 
