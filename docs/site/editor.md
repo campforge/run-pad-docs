@@ -194,6 +194,7 @@ for the macOS equivalents and custom bindings.
 | Find References | ++shift+f12++ | Shows a menu of every line in the script that uses the symbol; pick one to jump there. |
 | Rename | ++f2++ | Asks for a new name and renames every occurrence in the script as one undoable edit. |
 | Format Document | ++shift+alt+f++ | Reformats the whole script with Roslyn's formatter. |
+| Format Selection | ++ctrl+shift+f++ | Reformats the lines of the selection, or the line of the caret when nothing is selected; the rest of the script stays as it is. |
 | Resolve All Usings | ++ctrl+alt+u++ | Adds the namespace for every unresolved type that has exactly one match. |
 | Go to Line | ++ctrl+g++ | Asks for a line number and moves the caret there. |
 

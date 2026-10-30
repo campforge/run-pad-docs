@@ -14,7 +14,7 @@ shortcut.
 | Menu | Commands |
 | --- | --- |
 | **File** | New File, New RPad File, Open..., Quick Open..., Recent Files, Open Text File..., Import .linq Query..., Save, Save As..., Revert to Saved, Close Tab, Exit (++cmd+q++ on macOS) |
-| **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Go to Line..., Resolve All Usings |
+| **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Format Selection, Go to Line..., Resolve All Usings |
 | **View** | Toggle File Tree, Toggle Output Panel, Markdown Preview, Markdown Preview to the Side, Zoom In, Zoom Out, Reset Zoom |
 | **Run** | Run / Continue, Stop, Execute Selection, Stop and Run Again, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
 | **Tools** | Dependencies..., Assembly Explorer..., Connections..., Secret Store..., Preferences... |
@@ -107,6 +107,7 @@ On macOS, function keys may need the ++fn++ key, depending on your keyboard sett
 | Jump to Matching Bracket | ++ctrl+bracket-right++ | ++ctrl+bracket-right++ |
 | Toggle Line Comment | ++ctrl+slash++ | ++cmd+slash++ |
 | Format Document | ++shift+alt+f++ | ++shift+alt+f++ |
+| Format Selection | ++ctrl+shift+f++ | ++cmd+shift+f++ |
 | Go to Line | ++ctrl+g++ | ++ctrl+g++ |
 | Resolve All Usings | ++ctrl+alt+u++ | ++cmd+alt+u++ |
 
