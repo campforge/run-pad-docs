@@ -1,6 +1,6 @@
 ---
 title: Editor
-description: Syntax and semantic highlighting, completion, signature help, navigation, rename and formatting in the Invoklet editor.
+description: Syntax and semantic highlighting, completion, signature help, navigation, rename and formatting in the RunPad editor.
 ---
 
 # Editor
@@ -37,6 +37,9 @@ Change or disable both shortcuts in **Preferences → Keyboard**.
 
 ## Extension methods in C# Program scripts
 
+!!! note "Unreleased"
+    This support is not included in RunPad 0.8.0.
+
 In **Program** mode, put extension methods in a top-level static class alongside `Main`:
 
 ```csharp
@@ -58,48 +61,35 @@ Other helper types remain nested in the query. If an extension class uses a help
 make that type `internal` or `public` so it is accessible from the extension class.
 Methods and fields of the query remain members of the query.
 
-## Many open tabs
-
-Invoklet keeps the text and output of the three tabs you used last in memory, so a long list of tabs stays
-light. The other tabs look as they did, but their text, output and syntax colouring wait in a private
-folder of this window's [recovery data](reference.md#where-invoklet-stores-data) (removed when you close
-Invoklet) and come back when you select the tab or save it, with your unsaved changes, the caret and the
-scroll position. The output of a script's last run is kept in the script's build folder, next to its
-library, so it is also shown when you open the script again (a script that is not saved yet has no build
-folder: its output is kept only while Invoklet runs, and Save As moves it to the new file's folder). A tab's content is never moved
-out while you are on the tab, while its script runs or is being debugged, or after a run that ended while
-you were on another tab (until you look at it). If a tab's text cannot be read back, the tab stays empty
-and read-only and cannot be saved over your file.
-
 ## Recovering unsaved tabs
 
-**Preferences → Interface → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
-Invoklet normally. It is enabled by default; restart Invoklet after changing the setting.
+**Preferences → Editor → Restore open tabs and unsaved changes** keeps your workspace locally when you exit
+RunPad normally. It is enabled by default; restart RunPad after changing the setting.
 
-On the next launch, Invoklet restores the tab order, active tab, unsaved text, caret and selection,
+On the next launch, RunPad restores the tab order, active tab, unsaved text, caret and selection,
 and script settings such as arguments, references and packages. Original script files are not
 modified by this checkpoint. Clean files are read again from disk; a missing file can be recovered
 from its cached text. Explicitly closing a tab and choosing **Don't Save** discards that tab.
 
-When you close Invoklet with unsaved tabs, it asks once what to do with them:
+When you close RunPad with unsaved tabs, it asks once what to do with them:
 
 - **Save All** saves every unsaved tab, with the usual Save As for untitled ones and the usual
-  question about files changed on disk. Cancelling or a failed save keeps Invoklet open; files
+  question about files changed on disk. Cancelling or a failed save keeps RunPad open; files
   saved before that stay saved.
 - **Keep in Stash** closes without writing the files; the changes come back on the next launch.
-- **Cancel** keeps Invoklet open.
+- **Cancel** keeps RunPad open.
 
-Invoklet waits for pending Save As and file moves before writing the checkpoint. If writing fails,
+RunPad waits for pending Save As and file moves before writing the checkpoint. If writing fails,
 the window stays open so you can retry or save your work. Recovery data is stored in the
-`recovery` folder of [Invoklet's data folder](reference.md#where-invoklet-stores-data). A damaged checkpoint can fall back
-to the previous one. Each running instance keeps its own recovery data. On startup Invoklet restores
-the most recent session and also brings in the unsaved drafts of other Invoklet windows that have
+`recovery` folder of [RunPad's data folder](reference.md#where-runpad-stores-data). A damaged checkpoint can fall back
+to the previous one. Each running instance keeps its own recovery data. On startup RunPad restores
+the most recent session and also brings in the unsaved drafts of other RunPad windows that have
 been closed since; a running window's drafts are left alone. A draft of a file that is already
 open comes back as an untitled copy named after the file, so neither version is overwritten: it
 still finds the file's relative references, and it can't be saved over that file or over one
 another tab has open.
 
-The other window's draft data is deleted once Invoklet has kept the restored drafts in two of its
+The other window's draft data is deleted once RunPad has kept the restored drafts in two of its
 own checkpoints, so a damaged newest checkpoint can't lose them. Startup reports what it restored
 in a notice above the editor instead of a message box; **Dismiss** hides it. Draft data that cannot be read is kept unchanged and its recovery folders are listed in
 the notice (the text can be selected and copied). Damaged session data is skipped when an older
@@ -120,6 +110,8 @@ editor windows are not restored.
 - **Occurrences** (C#): when the caret is on a symbol, the other uses of that symbol in
   the script are highlighted.
 - **Brace matching** highlights the matching bracket. ++ctrl+bracket-right++ jumps to it.
+- **Toggle Line Comment** (++ctrl+slash++, ++cmd+slash++ on macOS) comments or uncomments every
+  line the selection touches, or the caret's line, with `//` in C# and `'` in Visual Basic.
 
 ## Completion
 
@@ -129,11 +121,17 @@ Completion (C#) opens automatically while you type:
 - after `new ` for types you can construct, and after `override ` for members you can
   override (accepting one inserts a stub with a generated body);
 - after `<` for generic type arguments;
+- where an argument starts in a call, with `name:` for each parameter you can still pass by
+  name;
 - while you type an identifier or keyword.
 
 Press ++ctrl+space++ to open it yourself. The list is filtered by context (no member
 suggestions inside strings or comments, for example), members declared in your own
 script are shown in bold, and overloads are collapsed into one entry.
+
+**Matching**: the list matches the start of a name, then any part of it, then the starts of
+its words: `ArgEnv` or `ae` finds `ArgumentsEnvironment`, `SBu` finds `StringBuilder`. When
+two items match equally well, `Dump` wins over other members.
 
 !!! tip "Control-Space on macOS"
     macOS may use Control-Space to switch input sources. If the list does not open,
@@ -141,8 +139,10 @@ script are shown in bold, and overloads are collapsed into one entry.
     **System Settings → Keyboard → Keyboard Shortcuts**.
 
 **Automatic imports**: the list also offers types from namespaces that are not imported
-yet, including types from the script's NuGet packages. Accepting one adds its namespace
-to the `namespaces:` list in the front matter instead of inserting a `using` line.
+yet: from the script's NuGet packages and its own assemblies as soon as you type, and from
+.NET itself after three letters. Each shows its namespace, so when two libraries have a
+type of the same name you pick the one you mean. Accepting one adds its namespace to the
+`namespaces:` list in the front matter instead of inserting a `using` line.
 
 **Commit characters**: with **Preferences → Editor → Accept completion when typing
 punctuation** turned on (the default), typing punctuation such as `.`, `(` or `;` accepts
@@ -164,11 +164,19 @@ continue typing.
 | `class`, `interface`, `ctor` | Type and constructor skeletons |
 | `using`, `lock` | `using (var resource = …)` and `lock (…)` blocks |
 
+After `prop` or `propg` expands, ++tab++ moves from the type to the name; ++enter++ or
+++esc++ leaves the snippet. Typing `{` does not insert `}`: instead, pressing ++enter++ in a new,
+still empty class, struct, record or interface body offers a property template, which ++tab++
+inserts; any other key leaves the code as it is.
+
 ## Signature help and quick info
 
 - **Signature help** (C#) opens when you type `(` or `,` in a call, or with
   ++ctrl+shift+space++. It picks the overload that matches the arguments typed so far,
-  highlights the current parameter and shows the XML documentation summary.
+  highlights the current parameter and shows the XML documentation summary. Inside a
+  nested call such as `Send(new Message(` it shows the inner call, and the outer one again
+  once the inner `)` is typed; a named argument such as `timeout:` highlights that parameter.
+  A long signature lists one parameter per line instead of running off the editor.
 - **Quick info** (C#): rest the mouse pointer over a symbol for a moment to see its
   signature and documentation.
 - **Inlay hints** (C#) show the inferred type next to `var` declarations and `foreach`
@@ -232,7 +240,7 @@ the keys you assigned. On a narrow window the strip keeps every button within re
 
 ### Interface scale and shared code zoom
 
-Available from **Invoklet 0.6.0**.
+Available from **RunPad 0.6.0**.
 
 **Preferences → Interface → Interface scale** changes the size of the interface,
 including code, results, panels, dialogs, icons and click targets. The default is 100%;

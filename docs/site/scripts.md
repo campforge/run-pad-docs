@@ -1,13 +1,13 @@
 ---
-title: Scripts and .inv files
-description: The .inv file format, front matter fields and the Statements, Program and Expression kinds.
+title: Scripts and .rpad files
+description: The .rpad file format, front matter fields and the Statements, Program and Expression kinds.
 ---
 
-# Scripts and .inv files
+# Scripts and .rpad files
 
 ## Opening scripts
 
-Use **File → Open…** (**Ctrl+O**, or **Cmd+O** on macOS) to open a `.inv` file from
+Use **File → Open…** (**Ctrl+O**, or **Cmd+O** on macOS) to open a `.rpad` file from
 any local folder. It stays in that folder; opening it does not copy it into Queries or run it.
 Opening an already-open path activates its existing tab and preserves unsaved changes.
 
@@ -18,7 +18,7 @@ entry reports an error; use Open to choose its new location.
 
 ## File format
 
-A Invoklet script is a plain-text `.inv` file. It is a Markdown document with:
+A RunPad script is a plain-text `.rpad` file. It is a Markdown document with:
 
 1. a YAML **front matter** block between two `---` lines at the very top;
 2. exactly one **run block**: a fenced code block whose info string is `csharp run` or
@@ -51,16 +51,16 @@ The file is Markdown-compatible and diffs cleanly in version control. You can re
 without creating a separate `.md` copy. The overview explains the file-type hint needed
 for GitHub rendering.
 
-## How Invoklet edits the file
+## How RunPad edits the file
 
-The editor shows only the code inside the run block. Invoklet keeps the Markdown before
+The editor shows only the code inside the run block. RunPad keeps the Markdown before
 and after the block exactly as it was and writes it back unchanged when it saves. The
 front matter is changed through the UI: the **kind** drop-down in the toolbar, the
 [Dependencies window](dependencies.md) and code fixes that add a namespace. To edit the
 Markdown text around the code, use another text editor — for example Obsidian with the
-Invoklet Markdown plugin; see [View your scripts in Obsidian](obsidian.md).
+RunPad Markdown plugin; see [View your scripts in Obsidian](obsidian.md).
 
-When Invoklet saves a script, it writes the front matter again from the fields it knows,
+When RunPad saves a script, it writes the front matter again from the fields it knows,
 in a fixed order. YAML comments and unknown fields in the header are not kept.
 
 ## Markdown preview
@@ -103,9 +103,7 @@ All fields are optional. A missing or empty value falls back to the default.
 | `packages` | none | NuGet packages as `PackageId: version` pairs. |
 | `references` | none | Paths to `.dll` files. See [Packages and references](dependencies.md). |
 | `namespaces` | none | Namespaces imported for the whole script, like global `using` (C#) or project-level `Imports` (VB). |
-| `arguments` | none | Named arguments with types and defaults. Available as typed `Arguments` properties. |
-| `argumentSets` | none | Named presets of values for declared arguments. |
-| `selectedArgumentSet` | defaults | Preset used when running or debugging. The toolbar changes this selection. |
+| `args` | empty list | String arguments passed to the script when running or debugging. CLI arguments can override this list for one invocation. |
 | `connections` | none | The script's connections: each a `name`, a `driver` (such as `http`, `grpc` or `sqlite`) and its `params`. Add them in the Dependencies window; see [Connections in a script](results.md#connections-in-a-script). |
 | `allowUnsafe` | `false` | C# only: `true` compiles the script with unsafe code allowed. Written only when on. See [Compilation](dependencies.md#compilation). |
 
@@ -128,18 +126,11 @@ references:
 namespaces:
   - System.Text.Json
   - System.Globalization
-arguments:
-  - name: title
-    type: string
-    default: "April totals"
-  - name: year
-    type: int
-    default: "2026"
 ---
 ```
 
 !!! warning "Invalid files are opened as plain text"
-    Invoklet refuses to run a file that has no front matter, an unclosed front matter
+    RunPad refuses to run a file that has no front matter, an unclosed front matter
     block, invalid YAML (for example `kind: Script`), or no run block for the declared
     language. The tab shows the whole file as text, the Results tab explains the
     problem, and the status strip says *Invalid document*. Fix the file and reopen it.
@@ -148,98 +139,60 @@ arguments:
 
 The opening fence must be exactly three backticks, the language id, whitespace, and
 `run` (for example `` ```csharp run ``). Variations such as `csharp runner` or
-`csharprun` are not run blocks. Invoklet uses the first matching block in the file. Other
+`csharprun` are not run blocks. RunPad uses the first matching block in the file. Other
 fenced blocks, such as `csharp` examples without `run`, are ordinary Markdown.
 
 ### Namespaces imported by default
 
-C# scripts get the namespaces of the .NET SDK's implicit usings plus Invoklet's runtime
+C# scripts get the namespaces of the .NET SDK's implicit usings plus RunPad's runtime
 namespace: `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`,
-`System.Net.Http`, `System.Threading`, `System.Threading.Tasks` and `Invoklet.Runtime`.
+`System.Net.Http`, `System.Threading`, `System.Threading.Tasks` and `RunPad.Runtime`.
 Visual Basic scripts import the same list. Add anything else to `namespaces`, or let a
 [quick fix](analyzers.md#quick-fixes-and-the-lightbulb) add it for you.
 
 C# scripts compile with nullable reference types enabled and the default C# language
 version of the selected SDK (for example C# 14 for .NET 10).
 
-## Conditional code for Invoklet
+## Conditional code for RunPad
 
-Invoklet defines the `Invoklet` preprocessor symbol for C# and Visual Basic scripts,
-including scripts run through the CLI. Use it to keep Invoklet-specific code in a
+RunPad defines the `RUNPAD` preprocessor symbol for C# and Visual Basic scripts,
+including scripts run through the CLI. Use it to keep RunPad-specific code in a
 script that is also used by another runner:
 
 ```csharp
-#if Invoklet
-Console.WriteLine("Running in Invoklet");
+#if RUNPAD
+Console.WriteLine("Running in RunPad");
 #else
 Console.WriteLine("Running elsewhere");
 #endif
 ```
 
-In Visual Basic, use `#If Invoklet Then` with `#Else` and `#End If`.
+In Visual Basic, use `#If RUNPAD Then` with `#Else` and `#End If`.
 
 ## Script arguments
 
-Use the **Arguments** page in the script's Dependencies window to declare named arguments,
-their types, defaults and named sets of values. Select a set from the script toolbar.
-Run and Debug use the same selected values. For example:
+Declare a script's arguments, their types and defaults, and named sets of values in the
+**Arguments** tab of the Dependencies window; see
+[Script arguments](dependencies.md#script-arguments). The script reads them as typed
+properties of `Arguments`, such as `Arguments.Count`.
 
-```yaml
-arguments:
-  - name: value
-    type: int
-  - name: env
-    type: string
-    default: dev
-argumentSets:
-  production:
-    value: "3"
-    env: prod
-selectedArgumentSet: production
-```
-
-Read these as `Arguments.Value` and `Arguments.Env` in C# or Visual Basic. Property names
-start with a capital letter; metadata names keep their original spelling. C# completion shows
-the declared properties and their types. A value-type argument without a default is nullable
-in every set, so `Arguments.Value` is an `int?` in this example. Its value is `3`, or `null`
-when no value is supplied. Invalid values prevent the run and identify the argument.
-
-An `enum` argument generates a real enum named `Arguments` followed by its property name.
-For the `env` declaration above, `Arguments.Env` has type `ArgumentsEnv` and the metadata labels
-`dev` and `prod` become `ArgumentsEnv.Dev` and `ArgumentsEnv.Prod`:
-
-```csharp
-ArgumentsEnv environment = Arguments.Env;
-(environment == ArgumentsEnv.Prod).Dump();
-```
-
-Visual Basic uses the same names and types (`Dim environment As ArgumentsEnv = Arguments.Env`).
-Without a default, an enum argument is nullable (`ArgumentsEnv?`). C# completion offers the enum
-type and its members. Metadata keeps the original labels; names with separators such as `prod-us`
-become enum members such as `ProdUs`. Labels that generate conflicting identifiers are reported
-as metadata errors.
-
-The `args` array remains available and contains the generated `--name value` pairs.
-With the production preset above it contains `--value`, `3`, `--env`, `prod`.
-The YAML header has no raw `args:` field; use declarations, defaults and presets.
-
-C# top-level Statements and a Program's `Main(string[] args)` receive these values;
-Visual Basic Statements and `Sub Main(args As String())` receive them too. Each name and value
-is a separate array item: spaces do not split a value, and an empty string stays an argument.
-The [command-line runner](cli.md#script-arguments-and-options) can replace the list
-without changing the file. Close or save your Invoklet edits before changing the header
-in another program; external edits are protected as described below.
+Run and Debug also pass them on the command line of the script's process, as `--name value`
+for each argument that has a value (a list as `--name` once per item). C# top-level
+Statements and a Program's `Main(string[] args)` receive these strings in `args`;
+Visual Basic Statements and `Sub Main(args As String())` receive them too. The
+[command-line runner](cli.md#script-arguments-and-options) can pick another set or replace
+the arguments without changing the file.
 
 ## External file changes
 
-When another program changes an open script, its tab follows the file. Invoklet checks
+When another program changes an open script, its tab follows the file. RunPad checks
 when you switch back to it from another program, and as soon as a script in the scripts
 folder changes:
 
 - A tab without unsaved changes reloads quietly: the code, the header (kind, target,
   packages) and the preview. **Undo** brings back the text the reload replaced.
 - A tab with unsaved changes asks whether to **Reload** the file and lose your changes, or
-  **Keep My Changes**. Keeping them is the default, and Invoklet doesn't ask again about the
+  **Keep My Changes**. Keeping them is the default, and RunPad doesn't ask again about the
   same version of the file.
 - A running script, or a file that was deleted, is left as it is.
 - If the file now holds a script in the other language (C# instead of Visual Basic or the
@@ -253,11 +206,11 @@ If you keep your changes, the next save asks whether to **Save As…**, **Overwr
 **Cancel**. This also applies to the automatic save before Run/Debug and saves required
 before closing or file operations. Cancel or an unsuccessful Save As stops that operation
 and keeps your unsaved changes. Overwrite explicitly replaces the disk version; Save As
-keeps it and saves your tab under another name. Invoklet never merges the two versions.
+keeps it and saves your tab under another name. RunPad never merges the two versions.
 
 ## Kinds
 
-The kind decides how Invoklet turns your code into a program. Change it with the kind
+The kind decides how RunPad turns your code into a program. Change it with the kind
 drop-down in the toolbar; the choice is saved to the front matter.
 
 ### Statements
@@ -270,7 +223,7 @@ var words = new[] { "alpha", "beta", "gamma" };
 words.Select(w => w.ToUpperInvariant()).Dump();
 ```
 
-In Visual Basic, Invoklet wraps the code in a module with a `Sub Main`, so you write only
+In Visual Basic, RunPad wraps the code in a module with a `Sub Main`, so you write only
 the statements:
 
 ```vb
@@ -284,18 +237,18 @@ names.Select(Function(n) New With {.Name = n, .Letters = n.Length}).Dump("Names"
 ### Program
 
 You write a `Main` method and whatever else it needs: fields, helper methods, nested
-types. In C#, Invoklet places your code inside a generated class and calls `Main` for you.
+types. In C#, RunPad places your code inside a generated class and calls `Main` for you.
 `Main` may be static or not, and may take the command-line arguments, a cancellation token, or
 both:
 
 | `Main` | Notes |
 | --- | --- |
 | `void Main()`, `async Task Main()` | The usual form. |
-| `Main(string[] args)` | Receives the selected arguments as `--name value` pairs, or the [CLI override](cli.md#script-arguments-and-options). |
+| `Main(string[] args)` | Receives the run's [script arguments](#script-arguments) as `--name value`, or the [CLI override](cli.md#script-arguments-and-options). |
 | `Main(CancellationToken ct)`, `Main(string[] args, CancellationToken ct)` | `ct` is cancelled when you press **Stop**; see [Stopping a script](results.md#stopping-a-script). |
 | `int Main(…)`, `async Task<int> Main(…)` | The returned number is the exit code; anything but 0 shows as *Exit code N*. |
 
-If the script declares several `Main` overloads, Invoklet calls the one that takes the most:
+If the script declares several `Main` overloads, RunPad calls the one that takes the most:
 arguments and a token, then a token, then arguments, then none. A `Main` under `#if DEBUG` or
 another conditional symbol counts only when the script's target framework defines that symbol,
 as it does for the compiler (`DEBUG` and `TRACE` are always defined).
@@ -303,13 +256,13 @@ as it does for the compiler (`DEBUG` and `TRACE` are always defined).
 ```csharp
 void Main()
 {
-    Console.WriteLine(Greet("Invoklet"));
+    Console.WriteLine(Greet("RunPad"));
 }
 
 string Greet(string name) => $"Hello, {name}!";
 ```
 
-A static class with extension methods can sit next to `Main`, as in LINQPad. Invoklet then compiles
+A static class with extension methods can sit next to `Main`, as in LINQPad. RunPad then compiles
 the script's static classes outside the generated class, because C# allows extension methods only
 in a class that isn't nested; other types stay nested in it as usual. The static classes still see
 the script's types, methods and fields by their simple names, but only those marked `internal` or
@@ -343,7 +296,7 @@ End Module
 
 ### Expression
 
-The whole block is one expression, written without a trailing semicolon. Invoklet
+The whole block is one expression, written without a trailing semicolon. RunPad
 evaluates it and renders the result as if you had called `.Dump()` on it.
 
 ```csharp
@@ -354,9 +307,9 @@ The [examples](examples.md) include one script of each C# kind.
 
 ## Where your scripts live
 
-Invoklet shows the `.inv` files and folders inside **Invoklet Queries** in your Documents folder
+RunPad shows the `.rpad` files and folders inside **RunPad Queries** in your Documents folder
 (created on first start) in the **Scripts** section of the panel on the left. The tree refreshes
-when files change on disk. The **Samples** section lists the sample scripts that come with Invoklet,
+when files change on disk. The **Samples** section lists the sample scripts that come with RunPad,
 grouped by folder; see [Examples](examples.md). Right-click the Scripts tree to create C# or Visual
 Basic files and folders,
 rename, delete, or *Show in File Manager*; drag items to move them.
