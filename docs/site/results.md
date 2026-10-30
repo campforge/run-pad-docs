@@ -101,6 +101,10 @@ example `Util.DumpDefaults.MaxDepth = 5;`.
 
 A type can control which members `.Dump()` shows by implementing `ICustomMemberProvider`.
 
+## Clearing the results
+
+**Run → Clear Results** (Ctrl+Shift+L, Cmd+Shift+L on macOS) empties the results panel of the current tab. A new run clears it too.
+
 ## Saving the results
 
 **File → Export Results as HTML…**, or **Save results as HTML…** in the output settings (the gear above the results), saves everything
