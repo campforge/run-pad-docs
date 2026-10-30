@@ -101,6 +101,12 @@ example `Util.DumpDefaults.MaxDepth = 5;`.
 
 A type can control which members `.Dump()` shows by implementing `ICustomMemberProvider`.
 
+## Saving the results
+
+**File → Export Results as HTML…**, or **Save results as HTML…** in the output settings (the gear above the results), saves everything
+in the results panel as one HTML page, with the colours of the current theme, that opens in any browser. The suggested name is the
+script's own, in its folder. A tab with no results says so instead of saving an empty page.
+
 ## Highlights, styles and headings
 
 `Util.Highlight`, `Util.HighlightIf`, `Util.WithStyle` and `Util.WithHeading` dress a value in the output of
