@@ -101,6 +101,24 @@ example `Util.DumpDefaults.MaxDepth = 5;`.
 
 A type can control which members `.Dump()` shows by implementing `ICustomMemberProvider`.
 
+## Highlights, styles and headings
+
+`Util.Highlight`, `Util.HighlightIf`, `Util.WithStyle` and `Util.WithHeading` dress a value in the output of
+`.Dump()`. They return a wrapper that is dumped like the value itself (at the same depth), so they work on their own or
+inside what you dump, for instance in a column of a table:
+
+```csharp
+Util.Highlight(42).Dump();                          // yellow marker; Util.Highlight(x, "lightgreen") picks the colour
+Util.WithStyle("late", "color:red; font-weight:bold").Dump();
+Util.WithHeading(orders, "Open orders").Dump();     // a heading above the value
+
+orders.Select(o => new { o.Id, Qty = Util.HighlightIf(o.Qty, q => q < 5) }).Dump();
+```
+
+`HighlightIf` highlights only when the condition holds and otherwise returns the value as it is. In the
+[command-line runner](cli.md) a highlight is shown with a yellow background and a heading as an underlined line; a
+style is not applied there.
+
 ## Live-updating output
 
 `DumpContainer` is a placeholder block. Dump it once, then change its content; the same
