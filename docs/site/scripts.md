@@ -16,6 +16,11 @@ The full path distinguishes scripts with the same name. **Clear Recent Files** c
 without deleting files or closing tabs. If a file was moved or deleted, opening its old recent
 entry reports an error; use Open to choose its new location.
 
+**File → Quick Open…** (**Ctrl+,**, or **Cmd+P** on macOS) opens a script by name without leaving the keyboard. Type part
+of the name, or the first letters of its words (`mfr` finds `MyFirstReport` and `my_first_report`); the list narrows as you
+type, with the recent scripts first and the folder of each shown beside its name. Use **Up** and **Down** to choose and
+**Enter** to open; **Esc** closes the box. It lists the scripts in the scripts folder and the recent ones from anywhere else.
+
 ## File format
 
 A RunPad script is a plain-text `.rpad` file. It is a Markdown document with:
