@@ -1,6 +1,6 @@
 ---
 title: Settings, shortcuts and troubleshooting
-description: Invoklet Preferences, keyboard shortcuts, data locations and solutions to common problems.
+description: RunPad Preferences, keyboard shortcuts, data locations and solutions to common problems.
 ---
 
 # Settings, shortcuts and troubleshooting
@@ -18,11 +18,11 @@ shortcut.
 | **View** | Toggle File Tree, Toggle Output Panel, Markdown Preview, Markdown Preview to the Side, Zoom In, Zoom Out, Reset Zoom |
 | **Run** | Run / Continue, Stop, Execute Selection, Stop and Run Again, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
 | **Tools** | Dependencies..., Assembly Explorer..., Connections..., Secret Store..., Preferences... |
-| **Help** | User Guide, Release Notes, Report an Issue, About Invoklet |
+| **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
 
 Commands that work on a script, such as Run or Zoom In, act on the active tab. On macOS the
-menu bar holds only Invoklet's own commands: About Invoklet is under **Help**, and **File → Exit**
-quits, from any Invoklet window.
+menu bar holds only RunPad's own commands: About RunPad is under **Help**, and **File → Exit**
+quits, from any RunPad window.
 
 ## Preferences
 
@@ -30,17 +30,19 @@ Open **Tools → Preferences...**. Settings are grouped in a tree on the left; t
 *Search settings...* to filter it. Changes apply immediately.
 
 <figure markdown="span">
-  [![The Interface page of Preferences: restoring open tabs, interface scale, appearance and the interface and editor themes](assets/screenshots/preferences_light.png#only-light)](assets/screenshots/preferences_light.png "Open full-size screenshot")
-  [![The Interface page of Preferences: restoring open tabs, interface scale, appearance and the interface and editor themes](assets/screenshots/preferences.png#only-dark)](assets/screenshots/preferences.png "Open full-size screenshot")
+  [![The Interface page of Preferences: interface scale, appearance and the interface and editor themes](assets/screenshots/preferences_light.png#only-light)](assets/screenshots/preferences_light.png "Open full-size screenshot")
+  [![The Interface page of Preferences: interface scale, appearance and the interface and editor themes](assets/screenshots/preferences.png#only-dark)](assets/screenshots/preferences.png "Open full-size screenshot")
 </figure>
 
 | Page | Settings |
 | --- | --- |
-| **Interface** | *Restore open tabs and unsaved changes* (on by default; see [Recovering unsaved tabs](editor.md#recovering-unsaved-tabs)). *Interface scale*, 90% to 200%, with *Reset to 100%* (see [Interface scale and shared code zoom](editor.md#interface-scale-and-shared-code-zoom)). *Appearance*: System, Dark or Light. *Interface theme* and *Editor theme* for the current appearance (defaults: *VS Code Dark* / *VS Code Light* and *Dark+* / *Light+*). |
-| **Editor** | Font family, font size and *Code zoom*; show line numbers, code folding, tabs, spaces, end of line, column ruler (column 80); word wrap; *Accept completion when typing punctuation*; *New files* (File → New File): language and kind. |
+| **Interface** | *Interface scale*, 90% to 200%, with *Reset to 100%* (see [Interface scale and shared code zoom](editor.md#interface-scale-and-shared-code-zoom)). *Appearance*: System, Dark or Light. *Interface theme* and *Editor theme* for the current appearance (defaults: *VS Code Dark* / *VS Code Light* and *Dark+* / *Light+*). |
+| **Interface → System** | What RunPad does differently on this system. On Linux: *Native Wayland window* (on by default; see [Linux on Wayland](install.md#linux-on-wayland)) and, on KDE, *Remember window position and center dialogs*. |
+| **Editor** | *Restore open tabs and unsaved changes* (on by default; see [Recovering unsaved tabs](editor.md#recovering-unsaved-tabs)). Font family, font size and *Code zoom*; show line numbers, code folding, tabs, spaces, end of line, column ruler (column 80); word wrap; *Accept completion when typing punctuation*; *New files* (File → New File): language and kind. |
 | **Keyboard** | Every key binding, grouped by area, with Reset and conflict warnings; see [Keyboard shortcuts](#keyboard-shortcuts). |
 | **Languages → .NET** | *Dotnet path* (default `dotnet`, found on `PATH`) and *Debugger path* (the `netcoredbg` executable). Shared by C# and Visual Basic. |
 | **Languages → .NET → C#** | *Inlay hints*; *Code fixes and refactorings (lightbulb)*; *Excluded diagnostic IDs*. See [Diagnostics and analyzers](analyzers.md#settings). |
+| **Experimental** | Features that are not finished yet, all off by default: *RunPad analyzers* (`RPAD…` warnings). See [Diagnostics and analyzers](analyzers.md#four-kinds-of-analysis). |
 | **Languages → .NET → Visual Basic** | No settings yet. |
 
 ## Keyboard shortcuts
@@ -101,6 +103,7 @@ On macOS, function keys may need the ++fn++ key, depending on your keyboard sett
 | Find References | ++shift+f12++ | ++shift+f12++ |
 | Rename Symbol | ++f2++ | ++f2++ |
 | Jump to Matching Bracket | ++ctrl+bracket-right++ | ++ctrl+bracket-right++ |
+| Toggle Line Comment | ++ctrl+slash++ | ++cmd+slash++ |
 | Format Document | ++shift+alt+f++ | ++shift+alt+f++ |
 | Go to Line | ++ctrl+g++ | ++ctrl+g++ |
 | Resolve All Usings | ++ctrl+alt+u++ | ++cmd+alt+u++ |
@@ -131,28 +134,28 @@ Cut, Copy, Paste, Select All — with ++cmd++ on macOS), ++tab++ expands a snipp
 ++ctrl++ (++cmd++ on macOS) while turning the mouse wheel zooms the editor or while clicking a
 name in the Assembly Explorer goes to its definition.
 
-## Where Invoklet stores data
+## Where RunPad stores data
 
 | What | Location |
 | --- | --- |
-| Your scripts | `Invoklet Queries` in your Documents folder |
-| Settings, including Recent Files | `settings.json` in Invoklet's data folder |
-| Drafts of open tabs and unsaved changes | `recovery` folder in Invoklet's data folder |
-| NuGet sources | `NuGet.Config` in Invoklet's data folder |
-| Your connections from **Tools → Connections** | `connections.json` in Invoklet's data folder |
-| Secrets from **Tools → Secret Store** | `secrets.json` in Invoklet's data folder (`INVOKLET_SECRETS_FILE` points elsewhere) |
-| Debugger installed by the setup window | `netcoredbg` folder in Invoklet's data folder |
-| Files written by `Util.Cache` and `Util.SaveString`/`SaveBytes` | `UserData` folder in Invoklet's data folder |
-| Logs | `logs` folder in Invoklet's data folder |
-| Build output | `Invoklet` folder in the system temporary folder. A saved script keeps its build folder between runs; folders unused for 14 days are removed when Invoklet starts. |
+| Your scripts | `RunPad Queries` in your Documents folder |
+| Settings, including Recent Files | `settings.json` in RunPad's data folder |
+| Drafts of open tabs and unsaved changes | `recovery` folder in RunPad's data folder |
+| NuGet sources | `NuGet.Config` in RunPad's data folder |
+| Your connections from **Tools → Connections** | `connections.json` in RunPad's data folder |
+| Secrets from **Tools → Secret Store** | `secrets.json` in RunPad's data folder (`RUNPAD_SECRETS_FILE` points elsewhere) |
+| Debugger installed by the setup window | `netcoredbg` folder in RunPad's data folder |
+| Files written by `Util.Cache` and `Util.SaveString`/`SaveBytes` | `UserData` folder in RunPad's data folder |
+| Logs | `logs` folder in RunPad's data folder |
+| Build output | `RunPad` folder in the system temporary folder. A saved script keeps its build folder between runs; folders unused for 14 days are removed when RunPad starts. |
 
-Invoklet's data folder is:
+RunPad's data folder is:
 
 | System | Folder |
 | --- | --- |
-| Windows | `%APPDATA%\Invoklet` |
-| macOS | `~/Library/Application Support/Invoklet` |
-| Linux | `~/.config/Invoklet` (or `$XDG_CONFIG_HOME/Invoklet`) |
+| Windows | `%APPDATA%\RunPad` |
+| macOS | `~/Library/Application Support/RunPad` |
+| Linux | `~/.config/RunPad` (or `$XDG_CONFIG_HOME/RunPad`) |
 
 ## Troubleshooting
 
@@ -162,14 +165,14 @@ Symptoms: the setup window shows ❌ next to *.NET SDK*, the SDK drop-down in th
 is empty and Run does nothing, or the command-line runner prints
 `No .NET SDK found (checked dotnet --list-sdks).`
 
-- Run `dotnet --list-sdks` in a terminal. Invoklet needs at least one SDK of version 6 or
+- Run `dotnet --list-sdks` in a terminal. RunPad needs at least one SDK of version 6 or
   newer.
-- If the SDK is installed but not on `PATH` for desktop apps (common when Invoklet is
+- If the SDK is installed but not on `PATH` for desktop apps (common when RunPad is
   started from the macOS Dock or Finder), set the full path in
   **Preferences → Languages → .NET → Dotnet path**, for example
   `/usr/local/share/dotnet/dotnet` on macOS or `C:\Program Files\dotnet\dotnet.exe` on
   Windows.
-- Or restart Invoklet and use **Install** in the setup window.
+- Or restart RunPad and use **Install** in the setup window.
 
 ### The debugger does not start or breakpoints are ignored
 
@@ -177,10 +180,10 @@ See [Debugging → Troubleshooting](debugging.md#troubleshooting).
 
 ### "Invalid document"
 
-The file is not a valid `.inv` document: the front matter is missing or not closed, the
+The file is not a valid `.rpad` document: the front matter is missing or not closed, the
 YAML is invalid, a `kind` or `language` value is not supported, or there is no run block
 for the declared language. The Results tab explains which. See
-[Scripts and .inv files](scripts.md#front-matter).
+[Scripts and .rpad files](scripts.md#front-matter).
 
 ### A package cannot be restored
 
@@ -193,10 +196,10 @@ Restore warnings and errors are printed in the Results tab.
 Reference the project's built `.dll` instead. See
 [Project references are not supported](dependencies.md#project-references-are-not-supported).
 
-### macOS refuses to open Invoklet
+### macOS refuses to open RunPad
 
 The package is ad-hoc signed but has no Apple Developer ID certificate or notarization.
-See [Installing Invoklet on macOS](install-macos.md#3-allow-the-first-launch).
+See [Installing RunPad on macOS](install-macos.md#3-allow-the-first-launch).
 
 ### No completion or underlines
 
