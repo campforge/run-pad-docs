@@ -124,7 +124,7 @@ and shows a notice; it does not mean the step succeeded.
 
 ## Practice script
 
-Download [`debugging-loop.rpad`](examples/debugging-loop.rpad). Its code block is:
+Use the `debugging-loop.rpad` example from the Samples section. Its code block is:
 
 ```csharp linenums="1"
 var total = 0;
