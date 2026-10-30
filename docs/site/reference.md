@@ -42,7 +42,7 @@ Open **Tools → Preferences...**. Settings are grouped in a tree on the left; t
 | **Keyboard** | Every key binding, grouped by area, with Reset and conflict warnings; see [Keyboard shortcuts](#keyboard-shortcuts). |
 | **Languages → .NET** | *Dotnet path* (default `dotnet`, found on `PATH`) and *Debugger path* (the `netcoredbg` executable). Shared by C# and Visual Basic. |
 | **Languages → .NET → C#** | *Inlay hints*; *Code fixes and refactorings (lightbulb)*; *Excluded diagnostic IDs*. See [Diagnostics and analyzers](analyzers.md#settings). |
-| **Experimental** | Features that are not finished yet, all off by default: *RunPad analyzers* (`RPAD…` warnings). See [Diagnostics and analyzers](analyzers.md#four-kinds-of-analysis). |
+| **Experimental** | Features that are not finished yet, all off by default: *RunPad analyzers* (`RPAD…` warnings). See the experimental analysis settings described below. |
 | **Languages → .NET → Visual Basic** | No settings yet. |
 
 ## Keyboard shortcuts
