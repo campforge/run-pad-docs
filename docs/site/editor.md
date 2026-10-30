@@ -65,7 +65,8 @@ light. The other tabs look as they did, but their text, output and syntax colour
 folder of this window's [recovery data](reference.md#where-invoklet-stores-data) (removed when you close
 Invoklet) and come back when you select the tab or save it, with your unsaved changes, the caret and the
 scroll position. The output of a script's last run is kept in the script's build folder, next to its
-library, so it is also shown when you open the script again. A tab's content is never moved
+library, so it is also shown when you open the script again (a script that is not saved yet has no build
+folder: its output is kept only while Invoklet runs, and Save As moves it to the new file's folder). A tab's content is never moved
 out while you are on the tab, while its script runs or is being debugged, or after a run that ended while
 you were on another tab (until you look at it). If a tab's text cannot be read back, the tab stays empty
 and read-only and cannot be saved over your file.
