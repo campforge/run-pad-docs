@@ -242,7 +242,7 @@ secrets, environment variables or unavailable/stale contracts. Use **Refresh** o
 **Tools → Connections** keeps your own connections in one window: HTTP APIs, gRPC servers and
 SQLite databases, with other databases to follow. **Add** creates one of a type; the form shows
 that type's settings. For an HTTP API they are the base address, headers sent with every request
-and a timeout; for a gRPC server, its address and metadata sent with every call; for SQLite, the
+and a timeout; for a gRPC server, its host and port (with a **Use SSL** checkbox) and metadata sent with every call; for SQLite, the
 database file.
 
 <figure markdown="span">
@@ -322,10 +322,19 @@ command-line runner reads them again with `--refresh-connections`. A server that
 because it is down, refuses the metadata or has no reflection, fails the build with the reason, and
 the **Connections** tab shows it.
 
-An HTTP connection can also name an **OpenAPI document**: the address of its OpenAPI 3 or Swagger 2 description in JSON, absolute
-or relative to the base address (`openapi.json`). It is sent with the connection's headers. The browser in **Tools → Connections** then
-lists the operations grouped by tag, each with its parameters, request body and answers; YAML documents are not read. Without
-the document the connection works as before and the browser has nothing to list.
+An **OpenAPI/Swagger** connection has the same settings as an HTTP one (`baseAddress`, `headers`, `timeout`) and nothing else: the API's
+OpenAPI 3 or Swagger 2 description, in JSON, is looked for at the usual addresses under the base address (`openapi.json`, `swagger.json`,
+`swagger/v1/swagger.json`, `v3/api-docs` and a few more), with the connection's headers. The script gets a method for each operation and a
+class for each schema, with bodies and answers as JSON:
+
+```csharp
+var pets = await Connections.Pets.ListPetsAsync("dog");
+var added = await Connections.Pets.AddPetAsync(new Connections.PetsClient.Pet { Name = "Rex" });
+```
+
+A failed call throws an `HttpRequestException` that carries the status and the body of the answer. The connection is also an `HttpClient`, so
+anything the description does not cover can be called by hand. **Tools → Connections** lists the operations by tag with their parameters,
+request bodies and answers, and the models. YAML descriptions are not read.
 
 ### SQLite connections
 
