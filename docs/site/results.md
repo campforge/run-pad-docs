@@ -357,6 +357,9 @@ In **Tools → Connections**, the panel on the right browses the connection: tab
 `not null`, primary key) and foreign keys, read when you select the connection. For a path relative to a script, choose that script's
 folder in the field below the status line.
 
+A gRPC connection is browsed the same way: its services, and for each the methods with their request and response messages and
+whether they stream. **Test Connection** says whether the server answered and loads what it offers into the browser.
+
 Connections work in C# scripts for now.
 
 ## Other `Util` helpers
