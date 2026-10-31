@@ -140,6 +140,7 @@ or a feature changes, adjust its scenario in `Scenarios.cs` and the image's alt 
 | `preferences` | `preferences` | Reference | Preferences → Interface |
 | `dependencies` | `dependencies` | Packages and references | Online search for Humanizer, Humanizer.Core selected; the local cache filtered to Humanizer |
 | `explorer` | `assembly-explorer` | Assembly Explorer | System.Linq.dll searched for `Enumerable.Where`, the first result decompiled |
+| `connections` | `connections` | Connections | Tools → Connections: five connections with test icons, `shop` (SQLite) selected and its orders table open in Browse resources |
 
 The interface uses Invoklet's own themes, Invoklet Midnight and Invoklet Warm Light, with the
 editor's default Dark+ and Light+ colors. The window chrome is Invoklet's own Windows title bar; dialogs are captured without the

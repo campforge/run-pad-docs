@@ -16,7 +16,7 @@ shortcut.
 | **File** | New File, New RPad File, Open..., Quick Open..., Recent Files, Open Text File..., Import .linq Query..., Save, Save As..., Export Results as HTML..., Revert to Saved, Close Tab, Exit (++cmd+q++ on macOS) |
 | **Edit** | Undo, Redo, Cut, Copy, Paste, Select All, Format Document, Format Selection, Go to Line..., Resolve All Usings |
 | **View** | Toggle File Tree, Toggle Output Panel, Markdown Preview, Markdown Preview to the Side, Zoom In, Zoom Out, Reset Zoom |
-| **Run** | Run / Continue, Stop, Execute Selection, Stop and Run Again, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
+| **Run** | Run / Continue, Stop, Execute Selection, Clear Results, Stop and Run Again, Debug Mode, Step Over, Step Into, Step Out, Pause, Run to Cursor |
 | **Tools** | Dependencies..., Assembly Explorer..., Connections..., Secret Store..., Preferences... |
 | **Help** | User Guide, Release Notes, Report an Issue, About RunPad |
 

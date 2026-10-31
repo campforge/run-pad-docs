@@ -219,6 +219,11 @@ readable only by you, like `~/.pgpass`. A script asking for a secret that isn't 
 reads the same store. To use another file, for example on a build server, set the
 `RUNPAD_SECRETS_FILE` environment variable to its path.
 
+On macOS and Linux the values are encrypted with a key kept in the system keychain (Keychain or the Secret Service), which may ask you to
+unlock it. Invoklet touches the keychain only when something needs a value: starting the program, running a script that never mentions
+`Util.GetSecret` or `Util.SetSecret` and listing the names of your secrets (in the Connections windows, say) do not. A script that reaches a
+secret in a way its own text does not show, through a library it references, gets no key: put a `Util.GetSecret` call in the script.
+
 ## Sidebar navigation
 
 The workspace sidebar is organized into three collapsible sections:
@@ -240,14 +245,21 @@ secrets, environment variables or unavailable/stale contracts. Use **Refresh** o
 ## Connections
 
 **Tools → Connections** keeps your own connections in one window: HTTP APIs, gRPC servers and
-SQLite databases, with other databases to follow. **Add** creates one of a type; the form shows
+SQLite databases and OpenAPI/Swagger APIs, with other databases to follow. **Add** creates one of a type; the form shows
 that type's settings. For an HTTP API they are the base address, headers sent with every request
 and a timeout; for a gRPC server, its host and port (with a **Use SSL** checkbox) and metadata sent with every call; for SQLite, the
-database file.
+database file (with a **Browse...** button), and for OpenAPI/Swagger the same as for HTTP.
+
+Each connection shows the icon of its type, and the outcome of its last **Test Connection** as an icon: a check mark, a warning (hover for the
+answer) or a spinner while it runs. The panel on the right, **Browse resources**, shows what the connection offers: for a SQLite database the
+tables and views with their columns (type, `null` or `not null`, primary key) and foreign keys, read as soon as you select the connection (for a
+path relative to a script, choose that script's folder first); for a gRPC server its services and their methods, with the request and response
+messages and whether they stream; for an OpenAPI/Swagger API its operations by tag, each with parameters, request body and answers, and its models.
+Servers are read when you press the reload button or **Test Connection**, which loads the contract instead of listing it in the answer.
 
 <figure markdown="span">
-  [![The Connections window: billing (HTTP), inventory (gRPC), shop (SQLite) and github; billing shows its base address and an Authorization header that names a secret](assets/screenshots/connections_light.png#only-light)](assets/screenshots/connections_light.png "Open full-size screenshot")
-  [![The Connections window: billing (HTTP), inventory (gRPC), shop (SQLite) and github; billing shows its base address and an Authorization header that names a secret](assets/screenshots/connections.png#only-dark)](assets/screenshots/connections.png "Open full-size screenshot")
+  [![The Connections window: billing, inventory, pets, shop and github with their type icons and test outcomes; shop (SQLite) selected, its tables, columns with types and a foreign key in the Browse resources panel](assets/screenshots/connections_light.png#only-light)](assets/screenshots/connections_light.png "Open full-size screenshot")
+  [![The Connections window: billing, inventory, pets, shop and github with their type icons and test outcomes; shop (SQLite) selected, its tables, columns with types and a foreign key in the Browse resources panel](assets/screenshots/connections.png#only-dark)](assets/screenshots/connections.png "Open full-size screenshot")
 </figure>
 
 Write a password or token as `${secret:name}` (or pick it from **Insert secret**): the value stays

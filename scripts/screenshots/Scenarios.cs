@@ -12,6 +12,7 @@ using Invoklet.Format.MdRun;
 using Invoklet.Services.Connections;
 using Invoklet.Services.Secrets;
 using Invoklet.Services;
+using Invoklet.Services.Preferences;
 using Invoklet.Services.Scaling;
 using Invoklet.UserControls;
 using Invoklet.UserControls.Models;
@@ -107,7 +108,7 @@ public sealed class Ctx : IAsyncDisposable
 
     public async Task RunAndWait(EditorTabItemViewModel tab)
     {
-        Tabs.RunOrContinueActive();
+        Tabs.Commands.Bindings[KeyCommands.RunOrContinue]();
         await WaitUntil(() => !tab.EnableRunButton, 10000, "run start");
         await WaitUntil(() => tab.EnableRunButton, 120000, "run end");
         await Pump(1500);
@@ -232,7 +233,7 @@ public static class Scenarios
         AddTree(c);
         var (tab, ctrl) = await c.Open(c.AddScript("word-counts.inv", EditorCode));
         // Hide the output panel: this one is about the code.
-        c.Tabs.ToggleOutputPanelActive();
+        c.Tabs.Commands.Bindings[KeyCommands.ToggleOutputPanel]();
         await Pump(3000);
         // Continue the query on a new line to open completion: ".ThenBy(w => w.Word)" + "\n    .Ta;".
         var doc = ctrl.State.Editor.Document;
@@ -252,7 +253,7 @@ public static class Scenarios
         await using var c = await Ctx.Create(1100, 560);
         AddTree(c);
         var (tab, ctrl) = await c.Open(c.AddScript("word-counts.inv", EditorCode));
-        c.Tabs.ToggleOutputPanelActive();
+        c.Tabs.Commands.Bindings[KeyCommands.ToggleOutputPanel]();
         await Caret(ctrl, 4, 1);
         c.Window.KeyPress(Key.H, RawInputModifiers.Control, PhysicalKey.H, "h");
         await Pump(800);
@@ -266,12 +267,12 @@ public static class Scenarios
         await using var c = await Ctx.Create(1100, 640, p => p.CSharp.InlayHintsEnabled = false);
         AddTree(c);
         var (tab, ctrl) = await c.Open(c.AddExample("analyzer-diagnostics.inv"));
-        c.Tabs.ToggleOutputPanelActive();
+        c.Tabs.Commands.Bindings[KeyCommands.ToggleOutputPanel]();
         await Pump(4000);
         // The caret on the unknown JsonSerializer, and its lightbulb menu open.
         await Caret(ctrl, 1, 20);
         await Pump(3000);
-        var margin = ctrl.State.Editor.TextArea.LeftMargins.OfType<Invoklet.Avalonia.CodeTextEditor.CodeFixMargin>().First();
+        var margin = ctrl.State.Editor.TextArea.LeftMargins.OfType<Invoklet.Avalonia.CodeTextEditor.CodeFix.CodeFixMargin>().First();
         margin.ShowFixMenu(margin.Fixes);
         await Pump(1500);
         Capture(c.Window, "diagnostics.png");
@@ -285,21 +286,21 @@ public static class Scenarios
         tab.DebugModeEnabled = true;
         ctrl.State.Editor.AddBreakpoint(5);
         await Pump(300);
-        c.Tabs.RunOrContinueActive();
+        c.Tabs.Commands.Bindings[KeyCommands.RunOrContinue]();
         await WaitUntil(() => tab.IsPaused, 120000, "first stop");
         await Pump(1000);
         // Continue to the third iteration, so the values tell a story.
-        c.Tabs.RunOrContinueActive();
+        c.Tabs.Commands.Bindings[KeyCommands.RunOrContinue]();
         await WaitUntil(() => !tab.IsPaused, 20000, "resume");
         await WaitUntil(() => tab.IsPaused, 20000, "second stop");
-        c.Tabs.RunOrContinueActive();
+        c.Tabs.Commands.Bindings[KeyCommands.RunOrContinue]();
         await WaitUntil(() => !tab.IsPaused, 20000, "resume");
         await WaitUntil(() => tab.IsPaused, 20000, "third stop");
         await Pump(1500);
         await Caret(ctrl, 5, 9);
         await Pump(1000);
         Capture(c.Window, "debugging.png");
-        c.Tabs.CancelActive();
+        c.Tabs.Commands.Bindings[KeyCommands.Stop]();
         await WaitUntil(() => tab.EnableRunButton, 30000, "stop");
     }
 
@@ -308,7 +309,7 @@ public static class Scenarios
         await using var c = await Ctx.Create(1280, 720);
         AddTree(c);
         var (tab, ctrl) = await c.Open(c.AddExample("products-overview.inv"));
-        c.Tabs.ToggleOutputPanelActive();
+        c.Tabs.Commands.Bindings[KeyCommands.ToggleOutputPanel]();
         tab.TogglePreviewToSide();
         await Pump(2500);
         await Caret(ctrl, 10, 1);
@@ -361,6 +362,22 @@ public static class Scenarios
         await using var c = await Ctx.Create(1100, 700, sampleConnections: false);
         SampleSecrets(c.Root, out var secrets);
         var store = new FileConnectionStore(Path.GetFullPath(Path.Combine(c.Root, "..", "connections.json")));
+        // A real database, so that the browser on the right shows tables, columns, types and keys as a script would get them.
+        // A short path, as a user would have one, rather than the temporary folder the scenario runs in.
+        var shopDatabase = OperatingSystem.IsWindows() ? Path.GetFullPath(Path.Combine(c.Root, "..", "shop.db")) : "/tmp/shop.db";
+        File.Delete(shopDatabase);
+        using (var db = new Microsoft.Data.Sqlite.SqliteConnection($"Data Source={shopDatabase};Pooling=False"))
+        {
+            db.Open();
+            using var create = db.CreateCommand();
+            create.CommandText = """
+                CREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT NOT NULL, city TEXT, created DATETIME);
+                CREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER NOT NULL REFERENCES customers(id), placed DATETIME NOT NULL, total DECIMAL(10, 2));
+                CREATE TABLE order_items (order_id INTEGER NOT NULL REFERENCES orders(id), line INTEGER NOT NULL, product TEXT NOT NULL, qty INT NOT NULL, PRIMARY KEY (order_id, line));
+                CREATE VIEW big_orders AS SELECT id, customer_id, total FROM orders WHERE total > 100;
+                """;
+            create.ExecuteNonQuery();
+        }
         store.Save(
         [
             new MdRunConnection
@@ -379,8 +396,13 @@ public static class Scenarios
             },
             new MdRunConnection
             {
+                Name = "pets", Driver = "openapi",
+                Params = new(StringComparer.Ordinal) { ["baseAddress"] = MdRunValue.Of("https://petstore.example.com/v3/") },
+            },
+            new MdRunConnection
+            {
                 Name = "shop", Driver = "sqlite",
-                Params = new(StringComparer.Ordinal) { ["file"] = MdRunValue.Of("data/shop.db") },
+                Params = new(StringComparer.Ordinal) { ["file"] = MdRunValue.Of(shopDatabase) },
             },
             new MdRunConnection
             {
@@ -392,9 +414,23 @@ public static class Scenarios
         registry.Register(new HttpConnectionDriver());
         registry.Register(new Invoklet.Connectors.Grpc.GrpcConnectionDriver());
         registry.Register(new Invoklet.Connectors.Sqlite.SqliteConnectionDriver());
-        var window = new ConnectionsWindow(new ConnectionsWindowViewModel(store, registry, secrets)) { Width = 820, Height = 560 };
+        registry.Register(new OpenApiConnectionDriver());
+        var schemas = new ConnectionSchemas(registry, Path.GetFullPath(Path.Combine(c.Root, "..", "connection-schemas")), Invoklet.Languages.DotnetCommon.DotnetConnectionTools.Default, _ => null);
+        var model = new ConnectionsWindowViewModel(store, registry, secrets, schemas);
+        // The outcome of the last test of two of them, as the list shows it.
+        model.Connections.First(x => x.Name == "billing").TestResult = "Success: The server answered 200 OK.";
+        model.Connections.First(x => x.Name == "inventory").TestResult = "Failed: Could not reach the server: connection refused.";
+        model.SelectedConnection = model.Connections.First(x => x.Name == "shop");
+        var window = new ConnectionsWindow(model) { Width = 1180, Height = 700 };
         window.Show(c.Window);
-        await Pump(1500);
+        await Pump(3000);
+        // The tables open, so that the columns, their types and the keys show.
+        var tree = window.FindControl<TreeView>("ResourceTree")!;
+        foreach (var name in new[] { "orders" })
+            if (model.Resources.FirstOrDefault(r => r.Name == name) is { } table && tree.ContainerFromItem(table) is TreeViewItem node)
+                node.IsExpanded = true;
+        model.SelectedResource = model.Resources.FirstOrDefault(r => r.Name == "orders");
+        await Pump(800);
         Capture(window, "connections.png");
         window.Close();
     }
@@ -441,7 +477,7 @@ public static class Scenarios
         ], null);
         c.Services.GetRequiredService<ISecretStore>().Save([new Secret("billing-token", "t0k")], null);
         var (tab, ctrl) = await c.Open(c.AddScript("invoices.inv", ConnectionScript));
-        c.Tabs.ToggleOutputPanelActive();
+        c.Tabs.Commands.Bindings[KeyCommands.ToggleOutputPanel]();
 
         var window = c.Services.GetRequiredService<DependenciesWindow>();
         window.Width = 1000;
