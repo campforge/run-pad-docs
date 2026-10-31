@@ -349,7 +349,7 @@ In the form, **Browse...** next to the database file picks the file, and the pat
 Views, tables without a primary key and tables whose key can be empty (`NULL`) can be read but
 not changed; computed (generated) columns are read but never written. Turn on **Read only** to open
 the file for reading only. The script needs the `Microsoft.EntityFrameworkCore.Sqlite` package,
-which **Add to Script** adds. RunPad never creates the file: a file that doesn't exist fails the
+which **Add to Script** adds, in the release that fits the script's target framework (EF Core 8 for `net8.0`, 9 for `net9.0`, 10 otherwise). RunPad never creates the file: a file that doesn't exist fails the
 build with its full path. A relative path needs the script to be saved; **Test Connection** in
 **Tools → Connections** needs a full path.
 
