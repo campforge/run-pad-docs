@@ -353,6 +353,10 @@ which **Add to Script** adds, in the release that fits the script's target frame
 build with its full path. A relative path needs the script to be saved; **Test Connection** in
 **Tools → Connections** needs a full path.
 
+In **Tools → Connections**, the panel on the right browses the connection: tables and views with their columns (type, `null` or
+`not null`, primary key) and foreign keys, read when you select the connection. For a path relative to a script, choose that script's
+folder in the field below the status line.
+
 Connections work in C# scripts for now.
 
 ## Other `Util` helpers
