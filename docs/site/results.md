@@ -322,6 +322,11 @@ command-line runner reads them again with `--refresh-connections`. A server that
 because it is down, refuses the metadata or has no reflection, fails the build with the reason, and
 the **Connections** tab shows it.
 
+An HTTP connection can also name an **OpenAPI document**: the address of its OpenAPI 3 or Swagger 2 description in JSON, absolute
+or relative to the base address (`openapi.json`). It is sent with the connection's headers. The browser in **Tools → Connections** then
+lists the operations grouped by tag, each with its parameters, request body and answers; YAML documents are not read. Without
+the document the connection works as before and the browser has nothing to list.
+
 ### SQLite connections
 
 A SQLite connection names a database file, either a full path or one relative to the script's
